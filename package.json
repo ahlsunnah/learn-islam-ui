@@ -1,0 +1,31 @@
+{
+  "name": "gatsby-boilerplate",
+  "description": "A default starter kit for gatsby",
+  "version": "0.0.1",
+  "author": "abumalick",
+  "license": "unlicense",
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "rimraf ./public",
+    "preview": "npm run clean && npm run build && http-server ./public -p 8000 -P http://localhost:8000",
+    "start": "gatsby develop"
+  },
+  "dependencies": {
+    "gatsby": "^1.8.13",
+    "gatsby-link": "^1.6.8",
+    "gatsby-plugin-catch-links": "^1.0.5",
+    "gatsby-plugin-preact": "^1.0.3",
+    "gatsby-plugin-react-helmet": "^1.0.3",
+    "gatsby-remark-copy-linked-files": "^1.5.2",
+    "gatsby-remark-images": "^1.5.4",
+    "gatsby-source-filesystem": "^1.4.3",
+    "gatsby-transformer-remark": "^1.7.2",
+    "rimraf": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-fbjs-opensource": "^1.0.0",
+    "eslint-config-prettier": "^2.3.0",
+    "http-server": "^0.10.0"
+  }
+}

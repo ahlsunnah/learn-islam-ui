@@ -1,12 +1,5 @@
 {
-  "extends": [
-    "fbjs-opensource",
-    "prettier",
-    "prettier/react",
-    "prettier/flowtype",
-    "plugin:flowtype/recommended"
-  ],
-  "plugins": ["flowtype"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "env": {
     "browser": true,
     "node": true
@@ -15,6 +8,8 @@
     "graphql": true
   },
   "rules": {
+    "react/jsx-wrap-multilines": 0,
+    "react/forbid-prop-types": 0,
     "no-unexpected-multiline": 2
   }
 }

@@ -16,9 +16,6 @@ export default function Index({data}) {
                   {post.frontmatter.title}
                 </Link>
               </h1>
-              <h2>
-                {post.frontmatter.date}
-              </h2>
               <p>
                 {post.excerpt}
                 {post.dir}
@@ -42,7 +39,6 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "MMMM DD, YYYY")
           }
         }
       }

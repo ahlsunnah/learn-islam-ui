@@ -5,6 +5,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-emotion',
     // 'gatsby-plugin-preact',
 
     // {

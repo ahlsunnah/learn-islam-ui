@@ -1,8 +1,19 @@
+// @flow
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 
-const Course = ({data, pathContext}) => {
+type Props = {
+  data: {
+    contentfulCourse: Object,
+  },
+  pathContext: {
+    languagePath: string,
+    slug: string,
+  },
+}
+
+const Course = ({data, pathContext}: Props) => {
   const {contentfulCourse: course} = data
   const {languagePath, slug} = pathContext
   return (

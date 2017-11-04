@@ -1,10 +1,18 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
-import Helmet from 'react-helmet'
+// import Helmet from 'react-helmet'
 import {Button} from 'antd'
 
-const Home = ({data, pathContext, ...rest}) => {
+const Home = ({
+  data,
+  pathContext,
+  ...rest
+}: {
+  data: Object,
+  test: string,
+  pathContext: Object,
+}) => {
   const {edges: sections} = data.allContentfulSection
   const {startButtonText, websiteTitle} = data.contentfulWebsite
   const {languagePath} = pathContext
@@ -43,13 +51,10 @@ const Home = ({data, pathContext, ...rest}) => {
     </div>
   )
 }
-Home.propTypes = {
-  data: PropTypes.object.isRequired,
-  pathContext: PropTypes.object.isRequired,
-}
 
 export default Home
 
+// $FlowIgnore
 export const pageQuery = graphql`
   query homeQuery($locale: String!) {
     contentfulWebsite(node_locale: {eq: $locale}) {

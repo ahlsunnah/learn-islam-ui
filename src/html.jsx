@@ -1,9 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 
 // const BUILD_TIME = new Date().getTime()
-
-const HTML = ({body, headComponents, postBodyComponents}) => (
+type Props = {
+  body: string,
+  headComponents: React.Node,
+  postBodyComponents: React.Node,
+}
+const HTML = ({body, headComponents, postBodyComponents}: Props) => (
   <html lang="ar">
     <head>
       <meta charSet="UTF-8" />
@@ -30,11 +34,5 @@ const HTML = ({body, headComponents, postBodyComponents}) => (
     </body>
   </html>
 )
-
-HTML.propTypes = {
-  body: PropTypes.string,
-  headComponents: PropTypes.node,
-  postBodyComponents: PropTypes.node,
-}
 
 export default HTML

@@ -1,8 +1,19 @@
+// @flow
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 
-const Section = ({data, pathContext}) => {
+type Props = {
+  data: {
+    contentfulSection: Object,
+  },
+  pathContext: {
+    languagePath: string,
+    slug: string,
+  },
+}
+
+const Section = ({data, pathContext}: Props) => {
   const {contentfulSection: section} = data
   const {languagePath, slug} = pathContext
   return (
@@ -32,6 +43,7 @@ const Section = ({data, pathContext}) => {
 
 export default Section
 
+// $FlowIgnore
 export const pageQuery = graphql`
   query sectionQuery($slug: String!, $locale: String!) {
     contentfulSection(slug: {eq: $slug}, node_locale: {eq: $locale}) {

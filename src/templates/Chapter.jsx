@@ -1,8 +1,18 @@
+// @flow
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 
-const Chapter = ({data, pathContext}) => {
+type Props = {
+  data: {
+    contentfulChapter: Object,
+  },
+  pathContext: {
+    languagePath: string,
+    slug: string,
+  },
+}
+const Chapter = ({data, pathContext}: Props) => {
   const {contentfulChapter: chapter} = data
   const {languagePath, slug} = pathContext
   return (
@@ -42,6 +52,7 @@ const Chapter = ({data, pathContext}) => {
 
 export default Chapter
 
+// $FlowIgnore
 export const pageQuery = graphql`
   query chapterQuery($slug: String!, $locale: String!) {
     contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {

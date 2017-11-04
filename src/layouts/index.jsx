@@ -1,17 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import 'antd/dist/antd.css'
 import 'tachyons' // eslint-disable-line
 
-const MainWrapper = ({children, location}) => {
-  const lang = location.pathname.includes('/fr/') ? 'fr-FR' : 'ar'
+type Props = {
+  children: Function,
+  location: {
+    pathname: string,
+  },
+}
+const MainWrapper = ({children, location}: Props) => {
+  const lang: string = location.pathname.includes('/fr/') ? 'fr-FR' : 'ar'
   console.log(lang)
   return <div>{children()}</div>
-}
-
-MainWrapper.propTypes = {
-  children: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default MainWrapper

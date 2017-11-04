@@ -7,14 +7,15 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "rimraf ./public",
-    "preview": "npm run clean && npm run build && http-server ./public -p 8000 -P http://localhost:8000",
+    "preview":
+      "npm run clean && npm run build && http-server ./public -p 8000 -P http://localhost:8000",
     "start": "gatsby develop"
   },
   "dependencies": {
     "antd": "^2.13.2",
     "emotion": "^8.0.9",
     "emotion-server": "^8.0.9",
-    "flow-bin": "^0.55.0",
+    "flow-bin": "^0.58.0",
     "gatsby": "^1.8.13",
     "gatsby-image": "^1.0.14",
     "gatsby-link": "^1.6.8",
@@ -36,9 +37,14 @@
     "tachyons": "^4.8.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-flow-react-proptypes": "^8.0.0",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "^3.19.0 || ^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0"

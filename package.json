@@ -14,6 +14,7 @@
     "antd": "^2.13.2",
     "flow-bin": "^0.55.0",
     "gatsby": "^1.8.13",
+    "gatsby-image": "^1.0.14",
     "gatsby-link": "^1.6.8",
     "gatsby-plugin-catch-links": "^1.0.5",
     "gatsby-plugin-react-helmet": "^1.0.3",

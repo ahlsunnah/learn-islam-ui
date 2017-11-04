@@ -10,7 +10,13 @@ const Chapter = ({data, pathContext}) => {
       <Helmet title={`${chapter.title}`} />
       <div className="tc">
         <h1>{chapter.title}</h1>
-        {chapter.content && <div>{chapter.content.content}</div>}
+        {chapter.content && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: chapter.content.childMarkdownRemark.html,
+            }}
+          />
+        )}
         {// NAV
         chapter.course.chapter
           .slice()
@@ -41,7 +47,9 @@ export const pageQuery = graphql`
     contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
       title
       content {
-        content
+        childMarkdownRemark {
+          html
+        }
       }
       course {
         slug

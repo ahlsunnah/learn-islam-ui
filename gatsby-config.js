@@ -28,11 +28,11 @@ module.exports = {
         accessToken: `400d21c5280aadfd68d5ae6334d01434448a1f313683155bf3155774ef2e534f`,
       },
     },
-    // {
-    //   resolve: 'gatsby-transformer-remark',
-    //   options: {
-    //     plugins: ['gatsby-remark-copy-linked-files', 'gatsby-remark-images'],
-    //   },
-    // },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: ['gatsby-remark-copy-linked-files', 'gatsby-remark-images'],
+      },
+    },
   ],
 }

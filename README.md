@@ -92,6 +92,7 @@ The app and the content are separated. Developers on this project usually work o
 - [Ant Design](https://ant.design/docs/react/introduce): React UI library antd that contains a set of high quality components and demos for building rich, interactive user interfaces.
 - [Tachyons](http://tachyons.io/): Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.
 - [emotion](https://emotion.sh/): The Next Generation of CSS-in-JS
+- [React Icons](http://gorangajic.github.io/react-icons): svg react icons of popular icon packs
  
 #### Code style, linting and error checking
 

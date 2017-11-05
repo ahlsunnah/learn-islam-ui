@@ -10,7 +10,6 @@ const Home = ({
   ...rest
 }: {
   data: Object,
-  test: string,
   pathContext: Object,
 }) => {
   const {edges: sections} = data.allContentfulSection
@@ -25,29 +24,27 @@ const Home = ({
       {sections &&
         sections
           // .filter(section => section.node.frontmatter.title.length > 0)
-          .map(({node: section}) => {
-            return (
-              <div className="bg-white" key={section.slug}>
-                <img
-                  alt="Logo"
-                  style={{
-                    height: section.logo.responsiveResolution.height,
-                    width: section.logo.responsiveResolution.width,
-                  }}
-                  src={section.logo.responsiveResolution.src}
-                  srcSet={section.logo.responsiveResolution.srcSet}
-                />
-                <h1>
-                  <Link to={`${languagePath}${section.slug}`}>
-                    {section.title}
-                  </Link>
-                </h1>
+          .map(({node: section}) => (
+            <div className="bg-white" key={section.slug}>
+              <img
+                alt="Logo"
+                style={{
+                  height: section.logo.responsiveResolution.height,
+                  width: section.logo.responsiveResolution.width,
+                }}
+                src={section.logo.responsiveResolution.src}
+                srcSet={section.logo.responsiveResolution.srcSet}
+              />
+              <h1>
                 <Link to={`${languagePath}${section.slug}`}>
-                  <Button type="primary">{startButtonText}</Button>
+                  {section.title}
                 </Link>
-              </div>
-            )
-          })}
+              </h1>
+              <Link to={`${languagePath}${section.slug}`}>
+                <Button type="primary">{startButtonText}</Button>
+              </Link>
+            </div>
+          ))}
     </div>
   )
 }

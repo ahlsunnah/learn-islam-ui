@@ -83,7 +83,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
           if (languagePath) {
             // Section pages
-            console.log(`Creating Section at path: ${languagePath}${node.slug}/`)
+            // console.log(`Creating Section at path: ${languagePath}${node.slug}/`)
             createPage({
               path: `${languagePath}${node.slug}/`,
               component: slash(sectionTemplate),
@@ -96,7 +96,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
             _.each(courses, (course) => {
               // Course pages
-              console.log(`Creating Course at path: ${languagePath}${node.slug}/${course.slug}`)
+              // console.log(`Creating Course at path: ${languagePath}${node.slug}/${course.slug}`)
               createPage({
                 path: `${languagePath}${node.slug}/${course.slug}/`,
                 component: slash(courseTemplate),
@@ -109,7 +109,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
               // Chapter pages
               _.each(course.chapter, (chapter) => {
-                console.log(`Creating Chapter at path: ${languagePath}${node.slug}/${course.slug}/${chapter.slug}`)
+                // console.log(`Creating Chapter at path: ${languagePath}${node.slug}/${course.slug}/${chapter.slug}`)
                 createPage({
                   path: `${languagePath}${node.slug}/${course.slug}/${chapter.slug}`,
                   component: slash(chapterTemplate),

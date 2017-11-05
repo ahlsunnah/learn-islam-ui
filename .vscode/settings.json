@@ -9,9 +9,11 @@
   "editor.formatOnSave": true,
   "javascript.validate.enable": false,
   "cSpell.words": [
+    "antd",
     "contentful",
     "devtools",
     "extension",
-    "redux"
+    "redux",
+    "tachyons"
   ]
 }

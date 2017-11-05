@@ -1,7 +1,10 @@
 // @flow
+/* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
 import styled from 'react-emotion'
+import {Button} from 'antd'
 import FaBars from 'react-icons/lib/fa/bars'
 import GoMoveLeft from 'react-icons/lib/go/move-left'
 import ChapterSidebar from '../components/ChapterSidebar'
@@ -25,7 +28,6 @@ const ChapterContent = styled.div`
 type Props = {
   data: {
     contentfulChapter: {
-      title: string,
       content: {
         childMarkdownRemark: {
           html: string,
@@ -44,6 +46,11 @@ type Props = {
         },
         title: string,
       },
+      order: number,
+      title: string,
+    },
+    contentfulWebsite: {
+      nextButton: string,
     },
   },
   pathContext: {
@@ -67,8 +74,24 @@ class Chapter extends React.Component<Props, State> {
   render() {
     const {data, pathContext} = this.props
     const {isSideBarVisible} = this.state
-    const {contentfulChapter: chapter} = data
+    const {contentfulChapter: chapter, contentfulWebsite} = data
     const {languagePath} = pathContext
+    const {nextButton} = contentfulWebsite
+    // We split the content and youtube links
+    const contentParts =
+      chapter.content &&
+      chapter.content.childMarkdownRemark.html
+        .split(/<p><a href="https?:\/\/www.youtube.com\/watch\?v=(\w+)".*/)
+        .filter(part => part !== '')
+    // We get the nextChapter if there is one
+    const nextChapter = chapter.course.chapter
+      .slice()
+      .sort((a, b) => a.order - b.order)
+      .find(({order}) => order > chapter.order)
+    const nextLink = nextChapter
+      ? `${languagePath}${chapter.course.section.slug}/${chapter.course
+          .slug}/${nextChapter.slug}/`
+      : `${languagePath}${chapter.course.section.slug}/`
     return (
       <div className="flex">
         <Helmet title={`${chapter.title}`} />
@@ -84,7 +107,7 @@ class Chapter extends React.Component<Props, State> {
           <div className="w-100 relative flex justify-center items-center bg-moon-gray">
             <div className="absolute top-0 bottom-0 left-0 flex items-center">
               <button
-                className="ml2 pa2 bg-transparent"
+                className="ml2 pa2 pointer bg-transparent"
                 onClick={this.toggleSidebar}
               >
                 {isSideBarVisible ? (
@@ -99,17 +122,36 @@ class Chapter extends React.Component<Props, State> {
             </h1>
             <div />
           </div>
-          {chapter.content && (
-            <ChapterContent
-              dangerouslySetInnerHTML={{
-                __html: chapter.content.childMarkdownRemark.html,
-              }}
-            />
-          )}
-          {/* <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{__html: section.html}}
-        /> */}
+          {contentParts &&
+            contentParts.map(
+              (part, i) =>
+                /^\w\w/.test(part) ? (
+                  <div key={i} className="w-100 aspect-ratio aspect-ratio--4x3">
+                    <iframe
+                      className="aspect-ratio--object"
+                      frameBorder="0"
+                      title={`Video ${i}`}
+                      type="text/html"
+                      src={`https://www.youtube.com/embed/${part}?autoplay=0&origin=http://http://localhost:8000"`}
+                    />
+                  </div>
+                ) : (
+                  <ChapterContent
+                    key={i}
+                    className="mv4"
+                    dangerouslySetInnerHTML={{
+                      __html: part,
+                    }}
+                  />
+                ),
+            )}
+          <div className="w-100 pa3 tl">
+            <Link to={nextLink}>
+              <Button type="primary" size="large">
+                {nextButton}
+              </Button>
+            </Link>
+          </div>
         </ContentWrapper>
       </div>
     )
@@ -123,6 +165,7 @@ export const pageQuery = graphql`
   query chapterQuery($slug: String!, $locale: String!) {
     contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
       title
+      order
       content {
         childMarkdownRemark {
           html
@@ -141,6 +184,9 @@ export const pageQuery = graphql`
           order
         }
       }
+    }
+    contentfulWebsite(node_locale: {eq: $locale}) {
+      nextButton
     }
   }
 `

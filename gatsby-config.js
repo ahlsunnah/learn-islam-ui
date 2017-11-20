@@ -35,5 +35,6 @@ module.exports = {
         plugins: ['gatsby-remark-copy-linked-files', 'gatsby-remark-images'],
       },
     },
+    'gatsby-plugin-netlify',
   ],
 }

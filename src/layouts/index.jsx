@@ -10,8 +10,7 @@ type Props = {
   },
 }
 const MainWrapper = ({children, location}: Props) => {
-  const lang: string = location.pathname.includes('/fr/') ? 'fr-FR' : 'ar'
-  console.log(lang)
+  const lang: string = location.pathname.includes('/fr/') ? 'fr-FR' : 'ar' // eslint-disable-line
   return <div>{children()}</div>
 }
 

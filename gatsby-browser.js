@@ -1,6 +1,6 @@
 /* eslint react/jsx-filename-extension: 0 */
 import React from 'react'
-import {Router} from 'react-router-dom'
+import {Router} from 'react-router-dom' // eslint-disable-line
 import {Provider} from 'react-redux'
 
 import createStore from './src/createStore'

@@ -43,34 +43,35 @@ const Section = ({data, pathContext}: Props) => {
           />
         )}
       </div>
-      {section.course
-        .slice()
-        .sort((a, b) => a.order - b.order) // TODO: sort in the query ?
-        .map(course => (
-          <div key={course.slug} className="flex justify-center">
-            <Link to={`${languagePath}${slug}/${course.slug}`}>
-              <div className="mt3 flex items-center br2 bg-white">
-                <div className="pa4">
-                  <h2>{course.title}</h2>
-                  {course.description.childMarkdownRemark.html && (
-                    <div
-                      className="ph3 black-80"
-                      dangerouslySetInnerHTML={{
-                        __html: course.description.childMarkdownRemark.html,
-                      }}
-                    />
-                  )}
-                  <button className="mt3 ph3 pv2 yellow bg-transparent bw1 b--yellow pointer">
-                    {`${startButtonText} >`}
-                  </button>
+      {section.course &&
+        section.course
+          .slice()
+          .sort((a, b) => a.order - b.order) // TODO: sort in the query ?
+          .map(course => (
+            <div key={course.slug} className="flex justify-center">
+              <Link to={`${languagePath}${slug}/${course.slug}`}>
+                <div className="mt3 flex items-center br2 bg-white">
+                  <div className="pa4">
+                    <h2>{course.title}</h2>
+                    {course.description.childMarkdownRemark.html && (
+                      <div
+                        className="ph3 black-80"
+                        dangerouslySetInnerHTML={{
+                          __html: course.description.childMarkdownRemark.html,
+                        }}
+                      />
+                    )}
+                    <button className="mt3 ph3 pv2 yellow bg-transparent bw1 b--yellow pointer">
+                      {`${startButtonText} >`}
+                    </button>
+                  </div>
+                  <div className="pa5 flex items-center bg-washed-blue">
+                    <FaBook className="f1" />
+                  </div>
                 </div>
-                <div className="pa5 flex items-center bg-washed-blue">
-                  <FaBook className="f1" />
-                </div>
-              </div>
-            </Link>
-          </div>
-        ))}
+              </Link>
+            </div>
+          ))}
     </div>
   )
 }

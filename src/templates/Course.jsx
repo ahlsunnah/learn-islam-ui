@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
+import {Redirect} from 'react-router' // eslint-disable-line
+import Loader from '../components/Loader'
 
 type Props = {
   data: {
@@ -14,31 +15,21 @@ type Props = {
 }
 
 const Course = ({data, pathContext}: Props) => {
-  const {contentfulCourse: course} = data
+  const course = data.contentfulCourse
+  const chapters = course.chapter.slice().sort((a, b) => a.order - b.order) // TODO: sort in the query ?
   const {languagePath, slug} = pathContext
+
   return (
     <div className="">
       <Helmet title={`${course.title}`} />
       <div className="tc">
         <h1>{course.title}</h1>
-        {course.chapter
-          .slice()
-          .sort((a, b) => a.order - b.order) // TODO: sort in the query ?
-          .map(chapter => (
-            <div key={chapter.slug}>
-              <Link
-                to={`${languagePath}${course.section
-                  .slug}/${slug}/${chapter.slug}`}
-              >
-                {chapter.title}
-              </Link>
-            </div>
-          ))}
-        {/* <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{__html: section.html}}
-        /> */}
+        <Loader />
       </div>
+      {/* TODO: redirect to the first non-completed chapter */}
+      <Redirect
+        to={`${languagePath}${course.section.slug}/${slug}/${chapters[0].slug}`}
+      />
     </div>
   )
 }

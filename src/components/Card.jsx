@@ -18,7 +18,7 @@ const DescendingCardDiv = styled(CardDiv)`
 type Props = {
   children: React.Node,
   className?: string,
-  to: string,
+  to?: string,
 }
 type State = {
   collapsed: boolean,

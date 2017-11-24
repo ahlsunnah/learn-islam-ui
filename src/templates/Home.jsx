@@ -40,6 +40,7 @@ type Props = {
               width: number,
             },
           },
+          order: number,
           slug: string,
           title: string,
         },
@@ -67,7 +68,9 @@ type Props = {
 }
 
 const Home = ({data, pathContext}: Props) => {
-  const {edges: sections} = data.allContentfulSection
+  const sections = data.allContentfulSection.edges
+    .slice()
+    .sort((a, b) => a.node.order - b.node.order) // TODO: sort in the query ?
   const {
     heroBackground,
     startButtonText,
@@ -181,6 +184,7 @@ export const pageQuery = graphql`
               width
             }
           }
+          order
           slug
           title
         }

@@ -2,6 +2,7 @@
 import * as React from 'react'
 import 'antd/dist/antd.css'
 import 'tachyons' // eslint-disable-line
+import './styles.css'
 
 type Props = {
   children: Function,

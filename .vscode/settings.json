@@ -9,11 +9,27 @@
   "editor.formatOnSave": true,
   "javascript.validate.enable": false,
   "cSpell.words": [
+    "abumalick",
     "antd",
+    "babel",
     "contentful",
     "devtools",
     "extension",
+    "flow",
+    "flowtype",
+    "jsx",
+    "monokai",
+    "multiline",
+    "multilines",
+    "netlify",
+    "no",
+    "plugin",
+    "proptypes",
+    "react",
     "redux",
-    "tachyons"
+    "tachyons",
+    "unexpected",
+    "unlicense",
+    "wrap"
   ]
 }

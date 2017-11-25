@@ -7,3 +7,9 @@
 .flex3 {
   flex: 3;
 }
+.ltr {
+  direction: ltr;
+}
+.rtl {
+  direction: rtl;
+}

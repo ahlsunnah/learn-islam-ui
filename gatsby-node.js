@@ -28,7 +28,6 @@ exports.createPages = ({graphql, boundActionCreators}) => {
       }
 
       const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
-      const MainLayout2 = path.resolve(`./src/templates/MainLayout2.jsx`)
 
       const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
       const sectionTemplate = path.resolve(`./src/templates/Section.jsx`)
@@ -52,10 +51,9 @@ exports.createPages = ({graphql, boundActionCreators}) => {
       )
       
       // layout for each lang
-      Object.keys(languagePaths).forEach((locale, i) => {
+      Object.keys(languagePaths).forEach((locale) => {
           createLayout({
-            // component: slash(MainLayout),
-            component: slash(i === 1 ? MainLayout2 : MainLayout),
+            component: slash(MainLayout),
             id: `main-layout-${locale}`,
             context: {
               languages,

@@ -106,7 +106,6 @@ class Chapter extends React.Component<Props, State> {
     const otherContentParts: Array<string> = arabicChapter
       ? this.indexOtherContent(chapter.content, contentParts)
       : []
-    console.log(otherContentParts)
     // We get the nextChapter if there is one
     const nextChapter = chapter.course.chapter
       .slice()
@@ -169,9 +168,9 @@ class Chapter extends React.Component<Props, State> {
                     />
                   </div>
                 ) : (
-                  <div key={i}>
+                  <div key={i} className="mh3">
                     {arabicChapter && (
-                      <ChapterContent className="mv4">
+                      <ChapterContent className="mt4">
                         {otherContentParts[i]}
                       </ChapterContent>
                     )}

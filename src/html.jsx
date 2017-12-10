@@ -15,8 +15,14 @@ type Props = {
   body: string,
   headComponents: React.Node,
   postBodyComponents: React.Node,
+  preBodyComponents: React.Node,
 }
-const HTML = ({body, headComponents, postBodyComponents}: Props) => {
+const HTML = ({
+  body,
+  headComponents,
+  postBodyComponents,
+  preBodyComponents,
+}: Props) => {
   let css
   if (process.env.NODE_ENV === `production`) {
     css = (
@@ -46,6 +52,7 @@ const HTML = ({body, headComponents, postBodyComponents}: Props) => {
         {css}
       </head>
       <body>
+        {preBodyComponents}
         <div id="___gatsby" dangerouslySetInnerHTML={{__html: body}} />
         {postBodyComponents}
       </body>

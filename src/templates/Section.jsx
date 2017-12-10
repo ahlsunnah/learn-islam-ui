@@ -48,7 +48,7 @@ const Section = ({data, pathContext}: Props) => {
           section.course
             .slice()
             .sort((a, b) => a.order - b.order) // TODO: sort in the query ?
-            .map(course => (
+            .map((course) => (
               <Card
                 className="mt3 flex items-center bg-white"
                 key={course.slug}
@@ -56,7 +56,7 @@ const Section = ({data, pathContext}: Props) => {
               >
                 <div className="pa3 flex3">
                   <h2 className="f3">{course.title}</h2>
-                  {course.description.childMarkdownRemark.html && (
+                  {course.description && (
                     <div
                       className="ph3 f5 gray"
                       dangerouslySetInnerHTML={{

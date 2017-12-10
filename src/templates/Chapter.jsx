@@ -55,6 +55,7 @@ type Props = {
   },
   arabicChapter?: {
     content: Content,
+    title: string,
   },
   pathContext: {
     languagePath: string,
@@ -148,6 +149,9 @@ class Chapter extends React.Component<Props, State> {
               `}
             >
               {chapter.title}
+              {arabicChapter && (
+                <span className="pl3">{arabicChapter.title}</span>
+              )}
             </h1>
             <div />
           </div>
@@ -225,7 +229,6 @@ export const pageQuery = graphql`
       node_locale: {eq: $arabicLocale}
     ) @skip(if: $arabic) {
       title
-      order
       content {
         childMarkdownRemark {
           html

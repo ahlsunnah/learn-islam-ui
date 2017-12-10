@@ -8,31 +8,31 @@ import {Button} from 'antd'
 import FaBars from 'react-icons/lib/fa/bars'
 import GoMoveLeft from 'react-icons/lib/go/move-left'
 import ChapterSidebar from '../components/ChapterSidebar'
+import RawHTML from '../components/RawHTML'
 
 const SIDEBAR_WIDTH = '18rem'
 
 const StyledChapterSidebar = styled(ChapterSidebar)`
-  width: ${props => (props.isSideBarVisible ? SIDEBAR_WIDTH : '0')};
+  width: ${(props) => (props.isSideBarVisible ? SIDEBAR_WIDTH : '0')};
   transition: width 0.5s ease;
 `
 const ContentWrapper = styled.div`
   flex: 1;
-  margin-left: ${props => (props.isSideBarVisible ? SIDEBAR_WIDTH : '0')};
+  margin-left: ${(props) => (props.isSideBarVisible ? SIDEBAR_WIDTH : '0')};
   transition: margin 0.5s ease;
 `
-const ChapterContent = styled.div`
+const ChapterContent = styled(RawHTML)`
   p {
     font-size: 1.25rem;
   }
 `
+type Content = {
+  childMarkdownRemark: {html: string},
+}
 type Props = {
   data: {
-    contentfulChapter: {
-      content: {
-        childMarkdownRemark: {
-          html: string,
-        },
-      },
+    chapter: {
+      content: Content,
       course: {
         chapter: Array<{
           order: number,
@@ -53,6 +53,9 @@ type Props = {
       nextButton: string,
     },
   },
+  arabicChapter?: {
+    content: Content,
+  },
   pathContext: {
     languagePath: string,
     slug: string,
@@ -71,26 +74,47 @@ class Chapter extends React.Component<Props, State> {
       isSideBarVisible: !isSideBarVisible,
     }))
   }
+  splitContent = (content: Content) =>
+    content &&
+    content.childMarkdownRemark.html
+      .split(/<p><a href="https?:\/\/www.youtube.com\/watch\?v=(\w+)".*/)
+      .filter((part) => part !== '')
+  indexOtherContent = (otherContent: Content, arabicParts: Array<string>) => {
+    const otherParts = otherContent.childMarkdownRemark.html.split(/<hr>/)
+    let currentIndex = 0
+    return arabicParts.map((arabicPart) => {
+      if (!/^\w\w/.test(arabicPart)) {
+        currentIndex += 1
+        return otherParts[currentIndex - 1]
+      }
+      return undefined
+    })
+  }
   render() {
     const {data, pathContext} = this.props
     const {isSideBarVisible} = this.state
-    const {contentfulChapter: chapter, contentfulWebsite} = data
+    const {arabicChapter, chapter, contentfulWebsite} = data
     const {languagePath} = pathContext
     const {nextButton} = contentfulWebsite
-    // We split the content and youtube links
-    const contentParts =
-      chapter.content &&
-      chapter.content.childMarkdownRemark.html
-        .split(/<p><a href="https?:\/\/www.youtube.com\/watch\?v=(\w+)".*/)
-        .filter(part => part !== '')
+    // We split the content and youtube links (videos are in the arabic content)
+    const contentParts: Array<string> = this.splitContent(
+      (arabicChapter || chapter).content,
+    )
+    // If we have content in arabic we want to index the othe language content
+    // according to videos in arabic content
+    const otherContentParts: Array<string> = arabicChapter
+      ? this.indexOtherContent(chapter.content, contentParts)
+      : []
+    console.log(otherContentParts)
     // We get the nextChapter if there is one
     const nextChapter = chapter.course.chapter
       .slice()
       .sort((a, b) => a.order - b.order)
       .find(({order}) => order > chapter.order)
     const nextLink = nextChapter
-      ? `${languagePath}${chapter.course.section.slug}/${chapter.course
-          .slug}/${nextChapter.slug}/`
+      ? `${languagePath}${chapter.course.section.slug}/${chapter.course.slug}/${
+          nextChapter.slug
+        }/`
       : `${languagePath}${chapter.course.section.slug}/`
     return (
       <div className="flex">
@@ -117,7 +141,12 @@ class Chapter extends React.Component<Props, State> {
                 )}
               </button>
             </div>
-            <h1 className="mv2 tc" css={`flex: 2;`}>
+            <h1
+              className="mv2 tc"
+              css={`
+                flex: 2;
+              `}
+            >
               {chapter.title}
             </h1>
             <div />
@@ -132,17 +161,18 @@ class Chapter extends React.Component<Props, State> {
                       frameBorder="0"
                       title={`Video ${i}`}
                       type="text/html"
-                      src={`https://www.youtube.com/embed/${part}?autoplay=0&origin=http://http://localhost:8000"`}
+                      src={`https://www.youtube.com/embed/${part}?autoplay=0`}
                     />
                   </div>
                 ) : (
-                  <ChapterContent
-                    key={i}
-                    className="mv4"
-                    dangerouslySetInnerHTML={{
-                      __html: part,
-                    }}
-                  />
+                  <div key={i}>
+                    {arabicChapter && (
+                      <ChapterContent className="mv4">
+                        {otherContentParts[i]}
+                      </ChapterContent>
+                    )}
+                    <ChapterContent className="mv4">{part}</ChapterContent>
+                  </div>
                 ),
             )}
           <div className="w-100 pa3 tl">
@@ -162,8 +192,13 @@ export default Chapter
 
 // $FlowIgnore
 export const pageQuery = graphql`
-  query chapterQuery($slug: String!, $locale: String!) {
-    contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
+  query chapterQuery(
+    $slug: String!
+    $locale: String!
+    $arabic: Boolean!
+    $arabicLocale: String!
+  ) {
+    chapter: contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
       title
       order
       content {
@@ -182,6 +217,18 @@ export const pageQuery = graphql`
           title
           slug
           order
+        }
+      }
+    }
+    arabicChapter: contentfulChapter(
+      slug: {eq: $slug}
+      node_locale: {eq: $arabicLocale}
+    ) @skip(if: $arabic) {
+      title
+      order
+      content {
+        childMarkdownRemark {
+          html
         }
       }
     }

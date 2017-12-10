@@ -49,6 +49,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
           })
         }
       )
+      const mainLanguage = Object.keys(languagePaths)[0]
       
       // layout for each lang
       Object.keys(languagePaths).forEach((locale) => {
@@ -144,6 +145,8 @@ exports.createPages = ({graphql, boundActionCreators}) => {
                     languagePath,
                     languages,
                     locale,
+                    arabic: locale === mainLanguage,
+                    arabicLocale: mainLanguage,
                   },
                   layout: `main-layout-${locale}`
                 })

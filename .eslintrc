@@ -15,12 +15,12 @@
     "graphql": true
   },
   "rules": {
+    "flowtype/space-after-type-colon": 0,
     "flowtype/space-before-type-colon": 0,
     "no-unexpected-multiline": 2,
     "react/forbid-prop-types": 0,
     "react/jsx-wrap-multilines": 0,
     "react/no-danger": 0,
-    "react/prop-types": 0,
     "react/require-default-props": 0
   }
 }

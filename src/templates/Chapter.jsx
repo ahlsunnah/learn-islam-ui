@@ -68,7 +68,13 @@ type State = {
 
 class Chapter extends React.Component<Props, State> {
   state = {
-    isSideBarVisible: true,
+    isSideBarVisible: false,
+  }
+  componentWillMount() {
+    console.log(window.innerWidth)
+    if (window && window.innerWidth > 1024) {
+      this.setState({isSideBarVisible: true})
+    }
   }
   toggleSidebar: Function = () => {
     this.setState(({isSideBarVisible}) => ({

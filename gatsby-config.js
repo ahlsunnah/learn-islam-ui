@@ -3,7 +3,7 @@ module.exports = {
     title: 'Learn Islam',
   },
   plugins: [
-    'gatsby-plugin-catch-links',
+    // 'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
     // 'gatsby-plugin-preact',
@@ -32,7 +32,11 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-remark',
       options: {
-        plugins: ['gatsby-remark-copy-linked-files', 'gatsby-remark-images'],
+        plugins: [
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-images',
+          'gatsby-remark-youtube',
+        ],
       },
     },
     'gatsby-plugin-netlify',

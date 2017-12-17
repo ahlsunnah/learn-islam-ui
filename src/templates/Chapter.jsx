@@ -22,7 +22,15 @@ const ContentWrapper = styled.div`
   transition: margin 0.5s ease;
 `
 const ChapterContent = styled(RawHTML)`
+  h1,
+  h2,
+  h3 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
   p {
+    margin-left: 1rem;
+    margin-right: 1rem;
     font-size: 1.25rem;
   }
 `
@@ -71,7 +79,6 @@ class Chapter extends React.Component<Props, State> {
     isSideBarVisible: false,
   }
   componentWillMount() {
-    console.log(window.innerWidth)
     if (window && window.innerWidth > 1024) {
       this.setState({isSideBarVisible: true})
     }
@@ -83,9 +90,7 @@ class Chapter extends React.Component<Props, State> {
   }
   splitContent = (content: Content) =>
     content &&
-    content.childMarkdownRemark.html
-      .split(/<p><a href="https?:\/\/www.youtube.com\/watch\?v=(\w+)".*/)
-      .filter((part) => part !== '')
+    content.childMarkdownRemark.html.split(/<hr>/).filter((part) => part !== '')
   indexOtherContent = (otherContent: Content, arabicParts: Array<string>) => {
     const otherParts = otherContent.childMarkdownRemark.html.split(/<hr>/)
     let currentIndex = 0
@@ -161,29 +166,16 @@ class Chapter extends React.Component<Props, State> {
             <div />
           </div>
           {contentParts &&
-            contentParts.map(
-              (part, i) =>
-                /^\w\w/.test(part) ? (
-                  <div key={i} className="w-100 aspect-ratio aspect-ratio--4x3">
-                    <iframe
-                      className="aspect-ratio--object"
-                      frameBorder="0"
-                      title={`Video ${i}`}
-                      type="text/html"
-                      src={`https://www.youtube.com/embed/${part}?autoplay=0`}
-                    />
-                  </div>
-                ) : (
-                  <div key={i} className="mh3">
-                    {arabicChapter && (
-                      <ChapterContent className="mt4">
-                        {otherContentParts[i]}
-                      </ChapterContent>
-                    )}
-                    <ChapterContent className="mv4">{part}</ChapterContent>
-                  </div>
-                ),
-            )}
+            contentParts.map((part, i) => (
+              <div key={i} className="w-100">
+                {arabicChapter && (
+                  <ChapterContent className="mb4">
+                    {otherContentParts[i]}
+                  </ChapterContent>
+                )}
+                <ChapterContent className="mb4">{part}</ChapterContent>
+              </div>
+            ))}
           <div className="w-100 pa3 tl">
             <Link to={nextLink}>
               <Button type="primary" size="large">

@@ -4,7 +4,6 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import styled from 'react-emotion'
-import {Button} from 'antd'
 import FaBars from 'react-icons/lib/fa/bars'
 import GoMoveLeft from 'react-icons/lib/go/move-left'
 import ChapterSidebar from '../components/ChapterSidebar'
@@ -178,9 +177,9 @@ class Chapter extends React.Component<Props, State> {
             ))}
           <div className="w-100 pa3 tl">
             <Link to={nextLink}>
-              <Button type="primary" size="large">
+              <button type="primary" size="large">
                 {nextButton}
-              </Button>
+              </button>
             </Link>
           </div>
         </ContentWrapper>

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import 'antd/dist/antd.css'
 import 'tachyons' // eslint-disable-line
 import LanguagesNav from '../components/LanguagesNav'
 import './styles.css'
@@ -8,7 +7,6 @@ import './styles.css'
 type Props = {
   children: Function,
   location: {
-    // eslint-disable-line
     pathname: string,
   },
   data: {

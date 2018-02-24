@@ -31,14 +31,13 @@
     "*.{png,jpeg,jpg,gif,svg}": ["imagemin-lint-staged", "git add"]
   },
   "dependencies": {
-    "antd": "^2.13.8",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-plugin-flow-react-proptypes": "^8.0.0",
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-flow-react-proptypes": "^19.0.0",
     "babel-preset-flow": "^6.23.0",
     "emotion": "^8.0.9",
     "emotion-server": "^8.0.9",
-    "flow-bin": "^0.58.0",
+    "flow-bin": "^0.66.0",
     "gatsby": "^1.9.130",
     "gatsby-image": "^1.0.28",
     "gatsby-link": "^1.6.31",

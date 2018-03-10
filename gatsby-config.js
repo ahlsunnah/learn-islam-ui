@@ -7,7 +7,18 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
     // 'gatsby-plugin-preact',
-
+    // `gatsby-source-feathers`,
+    {
+      resolve: `gatsby-source-rest`,
+      options: {
+        type: 'Feathers',
+        api: `http://localhost:3030/`,
+        name: 'learn-islam',
+        path: 'data',
+        params: '?$populate=true',
+        services: ['topics', 'tracks', 'courses', 'chapters', 'translations'],
+      },
+    },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {

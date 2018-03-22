@@ -28,7 +28,7 @@ exports.sourceNodes = async ({boundActionCreators}, pluginOptions) => {
     serviceGenerator(fKToService(key), value),
   ]
   const fKsToLinks = ([key, value]) => [
-    R.replace(/_ids$/, '___NODE')(key),
+    R.replace(/_ids$/, value.length === 0 ? '' : '___NODE')(key),
     R.map(serviceGenerator(fKsToService(key)), value),
   ]
   const trans = R.cond([

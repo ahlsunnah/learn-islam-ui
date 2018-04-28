@@ -7,7 +7,7 @@ type Props = {
 const items = ['course1', 'course2', 'course3', 'course4']
 
 const HomeCourses = ({featuredCoursesTitle}: Props) => (
-  <section className="pv5 min-h-512 flex flex-column mdc-theme--secondary-bg">
+  <section className="pv5 min-h-512-ns flex flex-column mdc-theme--secondary-bg">
     <div className="tc">
       <h2 className="white">{featuredCoursesTitle}</h2>
     </div>

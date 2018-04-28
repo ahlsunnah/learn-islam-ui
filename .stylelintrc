@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-primer",
-  "rules": {
-    "string-quotes": "single"
+  "rules": { 
+    "selector-max-type": 1,
+    "string-quotes": "single",
   }
 }

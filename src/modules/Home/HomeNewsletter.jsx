@@ -13,11 +13,11 @@ const HomeNewsletter = ({
   homeEmailPlaceHolder,
   homeEmailTitle,
 }: Props) => (
-  <section className="pv5 min-h-512 flex flex-column justify-center items-center">
+  <section className="pv5 min-h-512-ns flex flex-column justify-center items-center">
     <div className="ph4 tc mdc-theme--primary">
       <h2>{homeEmailTitle}</h2>
     </div>
-    <div className="flex justify-around items-center ">
+    <div className="flex flex-column flex-row-ns justify-around items-center ">
       <input
         type="text"
         className="mh2 ph4 pv2 br-pill ba bw1 b--light-gray raised"
@@ -26,7 +26,7 @@ const HomeNewsletter = ({
       {/* <label className="mdc-floating-label" htmlFor="newsletter-field">
           {homeEmailPlaceHolder}
         </label> */}
-      <Button className="mh2 ph4" raised>
+      <Button className="mt4 mt0-ns mh2 ph3 ph4-ns" raised>
         {enroll}
       </Button>
     </div>

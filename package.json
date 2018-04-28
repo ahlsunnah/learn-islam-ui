@@ -29,8 +29,8 @@
   "lint-staged": {
     "*.{js,jsx}": ["prettier --write", "eslint", "git add"],
     "*.json": ["prettier --write", "git add"],
-    "*.css": ["prettier --write", "stylelint", "git add"],
-    "*.scss": ["prettier --write", "stylelint --syntax=scss", "git add"],
+    "*.css": ["prettier --write", "git add"],
+    "*.scss": ["prettier --write", "git add"],
     "*.{md}": ["prettier --write", "git add", "git add"],
     "*.{png,jpeg,jpg,gif,svg}": ["imagemin-lint-staged", "git add"]
   },

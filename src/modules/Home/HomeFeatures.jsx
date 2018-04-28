@@ -16,7 +16,7 @@ type Props = {
 const items = ['feature1', 'feature2', 'feature3']
 
 const HomeFeatures = (props: Props) => (
-  <section className="pv5 min-h-512 flex flex-column">
+  <section className="pv5 min-h-512-ns flex flex-column">
     <div className="tc">
       <h2>{props.featuresTitle}</h2>
     </div>

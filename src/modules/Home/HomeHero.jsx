@@ -31,7 +31,7 @@ const HomeHero = ({
       otherLocaleTranslations={otherLocaleTranslations}
       translations={t}
     />
-    <div className="mt64 min-h-512 flex1 flex flex-column flex-row-ns justify-between items-center">
+    <div className="mt64 min-h-512-ns flex1 flex flex-column flex-row-ns justify-between items-center">
       <div className="mt4 mt0-ns ph5 flex1 white">
         <h1 className="f3 f2-ns fw4">{t.homeTitle}</h1>
         <p className="">{t.homeDescription}</p>

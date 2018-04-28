@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import R from 'ramda'
-import TracksContainer from '../containers/Tracks'
+import TracksContainer from '../modules/Tracks'
 
 type Props = {
   data: {

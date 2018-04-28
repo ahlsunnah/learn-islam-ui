@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react'
 import Link from 'gatsby-link'
-import Button from './Button'
-import Header from './Header'
-import IconWithText from './IconWithText'
-import RawHTML from './RawHTML'
-import clock from '../images/clock.svg'
-import target from '../images/target.svg'
-import {getHumanTime} from '../lib/time'
+import Button from '../../components/Button'
+import Header from '../../components/Header'
+import IconWithText from '../../components/IconWithText'
+import RawHTML from '../../components/RawHTML'
+import clock from '../../images/clock.svg'
+import target from '../../images/target.svg'
+import {getHumanTime} from '../../lib/time'
 
 type Props = {
   duration: number,

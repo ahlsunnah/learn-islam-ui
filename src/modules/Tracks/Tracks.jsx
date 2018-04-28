@@ -2,7 +2,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import Link from 'gatsby-link'
-import RawHTML from './RawHTML'
+import RawHTML from '../../components/RawHTML'
 
 type Props = {
   localePath: string,

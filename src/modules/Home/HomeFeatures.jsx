@@ -1,6 +1,7 @@
 // @flow
+/* eslint react/no-unused-prop-types: 0 */
 import * as React from 'react'
-import RawHTML from './RawHTML'
+import RawHTML from '../../components/RawHTML'
 
 type Props = {
   feature1Title: string,

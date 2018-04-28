@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import Link from 'gatsby-link'
-import Button from './Button'
-import Card from './Card'
-import RawHTML from './RawHTML'
+import Button from '../../components/Button'
+import Card from '../../components/Card'
+import RawHTML from '../../components/RawHTML'
 // import Card from 'preact-material-components/Card'
 // import 'preact-material-components/Card/style.css'
 // import 'preact-material-components/Button/style.css'

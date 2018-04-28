@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import NavBar from './NavBar'
+import NavBar from '../../components/NavBar'
 
 type Props = {
   otherLocaleTranslations: {},

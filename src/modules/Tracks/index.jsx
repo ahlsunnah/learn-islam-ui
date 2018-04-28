@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
-import BlueHero from '../components/BlueHero'
-import HomeFooter from '../components/HomeFooter'
-import Tracks from '../components/Tracks'
-import Footer from '../components/Footer'
+import BlueHero from './BlueHero'
+import HomeFooter from '../../components/HomeFooter'
+import Tracks from './Tracks'
+import Footer from '../../components/Footer'
 
 type Props = {
   data: {

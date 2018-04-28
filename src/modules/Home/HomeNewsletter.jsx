@@ -1,14 +1,12 @@
 // @flow
 import * as React from 'react'
-import Button from './Button'
+import Button from '../../components/Button'
 
 type Props = {
   enroll: string,
   homeEmailPlaceHolder: string,
   homeEmailTitle: string,
 }
-
-const items = ['feature1', 'feature2', 'feature3']
 
 const HomeNewsletter = ({
   enroll,

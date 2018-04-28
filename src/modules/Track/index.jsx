@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import Helmet from 'react-helmet'
-import CoursesWrapper from '../components/CoursesWrapper'
-import TrackHeader from '../components/TrackHeader'
-import TrackSidebar from '../components/TrackSidebar'
+import CoursesWrapper from './CoursesWrapper'
+import TrackHeader from './TrackHeader'
+import TrackSidebar from './TrackSidebar'
 
 type Props = {
   data: {

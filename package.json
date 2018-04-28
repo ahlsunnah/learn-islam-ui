@@ -8,6 +8,9 @@
     "build": "gatsby build",
     "clean": "rimraf ./public",
     "commit": "git-cz",
+    "full-build": "yarn build-plugin; yarn build",
+    "build-plugin":
+      "cd plugins/gatsby-source-rest/; yarn; yarn build:prod; cd ../../",
     "lint:css": "stylelint ./src/**/*.css",
     "lint:scss": "stylelint --syntax=scss ./src/**/*.scss",
     "lint:js": "eslint .",

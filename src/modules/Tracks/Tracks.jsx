@@ -19,9 +19,13 @@ const Tracks = ({localePath, tracks}: Props) => (
     {tracks.map(({slug, strings}, i) => (
       <Link key={slug} to={`${localePath}${slug}`} className="no-underline">
         <div
-          className={cx('mv5 pv3 flex justify-center black', {
-            'flex-row-reverse': i % 2,
-          })}
+          className={cx(
+            'mv4 mv5-ns pv3 flex justify-center black flex-column',
+            {
+              'flex-row-reverse-ns': i % 2,
+              'flex-row-ns': !(i % 2),
+            },
+          )}
         >
           <div className="mh3 w5 h4 bg-light-gray" />
           <div className="mh3 measure-narrow">

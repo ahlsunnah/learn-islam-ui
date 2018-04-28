@@ -1,42 +1,45 @@
 // @flow
 import * as React from 'react'
-import styled from 'react-emotion'
-import {boxShadowTransition} from '../styles'
+import cx from 'classnames'
+import '../styles/button.scss'
 
-const StyledButton = styled.button`
-  ${boxShadowTransition};
-`
-const ElevatedButton = styled(StyledButton)`
-  box-shadow: 12px 15px 20px rgba(0, 0, 0, 0.1);
-  &:hover,
-  &:focus {
-    box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-`
-const FlatButton = styled(StyledButton)`
-  &:hover,
-  &:focus {
-    box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.1);
-  }
-`
 type Props = {
   children: React.Node,
   className?: string,
   elevated?: boolean,
+  inverse?: boolean,
+  pill?: boolean,
+  raised?: boolean,
+  rounded?: boolean,
+  secondary?: boolean,
+  stroked?: boolean,
 }
-const Button = ({children, className = '', elevated}: Props) => {
-  const commonClasses = `${className} ph3 pv2 pointer`
-  return elevated ? (
-    <ElevatedButton
-      className={`${commonClasses} white bg-gold b--transparent dim`}
-    >
-      {children}
-    </ElevatedButton>
-  ) : (
-    <FlatButton className={`${commonClasses} gold bg-transparent b--gold`}>
-      {children}
-    </FlatButton>
-  )
-}
+const Button = ({
+  children,
+  className = '',
+  elevated,
+  inverse,
+  raised,
+  rounded = true,
+  secondary,
+  stroked,
+  ...props
+}: Props) => (
+  <button
+    className={cx('mdc-button', className, {
+      // br11: rounded,
+      'br-pill': rounded,
+      'button-color_and_stroke__secondary': stroked && secondary,
+      'button-fill__secondary': secondary && !stroked,
+      'button-inverse': inverse,
+      'button-elevated': elevated,
+      'mdc-button--raised': raised,
+      'mdc-button--stroked': stroked,
+    })}
+    {...props}
+  >
+    {children}
+  </button>
+)
 
 export default Button

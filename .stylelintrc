@@ -1,3 +1,6 @@
 {
-  "extends": "stylelint-config-primer"
+  "extends": "stylelint-config-primer",
+  "rules": {
+    "string-quotes": "single"
+  }
 }

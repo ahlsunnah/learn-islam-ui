@@ -37,18 +37,18 @@ const Course = ({data, pathContext}: Props) => {
 export default Course
 
 // $FlowIgnore
-export const pageQuery = graphql`
-  query courseQuery($slug: String!, $locale: String!) {
-    contentfulCourse(slug: {eq: $slug}, node_locale: {eq: $locale}) {
-      title
-      section {
-        slug
-      }
-      chapter {
-        order
-        slug
-        title
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query courseQuery($slug: String!, $locale: String!) {
+//     contentfulCourse(slug: {eq: $slug}, node_locale: {eq: $locale}) {
+//       title
+//       section {
+//         slug
+//       }
+//       chapter {
+//         order
+//         slug
+//         title
+//       }
+//     }
+//   }
+// `

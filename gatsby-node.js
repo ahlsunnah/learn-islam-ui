@@ -1,167 +1,161 @@
-const _ = require(`lodash`)
+/* eslint no-console: 0 */
+// const _ = require(`lodash`)
+const R = require(`ramda`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const slash = require(`slash`)
 
-exports.createPages = ({graphql, boundActionCreators}) => {
-  const {createLayout, createPage} = boundActionCreators
-  return new Promise((resolve, reject) => {
-    // We get the language path
+const locales = ['ar', 'fr']
+const localesPaths = {
+  ar: '/',
+  fr: '/fr/',
+}
+
+exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
+  new Promise((resolve, reject) => {
+    // const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
+    const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
+    const tracksTemplate = path.resolve(`./src/templates/Tracks.jsx`)
+    const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
+    // const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
+    // const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
+
+    // home pages
+    console.log('Creating home pages')
+    locales.forEach((locale) => {
+      createPage({
+        path: localesPaths[locale],
+        component: slash(homeTemplate),
+        context: {
+          locale,
+          localesPaths,
+        },
+      })
+    })
+
+    // tracks pages
+    console.log('Creating tracks pages')
+    locales.forEach((locale) => {
+      createPage({
+        path: `${localesPaths[locale]}masar`,
+        component: slash(tracksTemplate),
+        context: {
+          locale,
+          localesPaths,
+        },
+      })
+    })
+
+    console.log('fetching data')
     // prettier-ignore
     graphql(
       `
       {
-        allContentfulWebsite(limit: 1000) {
+        tracks: allFeathersTracks(limit: 1000) {
           edges {
             node {
-              languageName
-              languagePath
-              node_locale
-            }
-          }
-        }
-      }  
-      `
-    ).then(languagesRes => {
-      if (languagesRes.errors) {
-          reject(languagesRes.errors)
-      }
-
-      const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
-
-      const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
-      const sectionTemplate = path.resolve(`./src/templates/Section.jsx`)
-      const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
-      const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
-
-      // we store the list of languages with their path
-      const languagePaths = {}
-      // We need languages list on all pages
-      // We prepare it here to be able to choose enabled languages from here
-      const languages = []
-      _.each(
-        languagesRes.data.allContentfulWebsite.edges,
-        ({node:{languageName, languagePath, node_locale}}) => {
-          languagePaths[node_locale] = languagePath
-          languages.push ({
-            languageName,
-            languagePath,
-          })
-        }
-      )
-      const mainLanguage = Object.keys(languagePaths)[0]
-      
-      // layout for each lang
-      Object.keys(languagePaths).forEach((locale) => {
-          createLayout({
-            component: slash(MainLayout),
-            id: `main-layout-${locale}`,
-            context: {
-              languages,
-              locale,
-            },
-          })
-      })
-
-      // home pages
-      Object.entries(languagePaths).forEach(([locale, languagePath]) => {
-          createPage({
-            path: languagePath,
-            component: slash(homeTemplate),
-            context: {
-              languagePath,
-              languages,
-              locale,
-            },
-            layout: `main-layout-${locale}`
-          })
-      })
-
-      // get slugs of pages
-      graphql(
-        `
-        {
-          allContentfulSection(limit: 1000) {
-            edges {
-              node {
-                slug
-                node_locale
-                course {
-                  slug
-                  chapter {
-                    slug
-                  }
-                }
+              slug
+              strings: tracksStrings {
+                locale
+              }
+              courses {
+                id
               }
             }
           }
         }
-        `
-      ).then(result => {
-        if (result.errors) {
-          reject(result.errors)
-        }
-        _.each(result.data.allContentfulSection.edges, ({node}) => {
-          const locale = node.node_locale
-          const languagePath = languagePaths[locale]
-          const courses = node.course
-
-          if (languagePath) {
-            // Section pages
-            // console.log(`Creating Section at path: ${languagePath}${node.slug}/`)
+      }
+      `
+    ).then((result) => {
+      // prettier-ignore-stop
+      // console.log(result)
+      if (result.errors) {
+        console.error((result.errors[0].message))
+        reject()
+        return
+      }
+      const {tracks} = result.data
+      tracks.edges.forEach(({node}) => {
+        const {courses, slug, strings} = node
+        if (courses && courses.length) {
+          strings.forEach(({locale})=> {
+            console.log(`creating track page for slug (${slug}) and locale (${locale}) `, `${localesPaths[locale]}$slug/`)
             createPage({
-              path: `${languagePath}${node.slug}/`,
-              component: slash(sectionTemplate),
+              path: `${localesPaths[locale]}${slug}/`,
+              component: slash(trackTemplate),
               context: {
-                slug: node.slug,
-                languagePath,
-                languages,
                 locale,
+                localesPaths: R.pick(
+                  R.map(R.prop('locale'), strings),
+                  localesPaths
+                  ),
+                slug,
               },
-              layout: `main-layout-${locale}`
             })
-
-            _.each(courses, (course) => {
-              // Course pages
-              // console.log(`Creating Course at path: ${languagePath}${node.slug}/${course.slug}`)
-              createPage({
-                path: `${languagePath}${node.slug}/${course.slug}/`,
-                component: slash(courseTemplate),
-                context: {
-                  slug: course.slug,
-                  languagePath,
-                  locale,
-                },
-              })
-
-              // Chapter pages
-              _.each(course.chapter, (chapter) => {
-                // console.log(`Creating Chapter at path: ${languagePath}${node.slug}/${course.slug}/${chapter.slug}`)
-                createPage({
-                  path: `${languagePath}${node.slug}/${course.slug}/${chapter.slug}`,
-                  component: slash(chapterTemplate),
-                  context: {
-                    slug: chapter.slug,
-                    languagePath,
-                    languages,
-                    locale,
-                    arabic: locale === mainLanguage,
-                    arabicLocale: mainLanguage,
-                  },
-                  layout: `main-layout-${locale}`
-                })
-              })
-            })
-
-          }  
-        })
-        resolve()
-        })
-      // end of section pages
-      
+          })
+        }
+      })
 
 
-      // Create section pages
+      resolve()
     })
+    //   if (result.errors) {
+    //     reject(result.errors)
+    //   }
+    //   _.each(result.data.allContentfulSection.edges, ({node}) => {
+    //     const locale = node.node_locale
+    //     const languagePath = languagePaths[locale]
+    //     const courses = node.course
+
+    //     if (languagePath) {
+    //       // Section pages
+    //       // console.log(`Creating Section at path: ${languagePath}${node.slug}/`)
+    //       createPage({
+    //         path: `${languagePath}${node.slug}/`,
+    //         component: slash(sectionTemplate),
+    //         context: {
+    //           slug: node.slug,
+    //           languagePath,
+    //           languages,
+    //           locale,
+    //         },
+    //         layout: `main-layout-${locale}`,
+    //       })
+
+    //       _.each(courses, (course) => {
+    //         // Course pages
+    //         // console.log(`Creating Course at path: ${languagePath}${node.slug}/${course.slug}`)
+    //         createPage({
+    //           path: `${languagePath}${node.slug}/${course.slug}/`,
+    //           component: slash(courseTemplate),
+    //           context: {
+    //             slug: course.slug,
+    //             languagePath,
+    //             locale,
+    //           },
+    //         })
+
+    //         // Chapter pages
+    //         _.each(course.chapter, (chapter) => {
+    //           // console.log(`Creating Chapter at path: ${languagePath}${node.slug}/${course.slug}/${chapter.slug}`)
+    //           createPage({
+    //             path: `${languagePath}${node.slug}/${course.slug}/${
+    //               chapter.slug
+    //             }`,
+    //             component: slash(chapterTemplate),
+    //             context: {
+    //               slug: chapter.slug,
+    //               languagePath,
+    //               languages,
+    //               locale,
+    //               arabic: locale === mainLanguage,
+    //               arabicLocale: mainLanguage,
+    //             },
+    //             layout: `main-layout-${locale}`,
+    //           })
+    //         })
+    //       })
+    //     }
+    //   })
+    // })
   })
-}

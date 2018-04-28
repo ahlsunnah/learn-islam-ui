@@ -191,48 +191,48 @@ class Chapter extends React.Component<Props, State> {
 export default Chapter
 
 // $FlowIgnore
-export const pageQuery = graphql`
-  query chapterQuery(
-    $slug: String!
-    $locale: String!
-    $arabic: Boolean!
-    $arabicLocale: String!
-  ) {
-    chapter: contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
-      title
-      order
-      content {
-        childMarkdownRemark {
-          html
-        }
-      }
-      course {
-        slug
-        title
-        section {
-          slug
-          title
-        }
-        chapter {
-          title
-          slug
-          order
-        }
-      }
-    }
-    arabicChapter: contentfulChapter(
-      slug: {eq: $slug}
-      node_locale: {eq: $arabicLocale}
-    ) @skip(if: $arabic) {
-      title
-      content {
-        childMarkdownRemark {
-          html
-        }
-      }
-    }
-    contentfulWebsite(node_locale: {eq: $locale}) {
-      nextButton
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query chapterQuery(
+//     $slug: String!
+//     $locale: String!
+//     $arabic: Boolean!
+//     $arabicLocale: String!
+//   ) {
+//     chapter: contentfulChapter(slug: {eq: $slug}, node_locale: {eq: $locale}) {
+//       title
+//       order
+//       content {
+//         childMarkdownRemark {
+//           html
+//         }
+//       }
+//       course {
+//         slug
+//         title
+//         section {
+//           slug
+//           title
+//         }
+//         chapter {
+//           title
+//           slug
+//           order
+//         }
+//       }
+//     }
+//     arabicChapter: contentfulChapter(
+//       slug: {eq: $slug}
+//       node_locale: {eq: $arabicLocale}
+//     ) @skip(if: $arabic) {
+//       title
+//       content {
+//         childMarkdownRemark {
+//           html
+//         }
+//       }
+//     }
+//     contentfulWebsite(node_locale: {eq: $locale}) {
+//       nextButton
+//     }
+//   }
+// `

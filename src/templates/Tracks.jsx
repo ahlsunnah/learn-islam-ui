@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import R from 'ramda'
-import HomeContainer from '../containers/Home'
+import TracksContainer from '../containers/Tracks'
 
 type Props = {
   data: {
@@ -39,42 +39,29 @@ const enhance = (props, locale) =>
     },
   })(props)
 
-const Home = (props: Props) => (
-  <HomeContainer {...enhance(props, props.pathContext.locale)} />
+const Tracks = (props: Props) => (
+  <TracksContainer {...enhance(props, props.pathContext.locale)} />
 )
 
-export default Home
+export default Tracks
 
 // $FlowIgnore
 export const pageQuery = graphql`
-  query homeQuery($locale: String!) {
+  query tracksQuery($locale: String!) {
     translations: feathersTranslations(locale: {eq: $locale}) {
       aboutUs
       connect
       courses
-      enroll
-      feature1Text
-      feature2Text
-      feature3Text
-      feature1Title
-      feature2Title
-      feature3Title
-      featuredCoursesTitle
-      featuresTitle
       footerSocialTitle
-      homeTitle
-      homeDescription
-      homeEmailTitle
-      homeEmailPlaceHolder
       homeFooterCTA
       homeStartTrack
       localeName
       localePath
       siteName
       siteSlogan
-      soon
-      start
       tracks
+      tracksPageTitle
+      tracksPageDescription
       urlFacebook
       urlTelegram
       urlTwitter
@@ -84,12 +71,14 @@ export const pageQuery = graphql`
       localeName
       localePath
     }
-    tracks: allFeathersTracks(limit: 3, sort: {fields: [order], order: ASC}) {
+    tracks: allFeathersTracks(
+      limit: 1000
+      sort: {fields: [order], order: ASC}
+    ) {
       edges {
         node {
           order
           slug
-          soon
           strings: tracksStrings {
             title
             description

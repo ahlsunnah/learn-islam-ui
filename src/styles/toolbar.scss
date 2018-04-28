@@ -1,0 +1,11 @@
+@import './variables';
+@import '@material/toolbar/mdc-toolbar';
+
+.mdc-toolbar {
+  @include mdc-toolbar-fill-color (white);
+
+  a {
+    color: $mdc-theme-primary;
+  }
+  // @include mdc-toolbar-ink-color($mdc-theme-secondary);
+}

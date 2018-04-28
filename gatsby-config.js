@@ -1,6 +1,9 @@
+/* eslint no-console: 0 */
 const path = require(`path`)
 const {API, USER, PASSWORD} = process.env
-
+if (!API || !USER || !PASSWORD) {
+  console.error('We need API USER AND PASSWORD env variables set', API, USER)
+}
 module.exports = {
   siteMetadata: {
     title: 'Learn Islam',

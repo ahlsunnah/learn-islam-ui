@@ -33,11 +33,16 @@ const HomeTrackCard = ({localePath, slug, soon, strings: s, t}: Props) => (
       </RawHTML>
     </div>
     {soon ? (
-      <Button className="mv2 cursor-default" raised rounded secondary>
+      <Button
+        className="mv2 cursor-default no-underline"
+        raised
+        rounded
+        secondary
+      >
         {t.soon}
       </Button>
     ) : (
-      <Link className="mv2" to={`${localePath}${slug}`}>
+      <Link className="mv2 no-underline" to={`${localePath}${slug}`}>
         <Button raised rounded secondary>
           {t.start}
         </Button>

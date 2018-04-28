@@ -67,7 +67,7 @@ const CourseCard = ({
             }}
           />
         )}
-        <Link to={nextCoursePath}>
+        <Link className="no-underline" to={nextCoursePath}>
           <Button className="mt3" secondary stroked>
             {t.startCourse}
           </Button>

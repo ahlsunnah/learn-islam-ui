@@ -18,7 +18,7 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
     const tracksTemplate = path.resolve(`./src/templates/Tracks.jsx`)
     const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
     // const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
-    // const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
+    const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
 
     // home pages
     console.log('Creating home pages')
@@ -60,15 +60,24 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
               }
               courses {
                 id
+                slug
+                coursesStrings {
+                  locale
+                }
+                chapters {
+                  slug
+                  chaptersStrings {
+                    locale
+                  }
+                }
               }
             }
           }
         }
-      }
+      }      
       `
     ).then((result) => {
       // prettier-ignore-stop
-      // console.log(result)
       if (result.errors) {
         console.error((result.errors[0].message))
         reject()
@@ -78,8 +87,9 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
       tracks.edges.forEach(({node}) => {
         const {courses, slug, strings} = node
         if (courses && courses.length) {
+          // create track pages
           strings.forEach(({locale})=> {
-            console.log(`creating track page for slug (${slug}) and locale (${locale}) `, `${localesPaths[locale]}$slug/`)
+            console.log(`creating TRACK page for slug (${slug}) and locale (${locale}) `)
             createPage({
               path: `${localesPaths[locale]}${slug}/`,
               component: slash(trackTemplate),
@@ -93,8 +103,41 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
               },
             })
           })
+
+          courses.forEach((course) => {
+            const {chapters, slug: courseSlug} = course
+            // create course pages (redirect)
+            // TODO
+  
+            // create chapter pages
+            chapters.forEach(chapter => {
+              const {slug: chapterSlug, chaptersStrings} = chapter
+              chaptersStrings.forEach(({locale}) => {
+                console.log(`creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `)
+                createPage({
+                  path: chapters.length === 1
+                   ? `${localesPaths[locale]}${slug}/${chapterSlug}`
+                    : `${localesPaths[locale]}${slug}/${courseSlug}/${chapterSlug}`,
+                  component: slash(chapterTemplate),
+                  context: {
+                    locale,
+                    localesPaths: R.pick(
+                      R.map(R.prop('locale'), strings),
+                      localesPaths
+                      ),
+                    slug: chapterSlug,
+                  },
+                })
+              })
+            }
+
+            )
+          })
         }
       })
+
+      // create chapter pages
+      
 
 
       resolve()

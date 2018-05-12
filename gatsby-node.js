@@ -19,6 +19,7 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
     const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
     // const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
     const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
+    const quizTemplate = path.resolve(`./src/templates/Quiz.jsx`)
 
     // home pages
     console.log('Creating home pages')
@@ -47,39 +48,45 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
     })
 
     console.log('fetching data')
-    // prettier-ignore
+    // prettier-ignore-start
     graphql(
       `
-      {
-        tracks: allFeathersTracks(limit: 1000) {
-          edges {
-            node {
-              slug
-              strings: tracksStrings {
-                locale
-              }
-              courses {
-                id
+        {
+          tracks: allFeathersTracks(limit: 1000) {
+            edges {
+              node {
                 slug
-                coursesStrings {
+                strings: tracksStrings {
                   locale
                 }
-                chapters {
+                courses {
+                  id
                   slug
-                  chaptersStrings {
+                  coursesStrings {
                     locale
+                  }
+                  chapters {
+                    slug
+                    chaptersStrings {
+                      locale
+                    }
+                    quizs {
+                      difficulty
+                      quizsStrings {
+                        locale
+                      }
+                    }
                   }
                 }
               }
             }
           }
         }
-      }      
-      `
+      `,
+      // prettier-ignore-end
     ).then((result) => {
-      // prettier-ignore-stop
       if (result.errors) {
-        console.error((result.errors[0].message))
+        console.error(result.errors[0].message)
         reject()
         return
       }
@@ -88,8 +95,10 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
         const {courses, slug, strings} = node
         if (courses && courses.length) {
           // create track pages
-          strings.forEach(({locale})=> {
-            console.log(`creating TRACK page for slug (${slug}) and locale (${locale}) `)
+          strings.forEach(({locale}) => {
+            console.log(
+              `creating TRACK page for slug (${slug}) and locale (${locale}) `,
+            )
             createPage({
               path: `${localesPaths[locale]}${slug}/`,
               component: slash(trackTemplate),
@@ -97,8 +106,8 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                 locale,
                 localesPaths: R.pick(
                   R.map(R.prop('locale'), strings),
-                  localesPaths
-                  ),
+                  localesPaths,
+                ),
                 slug,
               },
             })
@@ -108,35 +117,73 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
             const {chapters, slug: courseSlug} = course
             // create course pages (redirect)
             // TODO
-  
+
             // create chapter pages
-            chapters.forEach(chapter => {
-              const {slug: chapterSlug, chaptersStrings} = chapter
+            chapters.forEach((chapter) => {
+              const {slug: chapterSlug, chaptersStrings, quizs} = chapter
               chaptersStrings.forEach(({locale}) => {
-                console.log(`creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `)
+                console.log(
+                  `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
+                )
                 createPage({
-                  path: `${localesPaths[locale]}${slug}/${courseSlug}/${chapterSlug}`,
+                  path: `${
+                    localesPaths[locale]
+                  }${slug}/${courseSlug}/${chapterSlug}`,
                   component: slash(chapterTemplate),
                   context: {
                     locale,
                     localesPaths: R.pick(
                       R.map(R.prop('locale'), strings),
-                      localesPaths
-                      ),
+                      localesPaths,
+                    ),
                     slug: chapterSlug,
                   },
                 })
-              })
-            }
 
-            )
+                // Create quizs:
+                if (quizs && quizs.length) {
+                  // Which difficulties do we have ?
+                  const difficulties = quizs.reduce(
+                    (acc, {difficulty, quizsStrings}) => {
+                      if (
+                        !acc.includes(difficulty) &&
+                        quizsStrings.some((item) => item.locale === locale)
+                      ) {
+                        acc.push(difficulty)
+                      }
+                      return acc
+                    },
+                    [],
+                  )
+
+                  difficulties.forEach((difficulty) => {
+                    console.log(
+                      `Create QUIZ page for chapter ${chapterSlug} and locale ${locale} and difficulty ${difficulty}`,
+                    )
+                    createPage({
+                      path: `${
+                        localesPaths[locale]
+                      }${slug}/${courseSlug}/${chapterSlug}/ikhtibar-${difficulty}`,
+                      component: slash(quizTemplate),
+                      context: {
+                        difficulty,
+                        locale,
+                        localesPaths: R.pick(
+                          R.map(R.prop('locale'), strings),
+                          localesPaths,
+                        ),
+                        slug: chapterSlug,
+                      },
+                    })
+                  })
+                }
+              })
+            })
           })
         }
       })
 
       // create chapter pages
-      
-
 
       resolve()
     })

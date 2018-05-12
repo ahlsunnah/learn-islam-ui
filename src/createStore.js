@@ -11,7 +11,7 @@ const createStore = () =>
     : reduxCreateStore(
         reducers,
         initialState,
-        window &&
+        typeof window !== 'undefined' &&
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
           window.__REDUX_DEVTOOLS_EXTENSION__(),
       )

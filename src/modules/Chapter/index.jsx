@@ -2,9 +2,6 @@
 /* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
-import FaBars from 'react-icons/lib/fa/bars'
-import GoMoveLeft from 'react-icons/lib/go/move-left'
 import {Strings} from '../../types'
 
 type Props = {
@@ -41,7 +38,7 @@ class Chapter extends React.Component<Props, State> {
     isSideBarVisible: false,
   }
   componentWillMount() {
-    if (window && window.innerWidth > 1024) {
+    if (typeof window !== 'undefined' && window.innerWidth > 1024) {
       this.setState({isSideBarVisible: true})
     }
   }

@@ -115,9 +115,7 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
               chaptersStrings.forEach(({locale}) => {
                 console.log(`creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `)
                 createPage({
-                  path: chapters.length === 1
-                   ? `${localesPaths[locale]}${slug}/${chapterSlug}`
-                    : `${localesPaths[locale]}${slug}/${courseSlug}/${chapterSlug}`,
+                  path: `${localesPaths[locale]}${slug}/${courseSlug}/${chapterSlug}`,
                   component: slash(chapterTemplate),
                   context: {
                     locale,

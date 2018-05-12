@@ -10,7 +10,7 @@ module.exports = {
     siteUrl: `https://madrassaminhaj.com`,
   },
   plugins: [
-    'gatsby-plugin-webpack-bundle-analyzer',
+    // 'gatsby-plugin-webpack-bundle-analyzer',
     'gatsby-plugin-resolve-src',
     'gatsby-plugin-accessibilityjs',
     {
@@ -69,6 +69,8 @@ module.exports = {
           'courses-strings',
           'chapters',
           'chapters-strings',
+          'quizs',
+          'quizs-strings',
           'translations',
         ],
       },

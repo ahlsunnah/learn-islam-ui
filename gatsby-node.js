@@ -19,7 +19,7 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
     const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
     // const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
     const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
-    const quizTemplate = path.resolve(`./src/templates/Quiz.jsx`)
+    const quizsTemplate = path.resolve(`./src/templates/Quizs.jsx`)
 
     // home pages
     console.log('Creating home pages')
@@ -158,13 +158,13 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
 
                   difficulties.forEach((difficulty) => {
                     console.log(
-                      `Create QUIZ page for chapter ${chapterSlug} and locale ${locale} and difficulty ${difficulty}`,
+                      `Create QUIZS page for chapter ${chapterSlug} and locale ${locale} and difficulty ${difficulty}`,
                     )
                     createPage({
                       path: `${
                         localesPaths[locale]
                       }${slug}/${courseSlug}/${chapterSlug}/ikhtibar-${difficulty}`,
-                      component: slash(quizTemplate),
+                      component: slash(quizsTemplate),
                       context: {
                         difficulty,
                         locale,

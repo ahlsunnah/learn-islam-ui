@@ -1,7 +1,7 @@
 // @flow
-import React from 'react'
+import TrackContainer from 'modules/Track'
 import R from 'ramda'
-import TrackContainer from '../modules/Track'
+import React from 'react'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
 const filterStrings = R.curry((locale, str) =>

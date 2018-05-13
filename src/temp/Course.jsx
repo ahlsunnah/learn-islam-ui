@@ -1,8 +1,8 @@
 // @flow
+import Loader from 'components/Loader'
 import React from 'react'
 import Helmet from 'react-helmet'
 import {Redirect} from 'react-router' // eslint-disable-line
-import Loader from '../components/Loader'
 
 type Props = {
   data: {

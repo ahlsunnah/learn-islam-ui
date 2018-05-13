@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react'
 import cx from 'classnames'
+import RawHTML from 'components/RawHTML'
 import Link from 'gatsby-link'
-import RawHTML from '../../components/RawHTML'
+import * as React from 'react'
 
 type Props = {
   localePath: string,

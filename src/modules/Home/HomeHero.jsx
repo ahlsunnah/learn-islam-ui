@@ -1,8 +1,8 @@
 // @flow
+import NavBar from 'components/NavBar'
+import heroPattern from 'images/heroPattern.svg'
 import * as React from 'react'
 import HomeTrackCard from './HomeTrackCard'
-import NavBar from '../../components/NavBar'
-import heroPattern from '../../images/heroPattern.svg'
 
 type Props = {
   otherLocaleTranslations: {},

@@ -1,7 +1,7 @@
 // @flow
-import React from 'react'
+import HomeContainer from 'modules/Home'
 import R from 'ramda'
-import HomeContainer from '../modules/Home'
+import React from 'react'
 
 type Props = {
   data: {

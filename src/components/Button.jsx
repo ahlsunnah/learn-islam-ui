@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import cx from 'classnames'
-import '../styles/button.scss'
+import 'styles/button.scss'
 
 type Props = {
   children: React.Node,

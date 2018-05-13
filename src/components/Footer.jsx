@@ -1,8 +1,6 @@
 // @flow
-import * as React from 'react'
+import 'styles/custom.scss'
 import 'tachyons/css/tachyons.min.css'
-import '../styles/custom.scss'
 
-type Props = {}
-const Footer = (props: Props) => null
+const Footer = () => null
 export default Footer

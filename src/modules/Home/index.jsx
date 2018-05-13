@@ -1,11 +1,11 @@
 // @flow
+import Footer from 'components/Footer'
+import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
-import HomeHero from './HomeHero'
 import HomeCourses from './HomeCourses'
 import HomeFeatures from './HomeFeatures'
-import HomeFooter from '../../components/HomeFooter'
+import HomeHero from './HomeHero'
 import HomeNewsletter from './HomeNewsletter'
-import Footer from '../../components/Footer'
 
 type Props = {
   data: {

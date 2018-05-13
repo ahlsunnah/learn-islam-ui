@@ -1,13 +1,13 @@
 // @flow
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 // TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-import * as React from 'react'
 import cx from 'classnames'
 import Link from 'gatsby-link'
-import structure from './structure'
-import logo from '../../images/logo.svg'
+import logo from 'images/logo.svg'
+import * as React from 'react'
+import 'styles/drawer.scss'
 import Button from '../Button'
-import '../../styles/drawer.scss'
+import structure from './structure'
 
 type Props = {
   isOpen: boolean,

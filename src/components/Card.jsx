@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react'
-import '../styles/card.scss'
 import cx from 'classnames'
+import * as React from 'react'
+import 'styles/card.scss'
 
 type Props = {
   children: React.Node,

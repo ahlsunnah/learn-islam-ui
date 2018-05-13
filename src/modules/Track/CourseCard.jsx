@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react'
+import Button from 'components/Button'
+import Card from 'components/Card'
+import IconWithText from 'components/IconWithText'
 import Link from 'gatsby-link'
-import Button from '../../components/Button'
-import Card from '../../components/Card'
-import IconWithText from '../../components/IconWithText'
-import target from '../../images/target.svg'
+import target from 'images/target.svg'
+import * as React from 'react'
 
 type Props = {
   chapters: Array<{

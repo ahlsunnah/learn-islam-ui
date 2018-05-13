@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
+import 'styles/toolbar.scss'
 import LogoSection from './LogoSection'
 import MobileSection from './MobileSection'
 import NavSection from './NavSection'
-import '../../styles/toolbar.scss'
 
 type Props = {
   localePath: string,

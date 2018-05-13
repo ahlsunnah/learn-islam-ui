@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react'
+import ChapterContainer from 'modules/Chapter'
 import R from 'ramda'
-import ChapterContainer from '../modules/Chapter'
+import * as React from 'react'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
 const filterLanguageWithArabic = (locale) =>

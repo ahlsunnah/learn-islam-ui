@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react'
 import Link from 'gatsby-link'
-import logo from '../../images/logo.svg'
+import logo from 'images/logo.svg'
+import * as React from 'react'
 
 type Props = {
   localePath: string,

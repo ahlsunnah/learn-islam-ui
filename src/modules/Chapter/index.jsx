@@ -2,6 +2,8 @@
 /* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
+import VideoIframe from 'components/VideoIframe'
+import StepContent from 'components/StepContent'
 import {Strings} from '../../types'
 
 type Props = {
@@ -21,7 +23,9 @@ type Props = {
           slug: string,
         },
       },
-      strings: Strings,
+      strings: Array<{
+        title: string,
+      }>,
     },
   },
   pathContext: {
@@ -48,12 +52,29 @@ class Chapter extends React.Component<Props, State> {
     }))
   }
   render() {
-    const {data, pathContext} = this.props
+    const {data, pathContext, chapter, strings} = this.props
     const {isSideBarVisible} = this.state
-    console.log(data)
     return (
-      <div className="flex">
-        <Helmet title={`title`} />
+      <div>
+        <Helmet
+          title={`مدرسة منهاج النبوة - ${data.chapter.strings[0].title}`}
+        />
+        <div className="pv2 bg-black-90 w-100 tc">
+          <h3 className="white f5 f4-ns">{data.chapter.strings[0].title}</h3>
+        </div>
+        <VideoIframe source="https://www.youtube.com/embed/x4VBBf4eJhA" />
+        {data.chapter.strings[0].transcription && (
+          <StepContent
+            title="Transcription en arabe"
+            content={data.chapter.strings[0].transcription}
+          />
+        )}
+        {data.chapter.strings[0].vocabulary && (
+          <StepContent
+            title="Le vocabulaire"
+            content={data.chapter.strings[0].vocabulary}
+          />
+        )}
       </div>
     )
   }

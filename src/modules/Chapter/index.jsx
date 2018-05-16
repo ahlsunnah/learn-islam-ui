@@ -27,6 +27,7 @@ type Props = {
         title: string,
       }>,
     },
+    translations: Object,
   },
   pathContext: {
     locale: string,
@@ -56,22 +57,20 @@ class Chapter extends React.Component<Props, State> {
     const {isSideBarVisible} = this.state
     return (
       <div>
-        <Helmet
-          title={`مدرسة منهاج النبوة - ${data.chapter.strings[0].title}`}
-        />
+        <Helmet title={data.chapter.strings[0].title} />
         <div className="pv2 bg-black-90 w-100 tc">
           <h3 className="white f5 f4-ns">{data.chapter.strings[0].title}</h3>
         </div>
         <VideoIframe source="https://www.youtube.com/embed/x4VBBf4eJhA" />
         {data.chapter.strings[0].transcription && (
           <StepContent
-            title="Transcription en arabe"
+            title={data.translations.transcriptionTitle}
             content={data.chapter.strings[0].transcription}
           />
         )}
         {data.chapter.strings[0].vocabulary && (
           <StepContent
-            title="Le vocabulaire"
+            title={data.translations.vocabulary}
             content={data.chapter.strings[0].vocabulary}
           />
         )}

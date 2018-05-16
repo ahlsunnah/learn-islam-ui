@@ -2,8 +2,8 @@
 /* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import VideoIframe from 'components/VideoIframe'
-import StepContent from 'components/StepContent'
+import VideoIframe from './VideoIframe'
+import StepContent from './StepContent'
 import {Strings} from '../../types'
 
 type Props = {

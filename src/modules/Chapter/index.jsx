@@ -2,9 +2,9 @@
 /* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import VideoIframe from './VideoIframe'
-import StepContent from './StepContent'
 import {Strings} from '../../types'
+import StepContent from './StepContent'
+import VideoIframe from './VideoIframe'
 
 type Props = {
   data: {
@@ -12,15 +12,20 @@ type Props = {
       audio: string,
       slug: string,
       course: {
-        chapters: Array<{
-          order: number,
-          slug: string,
-          strings: Strings,
-        }>,
         slug: string,
-        strings: Strings,
         track: {
           slug: string,
+          strings: Strings,
+          courses: Array<{
+            order: number,
+            slug: string,
+            strings: Strings,
+            chapters: Array<{
+              order: number,
+              slug: string,
+              strings: Strings,
+            }>,
+          }>,
         },
       },
       strings: Array<{
@@ -53,25 +58,26 @@ class Chapter extends React.Component<Props, State> {
     }))
   }
   render() {
-    const {data, pathContext, chapter, strings} = this.props
+    const {data, pathContext} = this.props
+    const {chapter, translations} = data
     const {isSideBarVisible} = this.state
     return (
       <div>
-        <Helmet title={data.chapter.strings[0].title} />
+        <Helmet title={chapter.strings[0].title} />
         <div className="pv2 bg-black-90 w-100 tc">
-          <h3 className="white f5 f4-ns">{data.chapter.strings[0].title}</h3>
+          <h3 className="white f5 f4-ns">{chapter.strings[0].title}</h3>
         </div>
-        <VideoIframe source={data.chapter.strings[0].video} />
-        {data.chapter.strings[0].transcription && (
+        <VideoIframe source={chapter.strings[0].video} />
+        {chapter.strings[0].transcription && (
           <StepContent
-            title={data.translations.transcriptionTitle}
-            content={data.chapter.strings[0].transcription}
+            title={translations.transcriptionTitle}
+            content={chapter.strings[0].transcription}
           />
         )}
-        {data.chapter.strings[0].vocabulary && (
+        {chapter.strings[0].vocabulary && (
           <StepContent
-            title={data.translations.vocabulary}
-            content={data.chapter.strings[0].vocabulary}
+            title={translations.vocabulary}
+            content={chapter.strings[0].vocabulary}
           />
         )}
       </div>

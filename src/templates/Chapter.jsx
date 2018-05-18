@@ -14,10 +14,19 @@ const filterStrings = R.curry((locale, str) =>
     str,
   ),
 )
-const enhanceCourse = (locale) =>
+const enhanceSubCourse = (locale) =>
   R.evolve({
     strings: filterLanguage(locale),
     chapters: R.map(filterStrings(locale)),
+  })
+const enhanceTrack = (locale) =>
+  R.evolve({
+    strings: filterLanguage(locale),
+    courses: R.map(enhanceSubCourse(locale)),
+  })
+const enhanceCourse = (locale) =>
+  R.evolve({
+    track: enhanceTrack(locale),
   })
 const enhanceChapter = (locale) =>
   R.evolve({
@@ -33,10 +42,12 @@ type Props = {
     chapter: {
       strings: Strings,
       course: {
-        strings: Strings,
-        chapters: Array<{
+        track: {
           strings: Strings,
-        }>,
+          courses: Array<{
+            strings: Strings,
+          }>,
+        },
       },
     },
   },
@@ -67,21 +78,28 @@ export const pageQuery = graphql`
       }
       course {
         slug
-        strings: coursesStrings {
-          locale
-          title
-          description
-        }
-        chapters {
-          order
-          slug
-          strings: chaptersStrings {
-            locale
-            title
-          }
-        }
         track {
           slug
+          strings: tracksStrings {
+            title
+            locale
+          }
+          courses {
+            order
+            slug
+            strings: coursesStrings {
+              locale
+              title
+            }
+            chapters {
+              slug
+              order
+              strings: chaptersStrings {
+                locale
+                title
+              }
+            }
+          }
         }
       }
     }

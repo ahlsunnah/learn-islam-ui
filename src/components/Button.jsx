@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react'
 import cx from 'classnames'
+import * as React from 'react'
 import 'styles/button.scss'
 
 type Props = {
@@ -29,12 +29,12 @@ const Button = ({
     className={cx('mdc-button', className, {
       // br11: rounded,
       'br-pill': rounded,
-      'button-color_and_stroke__secondary': stroked && secondary,
+      'button-color_and_outlined__secondary': stroked && secondary,
       'button-fill__secondary': secondary && !stroked,
       'button-inverse': inverse,
       'button-elevated': elevated,
       'mdc-button--raised': raised,
-      'mdc-button--stroked': stroked,
+      'mdc-button--outlined': stroked,
     })}
     {...props}
   >

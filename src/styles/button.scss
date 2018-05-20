@@ -10,9 +10,9 @@
   @include mdc-button-ink-color(white);
 }
 
-.button-color_and_stroke__secondary {
+.button-color_and_outlined__secondary {
   @include mdc-button-ink-color($mdc-theme-secondary);
-  @include mdc-button-stroke-color($mdc-theme-secondary);
+  @include mdc-button-outline-color($mdc-theme-secondary);
 }
 
 .button-elevated {

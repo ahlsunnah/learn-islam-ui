@@ -45,9 +45,9 @@ const LinkTheSentences = ({
 
 const enhance = compose(
   // TODO shuffle on mount
-  withPropsOnChange(['data'], ({data}) => ({
-    leftValues: Object.keys(data),
-    rightValues: Object.values(data).sort(),
+  withPropsOnChange(['data'], ({data: {values}}) => ({
+    leftValues: values.map(({a}) => a),
+    rightValues: values.map(({b}) => b).sort(),
   })),
   withStateHandlers(
     ({leftValues}) => ({

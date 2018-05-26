@@ -2,19 +2,19 @@
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {compose, withPropsOnChange, withStateHandlers} from 'recompose'
-import SelectInput from './SelectInput'
+import RadioButton from './RadioButton'
 
 type Props = {
   categories: Array<string>,
   handleChange: () => {},
-  //   inputValues: {[string]: string},
+  inputValues: {[string]: string},
   items: Array<string>,
   number: number,
 }
 const ChooseACategory = ({
   categories,
   handleChange,
-  //   inputValues,
+  inputValues,
   items,
   number,
 }: Props) => (
@@ -23,20 +23,19 @@ const ChooseACategory = ({
       {number} <ArrowForward className="dark-gray" />
     </div>
     <div className="mv0 f4">
-      {items.map((item) => (
-        <div
-          className="pb4 flex-ns justify-between items-start"
-          key={item}
-          //   className="bg-light-green"
-        >
+      {items.map((item, i) => (
+        <div className="pb4 flex-ns justify-between items-start" key={item}>
           <div>{item}</div>
-          {/* {values[i - 1] || '..........'} */}
-          <SelectInput
-            name={item}
-            onChange={handleChange}
-            options={categories}
-            // value={inputValues[item]}
-          />
+          {categories.map((category, j) => (
+            <RadioButton
+              key={category}
+              checked={inputValues[item] === category}
+              id={`radio${i}-${j}`}
+              name={item}
+              onChange={handleChange}
+              value={category}
+            />
+          ))}
         </div>
       ))}
     </div>

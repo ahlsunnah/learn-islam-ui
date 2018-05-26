@@ -32,13 +32,15 @@ type Strings = Array<{locale: string}>
 type Props = {
   data: {
     chapter: {
+      id: string,
+      slug: string,
+      strings: Strings,
       quizs: Array<{
         difficulty: number,
+        id: string,
         strings: Strings,
         type: string,
       }>,
-      slug: string,
-      strings: Strings,
     },
   },
   pathContext: {
@@ -59,6 +61,7 @@ export default Quizs
 export const pageQuery = graphql`
   query quizQuery($locale: String!, $slug: String!) {
     chapter: feathersChapters(slug: {eq: $slug}) {
+      id
       slug
       strings: chaptersStrings {
         locale
@@ -66,6 +69,7 @@ export const pageQuery = graphql`
       }
       quizs {
         difficulty
+        id
         type
         strings: quizsStrings {
           locale
@@ -76,6 +80,8 @@ export const pageQuery = graphql`
     translations: feathersTranslations(locale: {eq: $locale}) {
       start
       quiz
+      quizTrue
+      quizFalse
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
       localeName

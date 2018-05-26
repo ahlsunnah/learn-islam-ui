@@ -183,6 +183,15 @@
     "@material/theme" "^0.35.0"
     "@material/typography" "^0.35.0"
 
+"@material/floating-label@^0.35.2":
+  version "0.35.2"
+  resolved "https://registry.yarnpkg.com/@material/floating-label/-/floating-label-0.35.2.tgz#e2809c4201aaed1fbe8e0c2799d2785625a3fed3"
+  dependencies:
+    "@material/base" "^0.35.0"
+    "@material/rtl" "^0.35.0"
+    "@material/theme" "^0.35.0"
+    "@material/typography" "^0.35.0"
+
 "@material/line-ripple@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@material/line-ripple/-/line-ripple-0.35.0.tgz#5975b3c7150057eabb997a9453d48b2979b6a4ff"
@@ -218,6 +227,19 @@
 "@material/rtl@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.35.0.tgz#caae659e35a9bf1b9d91c734c8a3315a81bcde21"
+
+"@material/select@^0.35.2":
+  version "0.35.2"
+  resolved "https://registry.yarnpkg.com/@material/select/-/select-0.35.2.tgz#a5c6ed51f42cc8a264f315d78f241e928ae66c9a"
+  dependencies:
+    "@material/animation" "^0.34.0"
+    "@material/base" "^0.35.0"
+    "@material/floating-label" "^0.35.2"
+    "@material/line-ripple" "^0.35.0"
+    "@material/ripple" "^0.35.0"
+    "@material/rtl" "^0.35.0"
+    "@material/theme" "^0.35.0"
+    "@material/typography" "^0.35.0"
 
 "@material/textfield@^0.35.1":
   version "0.35.1"

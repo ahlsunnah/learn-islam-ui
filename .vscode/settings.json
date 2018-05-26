@@ -1,5 +1,8 @@
 {
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "editor.formatOnSave": true,
   "javascript.validate.enable": false,
   "cSpell.words": [
@@ -19,6 +22,7 @@
     "plugin",
     "pluralrules",
     "proptypes",
+    "quizs",
     "react",
     "redux",
     "tachyons",

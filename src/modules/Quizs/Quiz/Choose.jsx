@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {connect} from 'react-redux'
-import {compose, lifecycle, setPropTypes, withProps} from 'recompose'
+import {compose, lifecycle, setPropTypes, withPropsOnChange} from 'recompose'
 
 type Props = {
   data: {
@@ -62,7 +62,7 @@ const enhance = compose(
         })
     },
   }),
-  withProps(({data: {values}, state: {valuesOrder}}) => ({
+  withPropsOnChange(['state'], ({data: {values}, state: {valuesOrder}}) => ({
     valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
   })),
 )

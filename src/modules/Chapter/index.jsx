@@ -67,7 +67,10 @@ class Chapter extends React.Component<Props, State> {
         <div className="pv2 bg-black-90 w-100 tc">
           <h3 className="white f5 f4-ns">{chapter.strings[0].title}</h3>
         </div>
-        <VideoIframe source={chapter.strings[0].video} />
+        <VideoIframe
+          source={chapter.strings[0].video}
+          title={chapter.strings[0].title}
+        />
         {chapter.strings[0].transcription && (
           <StepContent
             title={translations.transcriptionTitle}

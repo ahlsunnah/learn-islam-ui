@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {Strings} from '../../types'
+import NavigationButtons from './NavigationButtons'
 import StepContent from './StepContent'
 import Transcription from './Transcription'
 import VideoIframe from './VideoIframe'
@@ -97,6 +98,10 @@ class Chapter extends React.Component<Props, State> {
             content={chapterStrings.vocabulary}
           />
         )}
+        <NavigationButtons
+          difficultiesLinks={pathContext.difficultiesLinks}
+          t={t}
+        />
       </div>
     )
   }

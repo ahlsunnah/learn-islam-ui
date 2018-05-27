@@ -125,12 +125,39 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                 console.log(
                   `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
                 )
+
+                // Which difficulties do we have ?
+                const difficulties =
+                  quizs && quizs.length
+                    ? quizs.reduce((acc, {difficulty, quizsStrings}) => {
+                        if (
+                          !acc.includes(difficulty) &&
+                          quizsStrings.some((item) => item.locale === locale)
+                        ) {
+                          acc.push(difficulty)
+                        }
+                        return acc
+                      }, [])
+                    : []
+                console.log(difficulties)
+                const difficultiesLinks = difficulties.reduce(
+                  (acc, difficulty) => {
+                    acc[`difficulty${difficulty}`] = `${
+                      localesPaths[locale]
+                    }${slug}/${courseSlug}/${chapterSlug}/ikhtibar-${difficulty}`
+                    return acc
+                  },
+                  {},
+                )
+                console.log(difficultiesLinks)
+
                 createPage({
                   path: `${
                     localesPaths[locale]
                   }${slug}/${courseSlug}/${chapterSlug}`,
                   component: slash(chapterTemplate),
                   context: {
+                    difficultiesLinks,
                     locale,
                     localesPaths: R.pick(
                       R.map(R.prop('locale'), strings),
@@ -142,28 +169,12 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
 
                 // Create quizs:
                 if (quizs && quizs.length) {
-                  // Which difficulties do we have ?
-                  const difficulties = quizs.reduce(
-                    (acc, {difficulty, quizsStrings}) => {
-                      if (
-                        !acc.includes(difficulty) &&
-                        quizsStrings.some((item) => item.locale === locale)
-                      ) {
-                        acc.push(difficulty)
-                      }
-                      return acc
-                    },
-                    [],
-                  )
-
                   difficulties.forEach((difficulty) => {
                     console.log(
                       `Create QUIZS page for chapter ${chapterSlug} and locale ${locale} and difficulty ${difficulty}`,
                     )
                     createPage({
-                      path: `${
-                        localesPaths[locale]
-                      }${slug}/${courseSlug}/${chapterSlug}/ikhtibar-${difficulty}`,
+                      path: difficultiesLinks[`difficulty${difficulty}`],
                       component: slash(quizsTemplate),
                       context: {
                         difficulty,

@@ -9,7 +9,7 @@ type Props = {
 const StepContent = ({cta, title = '', content = ''}: Props) => (
   <div className="ph6-ns ph4">
     <div className="flex justify-between items-center">
-      <h4 className="blue">{title}</h4>
+      <h2 className="blue">{title}</h2>
       {cta}
     </div>
     <p

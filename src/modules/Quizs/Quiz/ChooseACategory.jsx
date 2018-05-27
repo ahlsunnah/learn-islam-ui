@@ -45,8 +45,8 @@ const ChooseACategory = ({
 const enhance = compose(
   // TODO shuffle on mount
   withPropsOnChange(['data'], ({data}) => ({
-    categories: Object.keys(data),
-    items: Object.values(data).reduce((acc, value) => acc.concat(value), []),
+    categories: data.values.map(({name}) => name),
+    items: data.values.reduce((acc, {items}) => acc.concat(items), []),
   })),
   withStateHandlers(
     ({items}) => ({

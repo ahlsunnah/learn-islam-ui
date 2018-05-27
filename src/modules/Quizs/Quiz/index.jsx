@@ -12,11 +12,11 @@ const getComponentByType = (type) => {
   switch (type) {
     case 'choose': // {text, values: [ch1, ch2, ch3, ...]}
       return Choose
-    case 'choose-a-category': // {cat1: [val1, val2, ...], cat2: [val3, ...]}
+    case 'choose-a-category': // {values: [{name: '', items: ''}, {name: '', items: ''}]}
       return ChooseACategory
     case 'fill-in-the-blank': // {textWithPlaceholders, values: [val1, val2, val3, ...]}
       return FillInTheBlank
-    case 'link-the-sentences': // [{a, b}, {a, b}, ...]
+    case 'link-the-sentences': // {title, values: [{a, b}, {a, b}, ...]}
       return LinkTheSentences
     // case 'reorder': // [p1, p2, p3, ...]
     //   return Reorder

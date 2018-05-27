@@ -2,12 +2,16 @@
 import * as React from 'react'
 
 type Props = {
-  title: string,
+  cta?: React.Node,
   content: string,
+  title: string,
 }
-const StepContent = ({title = '', content = ''}: Props) => (
+const StepContent = ({cta, title = '', content = ''}: Props) => (
   <div className="ph6-ns ph4">
-    <h4 className="blue">{title}</h4>
+    <div className="flex justify-between items-center">
+      <h4 className="blue">{title}</h4>
+      {cta}
+    </div>
     <p
       dangerouslySetInnerHTML={{
         __html: content,

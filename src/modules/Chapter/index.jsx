@@ -4,6 +4,7 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import {Strings} from '../../types'
 import StepContent from './StepContent'
+import Transcription from './Transcription'
 import VideoIframe from './VideoIframe'
 
 type Props = {
@@ -59,28 +60,41 @@ class Chapter extends React.Component<Props, State> {
   }
   render() {
     const {data, pathContext} = this.props
-    const {chapter, translations} = data
+    const {chapter, otherLocaleTranslations, translations: t} = data
     const {isSideBarVisible} = this.state
+    const chapterStrings = chapter.strings.find(
+      ({locale}) => locale === pathContext.locale,
+    )
     return (
       <div>
-        <Helmet title={chapter.strings[0].title} />
+        <Helmet title={chapterStrings.title} />
         <div className="pv2 bg-black-90 w-100 tc">
-          <h3 className="white f5 f4-ns">{chapter.strings[0].title}</h3>
+          <h3 className="white f5 f4-ns">{chapterStrings.title}</h3>
         </div>
         <VideoIframe
-          source={chapter.strings[0].video}
-          title={chapter.strings[0].title}
+          source={chapterStrings.video}
+          title={chapterStrings.title}
         />
-        {chapter.strings[0].transcription && (
+        <Transcription
+          title={t.transcriptionTitle}
+          arabicContent={
+            (chapter.strings.find(({locale}) => locale === 'ar') || {})
+              .transcription
+          }
+          otherLanguageContent={
+            chapter.strings.length > 1
+              ? chapterStrings.transcription
+              : undefined
+          }
+          otherLanguageCTA={`${otherLocaleTranslations.readIn}${
+            otherLocaleTranslations.localeName
+          }`}
+          currentLanguageCTA={`${t.readIn} ${t.localeName}`}
+        />
+        {chapterStrings.vocabulary && (
           <StepContent
-            title={translations.transcriptionTitle}
-            content={chapter.strings[0].transcription}
-          />
-        )}
-        {chapter.strings[0].vocabulary && (
-          <StepContent
-            title={translations.vocabulary}
-            content={chapter.strings[0].vocabulary}
+            title={t.vocabulary}
+            content={chapterStrings.vocabulary}
           />
         )}
       </div>

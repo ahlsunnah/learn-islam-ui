@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react'
 import Link from 'gatsby-link'
-import structure from './structure'
+import * as React from 'react'
 import Button from '../Button'
+import structure from './structure'
 
 type Props = {
   localePath: string,
@@ -13,7 +13,7 @@ type Props = {
   t: {},
 }
 const NavSection = ({localePath, otherLocaleTranslations, t}: Props) => (
-  <section className="pv0 dn db-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
+  <section className="pv0 dn inline-flex-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
     <nav className="flex1">
       <ul className="list flex flex-wrap justify-around items-center">
         {structure.map(({title, link}) => (

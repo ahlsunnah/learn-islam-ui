@@ -59,3 +59,16 @@
     min-height: 512px;
   }
 }
+
+.mdc-toolbar__section.dn {
+  display: none;
+}
+
+@media screen and (min-width: 60em) {
+  .mdc-toolbar__section.dn-l {
+    display: none;
+  }
+  .mdc-toolbar__section.inline-flex-l {
+    display: inline-flex;
+  }
+}

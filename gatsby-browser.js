@@ -1,9 +1,9 @@
 // @flow
 /* eslint react/jsx-filename-extension: 0 */
+import 'babel-polyfill'
 import * as React from 'react'
-import {Router} from 'react-router-dom' // eslint-disable-line
 import {Provider} from 'react-redux'
-
+import {Router} from 'react-router-dom' // eslint-disable-line
 import createStore from './src/createStore'
 
 exports.replaceRouterComponent = ({history}) => {

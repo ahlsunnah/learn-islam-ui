@@ -53,6 +53,7 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-flow-react-proptypes": "^24.0.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
     "classnames": "^2.2.5",
     "emotion": "^9.1.3",

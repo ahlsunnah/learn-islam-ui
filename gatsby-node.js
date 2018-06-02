@@ -139,7 +139,6 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                         return acc
                       }, [])
                     : []
-                console.log(difficulties)
                 const difficultiesLinks = difficulties.reduce(
                   (acc, difficulty) => {
                     acc[`difficulty${difficulty}`] = `${
@@ -149,7 +148,6 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                   },
                   {},
                 )
-                console.log(difficultiesLinks)
 
                 createPage({
                   path: `${

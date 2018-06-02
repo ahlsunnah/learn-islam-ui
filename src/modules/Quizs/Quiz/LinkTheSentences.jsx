@@ -1,7 +1,17 @@
 // @flow
+import {addData} from 'actions/quizs'
+import shuffle from 'lib/shuffle'
+import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
-import {compose, withPropsOnChange, withStateHandlers} from 'recompose'
+import {connect} from 'react-redux'
+import {
+  compose,
+  lifecycle,
+  setPropTypes,
+  withPropsOnChange,
+  withStateHandlers,
+} from 'recompose'
 import SelectInput from './SelectInput'
 
 type Props = {
@@ -10,6 +20,7 @@ type Props = {
   inputValues: {[string]: string},
   number: number,
   remainingValues: Array<string>,
+  valuesOrder: Array<number>,
 }
 const LinkTheSentences = ({
   handleChange,
@@ -17,38 +28,68 @@ const LinkTheSentences = ({
   inputValues,
   number,
   remainingValues,
+  valuesOrder,
 }: Props) => (
   <div className="mb5 pv5 ph4 flex">
     <div className="flex-no-shrink mr2">
       {number} <ArrowForward className="dark-gray" />
     </div>
     <div className="mv0 f4">
-      {leftValues.map((leftValue) => (
-        <div
-          className="pb4 flex-ns justify-between items-start"
-          key={leftValue}
-          //   className="bg-light-green"
-        >
-          <div>{leftValue}</div>
-          {/* {values[i - 1] || '..........'} */}
-          <SelectInput
-            name={leftValue}
-            onChange={handleChange}
-            options={remainingValues}
-            value={inputValues[leftValue]}
-          />
-        </div>
-      ))}
+      {valuesOrder.map((valueIndex) => {
+        const leftValue = leftValues[valueIndex]
+        return (
+          <div
+            className="pb4 flex-ns justify-between items-start"
+            key={valueIndex}
+            //   className="bg-light-green"
+          >
+            <div>{leftValue}</div>
+            {/* {values[i - 1] || '..........'} */}
+            <SelectInput
+              name={leftValue}
+              onChange={handleChange}
+              options={remainingValues}
+              value={inputValues[leftValue]}
+            />
+          </div>
+        )
+      })}
     </div>
   </div>
 )
 
 const enhance = compose(
-  // TODO shuffle on mount
+  connect(undefined, {dAddData: addData}),
   withPropsOnChange(['data'], ({data: {values}}) => ({
     leftValues: values.map(({a}) => a),
     rightValues: values.map(({b}) => b).sort(),
   })),
+
+  // Shuffle leftValues
+  setPropTypes({
+    dAddData: PropTypes.func.isRequired,
+    leftValues: PropTypes.array.isRequired,
+    params: PropTypes.object.isRequired,
+    quizId: PropTypes.string.isRequired,
+  }),
+  lifecycle({
+    componentDidMount() {
+      const {leftValues, dAddData, params, quizId, state} = this.props
+      if (!state.valuesOrder)
+        dAddData({
+          data: {
+            valuesOrder: shuffle(leftValues.map((_, i) => i)),
+          },
+          params,
+          quizId,
+        })
+    },
+  }),
+  withPropsOnChange(['state'], ({leftValues, state: {valuesOrder}}) => ({
+    valuesOrder: valuesOrder || leftValues.map((_, i) => i), // default values for SSR
+  })),
+
+  // Handlers
   withStateHandlers(
     ({leftValues}) => ({
       inputValues: leftValues.reduce((acc, value) => {
@@ -68,6 +109,8 @@ const enhance = compose(
       },
     },
   ),
+
+  // Remove already chosen values from rightValues
   withPropsOnChange(['inputValues'], ({inputValues, rightValues}) => {
     const inputValuesValues = Object.values(inputValues)
     const notChosen = (val) => !inputValuesValues.includes(val)

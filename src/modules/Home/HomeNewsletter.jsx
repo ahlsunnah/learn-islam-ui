@@ -82,16 +82,17 @@ const enhance = compose(
       newsletterSubscribed,
       newsletterSuccess,
       setSuccess,
-    }) => async () => {
+    }) => () => {
       try {
-        const callResult = await addToMailchimp(email)
-        const {msg, result} = callResult
-        let message = msg
-        if (msg.includes('already subscribed to list'))
-          message = newsletterSubscribed
-        else if (msg.includes('Thank you for subscribing!'))
-          message = newsletterSuccess
-        setSuccess(result === 'success', message)
+        addToMailchimp(email).then((callResult) => {
+          const {msg, result} = callResult
+          let message = msg
+          if (msg.includes('already subscribed to list'))
+            message = newsletterSubscribed
+          else if (msg.includes('Thank you for subscribing!'))
+            message = newsletterSuccess
+          setSuccess(result === 'success', message)
+        })
       } catch (e) {
         setSuccess(
           false,

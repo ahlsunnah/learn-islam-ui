@@ -6,6 +6,7 @@
   "license": "Unlicense",
   "scripts": {
     "build": "gatsby build",
+    "build:prod": "eval $(cat .env.prod) gatsby build",
     "clean": "rimraf ./public",
     "commit": "git-cz",
     "full-build": "yarn build-plugin; yarn build",

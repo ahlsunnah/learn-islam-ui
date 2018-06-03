@@ -4,12 +4,13 @@ import 'styles/radio-button.scss'
 
 type Props = {
   checked: boolean,
+  children: React.Node,
   id: string,
-  name: string,
+  name: number,
   onChange: Function,
-  value: string,
+  value: number,
 }
-const RadioButton = ({checked, id, name, onChange, value}: Props) => (
+const RadioButton = ({checked, children, id, name, onChange, value}: Props) => (
   <div className="mdc-form-field">
     <label className="flex items-center f4" htmlFor={id}>
       <div className="mdc-radio">
@@ -27,7 +28,7 @@ const RadioButton = ({checked, id, name, onChange, value}: Props) => (
           <div className="mdc-radio__inner-circle" />
         </div>
       </div>
-      {value}
+      {children}
     </label>
   </div>
 )

@@ -1,5 +1,5 @@
 // @flow
-import {startQuizs} from 'actions/quizs'
+import {addData, startQuizs} from 'actions/quizs'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -11,28 +11,21 @@ type QuizType = {
   data: {},
 }
 type Props = {
-  params: {
-    chapterId: string,
-    difficulty: number,
-    locale: string,
-  },
   quizs: Map<string, QuizType>,
   quizsIds: Array<string>,
   quizsState: {},
-  t: {},
 }
-const QuizForm = ({params, quizs, quizsIds, quizsState, t}: Props) => (
+const QuizForm = ({quizs, quizsIds, quizsState, ...props}: Props) => (
   <div className="pv40vh">
     {quizsIds.map(
       (quizId, i) => (
         <Quiz
+          {...quizs.get(quizId)}
+          {...props}
           key={quizId}
           number={i + 1}
-          {...quizs.get(quizId)}
-          params={params}
           quizId={quizId}
           state={quizsState[quizId] || {}}
-          t={t}
         />
       ),
       quizs,
@@ -79,6 +72,9 @@ const enhance = compose(
       }
     },
     (dispatch, {params, quizs}) => ({
+      addData: ({data, quizId}) => {
+        dispatch(addData({data, params, quizId}))
+      },
       startQuizs: () =>
         dispatch(
           startQuizs({

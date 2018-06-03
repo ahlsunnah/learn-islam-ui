@@ -4,24 +4,29 @@ import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {
   compose,
+  lifecycle,
   setPropTypes,
+  withHandlers,
   withPropsOnChange,
-  withStateHandlers,
 } from 'recompose'
 import SelectInput from './SelectInput'
 
 type Props = {
-  handleChange: () => {},
-  inputValues: {[string]: string},
+  handleAnswer: () => {},
   number: number,
-  remainingValues: Array<string>,
+  orderedValues: Array<{index: number, text: string}>,
+  remainingValues: Array<{index: number, text: string}>,
+  state: {
+    answers?: Array,
+  },
   textParts: Array<string>,
 }
 const FillInTheBlank = ({
-  handleChange,
-  inputValues,
+  handleAnswer,
   number,
+  orderedValues,
   remainingValues,
+  state: {answers = []},
   textParts,
 }: Props) => (
   <div className="mb5 pv5 ph4 flex">
@@ -40,12 +45,13 @@ const FillInTheBlank = ({
                 key={`value${i - 1}`}
                 //   className="bg-light-green"
               >
-                {/* {values[i - 1] || '..........'} */}
                 <SelectInput
-                  name={`input-${i - 1}`}
-                  onChange={handleChange}
+                  name={i - 1}
+                  onChange={handleAnswer}
                   options={remainingValues}
-                  value={inputValues[`input-${i - 1}`]}
+                  value={orderedValues.find(
+                    ({index}) => index === answers[i - 1],
+                  )}
                 />
               </div>,
               <span key={`part${i}`}>{part}</span>, // eslint-disable-line react/no-array-index-key
@@ -58,37 +64,45 @@ const FillInTheBlank = ({
 
 const enhance = compose(
   setPropTypes({
+    addData: PropTypes.func.isRequired,
     data: PropTypes.shape({
       text: PropTypes.string.isRequired,
       values: PropTypes.array.isRequired,
     }).isRequired,
   }),
   withPropsOnChange(['data'], ({data: {text, values}}) => ({
-    orderedValues: values.slice().sort(),
+    orderedValues: values
+      .map((value, index) => ({index, text: value}))
+      .sort((a, b) => (a.text > b.text ? 1 : -1)),
     textParts: text.split('##'),
   })),
-  withStateHandlers(
-    ({orderedValues}) => ({
-      inputValues: orderedValues.reduce((acc, _, index) => {
-        acc[`input-${index}`] = ''
-        return acc
-      }, {}),
-    }),
-    {
-      handleChange: ({inputValues}) => (e) => {
-        const {name, value} = e.target
-        return {
-          inputValues: {
-            ...inputValues,
-            [name]: value,
+  lifecycle({
+    componentDidMount() {
+      const {addData, orderedValues, quizId, state} = this.props
+      if (!state.answers)
+        addData({
+          data: {
+            answers: new Array(orderedValues.length),
           },
-        }
-      },
+          quizId,
+        })
     },
-  ),
-  withPropsOnChange(['inputValues'], ({inputValues, orderedValues}) => {
-    const inputValuesValues = Object.values(inputValues)
-    const notChosen = (val) => !inputValuesValues.includes(val)
+  }),
+  withHandlers({
+    handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
+      const {name, value} = e.target
+      const newAnswers = answers.slice()
+      newAnswers[name] = parseInt(value, 10)
+      addData({
+        data: {
+          answers: newAnswers,
+        },
+        quizId,
+      })
+    },
+  }),
+  withPropsOnChange(['state'], ({orderedValues, state: {answers = []}}) => {
+    const notChosen = ({index}) => !answers.includes(index)
     return {
       remainingValues: orderedValues.filter(notChosen),
     }

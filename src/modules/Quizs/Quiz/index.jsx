@@ -29,6 +29,13 @@ const getComponentByType = (type) => {
 }
 
 type Props = {
+  addData: Function,
+  params: {
+    chapterId: string,
+    difficulty: number,
+    locale: string,
+  },
+  t: {},
   type: string,
 }
 const Quiz = ({type, ...props}: Props) => {

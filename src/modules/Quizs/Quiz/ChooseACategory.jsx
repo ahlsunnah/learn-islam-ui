@@ -1,34 +1,34 @@
 // @flow
-import {addData} from 'actions/quizs'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
-import {connect} from 'react-redux'
 import {
   compose,
   lifecycle,
   setPropTypes,
+  withHandlers,
   withPropsOnChange,
-  withStateHandlers,
 } from 'recompose'
 import RadioButton from './RadioButton'
 
 type Props = {
   categories: Array<string>,
-  handleChange: () => {},
-  inputValues: {[string]: string},
+  handleAnswer: () => {},
   items: Array<string>,
   itemsOrder: Array<number>,
   number: number,
+  state: {
+    answers?: Array,
+  },
 }
 const ChooseACategory = ({
   categories,
-  handleChange,
-  inputValues,
+  handleAnswer,
   items,
   itemsOrder,
   number,
+  state: {answers = []},
 }: Props) => (
   <div className="mb5 pv5 ph4 flex">
     <div className="flex-no-shrink mr2">
@@ -43,15 +43,17 @@ const ChooseACategory = ({
             key={itemIndex}
           >
             <div>{item}</div>
-            {categories.map((category, j) => (
+            {categories.map((category, categoryIndex) => (
               <RadioButton
-                key={category}
-                checked={inputValues[item] === category}
-                id={`radio${itemIndex}-${j}`}
-                name={item}
-                onChange={handleChange}
-                value={category}
-              />
+                key={categoryIndex}
+                checked={answers[itemIndex] === categoryIndex}
+                id={`radio${category}-${item}`}
+                name={itemIndex}
+                onChange={handleAnswer}
+                value={categoryIndex}
+              >
+                {category}
+              </RadioButton>
             ))}
           </div>
         )
@@ -61,8 +63,6 @@ const ChooseACategory = ({
 )
 
 const enhance = compose(
-  connect(undefined, {dAddData: addData}),
-
   // Separate the data
   withPropsOnChange(['data'], ({data}) => ({
     categories: data.values.map(({name}) => name),
@@ -71,46 +71,37 @@ const enhance = compose(
 
   // shuffle the items
   setPropTypes({
-    dAddData: PropTypes.func.isRequired,
-    params: PropTypes.object.isRequired,
+    addData: PropTypes.func.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
   lifecycle({
     componentDidMount() {
-      const {items, dAddData, params, quizId, state} = this.props
+      const {items, addData, quizId, state} = this.props
       if (!state.valuesOrder)
-        dAddData({
+        addData({
           data: {
+            answers: new Array(items.length),
             itemsOrder: shuffle(items.map((_, i) => i)),
           },
-          params,
           quizId,
         })
+    },
+  }),
+  withHandlers({
+    handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
+      const {name: item, value: category} = e.target
+      const newAnswer = answers.slice()
+      newAnswer[item] = parseInt(category, 10)
+      addData({
+        data: {
+          answers: newAnswer,
+        },
+        quizId,
+      })
     },
   }),
   withPropsOnChange(['state'], ({items, state: {itemsOrder}}) => ({
     itemsOrder: itemsOrder || items.map((_, i) => i), // default values for SSR
   })),
-
-  // Define handlers
-  withStateHandlers(
-    ({items}) => ({
-      inputValues: items.reduce((acc, item) => {
-        acc[item] = ''
-        return acc
-      }, {}),
-    }),
-    {
-      handleChange: ({inputValues}) => (e) => {
-        const {name: item, value: category} = e.target
-        return {
-          inputValues: {
-            ...inputValues,
-            [item]: category,
-          },
-        }
-      },
-    },
-  ),
 )
 export default enhance(ChooseACategory)

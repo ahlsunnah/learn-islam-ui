@@ -1,22 +1,32 @@
 // @flow
-import {addData} from 'actions/quizs'
 import Button from 'components/Button'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
-import {connect} from 'react-redux'
-import {compose, lifecycle, setPropTypes, withPropsOnChange} from 'recompose'
+import {
+  compose,
+  lifecycle,
+  setPropTypes,
+  withHandlers,
+  withPropsOnChange,
+} from 'recompose'
 
 type Props = {
   data: {
     text: string,
     values: Array<string>,
   },
+  handleAnswer: Function,
   number: number,
   valuesOrder: Array<number>,
 }
-const Choose = ({data: {text, values}, number, valuesOrder}: Props) => (
+const Choose = ({
+  data: {text, values},
+  handleAnswer,
+  number,
+  valuesOrder,
+}: Props) => (
   <div className="mb5 pv5 ph4 flex">
     <div className="flex-no-shrink mr2">
       {number} <ArrowForward className="dark-gray" />
@@ -26,7 +36,7 @@ const Choose = ({data: {text, values}, number, valuesOrder}: Props) => (
       <div className="mt4">
         {valuesOrder.map((order) => (
           <div className="mt2" key={order}>
-            <Button rounded secondary>
+            <Button rounded secondary onClick={handleAnswer} name={order}>
               {values[order]}
             </Button>
           </div>
@@ -37,27 +47,23 @@ const Choose = ({data: {text, values}, number, valuesOrder}: Props) => (
 )
 
 const enhance = compose(
-  connect(undefined, {dAddData: addData}),
   setPropTypes({
-    dAddData: PropTypes.func.isRequired,
-    params: PropTypes.object.isRequired,
+    addData: PropTypes.func.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
   lifecycle({
     componentDidMount() {
       const {
         data: {values},
-        dAddData,
-        params,
-        quizId,
+        addData,
         state,
+        quizId,
       } = this.props
       if (!state.valuesOrder)
-        dAddData({
+        addData({
           data: {
             valuesOrder: shuffle(values.map((_, i) => i)),
           },
-          params,
           quizId,
         })
     },
@@ -65,5 +71,15 @@ const enhance = compose(
   withPropsOnChange(['state'], ({data: {values}, state: {valuesOrder}}) => ({
     valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
   })),
+  withHandlers({
+    handleAnswer: ({addData, quizId}) => (e) => {
+      addData({
+        data: {
+          answer: e.target.name,
+        },
+        quizId,
+      })
+    },
+  }),
 )
 export default enhance(Choose)

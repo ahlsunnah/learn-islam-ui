@@ -68,6 +68,7 @@
     "gatsby-plugin-catch-links": "^1.0.22",
     "gatsby-plugin-emotion": "^1.1.16",
     "gatsby-plugin-favicon": "^2.1.1",
+    "gatsby-plugin-mailchimp": "^2.2.3",
     "gatsby-plugin-manifest": "^1.0.22",
     "gatsby-plugin-netlify": "^1.0.19",
     "gatsby-plugin-nprogress": "^1.0.14",

@@ -70,6 +70,9 @@ export const pageQuery = graphql`
       homeStartTrack
       localeName
       localePath
+      newsletterEmailNotValid
+      newsletterSubscribed
+      newsletterSuccess
       siteName
       siteSlogan
       soon

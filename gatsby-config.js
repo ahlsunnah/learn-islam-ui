@@ -94,6 +94,13 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint:
+          'https://madrassaminhaj.us18.list-manage.com/subscribe/post?u=fc7a9d01c616717321a2bfce5&amp;id=02f1f3a51a',
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'Madrassa Minhaj',

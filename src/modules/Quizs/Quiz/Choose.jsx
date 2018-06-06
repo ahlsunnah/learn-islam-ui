@@ -1,4 +1,5 @@
 // @flow
+import cx from 'classnames'
 import Button from 'components/Button'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
@@ -19,12 +20,16 @@ type Props = {
   },
   handleAnswer: Function,
   number: number,
+  state: {
+    answer?: number,
+  },
   valuesOrder: Array<number>,
 }
 const Choose = ({
   data: {text, values},
   handleAnswer,
   number,
+  state: {answer},
   valuesOrder,
 }: Props) => (
   <div className="mb5 pv5 ph4 flex">
@@ -36,7 +41,16 @@ const Choose = ({
       <div className="mt4">
         {valuesOrder.map((order) => (
           <div className="mt2" key={order}>
-            <Button rounded secondary onClick={handleAnswer} name={order}>
+            <Button
+              className={cx({
+                ph3: order === answer,
+              })}
+              rounded
+              secondary
+              stroked={order !== answer}
+              onClick={handleAnswer}
+              name={order}
+            >
               {values[order]}
             </Button>
           </div>
@@ -75,7 +89,7 @@ const enhance = compose(
     handleAnswer: ({addData, quizId}) => (e) => {
       addData({
         data: {
-          answer: e.target.name,
+          answer: parseInt(e.target.name, 10),
         },
         quizId,
       })

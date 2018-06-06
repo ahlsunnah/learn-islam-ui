@@ -24,7 +24,7 @@ const HTML = ({
   preBodyComponents,
 }: Props) => {
   let css
-  if (process.env.NODE_ENV === `production`) {
+  if (process.env.NODE_ENV === 'production') {
     css = (
       <style
         id="gatsby-inlined-css"
@@ -57,10 +57,12 @@ const HTML = ({
         /> */}
         {headComponents}
         {css}
-        {/* <link
-          rel="stylesheet"
-          href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
-        /> */}
+        {process.env.NODE_ENV === 'production' && (
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
+          />
+        )}
       </head>
       <body>
         {preBodyComponents}

@@ -1,5 +1,4 @@
 // @flow
-import Footer from 'components/Footer'
 import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
 import HomeCourses from './HomeCourses'
@@ -26,7 +25,6 @@ const HomeContainer = ({data}: Props) => (
       firstTrackSlug={`${data.translations.localePath}${data.tracks[0] &&
         data.tracks[0].slug}`}
     />
-    <Footer />
   </div>
 )
 export default HomeContainer

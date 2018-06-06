@@ -1,5 +1,4 @@
 // @flow
-import Footer from 'components/Footer'
 import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
 import BlueHero from './BlueHero'
@@ -22,7 +21,6 @@ const TracksContainer = ({data}: Props) => (
       firstTrackSlug={`${data.translations.localePath}${data.tracks[0] &&
         data.tracks[0].slug}`}
     />
-    <Footer />
   </div>
 )
 export default TracksContainer

@@ -48,7 +48,8 @@ const enhance = compose(
       cta: otherLanguageContent && (
         <div className="">
           <Button onClick={toggleLanguage}>
-            {showArabic ? currentLanguageCTA : otherLanguageCTA}
+            {showArabic ?
+              currentLanguageCTA : otherLanguageCTA}
           </Button>
         </div>
       ),

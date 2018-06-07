@@ -89,7 +89,7 @@ class Chapter extends React.Component<Props, State> {
           }
           otherLanguageCTA={`${otherLocaleTranslations.readIn}${
             otherLocaleTranslations.localeName
-          }`}
+            }`}
           currentLanguageCTA={`${t.readIn} ${t.localeName}`}
         />
         {chapterStrings.vocabulary && (

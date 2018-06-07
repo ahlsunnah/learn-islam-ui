@@ -2,6 +2,8 @@
 /* eslint react/no-array-index-key: 0 */
 import * as React from 'react'
 import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
+import Button from 'components/Button'
 import {Strings} from '../../types'
 import NavigationButtons from './NavigationButtons'
 import StepContent from './StepContent'
@@ -35,6 +37,10 @@ type Props = {
       }>,
     },
     translations: Object,
+    otherLocaleTranslations: {
+      localeName: string,
+      localePath: string,
+    },
   },
   pathContext: {
     locale: string,
@@ -69,6 +75,13 @@ class Chapter extends React.Component<Props, State> {
     return (
       <div>
         <Helmet title={chapterStrings.title} />
+        <div className="tr pa3 self-end dn db-ns">
+          <Link className="ph2 no-underline" to={`${otherLocaleTranslations.localePath}${chapter.course.track.slug}/${data.chapter.course.slug}/${data.chapter.slug}`}>
+            <Button rounded stroked>
+              {otherLocaleTranslations.localeName}
+            </Button>
+          </Link>
+        </div>
         <div className="pv2 bg-black-90 w-100 tc">
           <h3 className="white f5 f4-ns">{chapterStrings.title}</h3>
         </div>

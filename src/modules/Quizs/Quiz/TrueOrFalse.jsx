@@ -4,15 +4,19 @@ import Button from 'components/Button'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
-import {compose, setPropTypes, withHandlers} from 'recompose'
+import {compose, setPropTypes, withHandlers, withPropsOnChange} from 'recompose'
+import addScoreWhenFinished from './addScoreWhenFinished'
+import ResultIndicator from './ResultIndicator'
 
 type Props = {
   data: {
-    // isTrue: boolean,
+    isTrue: boolean,
     text: string,
   },
+  finished: boolean,
   handleAnswer: Function,
   number: number,
+  score: number,
   state: {
     answer?: boolean,
   },
@@ -22,20 +26,29 @@ type Props = {
   },
 }
 const TrueOrFalse = ({
-  data: {text},
+  data: {isTrue, text},
+  finished,
   handleAnswer,
   number,
+  score,
   state: {answer},
   t,
 }: Props) => (
-  <div className="mb5 pv5 ph4 flex">
-    <div className="flex-no-shrink mr2">
-      {number} <ArrowForward className="dark-gray" />
-    </div>
-    <div>
+  <div>
+    <div className="flex">
+      <div className="flex-no-shrink w2-5">
+        {number} <ArrowForward className="dark-gray" />
+      </div>
       <div className="f4">{text}</div>
-      <div className="mt4">
+    </div>
+    <div className="mt4 flex justify-between">
+      <div>
         <div className="mt2">
+          <ResultIndicator
+            finished={finished}
+            isCorrect={isTrue}
+            selected={answer !== undefined}
+          />
           <Button
             className={cx({
               ph3: answer,
@@ -44,12 +57,17 @@ const TrueOrFalse = ({
             onClick={handleAnswer}
             rounded
             secondary
-            stroked={answer === false}
+            stroked={!answer}
           >
             {t.quizTrue}
           </Button>
         </div>
         <div className="mt2">
+          <ResultIndicator
+            finished={finished}
+            isCorrect={!isTrue}
+            selected={answer === false}
+          />
           <Button
             className={cx({
               ph3: answer === false,
@@ -58,12 +76,18 @@ const TrueOrFalse = ({
             onClick={handleAnswer}
             rounded
             secondary
-            stroked={answer}
+            stroked={answer !== false}
           >
             {t.quizFalse}
           </Button>
         </div>
       </div>
+      {finished &&
+        (score ? (
+          <div className="self-end green f3">1/1</div>
+        ) : (
+          <div className="self-end red f3">0/1</div>
+        ))}
     </div>
   </div>
 )
@@ -71,6 +95,8 @@ const TrueOrFalse = ({
 const enhance = compose(
   setPropTypes({
     addData: PropTypes.func.isRequired,
+    addScore: PropTypes.func.isRequired,
+    finished: PropTypes.bool.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
   withHandlers({
@@ -83,5 +109,17 @@ const enhance = compose(
       })
     },
   }),
+  withPropsOnChange(
+    ['finished'],
+    ({data: {isTrue}, finished, state: {answer}}) => {
+      if (!finished) {
+        return {score: 0}
+      }
+      return {
+        score: answer === isTrue ? 1 : 0,
+      }
+    },
+  ),
+  addScoreWhenFinished,
 )
 export default enhance(TrueOrFalse)

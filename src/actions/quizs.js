@@ -13,6 +13,13 @@ export const addData = ({data, params, quizId}) => ({
   quizId,
 })
 
-// export const answerQuiz = ({answers, chapterId, difficulty, id, type}) => {}
+export const completeQuizs = ({params}) => ({
+  type: 'COMPLETE_QUIZ',
+  params,
+})
 
-// export const completeQuizs = ({chapterId, difficulty}) => {}
+export const addScore = ({params, score}) => ({
+  type: 'ADD_SCORE',
+  params,
+  score,
+})

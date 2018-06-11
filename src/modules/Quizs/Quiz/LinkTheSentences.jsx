@@ -1,8 +1,11 @@
 // @flow
+import cx from 'classnames'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
+import Correct from 'react-icons/lib/md/check'
+import Error from 'react-icons/lib/md/clear'
 import {
   compose,
   lifecycle,
@@ -10,45 +13,73 @@ import {
   withHandlers,
   withPropsOnChange,
 } from 'recompose'
-import SelectInput from './SelectInput'
+import addScoreWhenFinished from './addScoreWhenFinished'
+import MultilineSelect from './MultilineSelect'
 
 type Props = {
+  data: {
+    values: Array<{
+      a: string,
+      b: string,
+    }>,
+  },
+  finished: boolean,
   handleAnswer: () => {},
   leftValues: Array<string>,
   number: number,
   remainingValues: Array<{index: number, text: string}>,
   rightValues: Array<{index: number, text: string}>,
+  score: number,
   state: {
-    answers?: Array,
+    answers?: Array<?number>,
   },
   valuesOrder: Array<number>,
 }
 const LinkTheSentences = ({
+  data: {values},
   handleAnswer,
+  finished,
   leftValues,
   number,
   remainingValues,
   rightValues,
+  score,
   state: {answers = []},
   valuesOrder,
 }: Props) => (
-  <div className="mb5 pv5 ph4 flex">
-    <div className="flex-no-shrink mr2">
-      {number} <ArrowForward className="dark-gray" />
+  <div>
+    <div className="mb3 flex">
+      <div className="flex-no-shrink mr2">
+        {number} <ArrowForward className="dark-gray" />
+      </div>
+      <div>title</div>
     </div>
     <div className="mv0 f4">
-      {valuesOrder.map((valueIndex) => {
+      {valuesOrder.map((valueIndex, i) => {
         const leftValue = leftValues[valueIndex]
         const rightValue = rightValues.find(
           ({index}) => answers[valueIndex] === index,
         )
+        const isCorrect = finished && answers[valueIndex] === valueIndex
         return (
-          <div
-            className="pb4 flex-ns justify-between items-start"
-            key={valueIndex}
-          >
-            <div>{leftValue}</div>
-            <SelectInput
+          <div className="pb4" key={valueIndex}>
+            {i !== 0 && <hr />}
+            <div className="mt4">
+              {i + 1}. {leftValue}
+            </div>
+            <div className="tc mv2">
+              {finished &&
+                (isCorrect ? (
+                  <Correct className="green" />
+                ) : (
+                  <Error className="red" />
+                ))}
+              {!finished && <ArrowForward className="dark-gray rotate-90" />}
+            </div>
+            <MultilineSelect
+              correctAnswer={finished ? values[valueIndex].b : ''}
+              finished={finished}
+              isCorrect={isCorrect}
               name={valueIndex}
               onChange={handleAnswer}
               options={remainingValues}
@@ -58,6 +89,16 @@ const LinkTheSentences = ({
         )
       })}
     </div>
+    {finished && (
+      <div
+        className={cx('fr mt3 f3', {
+          green: score > answers.length / 2,
+          red: score <= answers.length / 2,
+        })}
+      >
+        {score}/{answers.length}
+      </div>
+    )}
   </div>
 )
 
@@ -81,7 +122,7 @@ const enhance = compose(
       if (!state.valuesOrder)
         addData({
           data: {
-            answers: new Array(leftValues.length),
+            answers: new Array(leftValues.length).fill(undefined),
             valuesOrder: shuffle(leftValues.map((_, i) => i)),
           },
           quizId,
@@ -113,5 +154,18 @@ const enhance = compose(
       remainingValues: rightValues.filter(notChosen),
     }
   }),
+
+  withPropsOnChange(['finished'], ({finished, state: {answers = []}}) => {
+    if (!finished) {
+      return {score: 0}
+    }
+    return {
+      score: answers.reduce((acc, answer, index) => {
+        if (answer === index) return acc + 1
+        return acc
+      }, 0),
+    }
+  }),
+  addScoreWhenFinished,
 )
 export default enhance(LinkTheSentences)

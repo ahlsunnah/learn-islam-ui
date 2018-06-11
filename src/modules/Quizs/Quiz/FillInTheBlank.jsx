@@ -1,4 +1,5 @@
 // @flow
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
@@ -9,35 +10,71 @@ import {
   withHandlers,
   withPropsOnChange,
 } from 'recompose'
+import addScoreWhenFinished from './addScoreWhenFinished'
 import SelectInput from './SelectInput'
 
+type DisplayAnswerProps = {
+  answer?: string,
+  answerIndex: number,
+  index: number,
+  value: string,
+}
+const DisplayAnswer = ({
+  answer,
+  answerIndex,
+  index,
+  value,
+}: DisplayAnswerProps) => {
+  if (answerIndex === undefined) return <div className="green">{value}</div>
+  if (answerIndex === index) return <div className="dark-blue">{value}</div>
+  return (
+    <div>
+      <span className="strike">{answer}</span>{' '}
+      <div className="dib green"> {value}</div>
+    </div>
+  )
+}
+
 type Props = {
+  data: {
+    values: Array<string>,
+  },
   handleAnswer: () => {},
+  finished: boolean,
   number: number,
   orderedValues: Array<{index: number, text: string}>,
   remainingValues: Array<{index: number, text: string}>,
+  score: number,
   state: {
     answers?: Array,
   },
   textParts: Array<string>,
 }
 const FillInTheBlank = ({
+  data: {values},
+  finished,
   handleAnswer,
   number,
   orderedValues,
   remainingValues,
+  score,
   state: {answers = []},
   textParts,
 }: Props) => (
-  <div className="mb5 pv5 ph4 flex">
-    <div className="flex-no-shrink mr2">
-      {number} <ArrowForward className="dark-gray" />
+  <div>
+    <div className="flex">
+      <div className="flex-no-shrink mr2">
+        {number} <ArrowForward className="dark-gray" />
+      </div>
+      <div>title</div>
     </div>
     <div className="mv0 f4">
       {textParts.map(
         (part, i) =>
           i === 0 ? (
-            <span key={`part${i}`}>{part}</span> // eslint-disable-line react/no-array-index-key
+            <span key={`part${i}`} className="lh1-75rem">
+              {part}
+            </span> // eslint-disable-line react/no-array-index-key
           ) : (
             [
               <div
@@ -45,20 +82,43 @@ const FillInTheBlank = ({
                 key={`value${i - 1}`}
                 //   className="bg-light-green"
               >
-                <SelectInput
-                  name={i - 1}
-                  onChange={handleAnswer}
-                  options={remainingValues}
-                  value={orderedValues.find(
-                    ({index}) => index === answers[i - 1],
-                  )}
-                />
+                {finished ? (
+                  <DisplayAnswer
+                    answer={
+                      answers[i - 1] !== undefined && values[answers[i - 1]]
+                    }
+                    answerIndex={answers[i - 1]}
+                    index={i - 1}
+                    value={values[i - 1]}
+                  />
+                ) : (
+                  <SelectInput
+                    name={i - 1}
+                    onChange={handleAnswer}
+                    options={remainingValues}
+                    value={orderedValues.find(
+                      ({index}) => index === answers[i - 1],
+                    )}
+                  />
+                )}
               </div>,
-              <span key={`part${i}`}>{part}</span>, // eslint-disable-line react/no-array-index-key
+              <span key={`part${i}`} className="lh1-75rem">
+                {part}
+              </span>, // eslint-disable-line react/no-array-index-key
             ]
           ),
       )}
     </div>
+    {finished && (
+      <div
+        className={cx('fr mt3 f3', {
+          green: score > answers.length / 2,
+          red: score <= answers.length / 2,
+        })}
+      >
+        {score}/{answers.length}
+      </div>
+    )}
   </div>
 )
 
@@ -82,7 +142,7 @@ const enhance = compose(
       if (!state.answers)
         addData({
           data: {
-            answers: new Array(orderedValues.length),
+            answers: new Array(orderedValues.length).fill(undefined),
           },
           quizId,
         })
@@ -92,7 +152,7 @@ const enhance = compose(
     handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
       const {name, value} = e.target
       const newAnswers = answers.slice()
-      newAnswers[name] = parseInt(value, 10)
+      newAnswers[name] = value !== '' ? parseInt(value, 10) : undefined
       addData({
         data: {
           answers: newAnswers,
@@ -107,5 +167,17 @@ const enhance = compose(
       remainingValues: orderedValues.filter(notChosen),
     }
   }),
+  withPropsOnChange(['finished'], ({finished, state: {answers = []}}) => {
+    if (!finished) {
+      return {score: 0}
+    }
+    return {
+      score: answers.reduce((acc, answer, index) => {
+        if (answer === index) return acc + 1
+        return acc
+      }, 0),
+    }
+  }),
+  addScoreWhenFinished,
 )
 export default enhance(FillInTheBlank)

@@ -1,14 +1,15 @@
 // @flow
 import * as React from 'react'
-import {Strings} from 'types'
 import QuizForm from './QuizForm'
 import QuizHeader from './QuizHeader'
 import './styles.scss'
+import type {Strings} from 'types' // eslint-disable-line
 
 type Props = {
   data: {
     chapter: {
       id: string,
+      quizs: Array<{}>,
       strings: Strings,
     },
     translations: {},

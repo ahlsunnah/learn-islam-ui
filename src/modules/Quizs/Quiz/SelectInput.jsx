@@ -1,17 +1,24 @@
 // @flow
+import cx from 'classnames'
 import * as React from 'react'
-import 'styles/select.scss'
 
 type Props = {
+  className?: string,
   name: number,
   onChange: Function,
   options: Array<{index: number, text: string}>,
   value?: {index: number, text: string},
 }
-const SelectInput = ({name, onChange, options = [], value}: Props) => (
-  <div className="mdc-select">
+const SelectInput = ({
+  className,
+  name,
+  onChange,
+  options = [],
+  value,
+}: Props) => (
+  <div className={cx('bb', className)}>
     <select
-      className="mdc-select__native-control"
+      className={cx('bg-transparent bn pointer', className)}
       name={name}
       onChange={onChange}
       value={value ? value.index : ''}
@@ -24,8 +31,6 @@ const SelectInput = ({name, onChange, options = [], value}: Props) => (
         </option>
       ))}
     </select>
-    {/* <label className="mdc-floating-label">Pick a Food Group</label> */}
-    <div className="mdc-line-ripple" />
   </div>
 )
 

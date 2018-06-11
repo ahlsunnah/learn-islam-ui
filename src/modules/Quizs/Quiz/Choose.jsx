@@ -12,14 +12,18 @@ import {
   withHandlers,
   withPropsOnChange,
 } from 'recompose'
+import addScoreWhenFinished from './addScoreWhenFinished'
+import ResultIndicator from './ResultIndicator'
 
 type Props = {
   data: {
     text: string,
     values: Array<string>,
   },
+  finished: boolean,
   handleAnswer: Function,
   number: number,
+  score: number,
   state: {
     answer?: number,
   },
@@ -27,42 +31,55 @@ type Props = {
 }
 const Choose = ({
   data: {text, values},
+  finished,
   handleAnswer,
   number,
+  score,
   state: {answer},
   valuesOrder,
 }: Props) => (
-  <div className="mb5 pv5 ph4 flex">
-    <div className="flex-no-shrink mr2">
-      {number} <ArrowForward className="dark-gray" />
-    </div>
-    <div>
-      <div className="f4">{text}</div>
-      <div className="mt4">
-        {valuesOrder.map((order) => (
-          <div className="mt2" key={order}>
-            <Button
-              className={cx({
-                ph3: order === answer,
-              })}
-              rounded
-              secondary
-              stroked={order !== answer}
-              onClick={handleAnswer}
-              name={order}
-            >
-              {values[order]}
-            </Button>
-          </div>
-        ))}
+  <div>
+    <div className="flex">
+      <div className="flex-no-shrink w2-5">
+        {number} <ArrowForward className="dark-gray" />
       </div>
+      <div className="f4">{text}</div>
     </div>
+    <div className="mt4">
+      {valuesOrder.map((order) => (
+        <div className="mt2 flex items-center" key={order}>
+          <ResultIndicator
+            finished={finished}
+            isCorrect={order === 0}
+            selected={answer === order}
+          />
+          <Button
+            className={cx('pv2 h-auto lh-title tl', {
+              ph3: order === answer,
+            })}
+            secondary
+            stroked={order !== answer}
+            onClick={handleAnswer}
+            name={order}
+          >
+            {values[order]}
+          </Button>
+        </div>
+      ))}
+    </div>
+    {finished &&
+      (score ? (
+        <div className="fr mt3 green f3">1/1</div>
+      ) : (
+        <div className="fr mt3 red f3">0/1</div>
+      ))}
   </div>
 )
 
 const enhance = compose(
   setPropTypes({
     addData: PropTypes.func.isRequired,
+    addScore: PropTypes.func.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
   lifecycle({
@@ -95,5 +112,14 @@ const enhance = compose(
       })
     },
   }),
+  withPropsOnChange(['finished'], ({finished, state: {answer}}) => {
+    if (!finished) {
+      return {score: 0}
+    }
+    return {
+      score: answer === 0,
+    }
+  }),
+  addScoreWhenFinished,
 )
 export default enhance(Choose)

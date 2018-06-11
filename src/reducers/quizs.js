@@ -8,6 +8,17 @@ const quizsByDifficulty = (state = {finished: false, quizs: []}, action) => {
           ...action.data,
         },
       }
+    case 'ADD_SCORE':
+      return {
+        ...state,
+        lastScore: state.lastScore + action.score,
+      }
+    case 'COMPLETE_QUIZ':
+      return {
+        ...state,
+        finished: true,
+        lastScore: 0,
+      }
     case 'START_QUIZ':
       return {
         ...state,
@@ -23,6 +34,8 @@ const quizsByDifficulty = (state = {finished: false, quizs: []}, action) => {
 const quizsByLocale = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
+    case 'ADD_SCORE':
+    case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {
         ...state,
@@ -40,6 +53,8 @@ const quizsByLocale = (state = {}, action) => {
 const quizsByChapterId = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
+    case 'ADD_SCORE':
+    case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {
         ...state,
@@ -57,6 +72,8 @@ const quizsByChapterId = (state = {}, action) => {
 const quizs = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
+    case 'ADD_SCORE':
+    case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {
         ...state,

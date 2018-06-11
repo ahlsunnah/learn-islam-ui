@@ -1,2 +1,38 @@
 @import '@material/form-field/mdc-form-field';
 @import '@material/radio/mdc-radio';
+
+.mdc-radio
+  .mdc-radio__native-control.checked
+  + .mdc-radio__background.isGreen
+  .mdc-radio__inner-circle {
+  background-color: #19a974;
+}
+
+.mdc-radio
+  .mdc-radio__native-control.checked
+  + .mdc-radio__background.isGreen
+  .mdc-radio__outer-circle {
+  border-color: #19a974;
+}
+
+.mdc-radio
+  .mdc-radio__native-control.checked
+  + .mdc-radio__background.isRed
+  .mdc-radio__inner-circle {
+  background-color: #ff4136;
+}
+
+.mdc-radio
+  .mdc-radio__native-control.checked
+  + .mdc-radio__background.isRed
+  .mdc-radio__outer-circle {
+  border-color: #ff4136;
+}
+
+.mdc-radio__native-control.checked
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
+  transform: scale(0.5);
+  transition: transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1),
+    background-color 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+}

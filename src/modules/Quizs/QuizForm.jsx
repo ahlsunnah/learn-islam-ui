@@ -1,35 +1,54 @@
 // @flow
-import {addData, startQuizs} from 'actions/quizs'
+import {addData, addScore, startQuizs} from 'actions/quizs'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {compose, lifecycle, setPropTypes, withPropsOnChange} from 'recompose'
 import Quiz from './Quiz'
+import QuizFooter from './QuizFooter'
 
 type QuizType = {
   type: string,
   data: {},
 }
 type Props = {
+  addData: Function, // eslint-disable-line react/no-unused-prop-types
+  addScore: Function, // eslint-disable-line react/no-unused-prop-types
+  params: {
+    chapterId: string,
+    difficulty: number,
+    locale: string,
+  },
   quizs: Map<string, QuizType>,
   quizsIds: Array<string>,
-  quizsState: {},
+  quizsState: {
+    finished: boolean,
+  },
+  t: {}, // eslint-disable-line react/no-unused-prop-types
 }
 const QuizForm = ({quizs, quizsIds, quizsState, ...props}: Props) => (
-  <div className="pv40vh">
-    {quizsIds.map(
-      (quizId, i) => (
-        <Quiz
-          {...quizs.get(quizId)}
-          {...props}
-          key={quizId}
-          number={i + 1}
-          quizId={quizId}
-          state={quizsState[quizId] || {}}
-        />
-      ),
-      quizs,
-    )}
+  <div>
+    <div className="--pv40vh">
+      {quizsIds.map(
+        (quizId, i) => (
+          <Quiz
+            {...quizs.get(quizId)}
+            {...props}
+            key={quizId}
+            number={i + 1}
+            quizId={quizId}
+            state={quizsState[quizId] || {}}
+            finished={quizsState.finished}
+          />
+        ),
+        quizs,
+      )}
+    </div>
+    <QuizFooter
+      finished={quizsState.finished}
+      params={props.params}
+      quizsState={quizsState}
+    />
   </div>
 )
 
@@ -61,19 +80,20 @@ const enhance = compose(
   }),
   connect(
     ({quizs}, {params: {chapterId, difficulty, locale}}) => {
-      const quizsState =
-        (quizs[chapterId] &&
-          quizs[chapterId][locale] &&
-          quizs[chapterId][locale][difficulty]) ||
-        {}
+      const quizsState = (quizs[chapterId] &&
+        quizs[chapterId][locale] &&
+        quizs[chapterId][locale][difficulty]) || {finished: false}
       return {
         quizsState,
         quizsIds: quizsState.quizsIds,
       }
     },
-    (dispatch, {params, quizs}) => ({
+    (dispatch: Function, {params, quizs}) => ({
       addData: ({data, quizId}) => {
         dispatch(addData({data, params, quizId}))
+      },
+      addScore: (score) => {
+        dispatch(addScore({params, score}))
       },
       startQuizs: () =>
         dispatch(

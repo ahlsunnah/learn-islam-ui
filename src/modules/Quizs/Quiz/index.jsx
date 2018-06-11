@@ -1,4 +1,5 @@
 // @flow
+import Card from 'components/Card'
 import * as React from 'react'
 import Choose from './Choose'
 import ChooseACategory from './ChooseACategory'
@@ -40,7 +41,11 @@ type Props = {
 }
 const Quiz = ({type, ...props}: Props) => {
   const QuizByType = getComponentByType(type)
-  return <QuizByType {...props} />
+  return (
+    <Card className="mb5 pv4 ph4 w-60-l w-75-m w-100 center" rounded>
+      <QuizByType {...props} />
+    </Card>
+  )
 }
 
 export default Quiz

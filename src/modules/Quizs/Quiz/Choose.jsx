@@ -103,13 +103,14 @@ const enhance = compose(
     valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
   })),
   withHandlers({
-    handleAnswer: ({addData, quizId}) => (e) => {
-      addData({
-        data: {
-          answer: parseInt(e.target.name, 10),
-        },
-        quizId,
-      })
+    handleAnswer: ({addData, finished, quizId}) => (e) => {
+      if (!finished)
+        addData({
+          data: {
+            answer: parseInt(e.target.name, 10),
+          },
+          quizId,
+        })
     },
   }),
   withPropsOnChange(['finished'], ({finished, state: {answer}}) => {
@@ -117,7 +118,7 @@ const enhance = compose(
       return {score: 0}
     }
     return {
-      score: answer === 0,
+      score: answer === 0 ? 1 : 0,
     }
   }),
   addScoreWhenFinished,

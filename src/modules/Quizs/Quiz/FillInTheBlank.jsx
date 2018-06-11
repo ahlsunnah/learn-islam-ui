@@ -15,7 +15,7 @@ import SelectInput from './SelectInput'
 
 type DisplayAnswerProps = {
   answer?: string,
-  answerIndex: number,
+  answerIndex?: number,
   index: number,
   value: string,
 }
@@ -85,7 +85,7 @@ const FillInTheBlank = ({
                 {finished ? (
                   <DisplayAnswer
                     answer={
-                      answers[i - 1] !== undefined && values[answers[i - 1]]
+                      answers[i - 1] !== undefined ? values[answers[i - 1]] : ''
                     }
                     answerIndex={answers[i - 1]}
                     index={i - 1}

@@ -129,16 +129,18 @@ const enhance = compose(
     },
   }),
   withHandlers({
-    handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
-      const {name: item, value: category} = e.target
-      const newAnswer = answers.slice()
-      newAnswer[item] = parseInt(category, 10)
-      addData({
-        data: {
-          answers: newAnswer,
-        },
-        quizId,
-      })
+    handleAnswer: ({addData, finished, quizId, state: {answers}}) => (e) => {
+      if (!finished) {
+        const {name: item, value: category} = e.target
+        const newAnswer = answers.slice()
+        newAnswer[item] = parseInt(category, 10)
+        addData({
+          data: {
+            answers: newAnswer,
+          },
+          quizId,
+        })
+      }
     },
   }),
   withPropsOnChange(['state'], ({items, state: {itemsOrder}}) => ({

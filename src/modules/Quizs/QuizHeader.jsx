@@ -4,13 +4,14 @@ import Card from 'components/Card'
 import * as React from 'react'
 
 type Props = {
+  scrollToRef: Function,
   t: {
     quiz: string,
     start: string,
   },
   title: string,
 }
-const QuizHeader = ({t, title}: Props) => (
+const QuizHeader = ({scrollToRef, t, title}: Props) => (
   <div className="vh-100 flex justify-center items-center">
     <Card
       className="pv3 ph4 w-50-ns w-90 center flex flex-column justify-around items-center tc"
@@ -19,7 +20,7 @@ const QuizHeader = ({t, title}: Props) => (
       <span className="f3">{t.quiz}</span>
       <h1>{title}</h1>
       <div>
-        <Button raised rounded>
+        <Button onClick={scrollToRef} raised rounded>
           {t.start}
         </Button>
       </div>

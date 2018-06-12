@@ -24,26 +24,25 @@ type Props = {
   quizsState: {
     finished: boolean,
   },
+  setRef: Function,
   t: {}, // eslint-disable-line react/no-unused-prop-types
 }
-const QuizForm = ({quizs, quizsIds, quizsState, ...props}: Props) => (
-  <div>
-    <div className="--pv40vh">
-      {quizsIds.map(
-        (quizId, i) => (
-          <Quiz
-            {...quizs.get(quizId)}
-            {...props}
-            key={quizId}
-            number={i + 1}
-            quizId={quizId}
-            state={quizsState[quizId] || {}}
-            finished={quizsState.finished}
-          />
-        ),
-        quizs,
-      )}
-    </div>
+const QuizForm = ({quizs, quizsIds, quizsState, setRef, ...props}: Props) => (
+  <div ref={setRef}>
+    {quizsIds.map(
+      (quizId, i) => (
+        <Quiz
+          {...quizs.get(quizId)}
+          {...props}
+          key={quizId}
+          number={i + 1}
+          quizId={quizId}
+          state={quizsState[quizId] || {}}
+          finished={quizsState.finished}
+        />
+      ),
+      quizs,
+    )}
     <QuizFooter
       finished={quizsState.finished}
       params={props.params}

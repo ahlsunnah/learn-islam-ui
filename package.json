@@ -95,6 +95,7 @@
     "recompose": "^0.27.0",
     "redux": "^4.0.0",
     "rimraf": "^2.6.1",
+    "scroll-into-view-if-needed": "^2.2.5",
     "slash": "^2.0.0",
     "tachyons": "^4.9.1"
   },

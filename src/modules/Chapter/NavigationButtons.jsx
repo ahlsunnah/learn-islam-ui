@@ -11,7 +11,7 @@ const NavigationButtons = ({difficultiesLinks, t}: Props) => (
   <div className="mb4 ph6-ns ph4 flex-ns items-center">
     <h3 className="mr3-ns">{t.quizCTA}:</h3>
     {Object.entries(difficultiesLinks).map(([difficulty, link]) => (
-      <div className="mv2 mr3 mr4-ns dib">
+      <div key={difficulty} className="mv2 mr3 mr4-ns dib">
         <Link className="no-underline" to={link}>
           <Button raised>{t[difficulty]}</Button>
         </Link>

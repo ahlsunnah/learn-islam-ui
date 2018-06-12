@@ -46,9 +46,12 @@ type Props = {
   remainingValues: Array<{index: number, text: string}>,
   score: number,
   state: {
-    answers?: Array,
+    answers?: Array<?number>,
   },
   textParts: Array<string>,
+  t: {
+    fillInTheBlankTitle: string,
+  },
 }
 const FillInTheBlank = ({
   data: {values},
@@ -60,15 +63,16 @@ const FillInTheBlank = ({
   score,
   state: {answers = []},
   textParts,
+  t: {fillInTheBlankTitle},
 }: Props) => (
   <div>
-    <div className="flex">
+    <div className="pb2 flex bb items-center">
       <div className="flex-no-shrink mr2">
         {number} <ArrowForward className="dark-gray" />
       </div>
-      <div>title</div>
+      <div className="f4">{fillInTheBlankTitle}</div>
     </div>
-    <div className="mv0 f4">
+    <div className="mt3 mb0 f4">
       {textParts.map(
         (part, i) =>
           i === 0 ? (

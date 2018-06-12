@@ -18,6 +18,7 @@ import MultilineSelect from './MultilineSelect'
 
 type Props = {
   data: {
+    title: string,
     values: Array<{
       a: string,
       b: string,
@@ -36,7 +37,7 @@ type Props = {
   valuesOrder: Array<number>,
 }
 const LinkTheSentences = ({
-  data: {values},
+  data: {title, values},
   handleAnswer,
   finished,
   leftValues,
@@ -48,11 +49,11 @@ const LinkTheSentences = ({
   valuesOrder,
 }: Props) => (
   <div>
-    <div className="mb3 flex">
+    <div className="pb2 mb3 flex bb items-center">
       <div className="flex-no-shrink mr2">
         {number} <ArrowForward className="dark-gray" />
       </div>
-      <div>title</div>
+      <div className="f4">{title}</div>
     </div>
     <div className="mv0 f4">
       {valuesOrder.map((valueIndex, i) => {

@@ -78,10 +78,12 @@ export const pageQuery = graphql`
       }
     }
     translations: feathersTranslations(locale: {eq: $locale}) {
-      start
+      chooseACategoryTitle
+      fillInTheBlankTitle
       quiz
       quizTrue
       quizFalse
+      start
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
       localeName

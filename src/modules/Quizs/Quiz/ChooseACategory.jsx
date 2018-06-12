@@ -29,7 +29,10 @@ type Props = {
   number: number,
   score: number,
   state: {
-    answers?: Array,
+    answers?: Array<?number>,
+  },
+  t: {
+    chooseACategoryTitle: string,
   },
 }
 const ChooseACategory = ({
@@ -42,13 +45,14 @@ const ChooseACategory = ({
   number,
   score,
   state: {answers = []},
+  t: {chooseACategoryTitle},
 }: Props) => (
   <div>
-    <div className="flex">
+    <div className="pb2 flex bb items-center">
       <div className="flex-no-shrink mr2">
         {number} <ArrowForward className="dark-gray" />
       </div>
-      <div>Title</div>
+      <div className="f4">{chooseACategoryTitle}</div>
     </div>
     <div className="mt3 f4">
       {itemsOrder.map((itemIndex) => {

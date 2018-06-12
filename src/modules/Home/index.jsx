@@ -1,7 +1,6 @@
 // @flow
 import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
-import HomeCourses from './HomeCourses'
 import HomeFeatures from './HomeFeatures'
 import HomeHero from './HomeHero'
 import HomeNewsletter from './HomeNewsletter'
@@ -18,7 +17,7 @@ const HomeContainer = ({data}: Props) => (
   <div>
     <HomeHero {...data} />
     <HomeFeatures {...data.translations} />
-    <HomeCourses {...data.translations} />
+    {/* <HomeCourses {...data.translations} /> */}
     <HomeNewsletter {...data.translations} />
     <HomeFooter
       {...data.translations}

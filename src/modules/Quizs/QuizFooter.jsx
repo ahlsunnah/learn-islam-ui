@@ -2,6 +2,7 @@
 import {completeQuizs} from 'actions/quizs'
 import Button from 'components/Button'
 import Card from 'components/Card'
+import Link from 'gatsby-link'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -15,6 +16,7 @@ import {
 import ProgressWrapper from './ProgressWrapper'
 
 type Props = {
+  chapterPathname: string,
   quizsState: {
     finished: boolean,
     lastScore?: number,
@@ -22,7 +24,12 @@ type Props = {
   submit: Function,
   totalQuestions: number,
 }
-const QuizFooter = ({quizsState, submit, totalQuestions}: Props) => (
+const QuizFooter = ({
+  chapterPathname,
+  quizsState,
+  submit,
+  totalQuestions,
+}: Props) => (
   <div className="h4">
     <Card className="ph4 pt4 pb45vh w-100 flex justify-center items-start">
       {quizsState.finished ? (
@@ -39,12 +46,11 @@ const QuizFooter = ({quizsState, submit, totalQuestions}: Props) => (
           <Button className="f4 ph4 pv2 h-auto" secondary>
             restart
           </Button>
-          <Button className="f4 ph4 pv2 h-auto" secondary>
-            return to course
-          </Button>
-          <Button className="f4 ph4 pv2 h-auto" secondary>
-            go to next course
-          </Button>
+          <Link to={chapterPathname}>
+            <Button className="f4 ph4 pv2 h-auto pointer" secondary>
+              return to course
+            </Button>
+          </Link>
         </div>
       ) : (
         <Button className="f4 ph4 pv2 h-auto" onClick={submit} secondary>

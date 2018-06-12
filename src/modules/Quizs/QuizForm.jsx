@@ -14,6 +14,7 @@ type QuizType = {
 type Props = {
   addData: Function, // eslint-disable-line react/no-unused-prop-types
   addScore: Function, // eslint-disable-line react/no-unused-prop-types
+  chapterPathname: string,
   params: {
     chapterId: string,
     difficulty: number,
@@ -27,7 +28,14 @@ type Props = {
   setRef: Function,
   t: {}, // eslint-disable-line react/no-unused-prop-types
 }
-const QuizForm = ({quizs, quizsIds, quizsState, setRef, ...props}: Props) => (
+const QuizForm = ({
+  chapterPathname,
+  quizs,
+  quizsIds,
+  quizsState,
+  setRef,
+  ...props
+}: Props) => (
   <div ref={setRef}>
     {quizsIds.map(
       (quizId, i) => (
@@ -44,6 +52,7 @@ const QuizForm = ({quizs, quizsIds, quizsState, setRef, ...props}: Props) => (
       quizs,
     )}
     <QuizFooter
+      chapterPathname={chapterPathname}
       finished={quizsState.finished}
       params={props.params}
       quizsState={quizsState}

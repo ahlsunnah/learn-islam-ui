@@ -16,6 +16,9 @@ type Props = {
     },
     translations: {},
   },
+  location: {
+    pathname: string,
+  },
   pathContext: {
     difficulty: number,
     locale: string,
@@ -26,6 +29,7 @@ type Props = {
 
 const QuizsContainer = ({
   data: {chapter, translations: t},
+  location: {pathname},
   pathContext: {difficulty, locale},
   scrollToRef,
   setRef,
@@ -39,6 +43,10 @@ const QuizsContainer = ({
           difficulty,
           locale,
         }}
+        chapterPathname={pathname
+          .split('/')
+          .slice(0, -1)
+          .join('/')}
         quizs={chapter.quizs}
         setRef={setRef}
         t={t}

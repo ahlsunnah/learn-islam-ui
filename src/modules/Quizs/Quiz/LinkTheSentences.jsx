@@ -68,14 +68,14 @@ const LinkTheSentences = ({
             <div className="mt4">
               {i + 1}. {leftValue}
             </div>
-            <div className="tc mv2">
+            <div className="tc mb1 f2">
               {finished &&
                 (isCorrect ? (
                   <Correct className="green" />
                 ) : (
                   <Error className="red" />
                 ))}
-              {!finished && <ArrowForward className="dark-gray rotate-90" />}
+              {!finished && <ArrowForward className="moon-gray rotate-90" />}
             </div>
             <MultilineSelect
               correctAnswer={finished ? values[valueIndex].b : ''}

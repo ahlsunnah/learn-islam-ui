@@ -71,11 +71,13 @@ const LinkTheSentences = ({
             <div className="tc mb1 f2">
               {finished &&
                 (isCorrect ? (
-                  <Correct className="green" />
+                  <Correct className="dn-ns green" />
                 ) : (
-                  <Error className="red" />
+                  <Error className="dn-ns red" />
                 ))}
-              {!finished && <ArrowForward className="moon-gray rotate-90" />}
+              <ArrowForward
+                className={cx('moon-gray rotate-90 dib-ns', {dn: finished})}
+              />
             </div>
             <MultilineSelect
               correctAnswer={finished ? values[valueIndex].b : ''}

@@ -135,9 +135,11 @@ const enhance = compose(
   withHandlers({
     handleAnswer: ({addData, finished, quizId, state: {answers}}) => (e) => {
       if (!finished) {
-        const {name: item, value: category} = e.target
+        const {name: item, value} = e.target
+        const category = parseInt(value, 10)
+
         const newAnswer = answers.slice()
-        newAnswer[item] = parseInt(category, 10)
+        newAnswer[item] = category === newAnswer[item] ? undefined : category
         addData({
           data: {
             answers: newAnswer,

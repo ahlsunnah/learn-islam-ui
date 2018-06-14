@@ -102,11 +102,12 @@ const enhance = compose(
     quizId: PropTypes.string.isRequired,
   }),
   withHandlers({
-    handleAnswer: ({addData, finished, quizId}) => (e) => {
+    handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
+      const newAnswer = e.target.name === 'true'
       if (!finished)
         addData({
           data: {
-            answer: e.target.name === 'true',
+            answer: answer === newAnswer ? undefined : newAnswer,
           },
           quizId,
         })

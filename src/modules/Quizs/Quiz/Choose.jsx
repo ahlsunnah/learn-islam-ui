@@ -104,11 +104,12 @@ const enhance = compose(
     valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
   })),
   withHandlers({
-    handleAnswer: ({addData, finished, quizId}) => (e) => {
+    handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
+      const newAnswer = parseInt(e.target.name, 10)
       if (!finished)
         addData({
           data: {
-            answer: parseInt(e.target.name, 10),
+            answer: answer === newAnswer ? undefined : newAnswer,
           },
           quizId,
         })

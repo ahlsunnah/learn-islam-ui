@@ -35,7 +35,7 @@ const RadioButton = ({
           })}
           id={id}
           name={name}
-          onChange={onChange}
+          onClick={onChange}
           type="radio"
           value={value}
         />

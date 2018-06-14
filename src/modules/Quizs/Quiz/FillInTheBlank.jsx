@@ -29,7 +29,7 @@ const DisplayAnswer = ({
   if (answerIndex === index) return <div className="dark-blue">{value}</div>
   return (
     <div>
-      <span className="strike">{answer}</span>{' '}
+      <span className="dib dark-blue bt bw2 b--red lh0-9">{answer}</span>{' '}
       <div className="dib green"> {value}</div>
     </div>
   )

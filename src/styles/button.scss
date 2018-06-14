@@ -33,3 +33,8 @@
   @include mdc-button-ink-color($mdc-theme-primary);
   @include mdc-button-container-fill-color(white);
 }
+
+.mdc-button.button-stroked-green {
+  border-color: green;
+  color: green;
+}

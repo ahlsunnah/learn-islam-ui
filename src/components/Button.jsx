@@ -8,6 +8,7 @@ type Props = {
   className?: string,
   elevated?: boolean,
   inverse?: boolean,
+  greenStroked?: boolean,
   pill?: boolean,
   raised?: boolean,
   rounded?: boolean,
@@ -19,6 +20,7 @@ const Button = ({
   className = '',
   elevated,
   inverse,
+  greenStroked,
   raised,
   rounded = true,
   secondary,
@@ -35,6 +37,7 @@ const Button = ({
       'button-elevated': elevated,
       'mdc-button--raised': raised,
       'mdc-button--outlined': stroked,
+      'button-stroked-green': greenStroked,
     })}
     {...props}
   >

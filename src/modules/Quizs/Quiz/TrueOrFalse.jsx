@@ -47,12 +47,13 @@ const TrueOrFalse = ({
           <ResultIndicator
             finished={finished}
             isCorrect={isTrue}
-            selected={answer !== undefined}
+            selected={answer === true}
           />
           <Button
             className={cx({
               ph3: answer,
             })}
+            greenStroked={finished && isTrue && answer !== true}
             name="true"
             onClick={handleAnswer}
             rounded
@@ -72,6 +73,7 @@ const TrueOrFalse = ({
             className={cx({
               ph3: answer === false,
             })}
+            greenStroked={finished && !isTrue && answer !== false}
             name="false"
             onClick={handleAnswer}
             rounded

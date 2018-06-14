@@ -13,7 +13,7 @@ const ResultIndicator = ({isCorrect, selected, finished}: Props) => {
   if (!finished) {
     return <div className="w2-5 dib v-mid box-36px" />
   }
-  if (isCorrect) {
+  if (isCorrect && selected) {
     return <Correct className="w2-5 f2 green" />
   }
   if (selected) {

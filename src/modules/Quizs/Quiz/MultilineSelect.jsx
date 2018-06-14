@@ -2,8 +2,8 @@
 import cx from 'classnames'
 import * as React from 'react'
 import Correct from 'react-icons/lib/md/check'
-import Error from 'react-icons/lib/md/clear'
 import {withStateHandlers} from 'recompose'
+import Error from './Error'
 import SelectInput from './SelectInput'
 
 type Props = {
@@ -30,7 +30,7 @@ const MultilineSelect = (props: Props) => (
           (props.isCorrect ? (
             <Correct className="flex-no-shrink dn dib-ns f2 green" />
           ) : (
-            props.value && <Error className="flex-no-shrink dn dib-ns f2 red" />
+            props.value && <Error className="flex-no-shrink dn dib-ns mh2" />
           ))}
 
         {props.value && props.value.text}

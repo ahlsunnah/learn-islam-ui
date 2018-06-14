@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import Correct from 'react-icons/lib/md/check'
-import Error from 'react-icons/lib/md/clear'
 import {
   compose,
   lifecycle,
@@ -14,6 +13,7 @@ import {
   withPropsOnChange,
 } from 'recompose'
 import addScoreWhenFinished from './addScoreWhenFinished'
+import Error from './Error'
 import MultilineSelect from './MultilineSelect'
 
 type Props = {
@@ -73,7 +73,7 @@ const LinkTheSentences = ({
                 (isCorrect ? (
                   <Correct className="dn-ns green" />
                 ) : (
-                  <Error className="dn-ns red" />
+                  <Error className="dn-ns" />
                 ))}
               <ArrowForward
                 className={cx('moon-gray rotate-90 dib-ns', {dn: finished})}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {compose, lifecycle, setPropTypes, withPropsOnChange} from 'recompose'
+import {calculateTotalQuestions, getQuizsState} from 'selectors/quizs'
 import Quiz from './Quiz'
 import QuizFooter from './QuizFooter'
 import QuizHeader from './QuizHeader'
@@ -16,7 +17,9 @@ type Props = {
   addData: Function, // eslint-disable-line react/no-unused-prop-types
   addScore: Function, // eslint-disable-line react/no-unused-prop-types
   chapterPathname: string,
-  chapterStrings: {},
+  chapterStrings: {
+    title: string,
+  },
   params: {
     chapterId: string,
     difficulty: number,
@@ -26,8 +29,25 @@ type Props = {
   quizsIds: Array<string>,
   quizsState: {
     finished: boolean,
+    lastScore?: number,
   },
-  t: {},
+  t: {
+    average: string,
+    assessmentFail: string,
+    assessmentGood: string,
+    assessmentPerfect: string,
+    assessmentVeryGood: string,
+    backToCourse: string,
+    grade: string,
+    quiz: string,
+    restartQuizs: string,
+    start: string,
+    yourScore: string,
+    yourLastScore: string,
+    goToTop: string,
+    seeYourScore: string,
+  },
+  totalQuestions?: number,
 }
 const QuizForm = ({
   chapterPathname,
@@ -35,10 +55,18 @@ const QuizForm = ({
   quizs,
   quizsIds,
   quizsState,
+  totalQuestions,
   ...props
 }: Props) => (
   <div id="quizs-top">
-    <QuizHeader t={props.t} {...chapterStrings} />
+    <QuizHeader
+      chapterPathname={chapterPathname}
+      chapterStrings={chapterStrings}
+      finished={quizsState.finished}
+      lastScore={quizsState.lastScore}
+      t={props.t}
+      totalQuestions={totalQuestions}
+    />
     <div id="quizs-start">
       {quizsIds.map(
         (quizId, i) => (
@@ -56,10 +84,11 @@ const QuizForm = ({
       )}
     </div>
     <QuizFooter
-      chapterPathname={chapterPathname}
       finished={quizsState.finished}
       params={props.params}
       quizsState={quizsState}
+      totalQuestions={totalQuestions}
+      t={props.t}
     />
   </div>
 )
@@ -91,13 +120,13 @@ const enhance = compose(
     quizs: PropTypes.object.isRequired,
   }),
   connect(
-    ({quizs}, {params: {chapterId, difficulty, locale}}) => {
-      const quizsState = (quizs[chapterId] &&
-        quizs[chapterId][locale] &&
-        quizs[chapterId][locale][difficulty]) || {finished: false}
+    (state, {params}) => {
+      const quizsState = getQuizsState(state, params)
+      const totalQuestions = calculateTotalQuestions(state, params)
       return {
         quizsState,
         quizsIds: quizsState.quizsIds,
+        totalQuestions,
       }
     },
     (dispatch: Function, {params, quizs}) => ({

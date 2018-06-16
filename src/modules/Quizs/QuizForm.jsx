@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {compose, lifecycle, setPropTypes, withPropsOnChange} from 'recompose'
 import Quiz from './Quiz'
 import QuizFooter from './QuizFooter'
+import QuizHeader from './QuizHeader'
 
 type QuizType = {
   type: string,
@@ -15,6 +16,7 @@ type Props = {
   addData: Function, // eslint-disable-line react/no-unused-prop-types
   addScore: Function, // eslint-disable-line react/no-unused-prop-types
   chapterPathname: string,
+  chapterStrings: {},
   params: {
     chapterId: string,
     difficulty: number,
@@ -25,32 +27,34 @@ type Props = {
   quizsState: {
     finished: boolean,
   },
-  setRef: Function,
-  t: {}, // eslint-disable-line react/no-unused-prop-types
+  t: {},
 }
 const QuizForm = ({
   chapterPathname,
+  chapterStrings,
   quizs,
   quizsIds,
   quizsState,
-  setRef,
   ...props
 }: Props) => (
-  <div ref={setRef}>
-    {quizsIds.map(
-      (quizId, i) => (
-        <Quiz
-          {...quizs.get(quizId)}
-          {...props}
-          key={quizId}
-          number={i + 1}
-          quizId={quizId}
-          state={quizsState[quizId] || {}}
-          finished={quizsState.finished}
-        />
-      ),
-      quizs,
-    )}
+  <div id="quizs-top">
+    <QuizHeader t={props.t} {...chapterStrings} />
+    <div id="quizs-start">
+      {quizsIds.map(
+        (quizId, i) => (
+          <Quiz
+            {...quizs.get(quizId)}
+            {...props}
+            key={quizId}
+            number={i + 1}
+            quizId={quizId}
+            state={quizsState[quizId] || {}}
+            finished={quizsState.finished}
+          />
+        ),
+        quizs,
+      )}
+    </div>
     <QuizFooter
       chapterPathname={chapterPathname}
       finished={quizsState.finished}

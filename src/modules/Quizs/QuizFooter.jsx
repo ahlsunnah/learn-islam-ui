@@ -3,6 +3,7 @@ import {completeQuizs} from 'actions/quizs'
 import Button from 'components/Button'
 import Card from 'components/Card'
 import Link from 'gatsby-link'
+import scrollTo from 'lib/scrollTo'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -91,12 +92,14 @@ const enhance = compose(
     },
   }),
   connect(undefined, (dispatch: Function, {params}) => ({
-    submit: () =>
+    submit: () => {
+      scrollTo('quizs-top')
       dispatch(
         completeQuizs({
           params,
         }),
-      ),
+      )
+    },
   })),
 )
 export default enhance(QuizFooter)

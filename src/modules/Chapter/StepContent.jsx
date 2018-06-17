@@ -12,8 +12,12 @@ const StepContent = ({cta, title = '', content = ''}: Props) => (
       <h2 className="blue">{title}</h2>
       {cta}
     </div>
-    <div className="ba bw1 br1 b--light-gray ph4-ns ph3" style={{overflowY: 'scroll', height: '400px'}}>
+    <div
+      className="ba bw1 br2 b--light-gray ph4-ns ph3 pv2"
+      style={{overflowY: 'scroll', height: '400px'}}
+    >
       <p
+        className="f5 black-90"
         dangerouslySetInnerHTML={{
           __html: content,
         }}

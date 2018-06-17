@@ -18,7 +18,6 @@ const LogoSection = ({
   otherLocaleTranslations,
 }: Props) => (
   <section className="pv0 mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-start">
-    {console.log('IT IS HERE', otherLocaleTranslations.localeName)}
     <Link className="mdc-toolbar__title pv0" to={localePath}>
       <h1
         className={cx('f5 mb0', {

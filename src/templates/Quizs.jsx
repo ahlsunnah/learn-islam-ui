@@ -52,7 +52,7 @@ type Props = {
 }
 
 const Quizs = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({'rtl arFont': props.pathContext.locale === 'ar'})}>
     <QuizsContainer
       {...enhance(
         props,

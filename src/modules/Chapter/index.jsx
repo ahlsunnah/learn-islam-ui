@@ -59,7 +59,7 @@ class Chapter extends React.Component<Props, State> {
     isSideBarVisible: false,
   }
   componentWillMount() {
-    if (getWindowWidth() > 1024) {
+    if (getWindowWidth() > 800) {
       this.setState({isSideBarVisible: true})
     }
   }

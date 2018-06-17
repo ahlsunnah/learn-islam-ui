@@ -6,6 +6,10 @@
   border-right: 5px solid transparent;
 }
 
+.bg-custom-dark-blue {
+  background-color: #293641;
+}
+
 .bottom--3 {
   bottom: -4rem;
 }
@@ -32,6 +36,10 @@
 
 .child-p-mt0 p {
   margin-top: 0;
+}
+
+.flex-grow1 {
+  flex-grow: 1;
 }
 
 .flex1 {
@@ -98,8 +106,20 @@ div.raised-bottom {
     0px -4px 5px 0px rgba(0, 0, 0, 0.14), 0px -1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
+.transition-width {
+  transition: width 0.2s linear;
+}
+
+.w0 {
+  width: 0;
+}
+
 .w2-5 {
   width: 3rem;
+}
+
+.w320px {
+  width: 270px;
 }
 
 @media screen and (min-width: 30em) {

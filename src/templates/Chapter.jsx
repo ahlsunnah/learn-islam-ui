@@ -102,6 +102,9 @@ export const pageQuery = graphql`
                 locale
                 title
               }
+              quizs {
+                difficulty
+              }
             }
           }
         }
@@ -113,6 +116,7 @@ export const pageQuery = graphql`
       downloadChapter
       focus
       localeName
+      localePath
       nextCourse
       readIn
       quizCTA

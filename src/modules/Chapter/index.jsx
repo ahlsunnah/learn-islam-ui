@@ -1,11 +1,14 @@
 // @flow
 /* eslint react/no-array-index-key: 0 */
+import Button from 'components/Button'
+import Link from 'gatsby-link'
+import hamburgerSvg from 'images/hamburger.svg'
+import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
-import Button from 'components/Button'
 import {Strings} from '../../types'
 import NavigationButtons from './NavigationButtons'
+import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
 import Transcription from './Transcription'
 import VideoIframe from './VideoIframe'
@@ -56,7 +59,7 @@ class Chapter extends React.Component<Props, State> {
     isSideBarVisible: false,
   }
   componentWillMount() {
-    if (typeof window !== 'undefined' && window.innerWidth > 1024) {
+    if (getWindowWidth() > 1024) {
       this.setState({isSideBarVisible: true})
     }
   }
@@ -73,48 +76,70 @@ class Chapter extends React.Component<Props, State> {
       ({locale}) => locale === pathContext.locale,
     )
     return (
-      <div>
+      <div className="inline-flex">
         <Helmet title={chapterStrings.title} />
-        <div className="tr pa3 self-end dn db-ns">
-          <Link className="ph2 no-underline" to={`${otherLocaleTranslations.localePath}${chapter.course.track.slug}/${data.chapter.course.slug}/${data.chapter.slug}`}>
-            <Button rounded stroked>
-              {otherLocaleTranslations.localeName}
-            </Button>
-          </Link>
-        </div>
-        <div className="pv2 bg-black-90 w-100 tc">
-          <h3 className="white f5 f4-ns">{chapterStrings.title}</h3>
-        </div>
-        <VideoIframe
-          source={chapterStrings.video}
-          title={chapterStrings.title}
-        />
-        <Transcription
-          title={t.transcriptionTitle}
-          arabicContent={
-            (chapter.strings.find(({locale}) => locale === 'ar') || {})
-              .transcription
-          }
-          otherLanguageContent={
-            chapter.strings.length > 1
-              ? chapterStrings.transcription
-              : undefined
-          }
-          otherLanguageCTA={`${otherLocaleTranslations.readIn}${
-            otherLocaleTranslations.localeName
-            }`}
-          currentLanguageCTA={`${t.readIn} ${t.localeName}`}
-        />
-        {chapterStrings.vocabulary && (
-          <StepContent
-            title={t.vocabulary}
-            content={chapterStrings.vocabulary}
-          />
-        )}
-        <NavigationButtons
-          difficultiesLinks={pathContext.difficultiesLinks}
+        <PersistentDrawer
+          course={chapter.course}
+          isOpen={isSideBarVisible}
+          otherLocaleTranslations={otherLocaleTranslations}
           t={t}
+          toggleDrawer={this.toggleSidebar}
         />
+        <div>
+          <div className="flex justify-between items-center bg-black-90 w-100">
+            <div className="flex-grow1 flex-no-shrink">
+              <button
+                className="mh2 mh3-ns bg-transparent bn pointer"
+                onClick={this.toggleSidebar}
+              >
+                <img alt="menu" className="mt2 h2" src={hamburgerSvg} />
+              </button>
+            </div>
+            <h3 className="white f5 f4-ns">{chapterStrings.title}</h3>
+            <div className="flex1 flex justify-end">
+              <Link
+                className="mh2 mh3-ns no-underline"
+                to={`${otherLocaleTranslations.localePath}${
+                  chapter.course.track.slug
+                }/${data.chapter.course.slug}/${data.chapter.slug}`}
+              >
+                <Button rounded stroked>
+                  {otherLocaleTranslations.localeName}
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <VideoIframe
+            source={chapterStrings.video}
+            title={chapterStrings.title}
+          />
+          <Transcription
+            title={t.transcriptionTitle}
+            arabicContent={
+              (chapter.strings.find(({locale}) => locale === 'ar') || {})
+                .transcription
+            }
+            otherLanguageContent={
+              chapter.strings.length > 1
+                ? chapterStrings.transcription
+                : undefined
+            }
+            otherLanguageCTA={`${otherLocaleTranslations.readIn}${
+              otherLocaleTranslations.localeName
+            }`}
+            currentLanguageCTA={`${t.readIn} ${t.localeName}`}
+          />
+          {chapterStrings.vocabulary && (
+            <StepContent
+              title={t.vocabulary}
+              content={chapterStrings.vocabulary}
+            />
+          )}
+          <NavigationButtons
+            difficultiesLinks={pathContext.difficultiesLinks}
+            t={t}
+          />
+        </div>
       </div>
     )
   }

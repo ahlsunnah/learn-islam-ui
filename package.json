@@ -99,6 +99,7 @@
     "rimraf": "^2.6.1",
     "scroll-into-view-if-needed": "^2.2.5",
     "slash": "^2.0.0",
+    "svg-icon": "^0.8.2",
     "tachyons": "^4.9.1"
   },
   "devDependencies": {

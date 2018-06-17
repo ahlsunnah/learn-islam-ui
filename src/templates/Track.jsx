@@ -47,7 +47,7 @@ type Props = {
 }
 
 const TrackTemplate = (props: Props) => (
-  <div className={cx({'rtl arFont': props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <TrackContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

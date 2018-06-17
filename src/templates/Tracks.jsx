@@ -42,7 +42,7 @@ const enhance = (props, locale) =>
   })(props)
 
 const Tracks = (props: Props) => (
-  <div className={cx({'rtl arFont': props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <TracksContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

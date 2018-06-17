@@ -8,7 +8,7 @@ type Props = {
   children: Function,
 }
 const DefaultLayout = ({children}: Props) => (
-  <div className="mdc-typography">
+  <div className="mdc-typography default-font-size">
     {children()}
     <Footer />
   </div>

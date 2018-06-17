@@ -33,11 +33,11 @@ const HomeHero = ({
     />
     <div className="mt64 min-h-512-ns flex1 flex flex-column flex-row-ns justify-between items-center">
       <div className="mt4 mt0-ns ph5 flex1 white">
-        <h1
-          className="f3 f2-ns fw4"
+        <div
+          className="f4 f3-ns fw4 title-with-subtitle"
           dangerouslySetInnerHTML={{__html: t.homeTitle}}
         />
-        <p className="">{t.homeDescription}</p>
+        <p className="mt4 pv3-ns f3-ns">{t.homeDescription}</p>
       </div>
       <div className="ph4 flex1">
         {tracks.map((track) => (

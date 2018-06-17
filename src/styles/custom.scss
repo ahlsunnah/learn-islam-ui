@@ -106,6 +106,14 @@ div.raised-bottom {
     0px -4px 5px 0px rgba(0, 0, 0, 0.14), 0px -1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
+.title-with-subtitle {
+  h2 {
+    margin-bottom: 0.2em;
+  }
+  span {
+    font-size: 0.8em;
+  }
+}
 .transition-width {
   transition: width 0.2s linear;
 }

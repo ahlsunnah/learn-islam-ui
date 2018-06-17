@@ -38,3 +38,13 @@
   border-color: green;
   color: green;
 }
+
+.mdc-button--raised:not(:disabled),
+.mdc-button--unelevated:not(:disabled) {
+  color: white;
+}
+
+.mdc-button--outlined:not(:disabled).white {
+  border-color: white;
+  color: white;
+}

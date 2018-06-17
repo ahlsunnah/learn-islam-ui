@@ -103,7 +103,7 @@ class Chapter extends React.Component<Props, State> {
                   chapter.course.track.slug
                 }/${data.chapter.course.slug}/${data.chapter.slug}`}
               >
-                <Button rounded stroked>
+                <Button rounded stroked className="white">
                   {otherLocaleTranslations.localeName}
                 </Button>
               </Link>

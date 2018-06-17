@@ -59,10 +59,13 @@ const PersistentDrawer = ({
   toggleDrawer,
 }: Props) => (
   <aside
-    className={cx('bg-custom-dark-blue flex-no-shrink transition-width', {
-      'w320px ': isOpen,
-      w0: !isOpen,
-    })}
+    className={cx(
+      'bg-custom-dark-blue flex-no-shrink transition-width overflow-hidden',
+      {
+        'w320px ': isOpen,
+        w0: !isOpen,
+      },
+    )}
   >
     <nav className="">
       <header className="bb b--black">

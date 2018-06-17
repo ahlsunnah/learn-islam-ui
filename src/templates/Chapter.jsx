@@ -2,6 +2,7 @@
 import ChapterContainer from 'modules/Chapter'
 import R from 'ramda'
 import * as React from 'react'
+import './styles.css'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
 const filterLanguageWithArabic = (locale) =>
@@ -57,7 +58,9 @@ type Props = {
 }
 
 const Chapter = (props: Props) => (
-  <ChapterContainer {...enhance(props, props.pathContext.locale)} />
+  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+    <ChapterContainer {...enhance(props, props.pathContext.locale)} />
+  </div>
 )
 
 export default Chapter

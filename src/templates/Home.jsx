@@ -2,6 +2,7 @@
 import HomeContainer from 'modules/Home'
 import R from 'ramda'
 import React from 'react'
+import './styles.css'
 
 type Props = {
   data: {
@@ -40,7 +41,9 @@ const enhance = (props, locale) =>
   })(props)
 
 const Home = (props: Props) => (
-  <HomeContainer {...enhance(props, props.pathContext.locale)} />
+  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+    <HomeContainer {...enhance(props, props.pathContext.locale)} />
+  </div>
 )
 
 export default Home

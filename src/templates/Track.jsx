@@ -2,6 +2,7 @@
 import TrackContainer from 'modules/Track'
 import R from 'ramda'
 import React from 'react'
+import './styles.css'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
 const filterStrings = R.curry((locale, str) =>
@@ -45,7 +46,9 @@ type Props = {
 }
 
 const TrackTemplate = (props: Props) => (
-  <TrackContainer {...enhance(props, props.pathContext.locale)} />
+  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+    <TrackContainer {...enhance(props, props.pathContext.locale)} />
+  </div>
 )
 
 export default TrackTemplate

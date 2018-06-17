@@ -2,6 +2,7 @@
 import QuizsContainer from 'modules/Quizs'
 import R from 'ramda'
 import * as React from 'react'
+import './styles.css'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
 const filterStrings = R.curry((locale, str) =>
@@ -50,9 +51,15 @@ type Props = {
 }
 
 const Quizs = (props: Props) => (
-  <QuizsContainer
-    {...enhance(props, props.pathContext.locale, props.pathContext.difficulty)}
-  />
+  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+    <QuizsContainer
+      {...enhance(
+        props,
+        props.pathContext.locale,
+        props.pathContext.difficulty,
+      )}
+    />
+  </div>
 )
 
 export default Quizs

@@ -2,6 +2,7 @@
 import TracksContainer from 'modules/Tracks'
 import R from 'ramda'
 import React from 'react'
+import './styles.css'
 
 type Props = {
   data: {
@@ -40,7 +41,9 @@ const enhance = (props, locale) =>
   })(props)
 
 const Tracks = (props: Props) => (
-  <TracksContainer {...enhance(props, props.pathContext.locale)} />
+  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+    <TracksContainer {...enhance(props, props.pathContext.locale)} />
+  </div>
 )
 
 export default Tracks

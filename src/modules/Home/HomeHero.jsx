@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import cx from 'classnames'
 import NavBar from 'components/NavBar'
 import heroPattern from 'images/heroPattern.svg'
 import HomeTrackCard from './HomeTrackCard'
@@ -34,7 +35,10 @@ const HomeHero = ({
     <div className="mt64 min-h-512-ns flex1 flex flex-column flex-row-ns justify-between items-center">
       <div className="mt4 mt0-ns ph5 flex1 white">
         <div
-          className="f4 f3-ns fw4 title-with-subtitle"
+          className={cx('tc f4 f3-ns fw4 title-with-subtitle', {
+            'tr-ns': otherLocaleTranslations.localeName === 'Français',
+            'tl-ns': otherLocaleTranslations.localeName !== 'Français',
+          })}
           dangerouslySetInnerHTML={{__html: t.homeTitle}}
         />
         <p className="mt4 pv3-ns f3-ns">{t.homeDescription}</p>

@@ -1,7 +1,8 @@
 // @flow
-import ChapterContainer from 'modules/Chapter'
-import R from 'ramda'
 import * as React from 'react'
+import R from 'ramda'
+import cx from 'classnames'
+import ChapterContainer from 'modules/Chapter'
 import './styles.css'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
@@ -58,7 +59,7 @@ type Props = {
 }
 
 const Chapter = (props: Props) => (
-  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <ChapterContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

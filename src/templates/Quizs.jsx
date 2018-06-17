@@ -1,7 +1,8 @@
 // @flow
-import QuizsContainer from 'modules/Quizs'
-import R from 'ramda'
 import * as React from 'react'
+import R from 'ramda'
+import cx from 'classnames'
+import QuizsContainer from 'modules/Quizs'
 import './styles.css'
 
 const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
@@ -51,7 +52,7 @@ type Props = {
 }
 
 const Quizs = (props: Props) => (
-  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <QuizsContainer
       {...enhance(
         props,

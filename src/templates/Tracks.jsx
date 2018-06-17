@@ -1,7 +1,8 @@
 // @flow
-import TracksContainer from 'modules/Tracks'
-import R from 'ramda'
 import React from 'react'
+import R from 'ramda'
+import cx from 'classnames'
+import TracksContainer from 'modules/Tracks'
 import './styles.css'
 
 type Props = {
@@ -41,7 +42,7 @@ const enhance = (props, locale) =>
   })(props)
 
 const Tracks = (props: Props) => (
-  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <TracksContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

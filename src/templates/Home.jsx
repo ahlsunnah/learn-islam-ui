@@ -1,7 +1,8 @@
 // @flow
-import HomeContainer from 'modules/Home'
-import R from 'ramda'
 import React from 'react'
+import R from 'ramda'
+import cx from 'classnames'
+import HomeContainer from 'modules/Home'
 import './styles.css'
 
 type Props = {
@@ -41,7 +42,7 @@ const enhance = (props, locale) =>
   })(props)
 
 const Home = (props: Props) => (
-  <div className={`${props.pathContext.locale === 'ar' ? 'rtl' : ''}`}>
+  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
     <HomeContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

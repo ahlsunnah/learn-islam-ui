@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import R from 'ramda'
+import Helmet from 'react-helmet'
 import cx from 'classnames'
 import HomeContainer from 'modules/Home'
 import './styles.css'
@@ -43,6 +44,9 @@ const enhance = (props, locale) =>
 
 const Home = (props: Props) => (
   <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+    <Helmet>
+      <html lang={props.pathContext.locale} />
+    </Helmet>
     <HomeContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

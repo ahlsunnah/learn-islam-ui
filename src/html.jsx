@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import Helmet from 'react-helmet'
 
 let stylesStr
 if (process.env.NODE_ENV === `production`) {
@@ -51,9 +50,6 @@ const HTML = ({
           href="https://fonts.googleapis.com/css?family=Amiri:400,700|Open+Sans:400,600&amp;subset=arabic"
           rel="stylesheet"
         />
-        <Helmet>
-          <html lang="en" />
-        </Helmet>
         {/* <link
           rel="shortcut icon"
           href="favicon.ico"

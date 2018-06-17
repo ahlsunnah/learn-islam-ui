@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import R from 'ramda'
+import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TrackContainer from 'modules/Track'
 import './styles.css'
@@ -48,6 +49,9 @@ type Props = {
 
 const TrackTemplate = (props: Props) => (
   <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+    <Helmet>
+      <html lang={props.pathContext.locale} />
+    </Helmet>
     <TrackContainer {...enhance(props, props.pathContext.locale)} />
   </div>
 )

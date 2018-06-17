@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import R from 'ramda'
+import Helmet from 'react-helmet'
 import cx from 'classnames'
 import QuizsContainer from 'modules/Quizs'
 import './styles.css'
@@ -53,6 +54,9 @@ type Props = {
 
 const Quizs = (props: Props) => (
   <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+    <Helmet>
+      <html lang={props.pathContext.locale} />
+    </Helmet>
     <QuizsContainer
       {...enhance(
         props,

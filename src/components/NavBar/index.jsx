@@ -27,7 +27,11 @@ const NavBar = ({
 }: Props) => (
   <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
     <div className="pv1 mdc-toolbar__row">
-      <LogoSection localePath={localePath} siteName={t.siteName} />
+      <LogoSection
+        localePath={localePath}
+        siteName={t.siteName}
+        otherLocaleTranslations={otherLocaleTranslations}
+      />
       <NavSection
         localePath={localePath}
         otherLocaleTranslations={otherLocaleTranslations}

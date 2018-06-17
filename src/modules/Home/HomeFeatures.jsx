@@ -1,6 +1,9 @@
 // @flow
 /* eslint react/no-unused-prop-types: 0 */
 import RawHTML from 'components/RawHTML'
+import feature1Svg from 'images/features-checklist.svg'
+import feature3Svg from 'images/features-globe.svg'
+import feature2Svg from 'images/features-interface.svg'
 import * as React from 'react'
 
 type Props = {
@@ -13,6 +16,7 @@ type Props = {
   featuresTitle: string,
 }
 
+const svgs = [feature1Svg, feature2Svg, feature3Svg]
 const items = ['feature1', 'feature2', 'feature3']
 
 const HomeFeatures = (props: Props) => (
@@ -21,13 +25,13 @@ const HomeFeatures = (props: Props) => (
       <h2>{props.featuresTitle}</h2>
     </div>
     <div className="flex1 flex flex-column flex-row-ns justify-around">
-      {items.map((name) => (
+      {items.map((name, i) => (
         <div
           key={name}
           className="mt4 mt5-ns ph4 flex flex-column items-center tc"
         >
-          <div className="mb4 bg-light-silver br-pill h4 w4">
-            <img src="/test" alt="" />
+          <div className="mb4">
+            <img className="h4" src={svgs[i]} alt="" />
           </div>
           <h3>{props[`${name}Title`]}</h3>
           <RawHTML>{props[`${name}Text`]}</RawHTML>

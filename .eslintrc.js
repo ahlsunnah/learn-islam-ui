@@ -32,6 +32,7 @@ module.exports = {
         specialLink: ['to'],
       },
     ],
+    'jsx-a11y/media-has-caption': 0,
     'no-underscore-dangle': 0,
     'no-unexpected-multiline': 2,
     'react/forbid-prop-types': 0,

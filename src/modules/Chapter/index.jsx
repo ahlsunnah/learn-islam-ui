@@ -114,6 +114,10 @@ class Chapter extends React.Component<Props, State> {
             source={chapterStrings.video}
             title={chapterStrings.title}
           />
+          <div className="mt3">
+            <h2 className="ph2">Audio:</h2>
+            <audio className="w-100" controls src={chapter.audio} />
+          </div>
           <Transcription
             title={t.transcriptionTitle}
             arabicContent={arabicTranscription}

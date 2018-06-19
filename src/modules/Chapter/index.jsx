@@ -1,19 +1,25 @@
 // @flow
-/* eslint react/no-array-index-key: 0 */
-import Button from 'components/Button'
-import Link from 'gatsby-link'
-import hamburgerSvg from 'images/hamburger.svg'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import {Strings} from '../../types'
+import {withPropsOnChange} from 'recompose'
+import Header from './Header'
 import NavigationButtons from './NavigationButtons'
 import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
 import Transcription from './Transcription'
 import VideoIframe from './VideoIframe'
+import type {Strings} from '../../types'
 
 type Props = {
+  arabicTranscription: string,
+  chapterStrings: {
+    locale: string,
+    title: string,
+    transcription: string,
+    video: string,
+    vocabulary?: string,
+  },
   data: {
     chapter: {
       audio: string,
@@ -30,22 +36,31 @@ type Props = {
             chapters: Array<{
               order: number,
               slug: string,
-              strings: Strings,
+              strings: Array<{
+                title: string,
+              }>,
             }>,
           }>,
         },
       },
       strings: Array<{
+        locale: string,
         title: string,
+        transcription: string,
+        video: string,
+        vocabulary?: string,
       }>,
     },
     translations: Object,
     otherLocaleTranslations: {
+      readIn: string,
       localeName: string,
       localePath: string,
     },
   },
+  otherLocalePath: string,
   pathContext: {
+    difficultiesLinks: {},
     locale: string,
     slug: string,
   },
@@ -69,12 +84,15 @@ class Chapter extends React.Component<Props, State> {
     }))
   }
   render() {
-    const {data, pathContext} = this.props
+    const {
+      arabicTranscription,
+      chapterStrings,
+      data,
+      otherLocalePath,
+      pathContext,
+    } = this.props
     const {chapter, otherLocaleTranslations, translations: t} = data
     const {isSideBarVisible} = this.state
-    const chapterStrings = chapter.strings.find(
-      ({locale}) => locale === pathContext.locale,
-    )
     return (
       <div className="inline-flex">
         <Helmet title={chapterStrings.title} />
@@ -86,39 +104,19 @@ class Chapter extends React.Component<Props, State> {
           toggleDrawer={this.toggleSidebar}
         />
         <div>
-          <div className="flex justify-between items-center bg-black-90 w-100">
-            <div className="flex-grow1 flex-no-shrink">
-              <button
-                className="mh2 mh3-ns bg-transparent bn pointer"
-                onClick={this.toggleSidebar}
-              >
-                <img alt="menu" className="mt2 h2" src={hamburgerSvg} />
-              </button>
-            </div>
-            <h3 className="white f5 f4-ns">{chapterStrings.title}</h3>
-            <div className="flex1 flex justify-end">
-              <Link
-                className="mh2 mh3-ns no-underline"
-                to={`${otherLocaleTranslations.localePath}${
-                  chapter.course.track.slug
-                }/${data.chapter.course.slug}/${data.chapter.slug}`}
-              >
-                <Button rounded stroked className="white">
-                  {otherLocaleTranslations.localeName}
-                </Button>
-              </Link>
-            </div>
-          </div>
+          <Header
+            otherLocaleName={otherLocaleTranslations.localeName}
+            otherLocalePath={otherLocalePath}
+            title={chapterStrings.title}
+            toggleSidebar={this.toggleSidebar}
+          />
           <VideoIframe
             source={chapterStrings.video}
             title={chapterStrings.title}
           />
           <Transcription
             title={t.transcriptionTitle}
-            arabicContent={
-              (chapter.strings.find(({locale}) => locale === 'ar') || {})
-                .transcription
-            }
+            arabicContent={arabicTranscription}
             otherLanguageContent={
               chapter.strings.length > 1
                 ? chapterStrings.transcription
@@ -145,4 +143,16 @@ class Chapter extends React.Component<Props, State> {
   }
 }
 
-export default Chapter
+const enhance = withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
+  arabicTranscription: (
+    data.chapter.strings.find(({locale}) => locale === 'ar') || {}
+  ).transcription,
+  chapterStrings:
+    data.chapter.strings.find(({locale}) => locale === pathContext.locale) ||
+    {},
+  otherLocalePath: `${data.otherLocaleTranslations.localePath}${
+    data.chapter.course.track.slug
+  }/${data.chapter.course.slug}/${data.chapter.slug}`,
+}))
+
+export default enhance(Chapter)

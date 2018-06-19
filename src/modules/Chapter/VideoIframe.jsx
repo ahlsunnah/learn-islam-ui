@@ -19,7 +19,7 @@ const VideoIframe = ({source = '', title}: Props) => (
 )
 
 const enhance = withPropsOnChange(['source'], ({source}) => ({
-  source: `https://www.youtube.com/embed/${source}?autoplay=1&cc_load_policy=1&color=white&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0`,
+  source: `https://www.youtube.com/embed/${source}?cc_load_policy=1&color=white&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0`,
 }))
 
 export default enhance(VideoIframe)

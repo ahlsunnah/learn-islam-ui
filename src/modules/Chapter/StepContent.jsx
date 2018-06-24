@@ -1,23 +1,41 @@
 // @flow
 import * as React from 'react'
+import cx from 'classnames'
+import 'styles/chapter-content.scss'
+import NavigationButtons from './NavigationButtons'
 
 type Props = {
-  cta?: React.Node,
+  active: boolean,
+  arabic?: boolean,
   content: string,
-  title: string,
+  difficultiesLinks: {},
+  t: {},
 }
-const StepContent = ({cta, title = '', content = ''}: Props) => (
-  <div className="ph6-l ph5 ph4">
-    <div className="flex justify-between items-center">
-      <h2 className="blue">{title}</h2>
-      {cta}
-    </div>
+const StepContent = ({
+  active,
+  arabic,
+  content = '',
+  difficultiesLinks,
+  t,
+}: Props) => (
+  <div
+    className={cx(
+      'chapter-content center ph4-ns ph3 pv2 ba bw1 br2 b--light-gray overflow-y-scroll f4-5 lh-17 black-90',
+      {
+        dn: !active,
+      },
+    )}
+  >
     <div
-      className="h400px ph4-ns ph3 pv2 ba bw1 br2 b--light-gray overflow-y-scroll f5 black-90"
+      className={cx('', {
+        'rtl f3': arabic,
+        'f4-5': !arabic,
+      })}
       dangerouslySetInnerHTML={{
         __html: content,
       }}
     />
+    <NavigationButtons difficultiesLinks={difficultiesLinks} t={t} />
   </div>
 )
 

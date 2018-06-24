@@ -48,6 +48,7 @@
     "@material/list": "^0.35.0",
     "@material/radio": "^0.35.0",
     "@material/select": "^0.35.2",
+    "@material/tabs": "^0.36.0",
     "@material/textfield": "^0.35.1",
     "@material/theme": "^0.35.0",
     "@material/toolbar": "^0.35.0",
@@ -100,7 +101,9 @@
     "scroll-into-view-if-needed": "^2.2.5",
     "slash": "^2.0.0",
     "svg-icon": "^0.8.2",
-    "tachyons": "^4.9.1"
+    "tachyons": "^4.9.1",
+    "typeface-amiri": "^0.0.56",
+    "typeface-open-sans": "^0.0.54"
   },
   "devDependencies": {
     "commitizen": "^2.9.6",

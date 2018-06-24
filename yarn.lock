@@ -244,9 +244,21 @@
     "@material/base" "^0.35.0"
     "@material/theme" "^0.35.0"
 
+"@material/ripple@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.36.0.tgz#262491c37643c3aabad93cd033698622c70beb13"
+  dependencies:
+    "@material/animation" "^0.34.0"
+    "@material/base" "^0.35.0"
+    "@material/theme" "^0.35.0"
+
 "@material/rtl@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.35.0.tgz#caae659e35a9bf1b9d91c734c8a3315a81bcde21"
+
+"@material/rtl@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.36.0.tgz#a81b587981dc6e09f51e26da8a7447f89358ccd5"
 
 "@material/select@^0.35.2":
   version "0.35.2"
@@ -266,6 +278,17 @@
   resolved "https://registry.yarnpkg.com/@material/selection-control/-/selection-control-0.35.0.tgz#e13640b37f5719f43edc315625ee862f1f3a8302"
   dependencies:
     "@material/ripple" "^0.35.0"
+
+"@material/tabs@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@material/tabs/-/tabs-0.36.0.tgz#0f989dcbe39d1c5336deeccb5756e816199bfbbe"
+  dependencies:
+    "@material/animation" "^0.34.0"
+    "@material/base" "^0.35.0"
+    "@material/ripple" "^0.36.0"
+    "@material/rtl" "^0.36.0"
+    "@material/theme" "^0.35.0"
+    "@material/typography" "^0.35.0"
 
 "@material/textfield@^0.35.1":
   version "0.35.1"
@@ -13526,6 +13549,14 @@ type-of@^2.0.1:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typeface-amiri@^0.0.56:
+  version "0.0.56"
+  resolved "https://registry.yarnpkg.com/typeface-amiri/-/typeface-amiri-0.0.56.tgz#faff9afb506faaa56a3e6b72d307f5cec0584012"
+
+typeface-open-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-open-sans/-/typeface-open-sans-0.0.54.tgz#20f5b5ea5c7f95d89dc1f8b2d2b1457680129cee"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"

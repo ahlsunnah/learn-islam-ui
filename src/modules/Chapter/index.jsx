@@ -3,13 +3,14 @@ import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {withPropsOnChange} from 'recompose'
+import 'styles/tabs.scss'
+import {Strings} from '../../types'
 import Header from './Header'
 import NavigationButtons from './NavigationButtons'
 import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
-import Transcription from './Transcription'
+import Tab from './Tab'
 import VideoIframe from './VideoIframe'
-import type {Strings} from '../../types'
 
 type Props = {
   arabicTranscription: string,
@@ -66,17 +67,25 @@ type Props = {
   },
 }
 type State = {
+  activeTab: string,
   isSideBarVisible: boolean,
 }
 
 class Chapter extends React.Component<Props, State> {
   state = {
+    activeTab: this.props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
     isSideBarVisible: false,
   }
   componentWillMount() {
     if (getWindowWidth() > 800) {
       this.setState({isSideBarVisible: true})
     }
+  }
+  toggleActiveTab: Function = (event) => {
+    console.log(event.currentTarget.name)
+    this.setState({
+      activeTab: event.currentTarget.name,
+    })
   }
   toggleSidebar: Function = () => {
     this.setState(({isSideBarVisible}) => ({
@@ -92,9 +101,9 @@ class Chapter extends React.Component<Props, State> {
       pathContext,
     } = this.props
     const {chapter, otherLocaleTranslations, translations: t} = data
-    const {isSideBarVisible} = this.state
+    const {activeTab, isSideBarVisible} = this.state
     return (
-      <div className="inline-flex">
+      <div className="flex">
         <Helmet title={chapterStrings.title} />
         <PersistentDrawer
           course={chapter.course}
@@ -103,7 +112,7 @@ class Chapter extends React.Component<Props, State> {
           t={t}
           toggleDrawer={this.toggleSidebar}
         />
-        <div>
+        <div className="flex1 flex flex-column items-stretch">
           <Header
             otherLocaleName={otherLocaleTranslations.localeName}
             otherLocalePath={otherLocalePath}
@@ -114,30 +123,67 @@ class Chapter extends React.Component<Props, State> {
             source={chapterStrings.video}
             title={chapterStrings.title}
           />
-          <div className="mt3">
-            <h2 className="ph2">Audio:</h2>
-            <audio className="w-100" controls src={chapter.audio} />
+          <div className="mt3 flex items-center">
+            <span className="ph2 b dn db-ns">Audio:</span>
+            <audio className="flex1" controls src={chapter.audio} />
           </div>
-          <Transcription
-            title={t.transcriptionTitle}
-            arabicContent={arabicTranscription}
-            otherLanguageContent={
-              chapter.strings.length > 1
-                ? chapterStrings.transcription
-                : undefined
-            }
-            otherLanguageCTA={`${otherLocaleTranslations.readIn}${
-              otherLocaleTranslations.localeName
-            }`}
-            currentLanguageCTA={`${t.readIn} ${t.localeName}`}
+          <nav className="mt3 mdc-tab-bar">
+            {chapter.strings.length > 1 && (
+              <Tab
+                type="FR"
+                active={activeTab === 'FR'}
+                handleClick={this.toggleActiveTab}
+              >
+                {t.transcriptionTitle}
+              </Tab>
+            )}
+            <Tab
+              type="AR"
+              active={activeTab === 'AR'}
+              handleClick={this.toggleActiveTab}
+            >
+              {t.transcriptionTitle}
+            </Tab>
+            {chapterStrings.vocabulary && (
+              <Tab
+                type="VOC"
+                active={activeTab === 'VOC'}
+                handleClick={this.toggleActiveTab}
+              >
+                {'Voc'}
+              </Tab>
+            )}
+            <Tab
+              type="QUIZ"
+              active={activeTab === 'QUIZ'}
+              handleClick={this.toggleActiveTab}
+            >
+              {'QUIZ'}
+            </Tab>
+          </nav>
+
+          <StepContent
+            active={activeTab === 'FR'}
+            content={chapterStrings.transcription}
+            difficultiesLinks={pathContext.difficultiesLinks}
+            t={t}
           />
-          {chapterStrings.vocabulary && (
-            <StepContent
-              title={t.vocabulary}
-              content={chapterStrings.vocabulary}
-            />
-          )}
-          <NavigationButtons
+          <StepContent
+            active={activeTab === 'AR'}
+            arabic
+            content={arabicTranscription}
+            difficultiesLinks={pathContext.difficultiesLinks}
+            t={t}
+          />
+          <StepContent
+            active={activeTab === 'VOC'}
+            content={chapterStrings.vocabulary}
+            difficultiesLinks={pathContext.difficultiesLinks}
+            t={t}
+          />
+          <StepContent
+            active={activeTab === 'QUIZ'}
+            content={"Fini ? il est temps de passer a l'examen !"}
             difficultiesLinks={pathContext.difficultiesLinks}
             t={t}
           />

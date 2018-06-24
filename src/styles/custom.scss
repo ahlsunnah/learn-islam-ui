@@ -38,6 +38,10 @@
   margin-top: 0;
 }
 
+.f4-5 {
+  font-size: 1.125rem;
+}
+
 .flex-grow1 {
   flex-grow: 1;
 }
@@ -59,11 +63,16 @@
 }
 
 .h400px {
-  height: 400px;
+  // height: 400px;
+  height: 80vh;
 }
 
 .lh0-9 {
   line-height: 0.9;
+}
+
+.lh-17 {
+  line-height: 1.7;
 }
 
 .lh1-75rem {

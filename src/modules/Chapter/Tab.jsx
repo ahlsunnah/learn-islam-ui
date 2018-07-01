@@ -10,18 +10,26 @@ type Props = {
   type: string,
 }
 const Tab = ({active, children, handleClick, type}: Props) => (
-  <button
-    className={cx('mdc-tab bn', {
-      'mdc-tab--active black-80': active,
+  <div
+    className={cx('flex1', {
+      'bb bw1 b--color-black': active,
     })}
-    name={type}
-    onClick={handleClick}
   >
-    <div className="flex items-center justify-center">
-      <TabIcon className="h2 mh1" height="20px" type={type} />
-      <span className="mh1 dn db-l">{children}</span>
-      <span className="mdc-tab__indicator" />
-    </div>
-  </button>
+    <button
+      className={cx(
+        'w-100 pv0 bn hover-only-bg-black-10 b--transparent pointer outline-0',
+        {
+          'black-80 ': active,
+        },
+      )}
+      name={type}
+      onClick={handleClick}
+    >
+      <div className={cx('pv3 flex items-center justify-center ')}>
+        <TabIcon className="h2 mh0 mh1-l" height="20px" type={type} />
+        <span className="mh1 dn db-l">{children}</span>
+      </div>
+    </button>
+  </div>
 )
 export default Tab

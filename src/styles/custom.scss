@@ -67,6 +67,11 @@
   height: 80vh;
 }
 
+.hover-only-bg-black-10:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease-in;
+}
+
 .lh0-9 {
   line-height: 0.9;
 }

@@ -3,14 +3,13 @@ import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {withPropsOnChange} from 'recompose'
-import 'styles/tabs.scss'
 import {Strings} from '../../types'
 import Header from './Header'
-import NavigationButtons from './NavigationButtons'
 import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
 import Tab from './Tab'
 import VideoIframe from './VideoIframe'
+import './styles.scss'
 
 type Props = {
   arabicTranscription: string,
@@ -112,7 +111,7 @@ class Chapter extends React.Component<Props, State> {
           t={t}
           toggleDrawer={this.toggleSidebar}
         />
-        <div className="flex1 flex flex-column items-stretch">
+        <div className="w-100 flex flex-column items-stretch">
           <Header
             otherLocaleName={otherLocaleTranslations.localeName}
             otherLocalePath={otherLocalePath}
@@ -123,11 +122,7 @@ class Chapter extends React.Component<Props, State> {
             source={chapterStrings.video}
             title={chapterStrings.title}
           />
-          <div className="mt3 flex items-center">
-            <span className="ph2 b dn db-ns">Audio:</span>
-            <audio className="flex1" controls src={chapter.audio} />
-          </div>
-          <nav className="mt3 mdc-tab-bar">
+          <nav className="chapter-tabs w-100 flex justify-around items-center">
             {chapter.strings.length > 1 && (
               <Tab
                 type="FR"
@@ -153,6 +148,13 @@ class Chapter extends React.Component<Props, State> {
                 {'Voc'}
               </Tab>
             )}
+            <Tab
+              type="AUDIO"
+              active={activeTab === 'AUDIO'}
+              handleClick={this.toggleActiveTab}
+            >
+              {'AUDIO'}
+            </Tab>
             <Tab
               type="QUIZ"
               active={activeTab === 'QUIZ'}
@@ -181,6 +183,29 @@ class Chapter extends React.Component<Props, State> {
             difficultiesLinks={pathContext.difficultiesLinks}
             t={t}
           />
+          <StepContent
+            active={activeTab === 'AUDIO'}
+            difficultiesLinks={pathContext.difficultiesLinks}
+            t={t}
+          >
+            <div className="mv4">
+              <h3 className="">
+                Vous voulez ecouter l'audio au lieu de la video ?
+              </h3>
+              <audio className="w-100" controls src={chapter.audio} />
+              <h3 className="">
+                Si vous voulez telecharger l'audio,{' '}
+                <a
+                  href={chapter.audio}
+                  title={chapterStrings.title}
+                  download
+                  target="_blank"
+                >
+                  cliquez ici
+                </a>
+              </h3>
+            </div>
+          </StepContent>
           <StepContent
             active={activeTab === 'QUIZ'}
             content={"Fini ? il est temps de passer a l'examen !"}

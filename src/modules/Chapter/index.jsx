@@ -129,7 +129,7 @@ class Chapter extends React.Component<Props, State> {
                 active={activeTab === 'FR'}
                 handleClick={this.toggleActiveTab}
               >
-                {t.transcriptionTitle}
+                {t.tabTranslation}
               </Tab>
             )}
             <Tab
@@ -137,7 +137,7 @@ class Chapter extends React.Component<Props, State> {
               active={activeTab === 'AR'}
               handleClick={this.toggleActiveTab}
             >
-              {t.transcriptionTitle}
+              {t.tabTranscription}
             </Tab>
             {chapterStrings.vocabulary && (
               <Tab
@@ -145,7 +145,7 @@ class Chapter extends React.Component<Props, State> {
                 active={activeTab === 'VOC'}
                 handleClick={this.toggleActiveTab}
               >
-                {'Voc'}
+                {t.tabVocabulary}
               </Tab>
             )}
             <Tab
@@ -153,14 +153,14 @@ class Chapter extends React.Component<Props, State> {
               active={activeTab === 'AUDIO'}
               handleClick={this.toggleActiveTab}
             >
-              {'AUDIO'}
+              {t.tabAudio}
             </Tab>
             <Tab
               type="QUIZ"
               active={activeTab === 'QUIZ'}
               handleClick={this.toggleActiveTab}
             >
-              {'QUIZ'}
+              {t.tabQuiz}
             </Tab>
           </nav>
 

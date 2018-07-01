@@ -124,9 +124,12 @@ export const pageQuery = graphql`
       nextCourse
       readIn
       quizCTA
+      tabAudio
+      tabTranscription
+      tabTranslation
+      tabQuiz
+      tabVocabulary
       takeQuiz
-      transcriptionTitle
-      vocabulary
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
       localeName

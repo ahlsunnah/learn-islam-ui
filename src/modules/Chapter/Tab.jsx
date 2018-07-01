@@ -24,10 +24,13 @@ const Tab = ({active, children, handleClick, type}: Props) => (
       onClick={handleClick}
     >
       <div
-        className={cx('pv3 flex items-center justify-center', {
-          'black-80': active,
-          'black-60': !active,
-        })}
+        className={cx(
+          'pv3 flex items-center justify-center transition-color hover-black-80',
+          {
+            'black-80': active,
+            'black-60': !active,
+          },
+        )}
       >
         <TabIcon className="h2 mh0 mh1-l" height="20px" type={type} />
         <span className="mh1 dn db-l">{children}</span>

@@ -132,6 +132,11 @@ div.raised-bottom {
     font-size: 0.8em;
   }
 }
+
+.transition-color {
+  transition: color 0.2s linear;
+}
+
 .transition-width {
   transition: width 0.2s linear;
 }

@@ -6,11 +6,12 @@ export const startQuizs = ({params, quizs}) => ({
   quizsIds: shuffle(Array.from(quizs.keys())),
 })
 
-export const addData = ({data, params, quizId}) => ({
+export const addData = ({data, params, quizId, started}) => ({
   type: 'ADD_DATA_TO_QUIZ',
   data,
   params,
   quizId,
+  started,
 })
 
 export const completeQuizs = ({params}) => ({

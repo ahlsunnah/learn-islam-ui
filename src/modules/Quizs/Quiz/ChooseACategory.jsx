@@ -145,6 +145,7 @@ const enhance = compose(
             answers: newAnswer,
           },
           quizId,
+          started: true,
         })
       }
     },

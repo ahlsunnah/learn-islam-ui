@@ -110,6 +110,7 @@ const enhance = compose(
             answer: answer === newAnswer ? undefined : newAnswer,
           },
           quizId,
+          started: true,
         })
     },
   }),

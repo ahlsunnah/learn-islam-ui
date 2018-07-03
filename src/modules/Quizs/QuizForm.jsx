@@ -20,6 +20,7 @@ type Props = {
   chapterStrings: {
     title: string,
   },
+  dStartQuizs: Function,
   params: {
     chapterId: string,
     difficulty: number,
@@ -30,6 +31,7 @@ type Props = {
   quizsState: {
     finished: boolean,
     lastScore?: number,
+    started: boolean,
   },
   t: {
     average: string,
@@ -38,6 +40,7 @@ type Props = {
     assessmentPerfect: string,
     assessmentVeryGood: string,
     backToCourse: string,
+    continue: string,
     grade: string,
     quiz: string,
     restartQuizs: string,
@@ -52,6 +55,7 @@ type Props = {
 const QuizForm = ({
   chapterPathname,
   chapterStrings,
+  dStartQuizs,
   quizs,
   quizsIds,
   quizsState,
@@ -63,11 +67,13 @@ const QuizForm = ({
       chapterPathname={chapterPathname}
       chapterStrings={chapterStrings}
       finished={quizsState.finished}
+      started={quizsState.started}
       lastScore={quizsState.lastScore}
+      restartQuizs={dStartQuizs}
       t={props.t}
       totalQuestions={totalQuestions}
     />
-    <div id="quizs-start">
+    <div id="quizs-start" key={quizsState.try}>
       {quizsIds.map(
         (quizId, i) => (
           <Quiz
@@ -130,13 +136,13 @@ const enhance = compose(
       }
     },
     (dispatch: Function, {params, quizs}) => ({
-      addData: ({data, quizId}) => {
-        dispatch(addData({data, params, quizId}))
+      addData: ({data, quizId, started}) => {
+        dispatch(addData({data, params, quizId, started}))
       },
       addScore: (score) => {
         dispatch(addScore({params, score}))
       },
-      startQuizs: () =>
+      dStartQuizs: () =>
         dispatch(
           startQuizs({
             params,
@@ -147,8 +153,8 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      const {quizsIds} = this.props
-      if (!quizsIds) this.props.startQuizs()
+      const {dStartQuizs, quizsIds} = this.props
+      if (!quizsIds) dStartQuizs()
     },
   }),
   withPropsOnChange(['quizsIds'], ({quizs, quizsIds}) => ({

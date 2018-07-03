@@ -97,6 +97,7 @@ export const pageQuery = graphql`
       average
       backToCourse
       chooseACategoryTitle
+      continue
       fillInTheBlankTitle
       goToTop
       grade

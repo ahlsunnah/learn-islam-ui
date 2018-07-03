@@ -1,8 +1,12 @@
-const quizsByDifficulty = (state = {finished: false, quizs: []}, action) => {
+const quizsByDifficulty = (
+  state = {finished: false, quizsIds: [], try: 0},
+  action,
+) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
       return {
         ...state,
+        started: action.started,
         [action.quizId]: {
           ...state[action.quizId],
           ...action.data,
@@ -21,9 +25,10 @@ const quizsByDifficulty = (state = {finished: false, quizs: []}, action) => {
       }
     case 'START_QUIZ':
       return {
-        ...state,
         finished: false,
+        lastScore: state.lastScore,
         quizsIds: action.quizsIds,
+        try: state.try + 1,
       }
 
     default:

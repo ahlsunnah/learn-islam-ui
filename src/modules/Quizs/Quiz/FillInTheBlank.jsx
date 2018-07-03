@@ -162,6 +162,7 @@ const enhance = compose(
           answers: newAnswers,
         },
         quizId,
+        started: true,
       })
     },
   }),

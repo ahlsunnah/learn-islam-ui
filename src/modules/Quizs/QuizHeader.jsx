@@ -4,7 +4,7 @@ import Card from 'components/Card'
 import Link from 'gatsby-link'
 import scrollTo from 'lib/scrollTo'
 import * as React from 'react'
-import {withPropsOnChange} from 'recompose'
+import {compose, withPropsOnChange, withHandlers} from 'recompose'
 
 const scrollToStart = () => scrollTo('quizs-start')
 
@@ -29,6 +29,8 @@ type Props = {
   },
   finished: boolean,
   lastScore?: number,
+  restartQuizs: Function,
+  started: boolean,
   t: {
     average: string,
     assessmentFail: string,
@@ -36,6 +38,7 @@ type Props = {
     assessmentPerfect: string,
     assessmentVeryGood: string,
     backToCourse: string,
+    continue: string,
     grade: string,
     quiz: string,
     restartQuizs: string,
@@ -52,6 +55,8 @@ const QuizHeader = ({
   chapterStrings: {title},
   finished,
   lastScore = 0,
+  restartQuizs,
+  started,
   t,
   totalQuestions = 1,
 }: Props) => (
@@ -84,7 +89,7 @@ const QuizHeader = ({
                 {t.backToCourse}
               </Button>
             </Link>
-            <Button className="ma2 ph3" secondary>
+            <Button className="ma2 ph3" onClick={restartQuizs} secondary>
               {t.restartQuizs}
             </Button>
           </div>
@@ -104,18 +109,28 @@ const QuizHeader = ({
             raised
             rounded
           >
-            {t.start}
+            {started ? t.continue : t.start}
           </Button>
+          {started && (
+            <Button className="ma2 ph3" onClick={restartQuizs} secondary>
+              {t.restartQuizs}
+            </Button>
+          )}
         </div>
       )}
     </Card>
   </div>
 )
 
-const enhance = withPropsOnChange(
-  ['lastScore'],
-  ({lastScore = 0, totalQuestions = 1}) => ({
+const enhance = compose(
+  withPropsOnChange(['lastScore'], ({lastScore = 0, totalQuestions = 1}) => ({
     average: Math.round(lastScore * 40 / totalQuestions) / 2,
+  })),
+  withHandlers({
+    restartQuizs: ({restartQuizs}) => () => {
+      restartQuizs()
+      scrollToStart()
+    },
   }),
 )
 

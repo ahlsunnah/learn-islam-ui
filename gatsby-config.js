@@ -11,7 +11,6 @@ module.exports = {
   },
   plugins: [
     // 'gatsby-plugin-webpack-bundle-analyzer',
-    'gatsby-plugin-react-next',
     'gatsby-plugin-resolve-src',
     'gatsby-plugin-accessibilityjs',
     {

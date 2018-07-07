@@ -34,7 +34,6 @@ module.exports = {
         siteUrl: `https://madrassaminhaj.com`,
       },
     },
-    'gatsby-plugin-emotion',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-sass',

@@ -12,10 +12,10 @@ The project is to build an online app for learning islam with videos, texts and 
 
 ### The purposes of the project is:
 
-* Learn Islam for ourselves to apply it and call to it, so we can earn the paradise and be protected from fire thanks to Allah's Rahmah
-* Dawa to Islam
-* Make it easy to learn basics of Islam for anyone (Muslims or kufars)
-* Use the actual technology and new ways of learning for teaching Islam
+- Learn Islam for ourselves to apply it and call to it, so we can earn the paradise and be protected from fire thanks to Allah's Rahmah
+- Dawa to Islam
+- Make it easy to learn basics of Islam for anyone (Muslims or kufars)
+- Use the actual technology and new ways of learning for teaching Islam
 
 ### Partners
 
@@ -26,10 +26,10 @@ The project will only contain videos of Chaykh Raslan. It will be available in a
 
 Abu Hafs made a team composed of
 
-* one arabic student that will transpose the videos of chaykh (if it is not available already)
-* about 10 french speaking students that will translate the content of videos
-* himself that write the quizzes and get corrections from arabic students.
-* One french speaking student that will prepare videos (cut videos and add logos and subtitles to it, then upload to youtube)
+- one arabic student that will transpose the videos of chaykh (if it is not available already)
+- about 10 french speaking students that will translate the content of videos
+- himself that write the quizzes and get corrections from arabic students.
+- One french speaking student that will prepare videos (cut videos and add logos and subtitles to it, then upload to youtube)
 
 ### What is will the app contain ?
 
@@ -39,23 +39,23 @@ The app will be multilingual with arabic as main language
 
 The courses will we organized as follow (it may change in future):
 
-* Sections: Usul addin, tafsir, fiqh, non-muslims, ...
-* Courses: Nawaqid alislam, chourout la ilaha illa Allah, tafsir surat alikhlas, ...
-* Chapters: Chirk, Ikhlas, etc ...
+- Sections: Usul addin, tafsir, fiqh, non-muslims, ...
+- Courses: Nawaqid alislam, chourout la ilaha illa Allah, tafsir surat alikhlas, ...
+- Chapters: Chirk, Ikhlas, etc ...
 
 Also:
 
-* Chapters will contain youtube videos (with subtitles), text and quizzes, we can mix everything like in udacity I think it would be better to let editors make what they want.
-* We may record user progress but only locally right now.
-* We should make a newsletter system
+- Chapters will contain youtube videos (with subtitles), text and quizzes, we can mix everything like in udacity I think it would be better to let editors make what they want.
+- We may record user progress but only locally right now.
+- We should make a newsletter system
 
 #### Second step
 
-* SEO
-* UX
-* User registration (google, facebook auth)
-* User progress in back-end
-* Notification system
+- SEO
+- UX
+- User registration (google, facebook auth)
+- User progress in back-end
+- Notification system
 
 ### Direction we took
 
@@ -63,41 +63,40 @@ We need an app a that is like udacity.
 
 The app and the content are separated. Developers on this project usually work only on the app. The content should come from students with approval of a salafi Chaykh .
 
-* Simple back-end for adding content (It will be added by non-developers)
-* We want the app to be
-  * quick and light-weight
-  * reusable, we want to be able to use the same codebase for multiple projects as much as possible
+- Simple back-end for adding content (It will be added by non-developers)
+- We want the app to be
+  - quick and light-weight
+  - reusable, we want to be able to use the same codebase for multiple projects as much as possible
 
 ### Technology used
 
 #### Languages
 
-* Javascript
-* Markdown
-* HTML & CSS
-* graphql
+- Javascript
+- Markdown
+- HTML & CSS
+- graphql
 
 #### Plateforms
 
-* [GatsbyJS](https://www.gatsbyjs.org/): Blazing-fast static site generator for React
-* [Contentful](https://www.contentful.com/): Essential content management infrastructure for projects of any size, with its flexible APIs and global CDN.
+- [GatsbyJS](https://www.gatsbyjs.org/): Blazing-fast static site generator for React
+- [Contentful](https://www.contentful.com/): Essential content management infrastructure for projects of any size, with its flexible APIs and global CDN.
 
 #### Libraries
 
-* [React](https://reactjs.org): A JavaScript library for building user interfaces
-* [Redux](http://redux.js.org/): Redux is a predictable state container for JavaScript apps.
+- [React](https://reactjs.org): A JavaScript library for building user interfaces
+- [Redux](http://redux.js.org/): Redux is a predictable state container for JavaScript apps.
 
 #### Design
 
-* [Tachyons](http://tachyons.io/): Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.
-* [emotion](https://emotion.sh/): The Next Generation of CSS-in-JS
-* [React Icons](http://gorangajic.github.io/react-icons): svg react icons of popular icon packs
+- [Tachyons](http://tachyons.io/): Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.
+- [React Icons](http://gorangajic.github.io/react-icons): svg react icons of popular icon packs
 
 #### Code style, linting and error checking
 
-* [Flow](https://flow.org/): A static type checker for JavaScript.
-* [Prettier](https://github.com/prettier/prettier/): An opinionated code formatter.
-* [ESlint](https://eslint.org/) with [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript): The pluggable linting utility for JavaScript and JSX
+- [Flow](https://flow.org/): A static type checker for JavaScript.
+- [Prettier](https://github.com/prettier/prettier/): An opinionated code formatter.
+- [ESlint](https://eslint.org/) with [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript): The pluggable linting utility for JavaScript and JSX
 
 ### Architecture explication
 

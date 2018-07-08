@@ -6,7 +6,7 @@ import type {Strings} from 'types' // eslint-disable-line
 
 type Props = {
   data: {
-    chapter: {
+    course: {
       id: string,
       quizs: Array<{}>,
       strings: Strings,
@@ -23,24 +23,24 @@ type Props = {
 }
 
 const QuizsContainer = ({
-  data: {chapter, translations: t},
+  data: {course, translations: t},
   location: {pathname},
   pathContext: {difficulty, locale},
 }: Props) => (
   <div>
     <div className="relative z-2">
       <QuizForm
-        chapterStrings={chapter.strings[0]}
+        courseStrings={course.strings[0]}
         params={{
-          chapterId: chapter.id,
+          courseId: course.id,
           difficulty,
           locale,
         }}
-        chapterPathname={pathname
+        coursePathname={pathname
           .split('/')
           .slice(0, -1)
           .join('/')}
-        quizs={chapter.quizs}
+        quizs={course.quizs}
         t={t}
       />
     </div>

@@ -23,8 +23,8 @@ const Assessment = ({average, t}) => {
 
 type Props = {
   average: number,
-  chapterPathname: string,
-  chapterStrings: {
+  coursePathname: string,
+  courseStrings: {
     title: string,
   },
   finished: boolean,
@@ -51,8 +51,8 @@ type Props = {
 
 const QuizHeader = ({
   average,
-  chapterPathname,
-  chapterStrings: {title},
+  coursePathname,
+  courseStrings: {title},
   finished,
   lastScore = 0,
   restartQuizs,
@@ -84,7 +84,7 @@ const QuizHeader = ({
             </div>
           )}
           <div className="flex flex-column flex-row-ns justify-between items-center tc">
-            <Link to={chapterPathname}>
+            <Link to={coursePathname}>
               <Button className="ma2 ph3 pointer b" secondary>
                 {t.backToCourse}
               </Button>
@@ -96,7 +96,7 @@ const QuizHeader = ({
         </div>
       ) : (
         <div className="flex flex-column flex-row-ns justify-between items-center tc">
-          <Link to={chapterPathname}>
+          <Link to={coursePathname}>
             <Button className="ma2 ph3 pointer b" secondary>
               {t.backToCourse}
             </Button>
@@ -124,7 +124,7 @@ const QuizHeader = ({
 
 const enhance = compose(
   withPropsOnChange(['lastScore'], ({lastScore = 0, totalQuestions = 1}) => ({
-    average: Math.round(lastScore * 40 / totalQuestions) / 2,
+    average: Math.round((lastScore * 40) / totalQuestions) / 2,
   })),
   withHandlers({
     restartQuizs: ({restartQuizs}) => () => {

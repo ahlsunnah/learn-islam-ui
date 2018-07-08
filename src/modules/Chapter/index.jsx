@@ -60,7 +60,7 @@ type Props = {
   },
   otherLocalePath: string,
   pathContext: {
-    difficultiesLinks: {},
+    difficulties: Array<{}>,
     locale: string,
     slug: string,
   },
@@ -167,25 +167,25 @@ class Chapter extends React.Component<Props, State> {
           <StepContent
             active={activeTab === 'FR'}
             content={chapterStrings.transcription}
-            difficultiesLinks={pathContext.difficultiesLinks}
+            difficulties={pathContext.difficulties}
             t={t}
           />
           <StepContent
             active={activeTab === 'AR'}
             arabic
             content={arabicTranscription}
-            difficultiesLinks={pathContext.difficultiesLinks}
+            difficulties={pathContext.difficulties}
             t={t}
           />
           <StepContent
             active={activeTab === 'VOC'}
             content={chapterStrings.vocabulary}
-            difficultiesLinks={pathContext.difficultiesLinks}
+            difficulties={pathContext.difficulties}
             t={t}
           />
           <StepContent
             active={activeTab === 'AUDIO'}
-            difficultiesLinks={pathContext.difficultiesLinks}
+            difficulties={pathContext.difficulties}
             t={t}
           >
             <div className="mv4">
@@ -209,7 +209,7 @@ class Chapter extends React.Component<Props, State> {
           <StepContent
             active={activeTab === 'QUIZ'}
             content={"Fini ? il est temps de passer a l'examen !"}
-            difficultiesLinks={pathContext.difficultiesLinks}
+            difficulties={pathContext.difficulties}
             t={t}
           />
         </div>

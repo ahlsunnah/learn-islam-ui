@@ -16,13 +16,13 @@ type QuizType = {
 type Props = {
   addData: Function, // eslint-disable-line react/no-unused-prop-types
   addScore: Function, // eslint-disable-line react/no-unused-prop-types
-  chapterPathname: string,
-  chapterStrings: {
+  coursePathname: string,
+  courseStrings: {
     title: string,
   },
   dStartQuizs: Function,
   params: {
-    chapterId: string,
+    courseId: string,
     difficulty: number,
     locale: string,
   },
@@ -53,8 +53,8 @@ type Props = {
   totalQuestions?: number,
 }
 const QuizForm = ({
-  chapterPathname,
-  chapterStrings,
+  coursePathname,
+  courseStrings,
   dStartQuizs,
   quizs,
   quizsIds,
@@ -64,8 +64,8 @@ const QuizForm = ({
 }: Props) => (
   <div id="quizs-top">
     <QuizHeader
-      chapterPathname={chapterPathname}
-      chapterStrings={chapterStrings}
+      coursePathname={coursePathname}
+      courseStrings={courseStrings}
       finished={quizsState.finished}
       started={quizsState.started}
       lastScore={quizsState.lastScore}
@@ -119,7 +119,7 @@ const enhance = compose(
   }),
   setPropTypes({
     params: PropTypes.shape({
-      chapterId: PropTypes.string.isRequired,
+      courseId: PropTypes.string.isRequired,
       difficulty: PropTypes.number.isRequired,
       locale: PropTypes.string.isRequired,
     }).isRequired,

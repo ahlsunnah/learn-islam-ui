@@ -32,7 +32,7 @@ const getComponentByType = (type) => {
 type Props = {
   addData: Function,
   params: {
-    chapterId: string,
+    courseId: string,
     difficulty: number,
     locale: string,
   },

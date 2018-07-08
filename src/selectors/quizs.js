@@ -1,9 +1,9 @@
 import {createSelector} from 'reselect'
 
-export const getQuizsState = ({quizs}, {chapterId, difficulty, locale}) =>
-  (quizs[chapterId] &&
-    quizs[chapterId][locale] &&
-    quizs[chapterId][locale][difficulty]) || {finished: false}
+export const getQuizsState = ({quizs}, {courseId, difficulty, locale}) =>
+  (quizs[courseId] &&
+    quizs[courseId][locale] &&
+    quizs[courseId][locale][difficulty]) || {finished: false}
 
 // TODO: optimize
 export const calculateTotalQuestions = createSelector(

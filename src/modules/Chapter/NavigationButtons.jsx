@@ -4,17 +4,17 @@ import Link from 'gatsby-link'
 import * as React from 'react'
 
 type Props = {
-  difficultiesLinks: {[string]: string},
+  difficulties: Array<{}>,
   t: {[string]: string},
 }
-const NavigationButtons = ({difficultiesLinks, t}: Props) =>
-  difficultiesLinks ? (
+const NavigationButtons = ({difficulties, t}: Props) =>
+  difficulties ? (
     <div className="mb4 ph6-ns ph4 flex-ns items-center">
       <h3 className="mr3-ns">{t.quizCTA}:</h3>
-      {Object.entries(difficultiesLinks).map(([difficulty, link]) => (
-        <div key={difficulty} className="mv2 mr3 mr4-ns dib">
-          <Link className="no-underline" to={link}>
-            <Button raised>{t[difficulty]}</Button>
+      {difficulties.map(({title, path}) => (
+        <div key={title} className="mv2 mr3 mr4-ns dib">
+          <Link className="no-underline" to={path}>
+            <Button raised>{t[title]}</Button>
           </Link>
         </div>
       ))}

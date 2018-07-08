@@ -26,7 +26,7 @@ const enhanceChapter = (locale, difficulty) =>
   })
 const enhance = (props, locale, difficulty) =>
   R.over(
-    R.lensPath(['data', 'chapter']),
+    R.lensPath(['data', 'course']),
     enhanceChapter(locale, difficulty),
     props,
   )
@@ -34,7 +34,7 @@ const enhance = (props, locale, difficulty) =>
 type Strings = Array<{locale: string}>
 type Props = {
   data: {
-    chapter: {
+    course: {
       id: string,
       slug: string,
       strings: Strings,
@@ -72,10 +72,10 @@ export default Quizs
 // $FlowIgnore
 export const pageQuery = graphql`
   query quizQuery($locale: String!, $slug: String!) {
-    chapter: feathersChapters(slug: {eq: $slug}) {
+    course: feathersCourses(slug: {eq: $slug}) {
       id
       slug
-      strings: chaptersStrings {
+      strings: coursesStrings {
         locale
         title
       }

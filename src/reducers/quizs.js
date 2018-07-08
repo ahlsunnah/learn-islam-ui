@@ -55,7 +55,7 @@ const quizsByLocale = (state = {}, action) => {
   }
 }
 
-const quizsByChapterId = (state = {}, action) => {
+const quizsByCourseId = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
     case 'ADD_SCORE':
@@ -82,8 +82,8 @@ const quizs = (state = {}, action) => {
     case 'START_QUIZ':
       return {
         ...state,
-        [action.params.chapterId]: quizsByChapterId(
-          state[action.params.chapterId],
+        [action.params.courseId]: quizsByCourseId(
+          state[action.params.courseId],
           action,
         ),
       }

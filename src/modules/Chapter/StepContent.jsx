@@ -8,7 +8,7 @@ type Props = {
   arabic?: boolean,
   children?: React.Node,
   content?: string,
-  difficultiesLinks: {},
+  difficulties: Array<{}>,
   t: {},
 }
 const StepContent = ({
@@ -16,7 +16,7 @@ const StepContent = ({
   arabic,
   children,
   content = '',
-  difficultiesLinks,
+  difficulties,
   t,
 }: Props) => (
   <div
@@ -39,7 +39,7 @@ const StepContent = ({
       />
     )}
     {children}
-    <NavigationButtons difficultiesLinks={difficultiesLinks} t={t} />
+    <NavigationButtons difficulties={difficulties} t={t} />
   </div>
 )
 

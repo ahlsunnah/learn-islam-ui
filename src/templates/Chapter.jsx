@@ -106,9 +106,6 @@ export const pageQuery = graphql`
                 locale
                 title
               }
-              quizs {
-                difficulty
-              }
             }
           }
         }

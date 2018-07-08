@@ -70,11 +70,11 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                     chaptersStrings {
                       locale
                     }
-                    quizs {
-                      difficulty
-                      quizsStrings {
-                        locale
-                      }
+                  }
+                  quizs {
+                    difficulty
+                    quizsStrings {
+                      locale
                     }
                   }
                 }
@@ -114,39 +114,40 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
           })
 
           courses.forEach((course) => {
-            const {chapters, slug: courseSlug} = course
+            const {chapters, quizs, slug: courseSlug} = course
             // create course pages (redirect)
             // TODO
 
+            // Which quiz difficulties do we have ?
+            const difficultiesByLocale =
+              quizs && quizs.length
+                ? quizs.reduce((acc, {difficulty, quizsStrings}) => {
+                    const currentTitle = `difficulty${difficulty}`
+                    quizsStrings.forEach(({locale}) => {
+                      if (!acc[locale]) {
+                        acc[locale] = []
+                      }
+                      if (
+                        !acc[locale].some(({title}) => title == currentTitle)
+                      ) {
+                        acc[locale].push({
+                          title: currentTitle,
+                          path: `${
+                            localesPaths[locale]
+                          }${slug}/${courseSlug}/ikhtibar-${difficulty}`,
+                        })
+                        acc[locale].sort((a, b) => (a.title > b.title ? 1 : -1))
+                      }
+                    })
+                    return acc
+                  }, {})
+                : {}
             // create chapter pages
             chapters.forEach((chapter) => {
-              const {slug: chapterSlug, chaptersStrings, quizs} = chapter
+              const {slug: chapterSlug, chaptersStrings} = chapter
               chaptersStrings.forEach(({locale}) => {
                 console.log(
                   `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
-                )
-
-                // Which difficulties do we have ?
-                const difficulties =
-                  quizs && quizs.length
-                    ? quizs.reduce((acc, {difficulty, quizsStrings}) => {
-                        if (
-                          !acc.includes(difficulty) &&
-                          quizsStrings.some((item) => item.locale === locale)
-                        ) {
-                          acc.push(difficulty)
-                        }
-                        return acc
-                      }, [])
-                    : []
-                const difficultiesLinks = difficulties.reduce(
-                  (acc, difficulty) => {
-                    acc[`difficulty${difficulty}`] = `${
-                      localesPaths[locale]
-                    }${slug}/${courseSlug}/${chapterSlug}/ikhtibar-${difficulty}`
-                    return acc
-                  },
-                  {},
                 )
 
                 createPage({
@@ -155,7 +156,7 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                   }${slug}/${courseSlug}/${chapterSlug}`,
                   component: slash(chapterTemplate),
                   context: {
-                    difficultiesLinks,
+                    difficulties: difficultiesByLocale[locale],
                     locale,
                     localesPaths: R.pick(
                       R.map(R.prop('locale'), strings),
@@ -164,95 +165,40 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                     slug: chapterSlug,
                   },
                 })
+              })
+            })
 
-                // Create quizs:
-                if (quizs && quizs.length) {
+            // Create quizs:
+            if (quizs && quizs.length) {
+              Object.entries(difficultiesByLocale).forEach(
+                ([locale, difficulties]) => {
                   difficulties.forEach((difficulty) => {
                     console.log(
-                      `Create QUIZS page for chapter ${chapterSlug} and locale ${locale} and difficulty ${difficulty}`,
+                      `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${
+                        difficulty.title
+                      }`,
                     )
                     createPage({
-                      path: difficultiesLinks[`difficulty${difficulty}`],
+                      path: difficulty.path,
                       component: slash(quizsTemplate),
                       context: {
-                        difficulty,
+                        difficulty: parseInt(difficulty.title.slice(-1), 10),
                         locale,
                         localesPaths: R.pick(
                           R.map(R.prop('locale'), strings),
                           localesPaths,
                         ),
-                        slug: chapterSlug,
+                        slug: courseSlug,
                       },
                     })
                   })
-                }
-              })
-            })
+                },
+              )
+            }
           })
         }
       })
 
-      // create chapter pages
-
       resolve()
     })
-    //   if (result.errors) {
-    //     reject(result.errors)
-    //   }
-    //   _.each(result.data.allContentfulSection.edges, ({node}) => {
-    //     const locale = node.node_locale
-    //     const languagePath = languagePaths[locale]
-    //     const courses = node.course
-
-    //     if (languagePath) {
-    //       // Section pages
-    //       // console.log(`Creating Section at path: ${languagePath}${node.slug}/`)
-    //       createPage({
-    //         path: `${languagePath}${node.slug}/`,
-    //         component: slash(sectionTemplate),
-    //         context: {
-    //           slug: node.slug,
-    //           languagePath,
-    //           languages,
-    //           locale,
-    //         },
-    //         layout: `main-layout-${locale}`,
-    //       })
-
-    //       _.each(courses, (course) => {
-    //         // Course pages
-    //         // console.log(`Creating Course at path: ${languagePath}${node.slug}/${course.slug}`)
-    //         createPage({
-    //           path: `${languagePath}${node.slug}/${course.slug}/`,
-    //           component: slash(courseTemplate),
-    //           context: {
-    //             slug: course.slug,
-    //             languagePath,
-    //             locale,
-    //           },
-    //         })
-
-    //         // Chapter pages
-    //         _.each(course.chapter, (chapter) => {
-    //           // console.log(`Creating Chapter at path: ${languagePath}${node.slug}/${course.slug}/${chapter.slug}`)
-    //           createPage({
-    //             path: `${languagePath}${node.slug}/${course.slug}/${
-    //               chapter.slug
-    //             }`,
-    //             component: slash(chapterTemplate),
-    //             context: {
-    //               slug: chapter.slug,
-    //               languagePath,
-    //               languages,
-    //               locale,
-    //               arabic: locale === mainLanguage,
-    //               arabicLocale: mainLanguage,
-    //             },
-    //             layout: `main-layout-${locale}`,
-    //           })
-    //         })
-    //       })
-    //     }
-    //   })
-    // })
   })

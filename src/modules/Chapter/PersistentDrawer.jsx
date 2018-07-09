@@ -14,13 +14,7 @@ type Props = {
   closeDrawerOnMobile: Function,
   course: {
     slug: string,
-    track: {
-      slug: string,
-      strings: Array<{
-        locale: string,
-        title: string,
-      }>,
-    },
+    track: Object,
   },
   courses: Array<{
     order: number,
@@ -36,7 +30,7 @@ type Props = {
         locale: string,
         title: string,
       }>,
-      quizs?: Array<number>,
+      // quizs?: Array<number>,
     }>,
   }>,
   isOpen: boolean,
@@ -51,7 +45,7 @@ type Props = {
 }
 const PersistentDrawer = ({
   closeDrawerOnMobile,
-  course: {slug: courseSlug, track},
+  course: {slug: currentCourseSlug, track},
   courses,
   isOpen,
   otherLocaleTranslations,
@@ -68,7 +62,7 @@ const PersistentDrawer = ({
     )}
   >
     <nav className="">
-      <header className="bb b--black">
+      <header className="">
         <Link
           className="white no-underline"
           to={`${t.localePath}${track.slug}`}
@@ -80,31 +74,58 @@ const PersistentDrawer = ({
         </Link>
       </header>
 
-      <div className="pv2 flex flex-column">
-        {courses.map(
-          ({chapters, slug: courseSlug, strings: courseStrings}, i) => {
-            if (chapters.length === 1)
-              return (
-                <Link
-                  key={`${courseSlug}-${chapters[0].slug}`}
-                  activeClassName="white b"
-                  className="ph1 pv2 flex items-center moon-gray no-underline"
-                  onClick={closeDrawerOnMobile}
-                  to={`${t.localePath}${track.slug}/${courseSlug}/${
-                    chapters[0].slug
-                  }`}
-                >
-                  {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-                  <img alt="" className="h2 ph1" src={circleSvg} />
-                  <span className="ph1">
-                    {i + 1}. {courseStrings[0].title}
-                  </span>
-                </Link>
-              )
-            // TODO handle course with multiple chapters
-            return null
-          },
-        )}
+      <div className="flex flex-column">
+        {courses.map(({chapters, slug: courseSlug, strings: courseStrings}) => {
+          // if (chapters.length === 1)
+          //   return (
+          //     <Link
+          //       key={courseSlug}
+          //       activeClassName="white b"
+          //       className="ph1 pv2 flex items-center moon-gray no-underline"
+          //       onClick={closeDrawerOnMobile}
+          //       to={`${t.localePath}${track.slug}/${courseSlug}/${
+          //         chapters[0].slug
+          //       }`}
+          //     >
+          //       {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
+          //       <img alt="" className="h2 ph1" src={circleSvg} />
+          //       <span className="ph1">
+          //         {i + 1}. {courseStrings[0].title}
+          //       </span>
+          //     </Link>
+          //   )
+          // TODO handle course with multiple chapters
+          return (
+            <div key={courseSlug} className="pv2 bt b--black">
+              <div
+                className={cx('ph4 pv2 flex items-center moon-gray b', {
+                  'white b': currentCourseSlug === courseSlug,
+                })}
+              >
+                <span className="ph1">{courseStrings[0].title}</span>
+              </div>
+              {chapters.map(
+                ({slug: chapterSlug, strings: chapterStrings}, j) => (
+                  <Link
+                    key={`${courseSlug}-${chapterSlug}`}
+                    activeClassName="white b"
+                    className="ph1 pv2 flex items-center moon-gray no-underline"
+                    onClick={closeDrawerOnMobile}
+                    to={`${t.localePath}${
+                      track.slug
+                    }/${courseSlug}/${chapterSlug}`}
+                  >
+                    {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
+                    <img alt="" className="h2 ph1" src={circleSvg} />
+                    <span className="ph1">
+                      {j + 1}. {chapterStrings[0].title}
+                    </span>
+                  </Link>
+                ),
+              )}
+            </div>
+          )
+        })}
       </div>
     </nav>
   </aside>
@@ -118,14 +139,14 @@ const enhance = compose(
         chapters: course.chapters
           .map((chapter) => ({
             ...chapter,
-            quizs:
-              chapter.quizs &&
-              chapter.quizs
-                .reduce((acc, {difficulty}) => {
-                  if (!acc.includes(difficulty)) acc.push(difficulty)
-                  return acc
-                }, [])
-                .sort(),
+            // quizs:
+            //   chapter.quizs &&
+            //   chapter.quizs
+            //     .reduce((acc, {difficulty}) => {
+            //       if (!acc.includes(difficulty)) acc.push(difficulty)
+            //       return acc
+            //     }, [])
+            //     .sort(),
           }))
           .sort((c1, c2) => c1.order - c2.order),
       }))

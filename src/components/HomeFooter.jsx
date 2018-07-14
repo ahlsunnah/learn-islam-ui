@@ -15,6 +15,7 @@ const icons = Object.entries({
 })
 
 type Props = {
+  copyright: string,
   firstTrackSlug: string,
   footerSocialTitle: string,
   homeFooterCTA: string,
@@ -27,6 +28,7 @@ type Props = {
   urlYoutube: string, // eslint-disable-line react/no-unused-prop-types
 }
 const HomeFooter = ({
+  copyright,
   firstTrackSlug,
   footerSocialTitle,
   homeFooterCTA,
@@ -66,6 +68,12 @@ const HomeFooter = ({
           </div>
         </div>
       </div>
+    </div>
+    <div className="pt3 tc">
+      {copyright}{' '}
+      <a className="white" href="https://madrassaminhaj.com">
+        {siteName}
+      </a>
     </div>
   </section>
 )

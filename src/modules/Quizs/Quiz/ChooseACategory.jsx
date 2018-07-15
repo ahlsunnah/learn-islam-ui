@@ -59,7 +59,9 @@ const ChooseACategory = ({
         const item = items[itemIndex]
         const answer = answers[itemIndex] // category
         const isCorrect =
-          answer !== undefined && values[answer].items.includes(item)
+          answer !== undefined &&
+          answer !== null &&
+          values[answer].items.includes(item)
         return (
           <div className="pb4 flex" key={itemIndex}>
             <ResultIndicator
@@ -122,7 +124,7 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       const {items, addData, quizId, state} = this.props
-      if (!state.valuesOrder)
+      if (!state.itemsOrder)
         addData({
           data: {
             answers: new Array(items.length).fill(undefined),
@@ -163,6 +165,7 @@ const enhance = compose(
         score: answers.reduce((acc, chosenCat, index) => {
           if (
             chosenCat !== undefined &&
+            chosenCat !== null &&
             values[chosenCat].items.includes(items[index])
           )
             return acc + 1

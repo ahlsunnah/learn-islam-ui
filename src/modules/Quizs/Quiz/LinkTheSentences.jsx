@@ -12,8 +12,8 @@ import {
   withHandlers,
   withPropsOnChange,
 } from 'recompose'
-import addScoreWhenFinished from './addScoreWhenFinished'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
+import addScoreWhenFinished from './addScoreWhenFinished'
 import MultilineSelect from './MultilineSelect'
 
 type Props = {
@@ -74,7 +74,7 @@ const LinkTheSentences = ({
                 (isCorrect ? (
                   <Correct className="dn-ns green" />
                 ) : (
-                  <Error className="dn-ns" />
+                  <Error className="dn-ns red" />
                 ))}
               <ArrowForward
                 className={cx('moon-gray rotate-90 dib-ns', {

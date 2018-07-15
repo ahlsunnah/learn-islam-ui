@@ -6,6 +6,7 @@ import Link from 'gatsby-link'
 import leftSvg from 'images/chevron-left.svg'
 import circleSvg from 'images/circle.svg'
 import checkSvg from 'images/check.svg'
+import starSvg from 'images/star.svg'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import {compose, withHandlers, withPropsOnChange} from 'recompose'
@@ -139,7 +140,7 @@ const PersistentDrawer = ({
                       }/${courseSlug}/ikhtibar-${difficulty}`}
                     >
                       {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-                      <img alt="" className="h2 ph1" src={circleSvg} />
+                      <img alt="" className="h2 ph1" src={starSvg} />
                       <span className="ph1">
                         {`${courses.length + j + 1}. ${t.quiz} ${
                           t[`difficulty${difficulty}`]

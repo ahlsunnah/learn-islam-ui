@@ -13,7 +13,7 @@ import {
   withPropsOnChange,
 } from 'recompose'
 import addScoreWhenFinished from './addScoreWhenFinished'
-import Error from './Error'
+import Error from 'react-icons/lib/md/do-not-disturb-alt'
 import MultilineSelect from './MultilineSelect'
 
 type Props = {

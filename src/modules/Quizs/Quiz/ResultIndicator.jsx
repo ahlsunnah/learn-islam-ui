@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import Correct from 'react-icons/lib/md/check'
-import Error from './Error'
+import Error from 'react-icons/lib/md/do-not-disturb-alt'
 
 type Props = {
   isCorrect: boolean,
@@ -17,11 +17,7 @@ const ResultIndicator = ({isCorrect, selected, finished}: Props) => {
     return <Correct className="flex-no-shrink w2-5 f2 green" />
   }
   if (selected) {
-    return (
-      <div className="flex-no-shrink w2-5 dib tc v-mid">
-        <Error className="mt1" />
-      </div>
-    )
+    return <Error className="flex-no-shrink w2-5 f2 red" />
   }
   return <div className="flex-no-shrink w2-5 dib v-mid box-36px" />
 }

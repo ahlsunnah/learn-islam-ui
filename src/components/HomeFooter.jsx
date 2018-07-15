@@ -74,6 +74,7 @@ const HomeFooter = ({
       <a className="white" href="https://madrassaminhaj.com">
         {siteName}
       </a>
+      {' - 2018'}
     </div>
   </section>
 )

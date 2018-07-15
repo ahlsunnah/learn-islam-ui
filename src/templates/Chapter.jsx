@@ -107,6 +107,9 @@ export const pageQuery = graphql`
                 title
               }
             }
+            quizs {
+              difficulty
+            }
           }
         }
       }
@@ -120,6 +123,7 @@ export const pageQuery = graphql`
       localePath
       nextCourse
       readIn
+      quiz
       quizCTA
       tabAudio
       tabTranscription

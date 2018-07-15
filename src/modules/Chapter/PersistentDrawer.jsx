@@ -5,6 +5,7 @@ import cx from 'classnames'
 import Link from 'gatsby-link'
 import leftSvg from 'images/chevron-left.svg'
 import circleSvg from 'images/circle.svg'
+import checkSvg from 'images/check.svg'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import {compose, withHandlers, withPropsOnChange} from 'recompose'
@@ -32,6 +33,7 @@ type Props = {
       }>,
       // quizs?: Array<number>,
     }>,
+    quizs?: Array<number>,
   }>,
   isOpen: boolean,
   otherLocaleTranslations: {
@@ -41,6 +43,7 @@ type Props = {
   toggleDrawer: Function,
   t: {
     localePath: string,
+    quiz: string,
   },
 }
 const PersistentDrawer = ({
@@ -75,57 +78,79 @@ const PersistentDrawer = ({
       </header>
 
       <div className="flex flex-column">
-        {courses.map(({chapters, slug: courseSlug, strings: courseStrings}) => {
-          // if (chapters.length === 1)
-          //   return (
-          //     <Link
-          //       key={courseSlug}
-          //       activeClassName="white b"
-          //       className="ph1 pv2 flex items-center moon-gray no-underline"
-          //       onClick={closeDrawerOnMobile}
-          //       to={`${t.localePath}${track.slug}/${courseSlug}/${
-          //         chapters[0].slug
-          //       }`}
-          //     >
-          //       {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-          //       <img alt="" className="h2 ph1" src={circleSvg} />
-          //       <span className="ph1">
-          //         {i + 1}. {courseStrings[0].title}
-          //       </span>
-          //     </Link>
-          //   )
-          // TODO handle course with multiple chapters
-          return (
-            <div key={courseSlug} className="pv2 bt b--black">
-              <div
-                className={cx('ph4 pv2 flex items-center moon-gray b', {
-                  'white b': currentCourseSlug === courseSlug,
-                })}
-              >
-                <span className="ph1">{courseStrings[0].title}</span>
+        {courses.map(
+          ({chapters, quizs, slug: courseSlug, strings: courseStrings}) => {
+            // if (chapters.length === 1)
+            //   return (
+            //     <Link
+            //       key={courseSlug}
+            //       activeClassName="white b"
+            //       className="ph1 pv2 flex items-center moon-gray no-underline"
+            //       onClick={closeDrawerOnMobile}
+            //       to={`${t.localePath}${track.slug}/${courseSlug}/${
+            //         chapters[0].slug
+            //       }`}
+            //     >
+            //       {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
+            //       <img alt="" className="h2 ph1" src={circleSvg} />
+            //       <span className="ph1">
+            //         {i + 1}. {courseStrings[0].title}
+            //       </span>
+            //     </Link>
+            //   )
+            // TODO handle course with multiple chapters
+            return (
+              <div key={courseSlug} className="pv2 bt b--black">
+                <div
+                  className={cx('ph4 pv2 flex items-center moon-gray b', {
+                    'white b': currentCourseSlug === courseSlug,
+                  })}
+                >
+                  <span className="ph1">{courseStrings[0].title}</span>
+                </div>
+                {chapters.map(
+                  ({slug: chapterSlug, strings: chapterStrings}, j) => (
+                    <Link
+                      key={`${courseSlug}-${chapterSlug}`}
+                      activeClassName="white b"
+                      className="ph1 pv2 flex items-center moon-gray no-underline"
+                      onClick={closeDrawerOnMobile}
+                      to={`${t.localePath}${
+                        track.slug
+                      }/${courseSlug}/${chapterSlug}`}
+                    >
+                      {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
+                      <img alt="" className="h2 ph1" src={circleSvg} />
+                      <span className="ph1">
+                        {j + 1}. {chapterStrings[0].title}
+                      </span>
+                    </Link>
+                  ),
+                )}
+                {quizs &&
+                  quizs.map((difficulty, j) => (
+                    <Link
+                      key={`${courseSlug}-quiz${difficulty}`}
+                      activeClassName="white b"
+                      className="ph1 pv2 flex items-center moon-gray no-underline"
+                      onClick={closeDrawerOnMobile}
+                      to={`${t.localePath}${
+                        track.slug
+                      }/${courseSlug}/ikhtibar-${difficulty}`}
+                    >
+                      {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
+                      <img alt="" className="h2 ph1" src={circleSvg} />
+                      <span className="ph1">
+                        {`${courses.length + j + 1}. ${t.quiz} ${
+                          t[`difficulty${difficulty}`]
+                        }`}
+                      </span>
+                    </Link>
+                  ))}
               </div>
-              {chapters.map(
-                ({slug: chapterSlug, strings: chapterStrings}, j) => (
-                  <Link
-                    key={`${courseSlug}-${chapterSlug}`}
-                    activeClassName="white b"
-                    className="ph1 pv2 flex items-center moon-gray no-underline"
-                    onClick={closeDrawerOnMobile}
-                    to={`${t.localePath}${
-                      track.slug
-                    }/${courseSlug}/${chapterSlug}`}
-                  >
-                    {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-                    <img alt="" className="h2 ph1" src={circleSvg} />
-                    <span className="ph1">
-                      {j + 1}. {chapterStrings[0].title}
-                    </span>
-                  </Link>
-                ),
-              )}
-            </div>
-          )
-        })}
+            )
+          },
+        )}
       </div>
     </nav>
   </aside>
@@ -136,19 +161,15 @@ const enhance = compose(
     courses: track.courses
       .map((course) => ({
         ...course,
-        chapters: course.chapters
-          .map((chapter) => ({
-            ...chapter,
-            // quizs:
-            //   chapter.quizs &&
-            //   chapter.quizs
-            //     .reduce((acc, {difficulty}) => {
-            //       if (!acc.includes(difficulty)) acc.push(difficulty)
-            //       return acc
-            //     }, [])
-            //     .sort(),
-          }))
-          .sort((c1, c2) => c1.order - c2.order),
+        chapters: course.chapters.slice().sort((c1, c2) => c1.order - c2.order),
+        quizs:
+          course.quizs &&
+          course.quizs
+            .reduce((acc, {difficulty}) => {
+              if (!acc.includes(difficulty)) acc.push(difficulty)
+              return acc
+            }, [])
+            .sort(),
       }))
       .sort((c1, c2) => c1.order - c2.order),
   })),

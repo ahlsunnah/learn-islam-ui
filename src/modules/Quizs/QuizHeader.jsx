@@ -40,7 +40,7 @@ type Props = {
     backToCourse: string,
     continue: string,
     grade: string,
-    quiz: string,
+    quizTitle: string,
     restartQuizs: string,
     start: string,
     yourScore: string,
@@ -65,7 +65,7 @@ const QuizHeader = ({
       className="pv3 ph4 w-50-ns w-90 center flex flex-column justify-around items-center"
       rounded
     >
-      <span className="f3">{t.quiz}</span>
+      <span className="f3">{t.quizTitle}</span>
       <h1 className="tc">{title}</h1>
       {finished ? (
         <div>

@@ -103,7 +103,7 @@ export const pageQuery = graphql`
       grade
       nextCourse
       nextTrack
-      quiz
+      quizTitle
       quizTrue
       quizFalse
       restartQuizs

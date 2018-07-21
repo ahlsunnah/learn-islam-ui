@@ -128,6 +128,10 @@ div.raised-bottom {
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
 }
 
+.rtl .rtl-rotate-180 {
+  transform: rotate(180deg);
+}
+
 .title-with-subtitle {
   h2 {
     margin-bottom: 0.2em;

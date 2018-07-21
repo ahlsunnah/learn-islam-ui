@@ -18,6 +18,7 @@ type Props = {
     track: Object,
   },
   courses: Array<{
+    id: string,
     order: number,
     slug: string,
     strings: Array<{
@@ -73,7 +74,7 @@ const PersistentDrawer = ({
           to={`${t.localePath}${track.slug}`}
         >
           <div className="pv2 flex items-center">
-            <img alt="" className="w2-5" src={leftSvg} />
+            <img alt="" className="w2-5 rtl-rotate-180" src={leftSvg} />
             <div className="f4">{track.strings[0].title}</div>
           </div>
         </Link>

@@ -24,3 +24,9 @@ export const addScore = ({params, score}) => ({
   params,
   score,
 })
+
+export const addTotal = ({params, total}) => ({
+  type: 'ADD_TOTAL',
+  params,
+  total,
+})

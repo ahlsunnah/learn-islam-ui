@@ -4,13 +4,12 @@
 import cx from 'classnames'
 import Link from 'gatsby-link'
 import leftSvg from 'images/chevron-left.svg'
-import circleSvg from 'images/circle.svg'
-import checkSvg from 'images/check.svg'
-import starSvg from 'images/star.svg'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
+import {connect} from 'react-redux'
 import {compose, withHandlers, withPropsOnChange} from 'recompose'
 import 'styles/drawer.scss'
+import ChapterCursor from './ChapterCursor'
 
 type Props = {
   closeDrawerOnMobile: Function,
@@ -41,6 +40,7 @@ type Props = {
     localeName: string,
     localePath: string,
   },
+  quizsState: Object,
   toggleDrawer: Function,
   t: {
     localePath: string,
@@ -53,6 +53,7 @@ const PersistentDrawer = ({
   courses,
   isOpen,
   otherLocaleTranslations,
+  quizsState,
   t,
   toggleDrawer,
 }: Props) => (
@@ -80,26 +81,13 @@ const PersistentDrawer = ({
 
       <div className="flex flex-column">
         {courses.map(
-          ({chapters, quizs, slug: courseSlug, strings: courseStrings}) => {
-            // if (chapters.length === 1)
-            //   return (
-            //     <Link
-            //       key={courseSlug}
-            //       activeClassName="white b"
-            //       className="ph1 pv2 flex items-center moon-gray no-underline"
-            //       onClick={closeDrawerOnMobile}
-            //       to={`${t.localePath}${track.slug}/${courseSlug}/${
-            //         chapters[0].slug
-            //       }`}
-            //     >
-            //       {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-            //       <img alt="" className="h2 ph1" src={circleSvg} />
-            //       <span className="ph1">
-            //         {i + 1}. {courseStrings[0].title}
-            //       </span>
-            //     </Link>
-            //   )
-            // TODO handle course with multiple chapters
+          ({
+            chapters,
+            id: courseId,
+            quizs,
+            slug: courseSlug,
+            strings: courseStrings,
+          }) => {
             return (
               <div key={courseSlug} className="pv2 bt b--black">
                 <div
@@ -120,8 +108,7 @@ const PersistentDrawer = ({
                         track.slug
                       }/${courseSlug}/${chapterSlug}`}
                     >
-                      {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-                      <img alt="" className="h2 ph1" src={circleSvg} />
+                      <ChapterCursor className="h2 ph1" isComplete={false} />
                       <span className="ph1">
                         {j + 1}. {chapterStrings[0].title}
                       </span>
@@ -129,25 +116,39 @@ const PersistentDrawer = ({
                   ),
                 )}
                 {quizs &&
-                  quizs.map((difficulty, j) => (
-                    <Link
-                      key={`${courseSlug}-quiz${difficulty}`}
-                      activeClassName="white b"
-                      className="ph1 pv2 flex items-center moon-gray no-underline"
-                      onClick={closeDrawerOnMobile}
-                      to={`${t.localePath}${
-                        track.slug
-                      }/${courseSlug}/ikhtibar-${difficulty}`}
-                    >
-                      {/* <img alt="" className="h2 ph1" src={checkSvg} /> */}
-                      <img alt="" className="h2 ph1" src={starSvg} />
-                      <span className="ph1">
-                        {`${courses.length + j + 1}. ${t.quiz} ${
-                          t[`difficulty${difficulty}`]
-                        }`}
-                      </span>
-                    </Link>
-                  ))}
+                  quizs.map((difficulty, j) => {
+                    return (
+                      <Link
+                        key={`${courseSlug}-quiz${difficulty}`}
+                        activeClassName="white b"
+                        className="ph1 pv2 flex items-center moon-gray no-underline"
+                        onClick={closeDrawerOnMobile}
+                        to={`${t.localePath}${
+                          track.slug
+                        }/${courseSlug}/ikhtibar-${difficulty}`}
+                      >
+                        <ChapterCursor
+                          className="h2 ph1"
+                          isComplete={
+                            quizsState[courseId] &&
+                            quizsState[courseId][courseStrings[0].locale] &&
+                            quizsState[courseId][courseStrings[0].locale][
+                              difficulty
+                            ] &&
+                            quizsState[courseId][courseStrings[0].locale][
+                              difficulty
+                            ].passed
+                          }
+                          isQuiz
+                        />
+                        <span className="ph1">
+                          {`${courses.length + j + 1}. ${t.quiz} ${
+                            t[`difficulty${difficulty}`]
+                          }`}
+                        </span>
+                      </Link>
+                    )
+                  })}
               </div>
             )
           },
@@ -158,6 +159,7 @@ const PersistentDrawer = ({
 )
 
 const enhance = compose(
+  connect(({quizs}) => ({quizsState: quizs || {}})),
   withPropsOnChange(['course'], ({course: {track}}) => ({
     courses: track.courses
       .map((course) => ({

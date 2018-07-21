@@ -93,6 +93,7 @@ export const pageQuery = graphql`
             locale
           }
           courses {
+            id
             order
             slug
             strings: coursesStrings {

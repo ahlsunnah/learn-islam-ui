@@ -1,5 +1,5 @@
 // @flow
-import {addData, addScore, startQuizs} from 'actions/quizs'
+import {addData, addScore, addTotal, startQuizs} from 'actions/quizs'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {connect} from 'react-redux'
@@ -33,23 +33,7 @@ type Props = {
     lastScore?: number,
     started: boolean,
   },
-  t: {
-    average: string,
-    assessmentFail: string,
-    assessmentGood: string,
-    assessmentPerfect: string,
-    assessmentVeryGood: string,
-    backToCourse: string,
-    continue: string,
-    grade: string,
-    quiz: string,
-    restartQuizs: string,
-    start: string,
-    yourScore: string,
-    yourLastScore: string,
-    goToTop: string,
-    seeYourScore: string,
-  },
+  t: Object,
   totalQuestions?: number,
 }
 const QuizForm = ({
@@ -142,6 +126,9 @@ const enhance = compose(
       addScore: (score) => {
         dispatch(addScore({params, score}))
       },
+      dAddTotal: (total) => {
+        dispatch(addTotal({params, total}))
+      },
       dStartQuizs: () =>
         dispatch(
           startQuizs({
@@ -153,9 +140,27 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      const {dStartQuizs, quizsIds} = this.props
+      const {
+        dAddTotal,
+        dStartQuizs,
+        quizsIds,
+        quizsState,
+        totalQuestions,
+      } = this.props
       if (!quizsIds) dStartQuizs()
+
+      if (quizsState.total !== totalQuestions) {
+        dAddTotal(totalQuestions)
+      }
     },
+    // TODO
+    // componentDidUpdate() {
+    //   const {dAddTotal, quizsState, totalQuestions} = this.props
+    //   console.log(quizsState)
+    //   if (quizsState.total !== totalQuestions) {
+    //     dAddTotal(totalQuestions)
+    //   }
+    // },
   }),
   withPropsOnChange(['quizsIds'], ({quizs, quizsIds}) => ({
     quizsIds: quizsIds || Array.from(quizs.keys()), // default value for SSR

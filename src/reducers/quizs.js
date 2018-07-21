@@ -1,3 +1,5 @@
+const MINIMUM_RESULT = 0.75
+
 const quizsByDifficulty = (
   state = {finished: false, quizsIds: [], try: 0},
   action,
@@ -12,19 +14,32 @@ const quizsByDifficulty = (
           ...action.data,
         },
       }
-    case 'ADD_SCORE':
+    case 'ADD_SCORE': {
+      const lastScore = state.lastScore + action.score
       return {
         ...state,
-        lastScore: state.lastScore + action.score,
+        lastScore,
+        passed: state.passed || lastScore >= state.total * MINIMUM_RESULT,
+      }
+    }
+    case 'ADD_TOTAL':
+      return {
+        ...state,
+        total: action.total,
       }
     case 'COMPLETE_QUIZ':
       return {
         ...state,
+        bestScore:
+          state.bestScore && state.bestScore > state.lastScore
+            ? state.bestScore
+            : state.lastScore,
         finished: true,
         lastScore: 0,
       }
     case 'START_QUIZ':
       return {
+        bestScore: state.bestScore,
         finished: false,
         lastScore: state.lastScore,
         quizsIds: action.quizsIds,
@@ -40,6 +55,7 @@ const quizsByLocale = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
     case 'ADD_SCORE':
+    case 'ADD_TOTAL':
     case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {
@@ -59,6 +75,7 @@ const quizsByCourseId = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
     case 'ADD_SCORE':
+    case 'ADD_TOTAL':
     case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {
@@ -78,6 +95,7 @@ const quizs = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_DATA_TO_QUIZ':
     case 'ADD_SCORE':
+    case 'ADD_TOTAL':
     case 'COMPLETE_QUIZ':
     case 'START_QUIZ':
       return {

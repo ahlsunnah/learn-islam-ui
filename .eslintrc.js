@@ -22,6 +22,7 @@ module.exports = {
     graphql: true,
   },
   rules: {
+    'arrow-body-style': 0,
     camelcase: 0,
     'flowtype/space-after-type-colon': 0,
     'flowtype/space-before-type-colon': 0,

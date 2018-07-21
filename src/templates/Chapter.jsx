@@ -74,6 +74,7 @@ export default Chapter
 export const pageQuery = graphql`
   query chapterQuery($locale: String!, $slug: String!) {
     chapter: feathersChapters(slug: {eq: $slug}) {
+      id
       slug
       audio
       strings: chaptersStrings {
@@ -101,6 +102,7 @@ export const pageQuery = graphql`
               title
             }
             chapters {
+              id
               slug
               order
               strings: chaptersStrings {

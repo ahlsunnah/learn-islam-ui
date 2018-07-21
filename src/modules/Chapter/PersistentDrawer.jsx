@@ -13,6 +13,7 @@ import ChapterCursor from './ChapterCursor'
 
 type Props = {
   closeDrawerOnMobile: Function,
+  chaptersState: Object,
   course: {
     slug: string,
     track: Object,
@@ -49,6 +50,7 @@ type Props = {
   },
 }
 const PersistentDrawer = ({
+  chaptersState,
   closeDrawerOnMobile,
   course: {slug: currentCourseSlug, track},
   courses,
@@ -99,7 +101,7 @@ const PersistentDrawer = ({
                   <span className="ph1">{courseStrings[0].title}</span>
                 </div>
                 {chapters.map(
-                  ({slug: chapterSlug, strings: chapterStrings}, j) => (
+                  ({id, slug: chapterSlug, strings: chapterStrings}, j) => (
                     <Link
                       key={`${courseSlug}-${chapterSlug}`}
                       activeClassName="white b"
@@ -109,7 +111,10 @@ const PersistentDrawer = ({
                         track.slug
                       }/${courseSlug}/${chapterSlug}`}
                     >
-                      <ChapterCursor className="h2 ph1" isComplete={false} />
+                      <ChapterCursor
+                        className="h2 ph1"
+                        isComplete={chaptersState[id]}
+                      />
                       <span className="ph1">
                         {j + 1}. {chapterStrings[0].title}
                       </span>
@@ -160,7 +165,10 @@ const PersistentDrawer = ({
 )
 
 const enhance = compose(
-  connect(({quizs}) => ({quizsState: quizs || {}})),
+  connect(({chapters, quizs}) => ({
+    chaptersState: chapters,
+    quizsState: quizs || {},
+  })),
   withPropsOnChange(['course'], ({course: {track}}) => ({
     courses: track.courses
       .map((course) => ({

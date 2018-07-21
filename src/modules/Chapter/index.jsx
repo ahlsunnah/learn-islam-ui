@@ -1,15 +1,17 @@
 // @flow
+import completeChapter from 'actions/chapters'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Helmet from 'react-helmet'
-import {withPropsOnChange} from 'recompose'
+import {connect} from 'react-redux'
+import {compose, withPropsOnChange} from 'recompose'
 import {Strings} from '../../types'
 import Header from './Header'
 import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
+import './styles.scss'
 import Tab from './Tab'
 import VideoIframe from './VideoIframe'
-import './styles.scss'
 
 type Props = {
   arabicTranscription: string,
@@ -58,6 +60,7 @@ type Props = {
       localePath: string,
     },
   },
+  dCompleteChapter: Function,
   otherLocalePath: string,
   pathContext: {
     difficulties: Array<{}>,
@@ -75,22 +78,40 @@ class Chapter extends React.Component<Props, State> {
     activeTab: this.props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
     isSideBarVisible: false,
   }
+
   componentWillMount() {
     if (getWindowWidth() > 800) {
       this.setState({isSideBarVisible: true})
     }
   }
+
+  componentDidMount() {
+    const {dCompleteChapter} = this.props
+    this.completeTimeout = setTimeout(() => {
+      console.log('timeout')
+      dCompleteChapter()
+      this.completeTimeout = null
+    }, 10000)
+  }
+
+  componentWillUnmount() {
+    if (this.completeTimeout) {
+      clearTimeout(this.completeTimeout)
+    }
+  }
+
   toggleActiveTab: Function = (event) => {
-    console.log(event.currentTarget.name)
     this.setState({
       activeTab: event.currentTarget.name,
     })
   }
+
   toggleSidebar: Function = () => {
     this.setState(({isSideBarVisible}) => ({
       isSideBarVisible: !isSideBarVisible,
     }))
   }
+
   render() {
     const {
       arabicTranscription,
@@ -218,16 +239,26 @@ class Chapter extends React.Component<Props, State> {
   }
 }
 
-const enhance = withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
-  arabicTranscription: (
-    data.chapter.strings.find(({locale}) => locale === 'ar') || {}
-  ).transcription,
-  chapterStrings:
-    data.chapter.strings.find(({locale}) => locale === pathContext.locale) ||
-    {},
-  otherLocalePath: `${data.otherLocaleTranslations.localePath}${
-    data.chapter.course.track.slug
-  }/${data.chapter.course.slug}/${data.chapter.slug}`,
-}))
+const enhance = compose(
+  connect(
+    ({chapters}, {data}) => ({
+      isChapterComplete: chapters[data.chapter.id] || false,
+    }),
+    (dispatch, {data}) => ({
+      dCompleteChapter: () => dispatch(completeChapter(data.chapter.id)),
+    }),
+  ),
+  withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
+    arabicTranscription: (
+      data.chapter.strings.find(({locale}) => locale === 'ar') || {}
+    ).transcription,
+    chapterStrings:
+      data.chapter.strings.find(({locale}) => locale === pathContext.locale) ||
+      {},
+    otherLocalePath: `${data.otherLocaleTranslations.localePath}${
+      data.chapter.course.track.slug
+    }/${data.chapter.course.slug}/${data.chapter.slug}`,
+  })),
+)
 
 export default enhance(Chapter)

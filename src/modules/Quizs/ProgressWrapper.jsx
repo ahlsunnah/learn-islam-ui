@@ -6,10 +6,13 @@ import Progress from './Progress'
 
 type Props = {
   percent: number,
+  progressText: string,
 }
-const ProgressWrapper = ({percent}: Props) => (
+const ProgressWrapper = ({percent, progressText}: Props) => (
   <div>
-    <span className="pt2 f6">{percent}% completed</span>
+    <span className="pt2 f6">
+      {progressText} {percent}%
+    </span>
     <div className="w5">
       <Progress progress={percent} />
     </div>
@@ -42,7 +45,7 @@ const enhance = compose(
       return acc + 1
     }, 0)
     return {
-      percent: Math.round(100 * questionsAnswered / totalQuestions),
+      percent: Math.round((100 * questionsAnswered) / totalQuestions),
     }
   }),
 )

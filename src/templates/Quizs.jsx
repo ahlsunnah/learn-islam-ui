@@ -152,6 +152,7 @@ export const pageQuery = graphql`
       localePath
       nextCourse
       nextTrack
+      progress
       quiz
       quizTitle
       quizTrue

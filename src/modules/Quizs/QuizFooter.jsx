@@ -19,6 +19,7 @@ type Props = {
   submit: Function,
   t: {
     goToTop: string,
+    progress: string,
     seeYourScore: string,
   },
   totalQuestions: number,
@@ -37,6 +38,7 @@ const QuizFooter = ({quizsState, submit, t, totalQuestions}: Props) => (
       )}
       <Card className="fixed bottom-0 left-0 right-0 h3 ph4 w-100 flex justify-center items-start raised-bottom">
         <ProgressWrapper
+          progressText={t.progress}
           quizsState={quizsState}
           totalQuestions={totalQuestions}
         />
@@ -51,15 +53,18 @@ const enhance = compose(
     quizsState: PropTypes.object.isRequired,
   }),
   branch(({quizsState}) => !quizsState.quizsIds, renderNothing),
-  connect(undefined, (dispatch: Function, {params}) => ({
-    submit: () => {
-      scrollToTop()
-      dispatch(
-        completeQuizs({
-          params,
-        }),
-      )
-    },
-  })),
+  connect(
+    undefined,
+    (dispatch: Function, {params}) => ({
+      submit: () => {
+        scrollToTop()
+        dispatch(
+          completeQuizs({
+            params,
+          }),
+        )
+      },
+    }),
+  ),
 )
 export default enhance(QuizFooter)

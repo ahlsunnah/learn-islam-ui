@@ -11,7 +11,10 @@ const localesPaths = {
   fr: '/fr/',
 }
 
-exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
+exports.createPages = ({
+  graphql,
+  boundActionCreators: {createPage, createRedirect},
+}) =>
   new Promise((resolve, reject) => {
     // const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
     const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
@@ -115,8 +118,6 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
 
           courses.forEach((course) => {
             const {chapters, quizs, slug: courseSlug} = course
-            // create course pages (redirect)
-            // TODO
 
             // Which quiz difficulties do we have ?
             const difficultiesByLocale =
@@ -143,17 +144,17 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                   }, {})
                 : {}
             // create chapter pages
-            chapters.forEach((chapter) => {
+            chapters.forEach((chapter, i) => {
               const {slug: chapterSlug, chaptersStrings} = chapter
               chaptersStrings.forEach(({locale}) => {
                 console.log(
                   `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
                 )
-
+                const path = `${
+                  localesPaths[locale]
+                }${slug}/${courseSlug}/${chapterSlug}`
                 createPage({
-                  path: `${
-                    localesPaths[locale]
-                  }${slug}/${courseSlug}/${chapterSlug}`,
+                  path,
                   component: slash(chapterTemplate),
                   context: {
                     difficulties: difficultiesByLocale[locale],
@@ -165,6 +166,16 @@ exports.createPages = ({graphql, boundActionCreators: {createPage}}) =>
                     slug: chapterSlug,
                   },
                 })
+
+                if (i === 0) {
+                  // We don't have course page => we redirect to first chapter
+                  createRedirect({
+                    fromPath: `${localesPaths[locale]}${slug}/${courseSlug}`,
+                    isPermanent: true,
+                    redirectInBrowser: true,
+                    toPath: path,
+                  })
+                }
               })
             })
 

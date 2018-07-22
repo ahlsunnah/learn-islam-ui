@@ -21,6 +21,7 @@ const Header = ({
       <button
         className="mh2 mh3-ns bg-transparent bn pointer"
         onClick={toggleSidebar}
+        type="button"
       >
         <img alt="menu" className="mt2 h2" src={hamburgerSvg} />
       </button>

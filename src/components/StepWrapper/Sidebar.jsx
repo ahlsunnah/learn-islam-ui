@@ -38,10 +38,6 @@ type Props = {
     quizs?: Array<number>,
   }>,
   isOpen: boolean,
-  otherLocaleTranslations: {
-    localeName: string,
-    localePath: string,
-  },
   quizsState: Object,
   toggleDrawer: Function,
   t: {
@@ -55,7 +51,6 @@ const PersistentDrawer = ({
   course: {slug: currentCourseSlug, track},
   courses,
   isOpen,
-  otherLocaleTranslations,
   quizsState,
   t,
   toggleDrawer,

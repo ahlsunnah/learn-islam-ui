@@ -1,13 +1,11 @@
 // @flow
 import completeChapter from 'actions/chapters'
-import getWindowWidth from 'lib/getWindowWidth'
+import StepWrapper from 'components/StepWrapper'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
 import {compose, withPropsOnChange} from 'recompose'
 import {Strings} from '../../types'
-import Header from './Header'
-import PersistentDrawer from './PersistentDrawer'
 import StepContent from './StepContent'
 import './styles.scss'
 import Tab from './Tab'
@@ -70,25 +68,16 @@ type Props = {
 }
 type State = {
   activeTab: string,
-  isSideBarVisible: boolean,
 }
 
 class Chapter extends React.Component<Props, State> {
   state = {
     activeTab: this.props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
-    isSideBarVisible: false,
-  }
-
-  componentWillMount() {
-    if (getWindowWidth() > 800) {
-      this.setState({isSideBarVisible: true})
-    }
   }
 
   componentDidMount() {
     const {dCompleteChapter} = this.props
     this.completeTimeout = setTimeout(() => {
-      console.log('timeout')
       dCompleteChapter()
       this.completeTimeout = null
     }, 10000)
@@ -106,12 +95,6 @@ class Chapter extends React.Component<Props, State> {
     })
   }
 
-  toggleSidebar: Function = () => {
-    this.setState(({isSideBarVisible}) => ({
-      isSideBarVisible: !isSideBarVisible,
-    }))
-  }
-
   render() {
     const {
       arabicTranscription,
@@ -121,120 +104,111 @@ class Chapter extends React.Component<Props, State> {
       pathContext,
     } = this.props
     const {chapter, otherLocaleTranslations, translations: t} = data
-    const {activeTab, isSideBarVisible} = this.state
+    const {activeTab} = this.state
     return (
-      <div className="flex">
+      <StepWrapper
+        course={chapter.course}
+        t={t}
+        otherLocaleName={otherLocaleTranslations.localeName}
+        otherLocalePath={otherLocalePath}
+        title={chapterStrings.title}
+      >
         <Helmet title={chapterStrings.title} />
-        <PersistentDrawer
-          course={chapter.course}
-          isOpen={isSideBarVisible}
-          otherLocaleTranslations={otherLocaleTranslations}
-          t={t}
-          toggleDrawer={this.toggleSidebar}
+        <VideoIframe
+          source={chapterStrings.video}
+          title={chapterStrings.title}
         />
-        <div className="w-100 flex flex-column items-stretch">
-          <Header
-            otherLocaleName={otherLocaleTranslations.localeName}
-            otherLocalePath={otherLocalePath}
-            title={chapterStrings.title}
-            toggleSidebar={this.toggleSidebar}
-          />
-          <VideoIframe
-            source={chapterStrings.video}
-            title={chapterStrings.title}
-          />
-          <nav className="chapter-tabs w-100 flex justify-around items-center">
-            {chapter.strings.length > 1 && (
-              <Tab
-                type="FR"
-                active={activeTab === 'FR'}
-                handleClick={this.toggleActiveTab}
-              >
-                {t.tabTranslation}
-              </Tab>
-            )}
+        <nav className="chapter-tabs w-100 flex justify-around items-center">
+          {chapter.strings.length > 1 && (
             <Tab
-              type="AR"
-              active={activeTab === 'AR'}
+              type="FR"
+              active={activeTab === 'FR'}
               handleClick={this.toggleActiveTab}
             >
-              {t.tabTranscription}
+              {t.tabTranslation}
             </Tab>
-            {chapterStrings.vocabulary && (
-              <Tab
-                type="VOC"
-                active={activeTab === 'VOC'}
-                handleClick={this.toggleActiveTab}
-              >
-                {t.tabVocabulary}
-              </Tab>
-            )}
-            <Tab
-              type="AUDIO"
-              active={activeTab === 'AUDIO'}
-              handleClick={this.toggleActiveTab}
-            >
-              {t.tabAudio}
-            </Tab>
-            <Tab
-              type="QUIZ"
-              active={activeTab === 'QUIZ'}
-              handleClick={this.toggleActiveTab}
-            >
-              {t.tabQuiz}
-            </Tab>
-          </nav>
-
-          <StepContent
-            active={activeTab === 'FR'}
-            content={chapterStrings.transcription}
-            difficulties={pathContext.difficulties}
-            t={t}
-          />
-          <StepContent
+          )}
+          <Tab
+            type="AR"
             active={activeTab === 'AR'}
-            arabic
-            content={arabicTranscription}
-            difficulties={pathContext.difficulties}
-            t={t}
-          />
-          <StepContent
-            active={activeTab === 'VOC'}
-            content={chapterStrings.vocabulary}
-            difficulties={pathContext.difficulties}
-            t={t}
-          />
-          <StepContent
-            active={activeTab === 'AUDIO'}
-            difficulties={pathContext.difficulties}
-            t={t}
+            handleClick={this.toggleActiveTab}
           >
-            <div className="mv4">
-              <h3 className="">
-                Vous voulez ecouter l'audio au lieu de la video ?
-              </h3>
-              <audio className="w-100" controls src={chapter.audio} />
-              <h3 className="">
-                Si vous voulez telecharger l'audio,{' '}
-                <a
-                  href={chapter.audio}
-                  title={chapterStrings.title}
-                  download
-                  target="_blank"
-                >
-                  cliquez ici
-                </a>
-              </h3>
-            </div>
-          </StepContent>
-          <StepContent
+            {t.tabTranscription}
+          </Tab>
+          {chapterStrings.vocabulary && (
+            <Tab
+              type="VOC"
+              active={activeTab === 'VOC'}
+              handleClick={this.toggleActiveTab}
+            >
+              {t.tabVocabulary}
+            </Tab>
+          )}
+          <Tab
+            type="AUDIO"
+            active={activeTab === 'AUDIO'}
+            handleClick={this.toggleActiveTab}
+          >
+            {t.tabAudio}
+          </Tab>
+          <Tab
+            type="QUIZ"
             active={activeTab === 'QUIZ'}
-            content={"Fini ? il est temps de passer a l'examen !"}
-            difficulties={pathContext.difficulties}
-            t={t}
-          />
-        </div>
-      </div>
+            handleClick={this.toggleActiveTab}
+          >
+            {t.tabQuiz}
+          </Tab>
+        </nav>
+
+        <StepContent
+          active={activeTab === 'FR'}
+          content={chapterStrings.transcription}
+          difficulties={pathContext.difficulties}
+          t={t}
+        />
+        <StepContent
+          active={activeTab === 'AR'}
+          arabic
+          content={arabicTranscription}
+          difficulties={pathContext.difficulties}
+          t={t}
+        />
+        <StepContent
+          active={activeTab === 'VOC'}
+          content={chapterStrings.vocabulary}
+          difficulties={pathContext.difficulties}
+          t={t}
+        />
+        <StepContent
+          active={activeTab === 'AUDIO'}
+          difficulties={pathContext.difficulties}
+          t={t}
+        >
+          <div className="mv4">
+            <h3 className="">
+              Vous voulez ecouter l'audio au lieu de la video ?
+            </h3>
+            <audio className="w-100" controls src={chapter.audio} />
+            <h3 className="">
+              Si vous voulez telecharger l'audio,{' '}
+              <a
+                href={chapter.audio}
+                title={chapterStrings.title}
+                download
+                target="_blank"
+              >
+                cliquez ici
+              </a>
+            </h3>
+          </div>
+        </StepContent>
+        <StepContent
+          active={activeTab === 'QUIZ'}
+          content={"Fini ? il est temps de passer a l'examen !"}
+          difficulties={pathContext.difficulties}
+          t={t}
+        />
+      </StepWrapper>
     )
   }
 }

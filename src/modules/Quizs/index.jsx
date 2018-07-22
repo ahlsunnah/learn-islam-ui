@@ -1,5 +1,8 @@
 // @flow
+import StepWrapper from 'components/StepWrapper'
 import * as React from 'react'
+import Helmet from 'react-helmet'
+import {withPropsOnChange} from 'recompose'
 import QuizForm from './QuizForm'
 import './styles.scss'
 import type {Strings} from 'types' // eslint-disable-line
@@ -8,14 +11,18 @@ type Props = {
   data: {
     course: {
       id: string,
+      slug: string,
       quizs: Array<{}>,
       strings: Strings,
+      track: Object,
     },
-    translations: {},
+    otherLocaleTranslations: Object,
+    translations: Object,
   },
   location: {
     pathname: string,
   },
+  otherLocalePath: string,
   pathContext: {
     difficulty: number,
     locale: string,
@@ -23,11 +30,19 @@ type Props = {
 }
 
 const QuizsContainer = ({
-  data: {course, translations: t},
+  data: {course, otherLocaleTranslations, translations: t},
   location: {pathname},
+  otherLocalePath,
   pathContext: {difficulty, locale},
 }: Props) => (
-  <div>
+  <StepWrapper
+    course={course}
+    t={t}
+    otherLocaleName={otherLocaleTranslations.localeName}
+    otherLocalePath={otherLocalePath}
+    title={t.quiz}
+  >
+    <Helmet title={'quiz'} />
     <div className="relative z-2">
       <QuizForm
         courseStrings={course.strings[0]}
@@ -45,7 +60,13 @@ const QuizsContainer = ({
       />
     </div>
     <div className="img-background fixed cover w-100 h-100 top-0 z-1" />
-  </div>
+  </StepWrapper>
 )
 
-export default QuizsContainer
+const enhance = withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
+  otherLocalePath: `${data.otherLocaleTranslations.localePath}${
+    data.course.track.slug
+  }/${data.course.slug}/ikhtibar-${pathContext.difficulty}`,
+}))
+
+export default enhance(QuizsContainer)

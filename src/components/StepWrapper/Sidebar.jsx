@@ -45,7 +45,7 @@ type Props = {
     quiz: string,
   },
 }
-const PersistentDrawer = ({
+const Sidebar = ({
   chaptersState,
   closeDrawerOnMobile,
   course: {slug: currentCourseSlug, track},
@@ -189,4 +189,4 @@ const enhance = compose(
     },
   }),
 )
-export default enhance(PersistentDrawer)
+export default enhance(Sidebar)

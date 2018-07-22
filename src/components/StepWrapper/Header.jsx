@@ -16,7 +16,7 @@ const Header = ({
   title,
   toggleSidebar,
 }: Props) => (
-  <div className="flex justify-between items-center bg-black-90 w-100">
+  <div className="z-2 flex justify-between items-center bg-black-90 w-100">
     <div className="flex-grow1 flex-no-shrink">
       <button
         className="mh2 mh3-ns bg-transparent bn pointer"

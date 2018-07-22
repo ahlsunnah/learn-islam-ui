@@ -21,6 +21,7 @@ type Props = {
     title: string,
   },
   dStartQuizs: Function,
+  levelSubtitle: string,
   params: {
     courseId: string,
     difficulty: number,
@@ -40,6 +41,7 @@ const QuizForm = ({
   coursePathname,
   courseStrings,
   dStartQuizs,
+  levelSubtitle,
   quizs,
   quizsIds,
   quizsState,
@@ -51,9 +53,10 @@ const QuizForm = ({
       coursePathname={coursePathname}
       courseStrings={courseStrings}
       finished={quizsState.finished}
-      started={quizsState.started}
       lastScore={quizsState.lastScore}
+      levelSubtitle={levelSubtitle}
       restartQuizs={dStartQuizs}
+      started={quizsState.started}
       t={props.t}
       totalQuestions={totalQuestions}
     />

@@ -29,6 +29,7 @@ type Props = {
   },
   finished: boolean,
   lastScore?: number,
+  levelSubtitle: string,
   restartQuizs: Function,
   started: boolean,
   t: {
@@ -52,9 +53,10 @@ type Props = {
 const QuizHeader = ({
   average,
   coursePathname,
-  courseStrings: {title},
+  courseStrings: {title: courseTitle},
   finished,
   lastScore = 0,
+  levelSubtitle,
   restartQuizs,
   started,
   t,
@@ -66,7 +68,8 @@ const QuizHeader = ({
       rounded
     >
       <span className="f3">{t.quizTitle}</span>
-      <h1 className="tc">{title}</h1>
+      <h1 className="mb2 tc">{courseTitle}</h1>
+      <p className="mb4">({levelSubtitle})</p>
       {finished ? (
         <div>
           {lastScore !== undefined && (

@@ -19,30 +19,36 @@ type Props = {
     otherLocaleTranslations: Object,
     translations: Object,
   },
+  levelSubtitle: string,
   location: {
     pathname: string,
   },
+  longTitle: string,
   otherLocalePath: string,
   pathContext: {
     difficulty: number,
     locale: string,
   },
+  title: string,
 }
 
 const QuizsContainer = ({
   data: {course, otherLocaleTranslations, translations: t},
+  levelSubtitle,
   location: {pathname},
+  longTitle,
   otherLocalePath,
   pathContext: {difficulty, locale},
+  title,
 }: Props) => (
   <StepWrapper
     course={course}
     t={t}
     otherLocaleName={otherLocaleTranslations.localeName}
     otherLocalePath={otherLocalePath}
-    title={t.quiz}
+    title={title}
   >
-    <Helmet title={'quiz'} />
+    <Helmet title={longTitle} />
     <div className="relative z-2">
       <QuizForm
         courseStrings={course.strings[0]}
@@ -55,6 +61,7 @@ const QuizsContainer = ({
           .split('/')
           .slice(0, -1)
           .join('/')}
+        levelSubtitle={levelSubtitle}
         quizs={course.quizs}
         t={t}
       />
@@ -67,6 +74,15 @@ const enhance = withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
   otherLocalePath: `${data.otherLocaleTranslations.localePath}${
     data.course.track.slug
   }/${data.course.slug}/ikhtibar-${pathContext.difficulty}`,
+  levelSubtitle: `${data.translations.level} ${
+    data.translations[`difficulty${pathContext.difficulty}`]
+  }`,
+  title: `${data.translations.quiz} ${
+    data.translations[`difficulty${pathContext.difficulty}`]
+  }`,
+  longTitle: `${data.course.strings[0].title}: ${data.translations.quiz} ${
+    data.translations[`difficulty${pathContext.difficulty}`]
+  }`,
 }))
 
 export default enhance(QuizsContainer)

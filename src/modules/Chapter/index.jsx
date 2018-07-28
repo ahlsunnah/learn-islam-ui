@@ -1,11 +1,14 @@
 // @flow
-import completeChapter from 'actions/chapters'
+/* eslint react/no-unused-prop-types: 0 */
+import {toggleCompleteChapter} from 'actions/chapters'
 import StepWrapper from 'components/StepWrapper'
+import PropTypes from 'prop-types'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
-import {compose, withPropsOnChange} from 'recompose'
+import {compose, setPropTypes, withPropsOnChange} from 'recompose'
 import {Strings} from '../../types'
+import NavigationButtons from './NavigationButtons'
 import StepContent from './StepContent'
 import './styles.scss'
 import Tab from './Tab'
@@ -58,10 +61,10 @@ type Props = {
       localePath: string,
     },
   },
-  dCompleteChapter: Function,
+  navigationButtons: React.Node,
   otherLocalePath: string,
   pathContext: {
-    difficulties: Array<{}>,
+    next: Object,
     locale: string,
     slug: string,
   },
@@ -71,21 +74,10 @@ type State = {
 }
 
 class Chapter extends React.Component<Props, State> {
-  state = {
-    activeTab: this.props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
-  }
-
-  componentDidMount() {
-    const {dCompleteChapter} = this.props
-    this.completeTimeout = setTimeout(() => {
-      dCompleteChapter()
-      this.completeTimeout = null
-    }, 10000)
-  }
-
-  componentWillUnmount() {
-    if (this.completeTimeout) {
-      clearTimeout(this.completeTimeout)
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      activeTab: props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
     }
   }
 
@@ -100,8 +92,8 @@ class Chapter extends React.Component<Props, State> {
       arabicTranscription,
       chapterStrings,
       data,
+      navigationButtons,
       otherLocalePath,
-      pathContext,
     } = this.props
     const {chapter, otherLocaleTranslations, translations: t} = data
     const {activeTab} = this.state
@@ -152,8 +144,8 @@ class Chapter extends React.Component<Props, State> {
             {t.tabAudio}
           </Tab>
           <Tab
-            type="QUIZ"
-            active={activeTab === 'QUIZ'}
+            type="NEXT"
+            active={activeTab === 'NEXT'}
             handleClick={this.toggleActiveTab}
           >
             {t.tabQuiz}
@@ -163,51 +155,46 @@ class Chapter extends React.Component<Props, State> {
         <StepContent
           active={activeTab === 'FR'}
           content={chapterStrings.transcription}
-          difficulties={pathContext.difficulties}
-          t={t}
-        />
+        >
+          {navigationButtons}
+        </StepContent>
         <StepContent
           active={activeTab === 'AR'}
           arabic
           content={arabicTranscription}
-          difficulties={pathContext.difficulties}
-          t={t}
-        />
+        >
+          {navigationButtons}
+        </StepContent>
         <StepContent
           active={activeTab === 'VOC'}
           content={chapterStrings.vocabulary}
-          difficulties={pathContext.difficulties}
-          t={t}
-        />
-        <StepContent
-          active={activeTab === 'AUDIO'}
-          difficulties={pathContext.difficulties}
-          t={t}
         >
+          {navigationButtons}
+        </StepContent>
+        <StepContent active={activeTab === 'AUDIO'}>
           <div className="mv4">
             <h3 className="">
-              Vous voulez ecouter l'audio au lieu de la video ?
+              {"Vous voulez ecouter l'audio au lieu de la video ?"}
             </h3>
             <audio className="w-100" controls src={chapter.audio} />
             <h3 className="">
-              Si vous voulez telecharger l'audio,{' '}
+              {"Si vous voulez telecharger l'audio, "}
               <a
                 href={chapter.audio}
                 title={chapterStrings.title}
                 download
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 cliquez ici
               </a>
             </h3>
+            {navigationButtons}
           </div>
         </StepContent>
-        <StepContent
-          active={activeTab === 'QUIZ'}
-          content={"Fini ? il est temps de passer a l'examen !"}
-          difficulties={pathContext.difficulties}
-          t={t}
-        />
+        <StepContent active={activeTab === 'NEXT'}>
+          {navigationButtons}
+        </StepContent>
       </StepWrapper>
     )
   }
@@ -218,8 +205,9 @@ const enhance = compose(
     ({chapters}, {data}) => ({
       isChapterComplete: chapters[data.chapter.id] || false,
     }),
-    (dispatch, {data}) => ({
-      dCompleteChapter: () => dispatch(completeChapter(data.chapter.id)),
+    (dispatch: Function, {data}) => ({
+      dToggleCompleteChapter: () =>
+        dispatch(toggleCompleteChapter(data.chapter.id)),
     }),
   ),
   withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
@@ -233,6 +221,32 @@ const enhance = compose(
       data.chapter.course.track.slug
     }/${data.chapter.course.slug}/${data.chapter.slug}`,
   })),
+  setPropTypes({
+    data: PropTypes.object.isRequired,
+    dToggleCompleteChapter: PropTypes.func.isRequired,
+    isChapterComplete: PropTypes.bool.isRequired,
+    pathContext: PropTypes.object.isRequired,
+  }),
+  withPropsOnChange(
+    ['data', 'isChapterComplete'],
+    function createNavigationButtons({
+      data: {translations},
+      dToggleCompleteChapter,
+      isChapterComplete,
+      pathContext: {next},
+    }) {
+      return {
+        navigationButtons: (
+          <NavigationButtons
+            isChapterComplete={isChapterComplete}
+            next={next}
+            t={translations}
+            toggleCompleteChapter={dToggleCompleteChapter}
+          />
+        ),
+      }
+    },
+  ),
 )
 
 export default enhance(Chapter)

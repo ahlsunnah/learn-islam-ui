@@ -118,16 +118,22 @@ export const pageQuery = graphql`
       }
     }
     translations: feathersTranslations(locale: {eq: $locale}) {
+      chapter
+      chapterCongratulations
+      chapterCongratulationsCTA
+      course
       difficulty1
       difficulty2
       downloadChapter
       focus
+      goToTracks
+      iCompletedTheChapter
       localeName
       localePath
+      next
       nextCourse
       readIn
       quiz
-      quizCTA
       tabAudio
       tabTranscription
       tabTranslation

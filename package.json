@@ -58,8 +58,9 @@
   "dependencies": {
     "@material/button": "^0.35.0",
     "@material/card": "^0.35.0",
+    "@material/checkbox": "^0.37.1",
     "@material/drawer": "^0.35.0",
-    "@material/form-field": "^0.35.0",
+    "@material/form-field": "^0.37.1",
     "@material/list": "^0.35.0",
     "@material/radio": "^0.35.0",
     "@material/select": "^0.35.2",

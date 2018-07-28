@@ -40,6 +40,7 @@ const Button = ({
       'button-stroked-green': greenStroked,
     })}
     {...props}
+    type="button"
   >
     {children}
   </button>

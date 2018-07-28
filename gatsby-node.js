@@ -20,7 +20,6 @@ exports.createPages = ({
     const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
     const tracksTemplate = path.resolve(`./src/templates/Tracks.jsx`)
     const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
-    // const courseTemplate = path.resolve(`./src/templates/Course.jsx`)
     const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
     const quizsTemplate = path.resolve(`./src/templates/Quizs.jsx`)
 
@@ -51,27 +50,35 @@ exports.createPages = ({
     })
 
     console.log('fetching data')
-    // prettier-ignore-start
     graphql(
       `
         {
-          tracks: allFeathersTracks(limit: 1000) {
+          tracks: allFeathersTracks(
+            limit: 1000
+            sort: {fields: [order], order: ASC}
+          ) {
             edges {
               node {
                 slug
+                order
                 strings: tracksStrings {
                   locale
+                  title
                 }
                 courses {
                   id
+                  order
                   slug
                   coursesStrings {
                     locale
+                    title
                   }
                   chapters {
+                    order
                     slug
                     chaptersStrings {
                       locale
+                      title
                     }
                   }
                   quizs {
@@ -86,7 +93,6 @@ exports.createPages = ({
           }
         }
       `,
-      // prettier-ignore-end
     ).then((result) => {
       if (result.errors) {
         console.error(result.errors[0].message)
@@ -94,6 +100,17 @@ exports.createPages = ({
         return
       }
       const {tracks} = result.data
+
+      // sort courses and chapters:
+      tracks.edges.forEach(({node: {courses}}) => {
+        if (courses && courses.length) {
+          courses.sort((a, b) => a.order - b.order)
+          courses.forEach(({chapters}) => {
+            chapters.sort((a, b) => a.order - b.order)
+          })
+        }
+      })
+
       tracks.edges.forEach(({node}) => {
         const {courses, slug, strings} = node
         if (courses && courses.length) {
@@ -116,9 +133,8 @@ exports.createPages = ({
             })
           })
 
-          courses.forEach((course) => {
+          courses.forEach((course, courseIndex) => {
             const {chapters, quizs, slug: courseSlug} = course
-
             // Which quiz difficulties do we have ?
             const difficultiesByLocale =
               quizs && quizs.length
@@ -129,7 +145,7 @@ exports.createPages = ({
                         acc[locale] = []
                       }
                       if (
-                        !acc[locale].some(({title}) => title == currentTitle)
+                        !acc[locale].some(({title}) => title === currentTitle)
                       ) {
                         acc[locale].push({
                           title: currentTitle,
@@ -144,36 +160,77 @@ exports.createPages = ({
                   }, {})
                 : {}
             // create chapter pages
-            chapters.forEach((chapter, i) => {
+            chapters.forEach((chapter, chapterIndex) => {
               const {slug: chapterSlug, chaptersStrings} = chapter
               chaptersStrings.forEach(({locale}) => {
                 console.log(
                   `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
                 )
-                const path = `${
+                const next = {}
+                if (chapterIndex < chapters.length - 1) {
+                  next.type = 'chapter'
+                  next.path = `${localesPaths[locale]}${slug}/${courseSlug}/${
+                    chapters[chapterIndex + 1].slug
+                  }`
+                  next.title = chapters[chapterIndex + 1].chaptersStrings.find(
+                    (item) => item.locale === locale,
+                  ).title
+                } else if (
+                  difficultiesByLocale[locale] &&
+                  difficultiesByLocale[locale].length
+                ) {
+                  console.log('The next step is an exercise')
+                  next.type = 'quiz'
+                  next.path = difficultiesByLocale[locale][0].path
+                  next.title = difficultiesByLocale[locale][0].title
+                } else if (courseIndex < courses.length - 1) {
+                  console.log(
+                    'The next step is the first chapter of the next course',
+                  )
+                  const nextCourse = courses[courseIndex + 1]
+                  next.type = 'course'
+                  next.path = `${localesPaths[locale]}${slug}/${
+                    nextCourse.slug
+                  }/${nextCourse.chapters[0].slug}`
+                  next.title = nextCourse.coursesStrings.find(
+                    (item) => item.locale === locale,
+                  ).title
+                } else {
+                  // TODO next track
+                  next.type = 'tracks'
+                  next.path = '/masar'
+                  next.title = strings.find(
+                    (item) => item.locale === locale,
+                  ).title
+                  console.log('finished the track')
+                }
+
+                console.log(next)
+
+                const chapterPath = `${
                   localesPaths[locale]
                 }${slug}/${courseSlug}/${chapterSlug}`
                 createPage({
-                  path,
+                  path: chapterPath,
                   component: slash(chapterTemplate),
                   context: {
-                    difficulties: difficultiesByLocale[locale],
                     locale,
                     localesPaths: R.pick(
                       R.map(R.prop('locale'), strings),
                       localesPaths,
                     ),
+                    next,
                     slug: chapterSlug,
                   },
                 })
 
-                if (i === 0) {
+                if (chapterIndex === 0) {
                   // We don't have course page => we redirect to first chapter
                   createRedirect({
-                    fromPath: `${localesPaths[locale]}${slug}/${courseSlug}`,
+                    fromPath: `${localesPaths[locale]}${slug}/${courseSlug}/`,
                     isPermanent: true,
                     redirectInBrowser: true,
-                    toPath: path,
+                    toPath: chapterPath,
                   })
                 }
               })

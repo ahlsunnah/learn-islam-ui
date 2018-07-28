@@ -2,22 +2,62 @@
 import Button from 'components/Button'
 import Link from 'gatsby-link'
 import * as React from 'react'
+import Checkbox from './Checkbox'
+import cx from 'classnames'
 
 type Props = {
-  difficulties: Array<{}>,
+  isChapterComplete: boolean,
+  next: {
+    path: string,
+    title: string,
+    type: string,
+  },
   t: {[string]: string},
+  toggleCompleteChapter: Function,
 }
-const NavigationButtons = ({difficulties, t}: Props) =>
-  difficulties ? (
-    <div className="mb4 ph6-ns ph4 flex-ns items-center">
-      <h3 className="mr3-ns">{t.quizCTA}:</h3>
-      {difficulties.map(({title, path}) => (
-        <div key={title} className="mv2 mr3 mr4-ns dib">
-          <Link className="no-underline" to={path}>
-            <Button raised>{t[title]}</Button>
+const NavigationButtons = ({
+  isChapterComplete,
+  next: {path, title, type},
+  t,
+  toggleCompleteChapter,
+}: Props) =>
+  path ? (
+    <div className="mt2 mb4 ph2 ph4-ns">
+      <Checkbox
+        checked={isChapterComplete}
+        handleChange={toggleCompleteChapter}
+        id="checkbox-finished"
+      >
+        {t.iCompletedTheChapter}
+      </Checkbox>
+      {type === 'tracks' &&
+        isChapterComplete && (
+          <div className="mt3 mb2">
+            <p>
+              {t.chapterCongratulations} [{title}]
+            </p>
+            <p>{t.chapterCongratulationsCTA}</p>
+            <Link className={cx('mh1 no-underline')} to={path}>
+              <Button className="pv2 h-auto lh-title tl" raised secondary>
+                {t.goToTracks}
+              </Button>
+            </Link>
+          </div>
+        )}
+      {type !== 'tracks' && (
+        <div className="mt3 mb2">
+          <Link className={cx('mh1 no-underline')} to={path}>
+            <Button disabled={!isChapterComplete} raised secondary>
+              {t.next}
+            </Button>
           </Link>
+          <span className="mh1">
+            {type === 'chapter' && `(${t.chapter}: ${title})`}
+            {type === 'course' && `(${t.course}: ${title})`}
+            {type === 'quiz' && `(${t.quiz} ${t[title]})`}
+          </span>
         </div>
-      ))}
+      )}
     </div>
   ) : null
 export default NavigationButtons

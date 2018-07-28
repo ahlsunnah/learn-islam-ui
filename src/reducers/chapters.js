@@ -1,9 +1,9 @@
 const chapters = (state = {}, action) => {
   switch (action.type) {
-    case 'COMPLETE_CHAPTER':
+    case 'TOGGLE_COMPLETE_CHAPTER':
       return {
         ...state,
-        [action.id]: true,
+        [action.id]: !state[action.id],
       }
 
     default:

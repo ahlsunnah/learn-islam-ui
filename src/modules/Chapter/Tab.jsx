@@ -22,6 +22,7 @@ const Tab = ({active, children, handleClick, type}: Props) => (
       )}
       name={type}
       onClick={handleClick}
+      type="button"
     >
       <div
         className={cx(

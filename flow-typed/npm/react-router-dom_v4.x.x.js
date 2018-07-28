@@ -1,5 +1,5 @@
-// flow-typed signature: a1ee87e08f5b14f9f9d369d4f03b173d
-// flow-typed version: 054fe1a852/react-router-dom_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 9fac6739b666e8a59414aa13358b677e
+// flow-typed version: 187bd8b1be/react-router-dom_v4.x.x/flow_>=v0.63.x
 
 declare module "react-router-dom" {
   declare export class BrowserRouter extends React$Component<{|
@@ -133,7 +133,10 @@ declare module "react-router-dom" {
 
   declare export class Redirect extends React$Component<{|
     to: string | LocationShape,
-    push?: boolean
+    push?: boolean,
+    from?: string,
+    exact?: boolean,
+    strict?: boolean
   |}> {}
 
   declare export class Route extends React$Component<{|
@@ -142,11 +145,14 @@ declare module "react-router-dom" {
     children?: React$ComponentType<ContextRouter> | React$Node,
     path?: string,
     exact?: boolean,
-    strict?: boolean
+    strict?: boolean,
+    location?: LocationShape,
+    sensitive?: boolean
   |}> {}
 
   declare export class Switch extends React$Component<{|
-    children?: React$Node
+    children?: React$Node,
+    location?: Location
   |}> {}
 
   declare export function withRouter<P: {}, Component: React$ComponentType<P>>(
@@ -164,6 +170,9 @@ declare module "react-router-dom" {
 
   declare export function matchPath(
     pathname: string,
-    options?: MatchPathOptions | string
+    options?: MatchPathOptions | string,
+    parent?: Match
   ): null | Match;
+  
+  declare export function generatePath(pattern?: string, params?: Object): string;
 }

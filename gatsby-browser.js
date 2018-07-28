@@ -7,7 +7,11 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {Router} from 'react-router-dom'
 import createStore from './src/createStore'
 
-exports.replaceRouterComponent = ({history}: {history: {}}) => {
+type Props = {
+  history: Object,
+}
+
+exports.replaceRouterComponent = ({history}: Props) => {
   const {store, persistor} = createStore()
 
   const ConnectedRouterWrapper = ({children}: {children: React.Node}) => (

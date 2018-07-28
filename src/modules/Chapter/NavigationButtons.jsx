@@ -1,9 +1,9 @@
 // @flow
+import cx from 'classnames'
 import Button from 'components/Button'
 import Link from 'gatsby-link'
 import * as React from 'react'
 import Checkbox from './Checkbox'
-import cx from 'classnames'
 
 type Props = {
   isChapterComplete: boolean,

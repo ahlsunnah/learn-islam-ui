@@ -1,4 +1,5 @@
 // @flow
+/* react/destructuring-assignment:0 */
 import * as React from 'react'
 import R from 'ramda'
 import Helmet from 'react-helmet'
@@ -142,11 +143,14 @@ export const pageQuery = graphql`
       average
       backToCourse
       chooseACategoryTitle
+      congratulations
+      congratulationsCTA
       continue
       difficulty1
       difficulty2
       fillInTheBlankTitle
       goToTop
+      goToTracks
       grade
       level
       localePath
@@ -160,6 +164,7 @@ export const pageQuery = graphql`
       restartQuizs
       seeYourScore
       start
+      takeExam
       yourLastScore
       yourScore
     }

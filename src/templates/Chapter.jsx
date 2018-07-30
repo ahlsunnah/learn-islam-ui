@@ -1,4 +1,5 @@
 // @flow
+/* eslint react/destructuring-assignment:0 */
 import * as React from 'react'
 import R from 'ramda'
 import Helmet from 'react-helmet'
@@ -119,8 +120,8 @@ export const pageQuery = graphql`
     }
     translations: feathersTranslations(locale: {eq: $locale}) {
       chapter
-      chapterCongratulations
-      chapterCongratulationsCTA
+      congratulations
+      congratulationsCTA
       course
       difficulty1
       difficulty2

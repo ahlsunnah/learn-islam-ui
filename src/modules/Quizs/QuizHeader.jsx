@@ -30,6 +30,16 @@ type Props = {
   finished: boolean,
   lastScore?: number,
   levelSubtitle: string,
+  next: {
+    path: string,
+    title: string,
+    type: string,
+  },
+  nextQuiz?: {
+    path: string,
+    title: string,
+    type: string,
+  },
   restartQuizs: Function,
   started: boolean,
   t: {
@@ -57,6 +67,8 @@ const QuizHeader = ({
   finished,
   lastScore = 0,
   levelSubtitle,
+  next,
+  nextQuiz,
   restartQuizs,
   started,
   t,
@@ -64,16 +76,16 @@ const QuizHeader = ({
 }: Props) => (
   <div className="vh-100 flex justify-center items-center">
     <Card
-      className="pv3 ph4 w-50-ns w-90 center flex flex-column justify-around items-center"
+      className="pv3 w-50-ns w-90 center flex flex-column justify-around items-center"
       rounded
     >
-      <span className="f3">{t.quizTitle}</span>
-      <h1 className="mb2 tc">{courseTitle}</h1>
-      <p className="mb4">({levelSubtitle})</p>
+      <span className="ph3 ph4-l f3">{t.quizTitle}</span>
+      <h1 className="ph3 ph4-l mb2 tc">{courseTitle}</h1>
+      <p className="ph3 ph4-l mb4">({levelSubtitle})</p>
       {finished ? (
         <div>
           {lastScore !== undefined && (
-            <div className="mv3 f4">
+            <div className="ph3 ph4-l mv3 f4">
               <div className="mv2">
                 {t.yourScore}: {lastScore} / {totalQuestions}
               </div>
@@ -86,16 +98,53 @@ const QuizHeader = ({
               </div>
             </div>
           )}
-          <div className="flex flex-column flex-row-ns justify-between items-center tc">
-            <Link to={coursePathname}>
-              <Button className="ma2 ph3 pointer b" secondary>
-                {t.backToCourse}
-              </Button>
-            </Link>
-            <Button className="ma2 ph3" onClick={restartQuizs} secondary>
+          <div className="ph3 ph4-l flex flex-column flex-row-l justify-between items-center tc">
+            <Button
+              autoSize
+              className="ma2 ph3 b"
+              onClick={restartQuizs}
+              secondary
+            >
               {t.restartQuizs}
             </Button>
+            {average < 15 && (
+              <Link to={coursePathname}>
+                <Button autoSize className="ma2 ph3 pointer b" secondary>
+                  {t.backToCourse}
+                </Button>
+              </Link>
+            )}
+            {nextQuiz && (
+              <Link to={nextQuiz.path}>
+                <Button autoSize className="ma2 ph3 pointer b" secondary>
+                  {`${t.takeExam}${t[nextQuiz.title]}`}
+                </Button>
+              </Link>
+            )}
           </div>
+          {average > 15 &&
+            next.type === 'course' && (
+              <div className="ph3 ph4-l bt b--black-60 flex flex-column flex-row-l justify-center items-center tc">
+                <Link to={next.path}>
+                  <Button autoSize className="ma2 ph3 pointer b" secondary>
+                    {t.nextCourse}
+                  </Button>
+                </Link>
+                ({next.title})
+              </div>
+            )}
+          {average > 15 &&
+            next.type === 'tracks' && (
+              <div className="ph3 ph4-l bt b--black-60 flex flex-column justify-center items-center f4">
+                <p>{`${t.congratulations} [${next.title}]`}</p>
+                <p>{t.congratulationsCTA}</p>
+                <Link to={next.path}>
+                  <Button autoSize className="ma2 ph3 pointer b" secondary>
+                    {t.goToTracks}
+                  </Button>
+                </Link>
+              </div>
+            )}
         </div>
       ) : (
         <div className="flex flex-column flex-row-ns justify-between items-center tc">

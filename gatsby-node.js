@@ -179,14 +179,10 @@ exports.createPages = ({
                   difficultiesByLocale[locale] &&
                   difficultiesByLocale[locale].length
                 ) {
-                  console.log('The next step is an exercise')
                   next.type = 'quiz'
                   next.path = difficultiesByLocale[locale][0].path
                   next.title = difficultiesByLocale[locale][0].title
                 } else if (courseIndex < courses.length - 1) {
-                  console.log(
-                    'The next step is the first chapter of the next course',
-                  )
                   const nextCourse = courses[courseIndex + 1]
                   next.type = 'course'
                   next.path = `${localesPaths[locale]}${slug}/${
@@ -202,10 +198,7 @@ exports.createPages = ({
                   next.title = strings.find(
                     (item) => item.locale === locale,
                   ).title
-                  console.log('finished the track')
                 }
-
-                console.log(next)
 
                 const chapterPath = `${
                   localesPaths[locale]
@@ -225,7 +218,7 @@ exports.createPages = ({
                 })
 
                 if (chapterIndex === 0) {
-                  // We don't have course page => we redirect to first chapter
+                  // course link redirects to first chapter
                   createRedirect({
                     fromPath: `${localesPaths[locale]}${slug}/${courseSlug}/`,
                     isPermanent: true,
@@ -240,12 +233,39 @@ exports.createPages = ({
             if (quizs && quizs.length) {
               Object.entries(difficultiesByLocale).forEach(
                 ([locale, difficulties]) => {
-                  difficulties.forEach((difficulty) => {
+                  difficulties.forEach((difficulty, difficultyIndex) => {
                     console.log(
                       `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${
                         difficulty.title
                       }`,
                     )
+                    let nextQuiz
+                    if (difficultyIndex < difficulties.length - 1) {
+                      nextQuiz = {
+                        type: 'quiz',
+                        path: difficulties[difficultyIndex + 1].path,
+                        title: difficulties[difficultyIndex + 1].title,
+                      }
+                    }
+                    const next = {}
+                    if (courseIndex < courses.length - 1) {
+                      const nextCourse = courses[courseIndex + 1]
+                      next.type = 'course'
+                      next.path = `${localesPaths[locale]}${slug}/${
+                        nextCourse.slug
+                      }/${nextCourse.chapters[0].slug}`
+                      next.title = nextCourse.coursesStrings.find(
+                        (item) => item.locale === locale,
+                      ).title
+                    } else {
+                      // TODO next track
+                      next.type = 'tracks'
+                      next.path = '/masar'
+                      next.title = strings.find(
+                        (item) => item.locale === locale,
+                      ).title
+                    }
+
                     createPage({
                       path: difficulty.path,
                       component: slash(quizsTemplate),
@@ -256,6 +276,8 @@ exports.createPages = ({
                           R.map(R.prop('locale'), strings),
                           localesPaths,
                         ),
+                        next,
+                        nextQuiz,
                         slug: courseSlug,
                       },
                     })

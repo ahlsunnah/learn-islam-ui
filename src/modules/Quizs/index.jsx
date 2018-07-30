@@ -28,6 +28,8 @@ type Props = {
   pathContext: {
     difficulty: number,
     locale: string,
+    next: Object,
+    nextQuiz?: Object,
   },
   title: string,
 }
@@ -38,7 +40,7 @@ const QuizsContainer = ({
   location: {pathname},
   longTitle,
   otherLocalePath,
-  pathContext: {difficulty, locale},
+  pathContext: {difficulty, locale, next, nextQuiz},
   title,
 }: Props) => (
   <StepWrapper
@@ -62,6 +64,8 @@ const QuizsContainer = ({
           .slice(0, -1)
           .join('/')}
         levelSubtitle={levelSubtitle}
+        next={next}
+        nextQuiz={nextQuiz}
         quizs={course.quizs}
         t={t}
       />

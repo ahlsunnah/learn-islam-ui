@@ -1,4 +1,5 @@
 // @flow
+/* eslint react/destructuring-assignment:0 */
 import {addData, addScore, addTotal, startQuizs} from 'actions/quizs'
 import PropTypes from 'prop-types'
 import * as React from 'react'
@@ -22,6 +23,8 @@ type Props = {
   },
   dStartQuizs: Function,
   levelSubtitle: string,
+  next: Object,
+  nextQuiz?: Object,
   params: {
     courseId: string,
     difficulty: number,
@@ -42,6 +45,8 @@ const QuizForm = ({
   courseStrings,
   dStartQuizs,
   levelSubtitle,
+  next,
+  nextQuiz,
   quizs,
   quizsIds,
   quizsState,
@@ -55,6 +60,8 @@ const QuizForm = ({
       finished={quizsState.finished}
       lastScore={quizsState.lastScore}
       levelSubtitle={levelSubtitle}
+      next={next}
+      nextQuiz={nextQuiz}
       restartQuizs={dStartQuizs}
       started={quizsState.started}
       t={props.t}

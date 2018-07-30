@@ -34,9 +34,9 @@ const NavigationButtons = ({
         isChapterComplete && (
           <div className="mt3 mb2">
             <p>
-              {t.chapterCongratulations} [{title}]
+              {t.congratulations} [{title}]
             </p>
-            <p>{t.chapterCongratulationsCTA}</p>
+            <p>{t.congratulationsCTA}</p>
             <Link className={cx('mh1 no-underline')} to={path}>
               <Button className="pv2 h-auto lh-title tl" raised secondary>
                 {t.goToTracks}

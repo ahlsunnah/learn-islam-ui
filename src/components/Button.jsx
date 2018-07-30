@@ -4,6 +4,7 @@ import * as React from 'react'
 import 'styles/button.scss'
 
 type Props = {
+  autoSize?: boolean,
   children: React.Node,
   className?: string,
   elevated?: boolean,
@@ -16,6 +17,7 @@ type Props = {
   stroked?: boolean,
 }
 const Button = ({
+  autoSize,
   children,
   className = '',
   elevated,
@@ -38,6 +40,7 @@ const Button = ({
       'mdc-button--raised': raised,
       'mdc-button--outlined': stroked,
       'button-stroked-green': greenStroked,
+      'pv2 h-auto lh-title': autoSize,
     })}
     {...props}
     type="button"

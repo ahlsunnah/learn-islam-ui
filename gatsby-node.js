@@ -19,6 +19,7 @@ exports.createPages = ({
     // const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
     const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
     const tracksTemplate = path.resolve(`./src/templates/Tracks.jsx`)
+    const aboutUsTemplate = path.resolve(`./src/templates/AboutUs.jsx`)
     const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
     const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
     const quizsTemplate = path.resolve(`./src/templates/Quizs.jsx`)
@@ -42,6 +43,19 @@ exports.createPages = ({
       createPage({
         path: `${localesPaths[locale]}masar`,
         component: slash(tracksTemplate),
+        context: {
+          locale,
+          localesPaths,
+        },
+      })
+    })
+
+    // about us pages
+    console.log('Creating about us pages')
+    locales.forEach((locale) => {
+      createPage({
+        path: `${localesPaths[locale]}nahnu`,
+        component: slash(aboutUsTemplate),
         context: {
           locale,
           localesPaths,

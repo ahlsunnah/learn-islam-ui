@@ -3,14 +3,17 @@ import NavBar from 'components/NavBar'
 import * as React from 'react'
 
 type Props = {
-  otherLocaleTranslations: {},
-  translations: {
-    localePath: string,
-    tracksPageTitle: string,
-    tracksPageDescription: string,
-  },
+  description?: string,
+  otherLocaleTranslations: Object,
+  title: string,
+  translations: Object,
 }
-const HomeHero = ({otherLocaleTranslations, translations: t}: Props) => (
+const HomeHero = ({
+  description,
+  otherLocaleTranslations,
+  title,
+  translations: t,
+}: Props) => (
   <div className="flex flex-column mdc-theme--primary-bg">
     <NavBar
       localePath={t.localePath}
@@ -18,8 +21,8 @@ const HomeHero = ({otherLocaleTranslations, translations: t}: Props) => (
       translations={t}
     />
     <div className="mt64 pt4 pb3 tc white">
-      <h1 className="f3 f2-ns fw4">{t.tracksPageTitle}</h1>
-      <p className="">{t.tracksPageDescription}</p>
+      <h1 className="f3 f2-ns fw4">{title}</h1>
+      <p className="">{description}</p>
     </div>
   </div>
 )

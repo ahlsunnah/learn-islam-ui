@@ -6,39 +6,35 @@ import MobileSection from './MobileSection'
 import NavSection from './NavSection'
 
 type Props = {
-  localePath: string,
   otherLocaleTranslations: {
     localeName: string,
     localePath: string,
   },
   translations: {
-    courses: string,
-    tracks: string,
     aboutUs: string,
     connect: string,
+    courses: string,
+    localePath: string,
     siteName: string,
+    tracks: string,
   },
 }
 
-const NavBar = ({
-  localePath,
-  otherLocaleTranslations,
-  translations: t,
-}: Props) => (
+const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
   <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
     <div className="pv1 mdc-toolbar__row">
       <LogoSection
-        localePath={localePath}
+        localePath={t.localePath}
         siteName={t.siteName}
         otherLocaleTranslations={otherLocaleTranslations}
       />
       <NavSection
-        localePath={localePath}
+        localePath={t.localePath}
         otherLocaleTranslations={otherLocaleTranslations}
         t={t}
       />
       <MobileSection
-        localePath={localePath}
+        localePath={t.localePath}
         otherLocaleTranslations={otherLocaleTranslations}
         t={t}
       />

@@ -1,20 +1,24 @@
 // @flow
+import BlueHero from 'components/BlueHero'
 import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
-import BlueHero from './BlueHero'
 import Tracks from './Tracks'
 
 type Props = {
   data: {
     otherLocaleTranslations: Object,
-    tracks: Array,
+    tracks: Array<Object>,
     translations: Object,
   },
   pathContext: Object,
 }
 const TracksContainer = ({data}: Props) => (
   <div>
-    <BlueHero {...data} />
+    <BlueHero
+      {...data}
+      title={data.translations.tracksPageTitle}
+      description={data.translations.tracksPageDescription}
+    />
     <Tracks tracks={data.tracks} localePath={data.translations.localePath} />
     <HomeFooter
       {...data.translations}

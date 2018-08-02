@@ -59,6 +59,7 @@ export const pageQuery = graphql`
     translations: feathersTranslations(locale: {eq: $locale}) {
       aboutUs
       connect
+      copyright
       courses
       footerSocialTitle
       homeFooterCTA

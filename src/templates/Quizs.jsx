@@ -1,5 +1,4 @@
 // @flow
-/* react/destructuring-assignment:0 */
 import * as React from 'react'
 import R from 'ramda'
 import Helmet from 'react-helmet'

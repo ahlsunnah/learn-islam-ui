@@ -39,6 +39,7 @@ module.exports = {
     'no-unexpected-multiline': 2,
     'no-unused-vars': 1,
     'prefer-arrow-callback': 0,
+    'react/destructuring-assignment': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-wrap-multilines': 0,
     'react/no-array-index-key': 0,

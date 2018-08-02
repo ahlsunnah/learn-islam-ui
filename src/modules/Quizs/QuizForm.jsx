@@ -1,5 +1,4 @@
 // @flow
-/* eslint react/destructuring-assignment:0 */
 import {addData, addScore, addTotal, startQuizs} from 'actions/quizs'
 import PropTypes from 'prop-types'
 import * as React from 'react'

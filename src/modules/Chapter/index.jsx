@@ -148,7 +148,7 @@ class Chapter extends React.Component<Props, State> {
             active={activeTab === 'NEXT'}
             handleClick={this.toggleActiveTab}
           >
-            {t.tabQuiz}
+            {t.tabCompleted}
           </Tab>
         </nav>
 
@@ -173,22 +173,26 @@ class Chapter extends React.Component<Props, State> {
         </StepContent>
         <StepContent active={activeTab === 'AUDIO'}>
           <div className="mv4">
-            <h3 className="">
-              {"Vous voulez ecouter l'audio au lieu de la video ?"}
-            </h3>
-            <audio className="w-100" controls src={chapter.audio} />
-            <h3 className="">
-              {"Si vous voulez telecharger l'audio, "}
-              <a
-                href={chapter.audio}
-                title={chapterStrings.title}
-                download
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                cliquez ici
-              </a>
-            </h3>
+            <h2>{t.courseSAudio}</h2>
+            <div>
+              <h3 className="">{t.listenAudio}</h3>
+              <audio className="w-100" controls src={chapter.audio} />
+            </div>
+            <div className="mv4">
+              <h3 className="">{t.downloadAudio}</h3>
+              <p className="">
+                <a
+                  className="b"
+                  href={chapter.audio}
+                  title={chapterStrings.title}
+                  download
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {t.clickHere}
+                </a>
+              </p>
+            </div>
             {navigationButtons}
           </div>
         </StepContent>

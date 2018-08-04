@@ -119,15 +119,19 @@ export const pageQuery = graphql`
     }
     translations: feathersTranslations(locale: {eq: $locale}) {
       chapter
+      clickHere
       congratulations
       congratulationsCTA
       course
+      courseSAudio
       difficulty1
       difficulty2
+      downloadAudio
       downloadChapter
       focus
       goToTracks
       iCompletedTheChapter
+      listenAudio
       localeName
       localePath
       next
@@ -135,9 +139,9 @@ export const pageQuery = graphql`
       readIn
       quiz
       tabAudio
+      tabCompleted
       tabTranscription
       tabTranslation
-      tabQuiz
       tabVocabulary
       takeQuiz
     }

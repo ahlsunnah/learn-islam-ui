@@ -25,8 +25,8 @@ const HomeNewsletter = ({
   message,
   success,
 }: Props) => (
-  <section className="pv5 min-h-512-ns flex flex-column justify-center items-center">
-    <div className="ph4 tc mdc-theme--primary">
+  <section className="pv5 min-h-512-ns flex flex-column justify-center items-center mdc-theme--primary-bg">
+    <div className="ph4 tc white">
       <h2>{homeEmailTitle}</h2>
     </div>
     <div className="relative flex flex-column flex-row-ns justify-around items-center">
@@ -42,7 +42,8 @@ const HomeNewsletter = ({
       <Button
         className="mt4 mt0-ns mh2 ph3 ph4-ns"
         onClick={handleSubmit}
-        raised
+        elevated
+        inverse
       >
         {enroll}
       </Button>

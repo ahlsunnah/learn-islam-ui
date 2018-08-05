@@ -18,9 +18,11 @@ const HomeContainer = ({data}: Props) => (
     <HomeHero {...data} />
     <HomeFeatures {...data.translations} />
     {/* <HomeCourses {...data.translations} /> */}
+    {/* <div className="mdc-theme--primary-bg" style={{height: '3px'}} /> */}
     <HomeNewsletter {...data.translations} />
     <HomeFooter
       {...data.translations}
+      dark
       firstTrackSlug={`${data.translations.localePath}${data.tracks[0] &&
         data.tracks[0].slug}`}
     />

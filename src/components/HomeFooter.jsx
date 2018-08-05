@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import Link from 'gatsby-link'
+import cx from 'classnames'
 import Facebook from 'react-icons/lib/fa/facebook'
 import Telegram from 'react-icons/lib/fa/paper-plane'
 import Twitter from 'react-icons/lib/fa/twitter'
@@ -16,6 +17,7 @@ const icons = Object.entries({
 
 type Props = {
   copyright: string,
+  dark?: boolean,
   firstTrackSlug: string,
   footerSocialTitle: string,
   homeFooterCTA: string,
@@ -29,6 +31,7 @@ type Props = {
 }
 const HomeFooter = ({
   copyright,
+  dark,
   firstTrackSlug,
   footerSocialTitle,
   homeFooterCTA,
@@ -37,13 +40,24 @@ const HomeFooter = ({
   siteSlogan,
   ...props
 }: Props) => (
-  <section className="pt5 pb4 ph4 ph5-l flex flex-column mdc-theme--primary-bg white">
+  <section
+    className={cx('pt5 pb4 ph4 ph5-l flex flex-column white', {
+      'mdc-theme--primary-bg': !dark,
+      'mdc-theme--secondary-bg': dark,
+    })}
+  >
     <div className="mh5-ns ph5-ns tc">
       <h2 className="ph5-l f4 fw4">{homeFooterCTA}</h2>
     </div>
     <div className="mt4 mt5-ns tc">
       <Link to={firstTrackSlug} className="no-underline">
-        <Button className="ph4 b" elevated inverse>
+        <Button
+          className={cx('ph4 b', {
+            'mdc-theme--secondary': dark,
+          })}
+          elevated
+          inverse
+        >
           {homeStartTrack}
         </Button>
       </Link>
@@ -59,7 +73,12 @@ const HomeFooter = ({
           <div className="mt3">
             {icons.map(([icon, Icon], i) => (
               <a key={i} href={props[`url${icon}`]} target="_blank">
-                <Icon className="mh2 pa1 f4 bg-white mdc-theme--primary" />
+                <Icon
+                  className={cx('mh2 pa1 f4 bg-white mdc-theme--primary', {
+                    'mdc-theme--primary': !dark,
+                    'mdc-theme--secondary': dark,
+                  })}
+                />
                 {/* <Button className="pa0" inverse>
                   <Icon className="mdc-button__icon" />
                 </Button> */}

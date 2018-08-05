@@ -23,7 +23,7 @@ type Props = {
 }
 const HomeTrackCard = ({localePath, slug, soon, strings: s, t}: Props) => (
   <Card
-    className="mt3 ph3 pv1 flex flex-column flex-row-l justify-around items-center"
+    className="mt3 ph3 pv1 flex flex-column flex-row-l justify-between items-center"
     rounded
   >
     <div className="mh2 flex flex-column item-center item-start-l">

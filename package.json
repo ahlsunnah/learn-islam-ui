@@ -115,7 +115,6 @@
     "slash": "^2.0.0",
     "svg-icon": "^0.8.2",
     "tachyons": "^4.10.0",
-    "typeface-amiri": "^0.0.56",
     "typeface-open-sans": "^0.0.54"
   },
   "devDependencies": {

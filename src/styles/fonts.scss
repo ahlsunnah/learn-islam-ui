@@ -21,25 +21,22 @@
     url('~typeface-open-sans/files/open-sans-latin-700.woff') format('woff');
 }
 
-// https://github.com/KyleAMathews/typefaces/blob/master/packages/amiri/index.css
-/* amiri-400normal - latin */
 @font-face {
-  font-family: 'Amiri';
+  font-family: 'Shahwan';
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: local('Amiri Regular '), local('Amiri-Regular'),
-    url('~typeface-amiri/files/amiri-latin-400.woff2') format('woff2'),
-    url('~typeface-amiri/files/amiri-latin-400.woff') format('woff');
+  src: local('Shahwan Regular '), local('Shahwan-Regular'),
+    url('~fonts/shahwan-fonts.woff2') format('woff2'),
+    url('~fonts/shahwan-fonts.woff') format('woff');
 }
 
-/* amiri-700normal - latin */
 @font-face {
-  font-family: 'Amiri';
+  font-family: 'Shahwan';
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: local('Amiri Bold '), local('Amiri-Bold'),
-    url('~typeface-amiri/files/amiri-latin-700.woff2') format('woff2'),
-    url('~typeface-amiri/files/amiri-latin-700.woff') format('woff');
+  src: local('Shahwan Bold '), local('Shahwan-Bold'),
+    url('~fonts/shahwan-fonts-b.woff2') format('woff2'),
+    url('~fonts/shahwan-fonts-b.woff') format('woff');
 }

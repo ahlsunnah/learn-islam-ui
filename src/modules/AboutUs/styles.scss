@@ -1,0 +1,19 @@
+.about-us-content {
+  max-width: 36rem;
+  line-height: 1.6;
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+}
+
+html:lang(ar) .about-us-content {
+  line-height: 1.8;
+}

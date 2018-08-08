@@ -7,6 +7,7 @@ import Telegram from 'react-icons/lib/fa/paper-plane'
 import Twitter from 'react-icons/lib/fa/twitter'
 import Youtube from 'react-icons/lib/fa/youtube-play'
 import Button from './Button'
+import RawHTML from './RawHTML'
 
 const icons = Object.entries({
   Facebook,
@@ -89,11 +90,7 @@ const HomeFooter = ({
       </div>
     </div>
     <div className="pt3 tc">
-      {copyright}{' '}
-      <a className="white" href="https://madrassaminhaj.com">
-        {siteName}
-      </a>
-      {' - 2018'}
+      <RawHTML>{copyright}</RawHTML>
     </div>
   </section>
 )

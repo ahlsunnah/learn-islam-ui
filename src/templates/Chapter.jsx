@@ -120,22 +120,23 @@ export const pageQuery = graphql`
     translations: feathersTranslations(locale: {eq: $locale}) {
       chapter
       clickHere
+      chapterAudio
       congratulations
       congratulationsCTA
       course
-      courseSAudio
       difficulty1
       difficulty2
       downloadAudio
-      downloadChapter
       focus
       goToTracks
       iCompletedTheChapter
       listenAudio
+      locale
       localeName
       localePath
       next
       nextCourse
+      nextHelp
       readIn
       quiz
       tabAudio
@@ -144,6 +145,7 @@ export const pageQuery = graphql`
       tabTranslation
       tabVocabulary
       takeQuiz
+      track
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
       localeName

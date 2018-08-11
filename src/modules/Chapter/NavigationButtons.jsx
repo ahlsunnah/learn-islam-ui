@@ -1,6 +1,7 @@
 // @flow
 import cx from 'classnames'
 import Button from 'components/Button'
+import RawHTML from 'components/RawHTML'
 import Link from 'gatsby-link'
 import * as React from 'react'
 import Checkbox from './Checkbox'
@@ -12,7 +13,18 @@ type Props = {
     title: string,
     type: string,
   },
-  t: {[string]: string},
+  t: {
+    chapter: string,
+    congratulations: string,
+    congratulationsCTA: string,
+    course: string,
+    goToTracks: string,
+    iCompletedTheChapter: string,
+    next: string,
+    nextHelp?: string,
+    quiz: string,
+    track: string,
+  },
   toggleCompleteChapter: Function,
 }
 const NavigationButtons = ({
@@ -23,6 +35,15 @@ const NavigationButtons = ({
 }: Props) =>
   path ? (
     <div className="mt2 mb4 ph2 ph4-ns">
+      <h1 className="mb2">
+        {type === 'tracks'
+          ? t.next
+          : `${t.locale === 'ar' ? 'ال' : ''}${t[type]} ${t.next}`}
+      </h1>
+      {t.nextHelp && (
+        <RawHTML className="mv3 black-60 f5">{t.nextHelp}</RawHTML>
+      )}
+
       <Checkbox
         checked={isChapterComplete}
         handleChange={toggleCompleteChapter}

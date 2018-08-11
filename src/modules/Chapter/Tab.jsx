@@ -7,9 +7,18 @@ type Props = {
   active: boolean,
   children: string,
   handleClick: Function,
+  svgClassName?: string,
+  svgPath: string,
   type: string,
 }
-const Tab = ({active, children, handleClick, type}: Props) => (
+const Tab = ({
+  active,
+  children,
+  handleClick,
+  svgClassName,
+  svgPath,
+  type,
+}: Props) => (
   <div
     className={cx('flex1 bb bw1 ', {
       'b--black': active,
@@ -33,7 +42,11 @@ const Tab = ({active, children, handleClick, type}: Props) => (
           },
         )}
       >
-        <TabIcon className="h2 mh0 mh1-l" height="20px" type={type} />
+        <TabIcon
+          className={cx('h2 mh0 mh1-l', svgClassName)}
+          height="20px"
+          path={svgPath}
+        />
         <span className="mh1 dn db-l">{children}</span>
       </div>
     </button>

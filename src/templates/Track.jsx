@@ -94,7 +94,7 @@ export const pageQuery = graphql`
     }
     translations: feathersTranslations(locale: {eq: $locale}) {
       connect
-      level
+      course
       level1
       level2
       level3
@@ -104,6 +104,7 @@ export const pageQuery = graphql`
       startCourse
       toOtherLanguageCTA
       track
+      trackLevel
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
       localeName

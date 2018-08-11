@@ -18,7 +18,7 @@ type Props = {
     description: string,
   }>,
   t: {
-    level: string,
+    course: string,
     startCourse: string,
   },
   topic: {
@@ -48,7 +48,7 @@ const CourseCard = ({
     >
       <div className="self-end pv3 flex items-center">
         <IconWithText className="ph2" icon={target}>
-          {`${t.level} ${t[`level${level}`]}`}
+          {`${t.course} ${t[`level${level}`]}`}
         </IconWithText>
         <div
           className="ph4 pv2 br-pill white f7"

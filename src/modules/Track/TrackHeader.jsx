@@ -16,7 +16,7 @@ type Props = {
   t: {
     locale: string,
     start: string,
-    track: string,
+    trackLevel: string,
     toOtherLanguageCTA: string,
   },
   otherLocaleName: string,
@@ -68,7 +68,7 @@ const TrackHeader = ({
         {getHumanTime(t.locale, duration)}
       </IconWithText>
       <IconWithText className="mt4 mt0-ns mh3-l" icon={target}>
-        {`${t.track} ${t[`level${level}`]}`}
+        {`${t.trackLevel}: ${t[`level${level}`]}`}
       </IconWithText>
     </div>
   </Header>

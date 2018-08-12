@@ -82,6 +82,8 @@ export const pageQuery = graphql`
       newsletterEmailNotValid
       newsletterSubscribed
       newsletterSuccess
+      siteContentPresentation
+      homeContentTitle
       siteName
       siteSlogan
       soon

@@ -3,7 +3,7 @@
 // TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
 import cx from 'classnames'
 import Link from 'gatsby-link'
-import logo from 'images/logo.svg'
+import logo from 'images/logo.png'
 import * as React from 'react'
 import 'styles/drawer.scss'
 import Button from '../Button'

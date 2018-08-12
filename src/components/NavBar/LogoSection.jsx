@@ -2,7 +2,7 @@
 import * as React from 'react'
 import Link from 'gatsby-link'
 import cx from 'classnames'
-import logo from 'images/logo.svg'
+import logo from 'images/logo.png'
 
 type Props = {
   localePath: string,
@@ -24,7 +24,7 @@ const LogoSection = ({
           'mr5-ns mr3': otherLocaleTranslations.localeName === 'Français',
         })}
       >
-        <img alt={siteName} height="50px" src={logo} />
+        <img alt={siteName} height="65px" src={logo} />
       </h1>
     </Link>
   </section>

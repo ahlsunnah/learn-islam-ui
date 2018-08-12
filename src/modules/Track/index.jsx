@@ -33,7 +33,7 @@ const TrackContainer = ({
   const nextCoursePath =
     track.courses[0] &&
     `${currentPath}/${track.courses[0].slug}/${track.courses[0].chapters[0] &&
-    track.courses[0].chapters[0].slug}`
+      track.courses[0].chapters[0].slug}`
   const trackDuration = track.courses.reduce(
     (acc, {chapters}) =>
       acc + chapters.reduce((acc2, {duration}) => acc2 + duration, 0),
@@ -44,12 +44,12 @@ const TrackContainer = ({
     track.courses.length &&
     Math.round(
       track.courses.reduce((acc, {level}) => acc + level, 0) /
-      track.courses.length,
+        track.courses.length,
     )
   return (
     <div className="min-vh-100 flex">
-      <TrackSidebar localePath={localePath} />
-      <div className="pt5-ns pb4 flex1 flex flex-column bg-light-gray">
+      <TrackSidebar locale={locale} localePath={localePath} />
+      <div className="pt5-l pb4 flex1 flex flex-column bg-light-gray">
         <Helmet title={track.strings[0].title} />
         <TrackHeader
           duration={trackDuration}

@@ -18,7 +18,7 @@ type Props = {
 const ContactUsContainer = ({data}: Props) => (
   <div>
     <BlueHero {...data} title={data.translations.aboutUsPageTitle} />
-    <RawHTML className="about-us-content center pt3 pb4 ph3 ph4-m ph0-l">
+    <RawHTML className="about-us-content center pt3 pb4 ph3 ph4-m ph0-l tj">
       {data.translations.aboutUsPageContent}
     </RawHTML>
     <HomeFooter

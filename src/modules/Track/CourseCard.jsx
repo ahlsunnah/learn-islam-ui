@@ -61,7 +61,7 @@ const CourseCard = ({
         <h2 className="f5">{strings[0].title}</h2>
         {strings[0].description && (
           <div
-            className="w-80-m w-60-l f6"
+            className="w-90-m w-70-l f6"
             dangerouslySetInnerHTML={{
               __html: strings[0].description,
             }}

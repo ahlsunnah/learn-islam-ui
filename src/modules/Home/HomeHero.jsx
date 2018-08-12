@@ -2,12 +2,12 @@
 import * as React from 'react'
 import cx from 'classnames'
 import NavBar from 'components/NavBar'
-import heroPattern from 'images/heroPattern.svg'
+import heroPattern from 'images/heroPattern2.svg'
 import HomeTrackCard from './HomeTrackCard'
 
 type Props = {
   otherLocaleTranslations: {},
-  tracks: Array,
+  tracks: Array<Object>,
   translations: {
     homeDescription: string,
     homeTitle: string,
@@ -22,9 +22,10 @@ const HomeHero = ({
   translations: t,
 }: Props) => (
   <div
-    className="min-vh-100 flex flex-column mdc-theme--primary-bg cover"
+    className="min-vh-100 flex flex-column mdc-theme--primary-bg"
     style={{
       backgroundImage: `url(${heroPattern})`,
+      backgroundSize: '30%',
     }}
   >
     <NavBar

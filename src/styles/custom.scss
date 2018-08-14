@@ -12,7 +12,7 @@
 
 .bg-pattern {
   background-image: url('~images/heroPattern2.svg');
-  background-size: 90%;
+  background-size: 15em;
 }
 
 .bottom--3 {
@@ -167,9 +167,9 @@ div.raised-bottom {
 }
 
 @media screen and (min-width: 30em) {
-  .bg-pattern {
-    background-size: 50%;
-  }
+  // .bg-pattern {
+  //   background-size: 50%;
+  // }
   div.w-95-ns {
     width: 95%;
   }
@@ -183,9 +183,9 @@ div.raised-bottom {
 }
 
 @media screen and (min-width: 60em) {
-  .bg-pattern {
-    background-size: 30%;
-  }
+  // .bg-pattern {
+  //   background-size: 30%;
+  // }
   .mdc-toolbar__section.dn-l {
     display: none;
   }

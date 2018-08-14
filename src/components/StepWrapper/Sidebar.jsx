@@ -57,7 +57,7 @@ const Sidebar = ({
 }: Props) => (
   <aside
     className={cx(
-      'bg-custom-dark-blue flex-no-shrink transition-width overflow-hidden',
+      'bg-custom-dark-blue bg-pattern flex-no-shrink transition-width overflow-hidden',
       {
         'w320px ': isOpen,
         w0: !isOpen,

@@ -2,7 +2,6 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import * as React from 'react'
-import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {
   compose,
   lifecycle,
@@ -67,10 +66,8 @@ const FillInTheBlank = ({
 }: Props) => (
   <div>
     <div className="pb2 flex bb items-center">
-      <div className="flex-no-shrink mr2">
-        {number} <ArrowForward className="dark-gray" />
-      </div>
-      <div className="f4">{fillInTheBlankTitle}</div>
+      <div className="flex-no-shrink mr2 b">{number} -&nbsp;</div>
+      <div className="f4 b">{fillInTheBlankTitle}</div>
     </div>
     <div className="mt3 mb0 f4">
       {textParts.map(

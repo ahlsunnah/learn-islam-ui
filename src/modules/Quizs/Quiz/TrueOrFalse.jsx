@@ -3,7 +3,6 @@ import cx from 'classnames'
 import Button from 'components/Button'
 import PropTypes from 'prop-types'
 import * as React from 'react'
-import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {compose, setPropTypes, withHandlers, withPropsOnChange} from 'recompose'
 import addScoreWhenFinished from './addScoreWhenFinished'
 import ResultIndicator from './ResultIndicator'
@@ -36,10 +35,8 @@ const TrueOrFalse = ({
 }: Props) => (
   <div>
     <div className="flex">
-      <div className="flex-no-shrink w2-5">
-        {number} <ArrowForward className="dark-gray" />
-      </div>
-      <div className="f4">{text}</div>
+      <div className="flex-no-shrink w2-5 b">{number} -</div>
+      <div className="f4 b">{text}</div>
     </div>
     <div className="mt4 flex justify-between">
       <div>

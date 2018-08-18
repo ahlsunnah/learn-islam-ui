@@ -50,10 +50,8 @@ const LinkTheSentences = ({
 }: Props) => (
   <div>
     <div className="pb2 mb3 flex bb items-center">
-      <div className="flex-no-shrink mr2">
-        {number} <ArrowForward className="dark-gray" />
-      </div>
-      <div className="f4">{title}</div>
+      <div className="flex-no-shrink mr2 b">{number} -</div>
+      <div className="f4 b">{title}</div>
     </div>
     <div className="mv0 f4">
       {valuesOrder.map((valueIndex, i) => {

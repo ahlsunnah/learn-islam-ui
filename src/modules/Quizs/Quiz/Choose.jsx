@@ -4,7 +4,6 @@ import Button from 'components/Button'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
 import * as React from 'react'
-import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import {
   compose,
   lifecycle,
@@ -40,10 +39,8 @@ const Choose = ({
 }: Props) => (
   <div>
     <div className="flex">
-      <div className="flex-no-shrink w2-5">
-        {number} <ArrowForward className="dark-gray" />
-      </div>
-      <div className="f4">{text}</div>
+      <div className="flex-no-shrink w2-5 b">{number} -</div>
+      <div className="f4 b">{text}</div>
     </div>
     <div className="mt4">
       {valuesOrder.map((order) => (

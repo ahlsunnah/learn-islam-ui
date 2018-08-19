@@ -27,6 +27,9 @@ type Props = {
     answer?: number,
   },
   valuesOrder: Array<number>,
+  t: {
+    localePath: string,
+  },
 }
 const Choose = ({
   data: {text, values},
@@ -36,6 +39,7 @@ const Choose = ({
   score,
   state: {answer},
   valuesOrder,
+  t: {localePath},
 }: Props) => (
   <div>
     <div className="flex">
@@ -67,9 +71,23 @@ const Choose = ({
     </div>
     {finished &&
       (score ? (
-        <div className="fr mt3 green f3">1/1</div>
+        <div
+          className={cx('mt3 green f3', {
+            tl: localePath === '/',
+            tr: localePath !== '/',
+          })}
+        >
+          1/1
+        </div>
       ) : (
-        <div className="fr mt3 red f3">0/1</div>
+        <div
+          className={cx('mt3 green f3', {
+            tl: localePath === '/',
+            tr: localePath !== '/',
+          })}
+        >
+          0/1
+        </div>
       ))}
   </div>
 )

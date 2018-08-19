@@ -22,6 +22,7 @@ type Props = {
   t: {
     quizFalse: string,
     quizTrue: string,
+    localePath: string,
   },
 }
 const TrueOrFalse = ({
@@ -31,7 +32,7 @@ const TrueOrFalse = ({
   number,
   score,
   state: {answer},
-  t,
+  t: {quizFalse, quizTrue, localePath},
 }: Props) => (
   <div>
     <div className="flex">
@@ -57,7 +58,7 @@ const TrueOrFalse = ({
             secondary
             stroked={!answer}
           >
-            {t.quizTrue}
+            {quizTrue}
           </Button>
         </div>
         <div className="mt2">
@@ -77,15 +78,29 @@ const TrueOrFalse = ({
             secondary
             stroked={answer !== false}
           >
-            {t.quizFalse}
+            {quizFalse}
           </Button>
         </div>
       </div>
       {finished &&
         (score ? (
-          <div className="self-end green f3">1/1</div>
+          <div
+            className={cx('self-end green f3', {
+              tl: localePath === '/',
+              tr: localePath !== '/',
+            })}
+          >
+            1/1
+          </div>
         ) : (
-          <div className="self-end red f3">0/1</div>
+          <div
+            className={cx('self-end green f3', {
+              tl: localePath === '/',
+              tr: localePath !== '/',
+            })}
+          >
+            0/1
+          </div>
         ))}
     </div>
   </div>

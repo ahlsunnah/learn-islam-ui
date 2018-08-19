@@ -29,7 +29,7 @@ const DisplayAnswer = ({
   return (
     <div>
       <span className="dib dark-blue bt bw2 b--red lh0-9">{answer}</span>{' '}
-      <div className="dib green"> {value}</div>
+      <div className="dib green">{value}</div>
     </div>
   )
 }
@@ -50,6 +50,7 @@ type Props = {
   textParts: Array<string>,
   t: {
     fillInTheBlankTitle: string,
+    localePath: string,
   },
 }
 const FillInTheBlank = ({
@@ -62,7 +63,7 @@ const FillInTheBlank = ({
   score,
   state: {answers = []},
   textParts,
-  t: {fillInTheBlankTitle},
+  t: {fillInTheBlankTitle, localePath},
 }: Props) => (
   <div>
     <div className="pb2 flex bb items-center">
@@ -112,7 +113,9 @@ const FillInTheBlank = ({
     </div>
     {finished && (
       <div
-        className={cx('fr mt3 f3', {
+        className={cx('mt3 f3', {
+          tl: localePath === '/',
+          tr: localePath !== '/',
           green: score > answers.length / 2,
           red: score <= answers.length / 2,
         })}

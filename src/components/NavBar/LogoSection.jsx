@@ -22,12 +22,13 @@ const LogoSection = ({
       <Link className="mdc-toolbar__title-ns pv0-ns" to={localePath}>
         <h1
           className={cx('db-ns dn f5 mb0', {
-            'mr5-ns mr3': otherLocaleTranslations.localeName === 'Français',
+            mr5: otherLocaleTranslations.localeName === 'Français',
+            ml5: otherLocaleTranslations.localeName !== 'Français',
           })}
         >
           <img alt={siteName} height="65px" src={logo} />
         </h1>
-        <div className="dn-ns db pa2">
+        <div className="dn-ns db pv2 ph3">
           <img alt={siteName} width="230px" height="60px" src={logo} />
         </div>
       </Link>

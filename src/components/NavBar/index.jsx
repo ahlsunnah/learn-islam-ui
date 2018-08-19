@@ -33,6 +33,7 @@ const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
         otherLocaleTranslations={otherLocaleTranslations}
         t={t}
       />
+
       <MobileSection
         localePath={t.localePath}
         otherLocaleTranslations={otherLocaleTranslations}

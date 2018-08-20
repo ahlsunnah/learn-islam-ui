@@ -22,23 +22,42 @@ type Props = {
 
 const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
   <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
-    <div className="pv1 mdc-toolbar__row">
-      <LogoSection
-        localePath={t.localePath}
-        siteName={t.siteName}
-        otherLocaleTranslations={otherLocaleTranslations}
-      />
-      <NavSection
-        localePath={t.localePath}
-        otherLocaleTranslations={otherLocaleTranslations}
-        t={t}
-      />
+    <div className="dn-ns db">
+      <div className="flex justify-between pv1 mdc-toolbar__row">
+        <div className="flex2" />
+        <LogoSection
+          localePath={t.localePath}
+          siteName={t.siteName}
+          otherLocaleTranslations={otherLocaleTranslations}
+        />
+        <div className="flex2 tl">
+          <MobileSection
+            localePath={t.localePath}
+            otherLocaleTranslations={otherLocaleTranslations}
+            t={t}
+          />
+        </div>
+      </div>
+    </div>
 
-      <MobileSection
-        localePath={t.localePath}
-        otherLocaleTranslations={otherLocaleTranslations}
-        t={t}
-      />
+    <div className="db-ns dn">
+      <div className="pv1 mdc-toolbar__row">
+        <LogoSection
+          localePath={t.localePath}
+          siteName={t.siteName}
+          otherLocaleTranslations={otherLocaleTranslations}
+        />
+        <NavSection
+          localePath={t.localePath}
+          otherLocaleTranslations={otherLocaleTranslations}
+          t={t}
+        />
+        <MobileSection
+          localePath={t.localePath}
+          otherLocaleTranslations={otherLocaleTranslations}
+          t={t}
+        />
+      </div>
     </div>
   </header>
 )

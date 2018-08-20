@@ -9,7 +9,7 @@ type Props = {
   toggleDrawer: Function,
 }
 const MobileSection = (props: Props) => (
-  <section className="mh3 pv0 dn-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
+  <section className="pv0 dn-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
     <Button onClick={props.toggleDrawer}>
       <MenuIcon />
     </Button>

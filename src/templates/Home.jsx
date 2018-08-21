@@ -77,6 +77,7 @@ export const pageQuery = graphql`
       homeEmailPlaceHolder
       homeFooterCTA
       homeStartTrack
+      locale
       localeName
       localePath
       newsletterEmailNotValid
@@ -95,6 +96,7 @@ export const pageQuery = graphql`
       urlYoutube
     }
     otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+      locale
       localeName
       localePath
     }

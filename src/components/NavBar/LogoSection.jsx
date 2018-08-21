@@ -8,7 +8,7 @@ type Props = {
   localePath: string,
   siteName: string,
   otherLocaleTranslations: {
-    localeName: string,
+    locale: string,
   },
 }
 
@@ -22,8 +22,8 @@ const LogoSection = ({
       <Link className="mdc-toolbar__title-ns pv0-ns" to={localePath}>
         <h1
           className={cx('db-ns dn f5 mb0', {
-            mr5: otherLocaleTranslations.localeName === 'Français',
-            ml5: otherLocaleTranslations.localeName !== 'Français',
+            mr5: otherLocaleTranslations.locale === 'fr',
+            ml5: otherLocaleTranslations.locale !== 'fr',
           })}
         >
           <img alt={siteName} height="65px" src={logo} />

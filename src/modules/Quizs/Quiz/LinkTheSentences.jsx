@@ -36,7 +36,7 @@ type Props = {
   },
   valuesOrder: Array<number>,
   t: {
-    localePath: string,
+    locale: string,
   },
 }
 const LinkTheSentences = ({
@@ -50,7 +50,7 @@ const LinkTheSentences = ({
   score,
   state: {answers = []},
   valuesOrder,
-  t: {localePath},
+  t: {locale},
 }: Props) => (
   <div>
     <div className="pb2 mb3 flex bb items-center">
@@ -100,8 +100,8 @@ const LinkTheSentences = ({
     {finished && (
       <div
         className={cx('mt3 f3', {
-          tl: localePath === '/',
-          tr: localePath !== '/',
+          tl: locale === 'ar',
+          tr: locale !== 'ar',
           green: score > answers.length / 2,
           red: score <= answers.length / 2,
         })}

@@ -22,7 +22,7 @@ type Props = {
   t: {
     quizFalse: string,
     quizTrue: string,
-    localePath: string,
+    locale: string,
   },
 }
 const TrueOrFalse = ({
@@ -32,7 +32,7 @@ const TrueOrFalse = ({
   number,
   score,
   state: {answer},
-  t: {quizFalse, quizTrue, localePath},
+  t: {quizFalse, quizTrue, locale},
 }: Props) => (
   <div>
     <div className="flex">
@@ -86,8 +86,8 @@ const TrueOrFalse = ({
         (score ? (
           <div
             className={cx('self-end green f3', {
-              tl: localePath === '/',
-              tr: localePath !== '/',
+              tl: locale === 'ar',
+              tr: locale !== 'ar',
             })}
           >
             1/1
@@ -95,8 +95,8 @@ const TrueOrFalse = ({
         ) : (
           <div
             className={cx('self-end green f3', {
-              tl: localePath === '/',
-              tr: localePath !== '/',
+              tl: locale === 'ar',
+              tr: locale !== 'ar',
             })}
           >
             0/1

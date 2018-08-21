@@ -50,7 +50,7 @@ type Props = {
   textParts: Array<string>,
   t: {
     fillInTheBlankTitle: string,
-    localePath: string,
+    locale: string,
   },
 }
 const FillInTheBlank = ({
@@ -63,7 +63,7 @@ const FillInTheBlank = ({
   score,
   state: {answers = []},
   textParts,
-  t: {fillInTheBlankTitle, localePath},
+  t: {fillInTheBlankTitle, locale},
 }: Props) => (
   <div>
     <div className="pb2 flex bb items-center">
@@ -114,8 +114,8 @@ const FillInTheBlank = ({
     {finished && (
       <div
         className={cx('mt3 f3', {
-          tl: localePath === '/',
-          tr: localePath !== '/',
+          tl: locale === 'ar',
+          tr: locale !== 'ar',
           green: score > answers.length / 2,
           red: score <= answers.length / 2,
         })}

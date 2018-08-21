@@ -32,7 +32,7 @@ type Props = {
   },
   t: {
     chooseACategoryTitle: string,
-    localePath: string,
+    locale: string,
   },
 }
 const ChooseACategory = ({
@@ -45,7 +45,7 @@ const ChooseACategory = ({
   number,
   score,
   state: {answers = []},
-  t: {chooseACategoryTitle, localePath},
+  t: {chooseACategoryTitle, locale},
 }: Props) => (
   <div>
     <div className="pb2 flex bb items-center">
@@ -97,8 +97,8 @@ const ChooseACategory = ({
     {finished && (
       <div
         className={cx('mt3 f3', {
-          tl: localePath === '/',
-          tr: localePath !== '/',
+          tl: locale === 'ar',
+          tr: locale !== 'ar',
           green: score > itemsOrder.length / 2,
           red: score <= itemsOrder.length / 2,
         })}

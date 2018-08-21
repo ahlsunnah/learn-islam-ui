@@ -152,6 +152,7 @@ export const pageQuery = graphql`
       goToTracks
       grade
       level
+      locale
       localePath
       nextCourse
       nextTrack

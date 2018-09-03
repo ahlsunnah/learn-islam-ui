@@ -5,7 +5,7 @@ import NavBar from 'components/NavBar'
 import HomeTrackCard from './HomeTrackCard'
 
 type Props = {
-  otherLocaleTranslations: {},
+  otherLocaleTranslations: Object,
   tracks: Array<Object>,
   translations: {
     homeDescription: string,

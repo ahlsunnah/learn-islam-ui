@@ -3,7 +3,8 @@
 // TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
 import cx from 'classnames'
 import Link from 'gatsby-link'
-import logo from 'images/logo.png'
+import logoAr from 'images/logo-ar.png'
+import logoFr from 'images/logo-fr.png'
 import * as React from 'react'
 import 'styles/drawer.scss'
 import Button from '../Button'
@@ -18,6 +19,7 @@ type Props = {
   },
   toggleDrawer: Function,
   t: {
+    locale: string,
     siteName: string,
   },
 }
@@ -41,8 +43,12 @@ const TemporaryDrawer = ({
     <nav className="mdc-drawer__drawer">
       <header className="mdc-drawer__header">
         <div className="mdc-drawer__header-content">
-          <Link className="" to={localePath}>
-            <img alt={t.siteName} height="42px" src={logo} />
+          <Link to={localePath}>
+            <img
+              alt={t.siteName}
+              height="60px"
+              src={t.locale === 'ar' ? logoAr : logoFr}
+            />
           </Link>
           <Link
             className="absolute top-1 right-1 ph2 no-underline"
@@ -54,7 +60,7 @@ const TemporaryDrawer = ({
           </Link>
         </div>
       </header>
-      <nav id="icon-with-text-demo" className="mdc-drawer__content mdc-list">
+      <nav className="mdc-drawer__content mdc-list">
         {structure.map(({title, link, Icon}) => (
           <Link
             key={title}

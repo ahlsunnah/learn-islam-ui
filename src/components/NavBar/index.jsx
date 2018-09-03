@@ -14,6 +14,7 @@ type Props = {
     aboutUs: string,
     connect: string,
     courses: string,
+    locale: string,
     localePath: string,
     siteName: string,
     tracks: string,
@@ -26,9 +27,9 @@ const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
       <div className="flex justify-between pv1 mdc-toolbar__row">
         <div className="flex2" />
         <LogoSection
+          locale={t.locale}
           localePath={t.localePath}
           siteName={t.siteName}
-          otherLocaleTranslations={otherLocaleTranslations}
         />
         <div className="flex2 tl">
           <MobileSection
@@ -43,9 +44,9 @@ const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
     <div className="db-ns dn">
       <div className="pv1 mdc-toolbar__row">
         <LogoSection
+          locale={t.locale}
           localePath={t.localePath}
           siteName={t.siteName}
-          otherLocaleTranslations={otherLocaleTranslations}
         />
         <NavSection
           localePath={t.localePath}

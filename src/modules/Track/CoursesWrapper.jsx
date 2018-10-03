@@ -10,7 +10,7 @@ type Props = {
   t: {},
 }
 const CoursesWrapper = ({courses, currentPath, t}: Props) => (
-  <div className="mt5-l pt4-l flex flex-column items-center">
+  <div className="flex flex-column items-center">
     {courses &&
       courses
         .slice()

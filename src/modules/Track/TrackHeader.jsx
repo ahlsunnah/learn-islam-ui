@@ -1,12 +1,11 @@
 // @flow
 import Button from 'components/Button'
-import Header from 'components/Header'
-import IconWithText from 'components/IconWithText'
+// import IconWithText from 'components/IconWithText'
 import RawHTML from 'components/RawHTML'
 import Link from 'gatsby-link'
-import clock from 'images/clock.svg'
-import target from 'images/target.svg'
-import {getHumanTime} from 'lib/time'
+// import clock from 'images/clock.svg'
+// import target from 'images/target.svg'
+// import {getHumanTime} from 'lib/time'
 import * as React from 'react'
 
 type Props = {
@@ -32,7 +31,7 @@ const TrackHeader = ({
   t,
   trackTitle,
 }: Props) => (
-  <Header className="pl5 pl6-ns pb4 flex flex-column flex-row-ns justify-around bg-white">
+  <div className="ph3 pb4 pt3 flex flex-column flex-row-ns justify-around bg-white raised-header">
     <div className="self-end dn-ns">
       <Link className="ph2 no-underline" to={otherLocaleUrl}>
         <Button rounded stroked>
@@ -64,13 +63,13 @@ const TrackHeader = ({
           </Button>
         </Link>
       </div>
-      <IconWithText className="mv2 mh3-l" icon={clock}>
+      {/* <IconWithText className="mv2 mh3-l" icon={clock}>
         {getHumanTime(t.locale, duration)}
-      </IconWithText>
-      <IconWithText className="mt4 mt0-ns mh3-l" icon={target}>
+      </IconWithText> */}
+      {/* <IconWithText className="mt4 mt0-ns mh3-l" icon={target}>
         {`${t.trackLevel}: ${t[`level${level}`]}`}
-      </IconWithText>
+      </IconWithText> */}
     </div>
-  </Header>
+  </div>
 )
 export default TrackHeader

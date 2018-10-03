@@ -49,7 +49,7 @@ const TrackContainer = ({
   return (
     <div className="min-vh-100 flex">
       <TrackSidebar locale={locale} localePath={localePath} />
-      <div className="pt5-l pb4 flex1 flex flex-column bg-light-gray">
+      <div className="pb4 flex1 flex flex-column bg-light-gray">
         <Helmet title={track.strings[0].title} />
         <TrackHeader
           duration={trackDuration}

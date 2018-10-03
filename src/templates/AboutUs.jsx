@@ -43,6 +43,7 @@ export const pageQuery = graphql`
       footerSocialTitle
       homeFooterCTA
       homeStartTrack
+      locale
       localeName
       localePath
       siteName

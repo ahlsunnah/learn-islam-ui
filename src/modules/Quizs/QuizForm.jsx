@@ -67,8 +67,8 @@ const QuizForm = ({
       totalQuestions={totalQuestions}
     />
     <div id="quizs-start" key={quizsState.try}>
-      {quizsIds.map(
-        (quizId, i) => (
+      {quizsIds.map((quizId, i) => {
+        return (
           <Quiz
             {...quizs.get(quizId)}
             {...props}
@@ -78,9 +78,8 @@ const QuizForm = ({
             state={quizsState[quizId] || {}}
             finished={quizsState.finished}
           />
-        ),
-        quizs,
-      )}
+        )
+      }, quizs)}
     </div>
     <QuizFooter
       finished={quizsState.finished}
@@ -152,6 +151,7 @@ const enhance = compose(
       const {
         dAddTotal,
         dStartQuizs,
+        quizs,
         quizsIds,
         quizsState,
         totalQuestions,
@@ -161,6 +161,11 @@ const enhance = compose(
       if (quizsState.total !== totalQuestions) {
         dAddTotal(totalQuestions)
       }
+      quizsIds.forEach((quizId) => {
+        if (!quizs.get(quizId)) {
+          dStartQuizs()
+        }
+      })
     },
     // TODO
     // componentDidUpdate() {

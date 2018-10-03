@@ -161,11 +161,12 @@ const enhance = compose(
       if (quizsState.total !== totalQuestions) {
         dAddTotal(totalQuestions)
       }
-      quizsIds.forEach((quizId) => {
-        if (!quizs.get(quizId)) {
-          dStartQuizs()
-        }
+      const containDeletedQuiz = quizsIds.some((quizId) => {
+        return !quizs.get(quizId)
       })
+      if (containDeletedQuiz) {
+        dStartQuizs()
+      }
     },
     // TODO
     // componentDidUpdate() {

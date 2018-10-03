@@ -156,16 +156,19 @@ const enhance = compose(
         quizsState,
         totalQuestions,
       } = this.props
-      if (!quizsIds) dStartQuizs()
+      if (!quizsIds) {
+        dStartQuizs()
+      } else {
+        const containDeletedQuiz = quizsIds.some((quizId) => {
+          return !quizs.get(quizId)
+        })
+        if (containDeletedQuiz) {
+          dStartQuizs()
+        }
+      }
 
       if (quizsState.total !== totalQuestions) {
         dAddTotal(totalQuestions)
-      }
-      const containDeletedQuiz = quizsIds.some((quizId) => {
-        return !quizs.get(quizId)
-      })
-      if (containDeletedQuiz) {
-        dStartQuizs()
       }
     },
     // TODO

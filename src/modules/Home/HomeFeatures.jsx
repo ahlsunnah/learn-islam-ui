@@ -17,7 +17,8 @@ type Props = {
 }
 
 const svgs = [feature1Svg, feature2Svg, feature3Svg]
-const items = ['feature1', 'feature2', 'feature3']
+// const items = ['feature1', 'feature2', 'feature3']
+const items = ['feature1', 'feature2']
 
 const HomeFeatures = (props: Props) => (
   <section className="pv5 min-h-512-ns flex flex-column">

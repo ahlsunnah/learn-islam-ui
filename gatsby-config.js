@@ -6,8 +6,8 @@ if (!API || !USER || !PASSWORD) {
 }
 module.exports = {
   siteMetadata: {
-    title: 'Learn Islam',
-    siteUrl: `https://madrassaminhaj.com`,
+    title: 'Madrassah Minhaj',
+    siteUrl: `https://demo.m-minhaj.com`,
   },
   plugins: [
     // 'gatsby-plugin-webpack-bundle-analyzer',

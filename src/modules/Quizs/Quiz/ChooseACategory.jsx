@@ -69,7 +69,7 @@ const ChooseACategory = ({
             />
             <div>
               <div>{item}</div>
-              <div>
+              <div className="mt1">
                 {categories.map((category, categoryIndex) => (
                   <RadioButton
                     key={categoryIndex}

@@ -23,7 +23,7 @@ const RadioButton = ({
   onChange,
   value,
 }: Props) => (
-  <div className="mdc-form-field">
+  <div className="mdc-form-field db">
     <label className="flex items-center f4" htmlFor={id}>
       <div className="mdc-radio">
         <input

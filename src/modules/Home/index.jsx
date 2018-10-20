@@ -12,11 +12,13 @@ type Props = {
     tracks: Array<Object>,
     translations: Object,
   },
-  pathContext: Object,
+  pathContext: {
+    otherLanguagePath: string,
+  },
 }
-const HomeContainer = ({data}: Props) => (
+const HomeContainer = ({data, pathContext: {otherLanguagePath}}: Props) => (
   <div>
-    <HomeHero {...data} />
+    <HomeHero {...data} otherLanguagePath={otherLanguagePath} />
     <HomeContentPresentation
       text={data.translations.siteContentPresentation}
       title={data.translations.homeContentTitle}

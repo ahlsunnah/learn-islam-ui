@@ -6,6 +6,7 @@ import MobileSection from './MobileSection'
 import NavSection from './NavSection'
 
 type Props = {
+  otherLanguagePath: string,
   otherLocaleTranslations: {
     localeName: string,
     localePath: string,
@@ -21,7 +22,11 @@ type Props = {
   },
 }
 
-const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
+const NavBar = ({
+  otherLanguagePath,
+  otherLocaleTranslations,
+  translations: t,
+}: Props) => (
   <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
     <div className="dn-ns db">
       <div className="flex justify-between pv1 mdc-toolbar__row">
@@ -34,6 +39,7 @@ const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
         <div className="flex2 tl">
           <MobileSection
             localePath={t.localePath}
+            otherLanguagePath={otherLanguagePath}
             otherLocaleTranslations={otherLocaleTranslations}
             t={t}
           />
@@ -50,11 +56,13 @@ const NavBar = ({otherLocaleTranslations, translations: t}: Props) => (
         />
         <NavSection
           localePath={t.localePath}
+          otherLanguagePath={otherLanguagePath}
           otherLocaleTranslations={otherLocaleTranslations}
           t={t}
         />
         <MobileSection
           localePath={t.localePath}
+          otherLanguagePath={otherLanguagePath}
           otherLocaleTranslations={otherLocaleTranslations}
           t={t}
         />

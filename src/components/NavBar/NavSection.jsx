@@ -6,13 +6,18 @@ import structure from './structure'
 
 type Props = {
   localePath: string,
+  otherLanguagePath: string,
   otherLocaleTranslations: {
     localeName: string,
-    localePath: string,
   },
   t: {},
 }
-const NavSection = ({localePath, otherLocaleTranslations, t}: Props) => (
+const NavSection = ({
+  localePath,
+  otherLanguagePath,
+  otherLocaleTranslations,
+  t,
+}: Props) => (
   <section className="pv0 dn inline-flex-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
     <nav className="flex1">
       <ul className="list flex flex-wrap justify-around items-center">
@@ -28,10 +33,7 @@ const NavSection = ({localePath, otherLocaleTranslations, t}: Props) => (
           </li>
         ))}
         <li>
-          <Link
-            className="ph2 no-underline"
-            to={otherLocaleTranslations.localePath}
-          >
+          <Link className="ph2 no-underline" to={otherLanguagePath}>
             <Button rounded stroked>
               {otherLocaleTranslations.localeName}
             </Button>

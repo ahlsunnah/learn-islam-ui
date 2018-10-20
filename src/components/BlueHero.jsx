@@ -4,12 +4,14 @@ import * as React from 'react'
 
 type Props = {
   description?: string,
+  otherLanguagePath: string,
   otherLocaleTranslations: Object,
   title: string,
   translations: Object,
 }
 const HomeHero = ({
   description,
+  otherLanguagePath,
   otherLocaleTranslations,
   title,
   translations: t,
@@ -18,6 +20,7 @@ const HomeHero = ({
     <NavBar
       localePath={t.localePath}
       otherLocaleTranslations={otherLocaleTranslations}
+      otherLanguagePath={otherLanguagePath}
       translations={t}
     />
     <div className="mt64 pt4 pb3 tc white">

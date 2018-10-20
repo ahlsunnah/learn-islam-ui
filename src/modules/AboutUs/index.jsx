@@ -13,11 +13,17 @@ type Props = {
     otherLocaleTranslations: Object,
     translations: Object,
   },
-  pathContext: Object,
+  pathContext: {
+    otherLanguagePath: string,
+  },
 }
-const ContactUsContainer = ({data}: Props) => (
+const AboutUsContainer = ({data, pathContext: {otherLanguagePath}}: Props) => (
   <div>
-    <BlueHero {...data} title={data.translations.aboutUsPageTitle} />
+    <BlueHero
+      {...data}
+      otherLanguagePath={otherLanguagePath}
+      title={data.translations.aboutUsPageTitle}
+    />
     <RawHTML className="about-us-content center pt3 pb4 ph3 ph4-m ph0-l tj">
       {data.translations.aboutUsPageContent}
     </RawHTML>
@@ -27,4 +33,4 @@ const ContactUsContainer = ({data}: Props) => (
     />
   </div>
 )
-export default ContactUsContainer
+export default AboutUsContainer

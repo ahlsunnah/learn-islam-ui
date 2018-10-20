@@ -10,6 +10,13 @@ const localesPaths = {
   ar: '/',
   fr: '/fr/',
 }
+const otherLocalesPaths = locales
+  .slice()
+  .reverse()
+  .reduce((prev, curr, currIndex) => {
+    prev[curr] = localesPaths[locales[currIndex]] // eslint-disable-line no-param-reassign
+    return prev
+  }, {})
 
 exports.createPages = ({
   graphql,
@@ -33,6 +40,7 @@ exports.createPages = ({
         context: {
           locale,
           localesPaths,
+          otherLanguagePath: otherLocalesPaths[locale],
         },
       })
     })
@@ -41,11 +49,12 @@ exports.createPages = ({
     console.log('Creating tracks pages')
     locales.forEach((locale) => {
       createPage({
-        path: `${localesPaths[locale]}masar`,
+        path: `${localesPaths[locale]}masar/`,
         component: slash(tracksTemplate),
         context: {
           locale,
           localesPaths,
+          otherLanguagePath: `${otherLocalesPaths[locale]}masar/`,
         },
       })
     })
@@ -54,11 +63,12 @@ exports.createPages = ({
     console.log('Creating about us pages')
     locales.forEach((locale) => {
       createPage({
-        path: `${localesPaths[locale]}nahnu`,
+        path: `${localesPaths[locale]}nahnu/`,
         component: slash(aboutUsTemplate),
         context: {
           locale,
           localesPaths,
+          otherLanguagePath: `${otherLocalesPaths[locale]}nahnu/`,
         },
       })
     })

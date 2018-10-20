@@ -10,14 +10,18 @@ type Props = {
     tracks: Array<Object>,
     translations: Object,
   },
-  pathContext: Object,
+  pathContext: {
+    otherLanguagePath: string,
+  },
 }
-const TracksContainer = ({data}: Props) => (
+const TracksContainer = ({data, pathContext: {otherLanguagePath}}: Props) => (
   <div>
     <BlueHero
-      {...data}
-      title={data.translations.tracksPageTitle}
       description={data.translations.tracksPageDescription}
+      otherLanguagePath={otherLanguagePath}
+      otherLocaleTranslations={data.otherLocaleTranslations}
+      translations={data.translations}
+      title={data.translations.tracksPageTitle}
     />
     <Tracks tracks={data.tracks} localePath={data.translations.localePath} />
     <HomeFooter

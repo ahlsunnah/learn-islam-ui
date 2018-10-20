@@ -28,14 +28,15 @@ type Props = {
   handleAnswer: () => {},
   leftValues: Array<string>,
   number: number,
-  remainingValues: Array<{index: number, text: string}>,
-  rightValues: Array<{index: number, text: string}>,
+  remainingValues: Array<{value: number, label: string}>,
+  rightValues: Array<{value: number, label: string}>,
   score: number,
   state: {
     answers?: Array<?number>,
   },
   valuesOrder: Array<number>,
   t: {
+    chooseAnswer: string,
     locale: string,
   },
 }
@@ -50,7 +51,7 @@ const LinkTheSentences = ({
   score,
   state: {answers = []},
   valuesOrder,
-  t: {locale},
+  t: {chooseAnswer, locale},
 }: Props) => (
   <div>
     <div className="pb2 mb3 flex bb items-center">
@@ -61,7 +62,7 @@ const LinkTheSentences = ({
       {valuesOrder.map((valueIndex, i) => {
         const leftValue = leftValues[valueIndex]
         const rightValue = rightValues.find(
-          ({index}) => answers[valueIndex] === index,
+          ({value}) => answers[valueIndex] === value,
         )
         const isCorrect = finished && answers[valueIndex] === valueIndex
         return (
@@ -86,7 +87,9 @@ const LinkTheSentences = ({
             </div>
             <MultilineSelect
               correctAnswer={finished ? values[valueIndex].b : ''}
+              chooseAnswerString={chooseAnswer}
               finished={finished}
+              isRtl={locale === 'ar'}
               isCorrect={isCorrect}
               name={valueIndex}
               onChange={handleAnswer}
@@ -113,17 +116,25 @@ const LinkTheSentences = ({
 )
 
 const enhance = compose(
-  withPropsOnChange(['data'], ({data: {values}}) => ({
-    leftValues: values.map(({a}) => a),
-    rightValues: values
-      .map(({b}, index) => ({index, text: b}))
-      .sort((a, b) => (a.text > b.text ? 1 : -1)),
-  })),
+  withPropsOnChange(['data'], ({data: {values}}) => {
+    return {
+      leftValues: values.map(({a}) => a),
+      rightValues: values
+        .map(({b}, index) => ({value: index, label: b}))
+        .sort((a, b) => (a.label > b.label ? 1 : -1)),
+    }
+  }),
 
   // Shuffle leftValues
   setPropTypes({
     addData: PropTypes.func.isRequired,
     leftValues: PropTypes.array.isRequired,
+    rightValues: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+      }).isRequired,
+    ),
     quizId: PropTypes.string.isRequired,
   }),
   lifecycle({
@@ -133,6 +144,7 @@ const enhance = compose(
         addData({
           data: {
             answers: new Array(leftValues.length).fill(undefined),
+            // valuesOrder: leftValues.map((_, i) => i),
             valuesOrder: shuffle(leftValues.map((_, i) => i)),
           },
           quizId,
@@ -144,10 +156,19 @@ const enhance = compose(
   })),
 
   withHandlers({
-    handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
-      const {name, value} = e.target
+    handleAnswer: ({addData, quizId, state: {answers}}) => (
+      event,
+      action,
+      name,
+    ) => {
       const newAnswers = answers.slice()
-      newAnswers[name] = value !== '' ? parseInt(value, 10) : undefined
+      if (action.action === 'select-option') {
+        const {value} = event
+        newAnswers[name] = parseInt(value, 10)
+      } else {
+        newAnswers[name] = undefined
+      }
+
       addData({
         data: {
           answers: newAnswers,
@@ -160,7 +181,7 @@ const enhance = compose(
 
   // Remove already chosen values from rightValues
   withPropsOnChange(['state'], ({rightValues, state: {answers = []}}) => {
-    const notChosen = ({index}) => !answers.includes(index)
+    const notChosen = ({value}) => !answers.includes(value)
     return {
       remainingValues: rightValues.filter(notChosen),
     }

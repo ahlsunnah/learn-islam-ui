@@ -2,65 +2,88 @@
 import cx from 'classnames'
 import * as React from 'react'
 import Correct from 'react-icons/lib/md/check'
-import {withStateHandlers} from 'recompose'
+import {withHandlers} from 'recompose'
+import Select from 'react-select'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
-import SelectInput from './SelectInput'
 
 type Props = {
+  chooseAnswerString: string,
   correctAnswer: string,
   finished: boolean,
   isCorrect: boolean,
-  isOpen: boolean,
-  open: Function,
+  isRtl: boolean,
+  onChange: Function,
   value?: {
-    index: number,
-    text: string,
+    label: string,
+    value: number,
   },
+  options: Array<{
+    label: string,
+    value: number,
+  }>,
 }
-const MultilineSelect = (props: Props) => (
-  <div className="relative w-100 m-h-3 ba br2 b--dark-gray">
-    <div
-      className={cx('pa2 dark-blue', {
-        'w-95-ns w-90': !props.finished,
-        'w-100': props.finished,
-      })}
-    >
-      <div className="flex items-center">
-        {props.finished &&
-          (props.isCorrect ? (
-            <Correct className="flex-no-shrink dn dib-ns f2 green" />
-          ) : (
-            props.value && (
-              <Error className="flex-no-shrink dn dib-ns mh2 red" />
-            )
-          ))}
 
-        {props.value && props.value.text}
-      </div>
-      {props.finished &&
-        !props.isCorrect && <div className="green">{props.correctAnswer}</div>}
+const MultilineSelect = (props: Props) => {
+  return (
+    <div className="relative w-100">
+      {props.finished && (
+        <div
+          className={cx('pa2 dark-blue ba br2 b--dark-gray', {
+            'w-95-ns w-90': !props.finished,
+            'w-100': props.finished,
+          })}
+        >
+          <div className="flex items-center">
+            {props.isCorrect ? (
+              <Correct className="flex-no-shrink dn dib-ns f2 green" />
+            ) : (
+              props.value && (
+                <Error className="flex-no-shrink dn dib-ns mh2 red" />
+              )
+            )}
+
+            {props.value && props.value.label}
+          </div>
+          {!props.isCorrect && (
+            <div className="green">{props.correctAnswer}</div>
+          )}
+        </div>
+      )}
+      {!props.finished && (
+        <Select
+          isClearable
+          isRtl={props.isRtl}
+          onChange={props.onChange}
+          styles={{
+            input: (styles) => {
+              if (props.value)
+                return {
+                  ...styles,
+                  position: 'absolute',
+                }
+              return styles
+            },
+            singleValue: (styles) => {
+              return {
+                color: styles.color,
+                marginLeft: styles.marginLeft,
+                marginRight: styles.marginRight,
+                // maxWidth: styles.maxWidth,
+              }
+            },
+          }}
+          value={props.value}
+          options={props.options}
+          placeholder={props.chooseAnswerString}
+        />
+      )}
     </div>
-    {!props.finished && (
-      <div className="arrow-down absolute right-1 center-absolute-v" />
-    )}
-    {!props.finished && (
-      <SelectInput
-        {...props}
-        className={cx('absolute absolute--fill', {
-          'o-025': !props.isOpen,
-        })}
-        onClick={props.open}
-      />
-    )}
-  </div>
-)
+  )
+}
 
-const enhance = withStateHandlers(
-  {isOpen: false},
-  {
-    open: ({isOpen}) => () => ({
-      isOpen: !isOpen,
-    }),
+const enhance = withHandlers({
+  onChange: ({name, onChange}) => (value, action) => {
+    onChange(value, action, name)
   },
-)
+})
 export default enhance(MultilineSelect)

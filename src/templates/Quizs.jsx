@@ -142,6 +142,7 @@ export const pageQuery = graphql`
       average
       backToCourse
       chooseACategoryTitle
+      chooseAnswer
       congratulations
       congratulationsCTA
       continue

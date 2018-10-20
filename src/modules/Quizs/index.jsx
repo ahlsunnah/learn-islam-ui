@@ -70,7 +70,7 @@ const QuizsContainer = ({
         t={t}
       />
     </div>
-    <div className="mdc-theme--primary-bg bg-pattern fixed w-100 h-100 top-0 z-1" />
+    <div className="mdc-theme--primary-bg fixed w-100 h-100 top-0 z-1" />
   </StepWrapper>
 )
 

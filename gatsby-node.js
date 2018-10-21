@@ -25,11 +25,11 @@ exports.onCreateWebpackConfig = ({actions, getConfig}) => {
   actions.replaceWebpackConfig(config)
 }
 
-exports.onCreateBabelConfig = ({actions}) => {
-  actions.setBabelPlugin({
-    name: `babel-plugin-flow-react-proptypes`,
-  })
-}
+// exports.onCreateBabelConfig = ({actions}) => {
+//   actions.setBabelPlugin({
+//     name: `babel-plugin-flow-react-proptypes`,
+//   })
+// }
 
 exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
   new Promise((resolve, reject) => {

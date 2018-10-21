@@ -1,3 +1,4 @@
 /*.js
+!/.babel-preset.js
 !index.js
 yarn.lock

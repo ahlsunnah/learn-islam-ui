@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
-import R from 'ramda'
+import {graphql} from 'gatsby'
+import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TracksContainer from 'modules/Tracks'
@@ -19,7 +20,7 @@ type Props = {
     },
     translations: Object,
   },
-  pathContext: Object,
+  pageContext: Object,
 }
 
 const filterLanguage = R.curry((locale, str) =>
@@ -43,11 +44,11 @@ const enhance = (props, locale) =>
   })(props)
 
 const Tracks = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
-      <html lang={props.pathContext.locale} />
+      <html lang={props.pageContext.locale} />
     </Helmet>
-    <TracksContainer {...enhance(props, props.pathContext.locale)} />
+    <TracksContainer {...enhance(props, props.pageContext.locale)} />
   </div>
 )
 

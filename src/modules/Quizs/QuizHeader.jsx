@@ -1,7 +1,7 @@
 // @flow
 import Button from 'components/Button'
 import Card from 'components/Card'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import scrollTo from 'lib/scrollTo'
 import * as React from 'react'
 import {compose, withPropsOnChange, withHandlers} from 'recompose'

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
-import R from 'ramda'
+import {graphql} from 'gatsby'
+import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TrackContainer from 'modules/Track'
@@ -42,17 +43,17 @@ type Props = {
       }>,
     },
   },
-  pathContext: {
+  pageContext: {
     locale: string,
   },
 }
 
 const TrackTemplate = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
-      <html lang={props.pathContext.locale} />
+      <html lang={props.pageContext.locale} />
     </Helmet>
-    <TrackContainer {...enhance(props, props.pathContext.locale)} />
+    <TrackContainer {...enhance(props, props.pageContext.locale)} />
   </div>
 )
 

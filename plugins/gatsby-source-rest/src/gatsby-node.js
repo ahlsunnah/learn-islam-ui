@@ -5,7 +5,10 @@ const axios = require('axios')
 const crypto = require('crypto')
 const getAuthorizationToken = require('./getAuthorizationToken')
 
-const slugify = R.pipe(camelize, capitalize)
+const slugify = R.pipe(
+  camelize,
+  capitalize,
+)
 const typeGenerator = R.curry(
   (type, service, id) =>
     id ? `${type}${slugify(service)}${id}` : `${type}${slugify(service)}`,
@@ -23,8 +26,8 @@ const generateDigest = (item) =>
     .update(JSON.stringify(item))
     .digest(`hex`)
 
-exports.sourceNodes = async ({boundActionCreators}, pluginOptions) => {
-  const {createNode} = boundActionCreators
+exports.sourceNodes = async ({actions}, pluginOptions) => {
+  const {createNode} = actions
   const {
     api = '',
     email,
@@ -36,13 +39,17 @@ exports.sourceNodes = async ({boundActionCreators}, pluginOptions) => {
   } = pluginOptions
   const serviceGenerator = typeGenerator(type)
   const fKToLink = ([key, value]) => [
-    R.pipe(camelize, R.replace(/Id$/, '___NODE'))(key),
+    R.pipe(
+      camelize,
+      R.replace(/Id$/, '___NODE'),
+    )(key),
     serviceGenerator(fKToService(key), value),
   ]
   const fKsToLinks = ([key, value]) => [
-    R.pipe(camelize, R.replace(/Ids$/, value.length === 0 ? '' : '___NODE'))(
-      key,
-    ),
+    R.pipe(
+      camelize,
+      R.replace(/Ids$/, value.length === 0 ? '' : '___NODE'),
+    )(key),
     R.map(serviceGenerator(fKsToService(key)), value),
   ]
   const trans = R.cond([
@@ -50,7 +57,11 @@ exports.sourceNodes = async ({boundActionCreators}, pluginOptions) => {
     [keyIsFKs, fKsToLinks],
     [R.T, camelizeKeys],
   ])
-  const transformObj = R.pipe(R.toPairs, R.map(trans), R.fromPairs)
+  const transformObj = R.pipe(
+    R.toPairs,
+    R.map(trans),
+    R.fromPairs,
+  )
 
   const authorizationToken = await getAuthorizationToken({api, email, password})
   // console.log('authorized', authorizationToken)

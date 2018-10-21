@@ -1,8 +1,0 @@
-{
-  "presets": ["flow"],
-  "env": {
-    "development": {
-      "plugins": ["flow-react-proptypes"]
-    }
-  }
-}

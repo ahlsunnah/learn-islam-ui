@@ -1,7 +1,7 @@
 // @flow
 import cx from 'classnames'
 import RawHTML from 'components/RawHTML'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import * as React from 'react'
 
 type Props = {

@@ -1,5 +1,4 @@
 /* eslint no-console: 0 */
-// const _ = require(`lodash`)
 const R = require(`ramda`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
@@ -18,10 +17,21 @@ const otherLocalesPaths = locales
     return prev
   }, {})
 
-exports.createPages = ({
-  graphql,
-  boundActionCreators: {createPage, createRedirect},
-}) =>
+exports.onCreateWebpackConfig = ({actions, getConfig}) => {
+  const config = getConfig()
+  config.node.fs = 'empty' // fixes antlr4 build
+  config.resolve.modules = ['src', 'node_modules']
+
+  actions.replaceWebpackConfig(config)
+}
+
+exports.onCreateBabelConfig = ({actions}) => {
+  actions.setBabelPlugin({
+    name: `babel-plugin-flow-react-proptypes`,
+  })
+}
+
+exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
   new Promise((resolve, reject) => {
     // const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
     const homeTemplate = path.resolve(`./src/templates/Home.jsx`)

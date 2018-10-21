@@ -1,13 +1,23 @@
+// @flow
 /* eslint react/jsx-filename-extension: 0 */
-import React from 'react'
+import * as React from 'react'
 import {Provider} from 'react-redux'
-import {renderToString} from 'react-dom/server'
+import Layout from './src/components/Layout'
 
 import createStore from './src/createStore'
 
-exports.replaceRenderer = ({bodyComponent, replaceBodyHTMLString}) => {
+type Props = {
+  element: React.Node,
+}
+
+export const wrapPageElement = ({element}: Props) => {
+  // props provide same data to Layout as Page element will get
+  // including location, data, etc - you don't need to pass it
+  return <Layout>{element}</Layout>
+}
+
+export const wrapRootElement = ({element}: Props) => {
   const {store} = createStore()
 
-  const ConnectedBody = () => <Provider store={store}>{bodyComponent}</Provider>
-  replaceBodyHTMLString(renderToString(<ConnectedBody />))
+  return <Provider store={store}>{element}</Provider>
 }

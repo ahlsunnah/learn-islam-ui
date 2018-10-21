@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
-import R from 'ramda'
+import * as R from 'ramda'
+import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import ChapterContainer from 'modules/Chapter'
@@ -54,17 +55,17 @@ type Props = {
       },
     },
   },
-  pathContext: {
+  pageContext: {
     locale: string,
   },
 }
 
 const Chapter = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
-      <html lang={props.pathContext.locale} />
+      <html lang={props.pageContext.locale} />
     </Helmet>
-    <ChapterContainer {...enhance(props, props.pathContext.locale)} />
+    <ChapterContainer {...enhance(props, props.pageContext.locale)} />
   </div>
 )
 

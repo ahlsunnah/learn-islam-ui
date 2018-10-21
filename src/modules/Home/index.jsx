@@ -12,11 +12,11 @@ type Props = {
     tracks: Array<Object>,
     translations: Object,
   },
-  pathContext: {
+  pageContext: {
     otherLanguagePath: string,
   },
 }
-const HomeContainer = ({data, pathContext: {otherLanguagePath}}: Props) => (
+const HomeContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
   <div>
     <HomeHero {...data} otherLanguagePath={otherLanguagePath} />
     <HomeContentPresentation

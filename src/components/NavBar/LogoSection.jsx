@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import cx from 'classnames'
 // import logoAr from 'images/logo-ar.png'
 // import logoFr from 'images/logo-fr.png'

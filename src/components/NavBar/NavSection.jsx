@@ -1,5 +1,5 @@
 // @flow
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import * as React from 'react'
 import Button from '../Button'
 import structure from './structure'

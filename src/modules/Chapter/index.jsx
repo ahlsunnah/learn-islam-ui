@@ -63,7 +63,7 @@ type Props = {
   },
   navigationButtons: React.Node,
   otherLocalePath: string,
-  pathContext: {
+  pageContext: {
     next: Object,
     locale: string,
     slug: string,
@@ -94,7 +94,7 @@ class Chapter extends React.Component<Props, State> {
       data,
       navigationButtons,
       otherLocalePath,
-      pathContext: {next},
+      pageContext: {next},
     } = this.props
     const {chapter, otherLocaleTranslations, translations: t} = data
     const {activeTab} = this.state
@@ -223,12 +223,12 @@ const enhance = compose(
         dispatch(toggleCompleteChapter(data.chapter.id)),
     }),
   ),
-  withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
+  withPropsOnChange(['data'], ({data, pageContext}: Props) => ({
     arabicTranscription: (
       data.chapter.strings.find(({locale}) => locale === 'ar') || {}
     ).transcription,
     chapterStrings:
-      data.chapter.strings.find(({locale}) => locale === pathContext.locale) ||
+      data.chapter.strings.find(({locale}) => locale === pageContext.locale) ||
       {},
     otherLocalePath: `${data.otherLocaleTranslations.localePath}${
       data.chapter.course.track.slug
@@ -238,7 +238,7 @@ const enhance = compose(
     data: PropTypes.object.isRequired,
     dToggleCompleteChapter: PropTypes.func.isRequired,
     isChapterComplete: PropTypes.bool.isRequired,
-    pathContext: PropTypes.object.isRequired,
+    pageContext: PropTypes.object.isRequired,
   }),
   withPropsOnChange(
     ['data', 'isChapterComplete'],
@@ -246,7 +246,7 @@ const enhance = compose(
       data: {translations},
       dToggleCompleteChapter,
       isChapterComplete,
-      pathContext: {next},
+      pageContext: {next},
     }) {
       return {
         navigationButtons: (

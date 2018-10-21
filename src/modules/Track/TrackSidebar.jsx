@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import Home from 'react-icons/lib/io/ios-home-outline'
 import cx from 'classnames'
 

@@ -2,7 +2,7 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
 import IconWithText from 'components/IconWithText'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import target from 'images/target.svg'
 import * as React from 'react'
 

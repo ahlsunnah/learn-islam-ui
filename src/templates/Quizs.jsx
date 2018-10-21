@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
-import R from 'ramda'
+import {graphql} from 'gatsby'
+import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import QuizsContainer from 'modules/Quizs'
@@ -63,22 +64,22 @@ type Props = {
       },
     },
   },
-  pathContext: {
+  pageContext: {
     difficulty: number,
     locale: string,
   },
 }
 
 const Quizs = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
-      <html lang={props.pathContext.locale} />
+      <html lang={props.pageContext.locale} />
     </Helmet>
     <QuizsContainer
       {...enhance(
         props,
-        props.pathContext.locale,
-        props.pathContext.difficulty,
+        props.pageContext.locale,
+        props.pageContext.difficulty,
       )}
     />
   </div>

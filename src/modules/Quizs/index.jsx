@@ -25,7 +25,7 @@ type Props = {
   },
   longTitle: string,
   otherLocalePath: string,
-  pathContext: {
+  pageContext: {
     difficulty: number,
     locale: string,
     next: Object,
@@ -40,7 +40,7 @@ const QuizsContainer = ({
   location: {pathname},
   longTitle,
   otherLocalePath,
-  pathContext: {difficulty, locale, next, nextQuiz},
+  pageContext: {difficulty, locale, next, nextQuiz},
   title,
 }: Props) => (
   <StepWrapper
@@ -74,18 +74,18 @@ const QuizsContainer = ({
   </StepWrapper>
 )
 
-const enhance = withPropsOnChange(['data'], ({data, pathContext}: Props) => ({
+const enhance = withPropsOnChange(['data'], ({data, pageContext}: Props) => ({
   otherLocalePath: `${data.otherLocaleTranslations.localePath}${
     data.course.track.slug
-  }/${data.course.slug}/ikhtibar-${pathContext.difficulty}`,
+  }/${data.course.slug}/ikhtibar-${pageContext.difficulty}`,
   levelSubtitle: `${data.translations.level} ${
-    data.translations[`difficulty${pathContext.difficulty}`]
+    data.translations[`difficulty${pageContext.difficulty}`]
   }`,
   title: `${data.translations.quiz} ${
-    data.translations[`difficulty${pathContext.difficulty}`]
+    data.translations[`difficulty${pageContext.difficulty}`]
   }`,
   longTitle: `${data.course.strings[0].title}: ${data.translations.quiz} ${
-    data.translations[`difficulty${pathContext.difficulty}`]
+    data.translations[`difficulty${pageContext.difficulty}`]
   }`,
 }))
 

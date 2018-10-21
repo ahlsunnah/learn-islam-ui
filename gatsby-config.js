@@ -10,9 +10,9 @@ module.exports = {
     siteUrl: `https://demo.m-minhaj.com`,
   },
   plugins: [
+    'gatsby-plugin-flow',
     // 'gatsby-plugin-webpack-bundle-analyzer',
-    'gatsby-plugin-resolve-src',
-    'gatsby-plugin-accessibilityjs',
+    // 'gatsby-plugin-accessibilityjs',
     {
       resolve: 'gatsby-plugin-sentry',
       options: {
@@ -39,16 +39,7 @@ module.exports = {
       resolve: 'gatsby-plugin-sass',
       options: {includePaths: [path.resolve(__dirname, './node_modules')]},
     },
-    // {
-    //   resolve: `gatsby-plugin-postcss-sass`,
-    //   options: {
-    //     includePaths: [path.resolve(__dirname, './node_modules')],
-    //     // postCssPlugins: [somePostCssPlugin()],
-    //     // precision: 5,
-    //   },
-    // },
-    // 'gatsby-plugin-preact',
-    // `gatsby-source-feathers`,
+    'gatsby-plugin-postcss',
     {
       resolve: `gatsby-source-rest`,
       options: {

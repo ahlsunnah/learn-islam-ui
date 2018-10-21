@@ -2,22 +2,22 @@
 import Loader from 'components/Loader'
 import React from 'react'
 import Helmet from 'react-helmet'
-import {Redirect} from 'react-router' // eslint-disable-line
+import {Redirect} from '@reach/router' // eslint-disable-line
 
 type Props = {
   data: {
     contentfulCourse: Object,
   },
-  pathContext: {
+  pageContext: {
     languagePath: string,
     slug: string,
   },
 }
 
-const Course = ({data, pathContext}: Props) => {
+const Course = ({data, pageContext}: Props) => {
   const course = data.contentfulCourse
   const chapters = course.chapter.slice().sort((a, b) => a.order - b.order) // TODO: sort in the query ?
-  const {languagePath, slug} = pathContext
+  const {languagePath, slug} = pageContext
 
   return (
     <div className="">

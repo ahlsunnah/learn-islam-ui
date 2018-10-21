@@ -10,7 +10,7 @@ type Props = {
 }
 const DefaultLayout = ({children}: Props) => (
   <div className="mdc-typography">
-    {children()}
+    {children}
     <Footer />
   </div>
 )

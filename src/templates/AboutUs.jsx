@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import Helmet from 'react-helmet'
+import {graphql} from 'gatsby'
 import cx from 'classnames'
 import AboutUsContainer from 'modules/AboutUs'
 import './styles.css'
@@ -13,13 +14,13 @@ type Props = {
     translations: Object,
     otherLocaleTranslations: Object,
   },
-  pathContext: Object,
+  pageContext: Object,
 }
 
 const AboutUs = (props: Props) => (
-  <div className={cx({rtl: props.pathContext.locale === 'ar'})}>
+  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
-      <html lang={props.pathContext.locale} />
+      <html lang={props.pageContext.locale} />
     </Helmet>
     <AboutUsContainer {...props} />
   </div>

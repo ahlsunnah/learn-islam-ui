@@ -13,11 +13,11 @@ type Props = {
     otherLocaleTranslations: Object,
     translations: Object,
   },
-  pathContext: {
+  pageContext: {
     otherLanguagePath: string,
   },
 }
-const AboutUsContainer = ({data, pathContext: {otherLanguagePath}}: Props) => (
+const AboutUsContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
   <div>
     <BlueHero
       {...data}

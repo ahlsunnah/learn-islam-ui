@@ -1,15 +1,6 @@
 // @flow
 import * as React from 'react'
 
-let stylesStr
-if (process.env.NODE_ENV === `production`) {
-  try {
-    stylesStr = require(`!raw-loader!../public/styles.css`) // eslint-disable-line
-  } catch (e) {
-    console.log(e) // eslint-disable-line no-console
-  }
-}
-
 // const BUILD_TIME = new Date().getTime()
 type Props = {
   body: string,
@@ -23,15 +14,6 @@ const HTML = ({
   postBodyComponents,
   preBodyComponents,
 }: Props) => {
-  let css
-  if (process.env.NODE_ENV === 'production') {
-    css = (
-      <style
-        id="gatsby-inlined-css"
-        dangerouslySetInnerHTML={{__html: stylesStr}}
-      />
-    )
-  }
   return (
     <html lang="ar">
       <head>
@@ -56,7 +38,6 @@ const HTML = ({
           type="image/vnd.microsoft.icon"
         /> */}
         {headComponents}
-        {css}
         {process.env.NODE_ENV === 'production' && (
           <link
             rel="stylesheet"

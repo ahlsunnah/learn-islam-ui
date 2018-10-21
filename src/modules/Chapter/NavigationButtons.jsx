@@ -2,7 +2,7 @@
 import cx from 'classnames'
 import Button from 'components/Button'
 import RawHTML from 'components/RawHTML'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import * as React from 'react'
 import Checkbox from './Checkbox'
 

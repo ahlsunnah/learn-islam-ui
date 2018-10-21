@@ -1,6 +1,6 @@
 // @flow
 import Button from 'components/Button'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import hamburgerSvg from 'images/hamburger.svg'
 import * as React from 'react'
 

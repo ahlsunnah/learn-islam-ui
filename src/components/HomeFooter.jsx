@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import cx from 'classnames'
 import Facebook from 'react-icons/lib/fa/facebook'
 import Telegram from 'react-icons/lib/fa/paper-plane'

@@ -13,7 +13,7 @@ type Props = {
     track: {},
     translations: {},
   },
-  pathContext: {
+  pageContext: {
     locale: string,
     localesPaths: {
       [string]: string,
@@ -24,9 +24,9 @@ type Props = {
 
 const TrackContainer = ({
   data: {otherLocaleTranslations, track, translations},
-  pathContext,
+  pageContext,
 }: Props) => {
-  const {locale, localesPaths, slug} = pathContext
+  const {locale, localesPaths, slug} = pageContext
   const localePath = localesPaths[locale]
   const currentPath = `${localePath}${slug}`
   // TODO calculate next course with progress

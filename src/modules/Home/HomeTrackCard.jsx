@@ -2,7 +2,7 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
 import RawHTML from 'components/RawHTML'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import React from 'react'
 // import Card from 'preact-material-components/Card'
 // import 'preact-material-components/Card/style.css'

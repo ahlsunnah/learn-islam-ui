@@ -2,7 +2,7 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 // TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
 import cx from 'classnames'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import logoAr from 'images/logo-ar.png'
 import logoFr from 'images/logo-fr.png'
 import * as React from 'react'

@@ -2,7 +2,7 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
 import RawHTML from 'components/RawHTML'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import React from 'react'
 // import Card from 'preact-material-components/Card'
 // import 'preact-material-components/Card/style.css'
@@ -42,7 +42,7 @@ const HomeTrackCard = ({localePath, slug, soon, strings: s, t}: Props) => (
         {t.soon}
       </Button>
     ) : (
-      <Link className="mv2 no-underline" to={`${localePath}${slug}`}>
+      <Link className="mv2 no-underline" to={`${localePath}${slug}/`}>
         <Button raised rounded secondary>
           {t.start}
         </Button>

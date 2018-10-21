@@ -185,7 +185,7 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
                           title: currentTitle,
                           path: `${
                             localesPaths[locale]
-                          }${slug}/${courseSlug}/ikhtibar-${difficulty}`,
+                          }${slug}/${courseSlug}/ikhtibar-${difficulty}/`,
                         })
                         acc[locale].sort((a, b) => (a.title > b.title ? 1 : -1))
                       }
@@ -205,7 +205,7 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
                   next.type = 'chapter'
                   next.path = `${localesPaths[locale]}${slug}/${courseSlug}/${
                     chapters[chapterIndex + 1].slug
-                  }`
+                  }/`
                   next.title = chapters[chapterIndex + 1].chaptersStrings.find(
                     (item) => item.locale === locale,
                   ).title
@@ -221,14 +221,14 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
                   next.type = 'course'
                   next.path = `${localesPaths[locale]}${slug}/${
                     nextCourse.slug
-                  }/${nextCourse.chapters[0].slug}`
+                  }/${nextCourse.chapters[0].slug}/`
                   next.title = nextCourse.coursesStrings.find(
                     (item) => item.locale === locale,
                   ).title
                 } else {
                   // TODO next track
                   next.type = 'tracks'
-                  next.path = '/masar'
+                  next.path = '/masar/'
                   next.title = strings.find(
                     (item) => item.locale === locale,
                   ).title
@@ -236,7 +236,7 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
 
                 const chapterPath = `${
                   localesPaths[locale]
-                }${slug}/${courseSlug}/${chapterSlug}`
+                }${slug}/${courseSlug}/${chapterSlug}/`
                 createPage({
                   path: chapterPath,
                   component: slash(chapterTemplate),
@@ -287,14 +287,14 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
                       next.type = 'course'
                       next.path = `${localesPaths[locale]}${slug}/${
                         nextCourse.slug
-                      }/${nextCourse.chapters[0].slug}`
+                      }/${nextCourse.chapters[0].slug}/`
                       next.title = nextCourse.coursesStrings.find(
                         (item) => item.locale === locale,
                       ).title
                     } else {
                       // TODO next track
                       next.type = 'tracks'
-                      next.path = '/masar'
+                      next.path = '/masar/'
                       next.title = strings.find(
                         (item) => item.locale === locale,
                       ).title

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import cx from 'classnames'
 import Facebook from 'react-icons/lib/fa/facebook'
 import Telegram from 'react-icons/lib/fa/paper-plane'
@@ -51,7 +51,7 @@ const HomeFooter = ({
       <h2 className="ph5-l f4 fw4">{homeFooterCTA}</h2>
     </div>
     <div className="mt4 mt5-ns tc">
-      <Link to={firstTrackSlug} className="no-underline">
+      <Link to={`${firstTrackSlug}/`} className="no-underline">
         <Button
           className={cx('ph4 b', {
             'mdc-theme--secondary': dark,
@@ -73,7 +73,12 @@ const HomeFooter = ({
           <div className="mh2">{footerSocialTitle}</div>
           <div className="mt3">
             {icons.map(([icon, Icon], i) => (
-              <a key={i} href={props[`url${icon}`]} target="_blank">
+              <a
+                key={i}
+                href={props[`url${icon}`]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon
                   className={cx('mh2 pa1 f4 bg-white mdc-theme--primary', {
                     'mdc-theme--primary': !dark,

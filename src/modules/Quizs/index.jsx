@@ -59,10 +59,10 @@ const QuizsContainer = ({
           difficulty,
           locale,
         }}
-        coursePathname={pathname
+        coursePathname={`${pathname
           .split('/')
           .slice(0, -1)
-          .join('/')}
+          .join('/')}/`}
         levelSubtitle={levelSubtitle}
         next={next}
         nextQuiz={nextQuiz}

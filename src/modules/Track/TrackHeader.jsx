@@ -2,7 +2,7 @@
 import Button from 'components/Button'
 // import IconWithText from 'components/IconWithText'
 import RawHTML from 'components/RawHTML'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 // import clock from 'images/clock.svg'
 // import target from 'images/target.svg'
 // import {getHumanTime} from 'lib/time'

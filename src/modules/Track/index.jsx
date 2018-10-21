@@ -33,7 +33,7 @@ const TrackContainer = ({
   const nextCoursePath =
     track.courses[0] &&
     `${currentPath}/${track.courses[0].slug}/${track.courses[0].chapters[0] &&
-      track.courses[0].chapters[0].slug}`
+      track.courses[0].chapters[0].slug}/`
   const trackDuration = track.courses.reduce(
     (acc, {chapters}) =>
       acc + chapters.reduce((acc2, {duration}) => acc2 + duration, 0),

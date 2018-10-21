@@ -2,7 +2,7 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
 import IconWithText from 'components/IconWithText'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import target from 'images/target.svg'
 import * as React from 'react'
 
@@ -39,7 +39,7 @@ const CourseCard = ({
 }: Props) => {
   // TODO calculate next chapter with progress
   const nextCoursePath = `${currentPath}/${slug}/${chapters[0] &&
-    chapters[0].slug}`
+    chapters[0].slug}/`
   return (
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"

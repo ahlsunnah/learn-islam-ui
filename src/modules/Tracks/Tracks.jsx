@@ -1,7 +1,7 @@
 // @flow
 import cx from 'classnames'
 import RawHTML from 'components/RawHTML'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import * as React from 'react'
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 const Tracks = ({localePath, tracks}: Props) => (
   <div>
     {tracks.map(({slug, strings}, i) => (
-      <Link key={slug} to={`${localePath}${slug}`} className="no-underline">
+      <Link key={slug} to={`${localePath}${slug}/`} className="no-underline">
         <div
           className={cx(
             'mv4 mv5-ns pv3 flex justify-center black flex-column',

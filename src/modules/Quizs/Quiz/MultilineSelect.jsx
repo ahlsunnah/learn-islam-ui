@@ -54,15 +54,8 @@ const MultilineSelect = (props: Props) => {
           isClearable
           isRtl={props.isRtl}
           onChange={props.onChange}
+          isSearchable={false}
           styles={{
-            input: (styles) => {
-              if (props.value)
-                return {
-                  ...styles,
-                  position: 'absolute',
-                }
-              return styles
-            },
             singleValue: (styles) => {
               return {
                 color: styles.color,

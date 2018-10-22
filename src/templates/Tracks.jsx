@@ -70,6 +70,7 @@ export const pageQuery = graphql`
       localePath
       siteName
       siteSlogan
+      soon
       tracks
       tracksPageTitle
       tracksPageDescription
@@ -90,6 +91,7 @@ export const pageQuery = graphql`
         node {
           order
           slug
+          soon
           strings: tracksStrings {
             title
             description

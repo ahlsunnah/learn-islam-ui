@@ -4,8 +4,20 @@ import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
 import * as React from 'react'
 
+const LinkOrChildren = ({children, className = '', to}) => {
+  if (to)
+    return (
+      <Link to={to} className={className}>
+        {children}
+      </Link>
+    )
+
+  return children
+}
+
 type Props = {
   localePath: string,
+  soonString: string,
   tracks: Array<{
     slug: string,
     strings: {
@@ -14,10 +26,14 @@ type Props = {
     },
   }>,
 }
-const Tracks = ({localePath, tracks}: Props) => (
+const Tracks = ({localePath, soonString, tracks}: Props) => (
   <div>
-    {tracks.map(({slug, strings}, i) => (
-      <Link key={slug} to={`${localePath}${slug}/`} className="no-underline">
+    {tracks.map(({slug, soon, strings}, i) => (
+      <LinkOrChildren
+        key={slug}
+        to={!soon && `${localePath}${slug}/`}
+        className="no-underline"
+      >
         <div
           className={cx(
             'mv4 mv5-ns pv3 flex justify-center black flex-column',
@@ -29,11 +45,12 @@ const Tracks = ({localePath, tracks}: Props) => (
         >
           <div className="mh3 w5 h4 bg-light-gray" />
           <div className="mh3 measure-narrow">
+            {!!soon && <span>{soonString}</span>}
             <h2>{strings.title}</h2>
             <RawHTML>{strings.description}</RawHTML>
           </div>
         </div>
-      </Link>
+      </LinkOrChildren>
     ))}
   </div>
 )

@@ -23,7 +23,11 @@ const TracksContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
       translations={data.translations}
       title={data.translations.tracksPageTitle}
     />
-    <Tracks tracks={data.tracks} localePath={data.translations.localePath} />
+    <Tracks
+      tracks={data.tracks}
+      localePath={data.translations.localePath}
+      soonString={data.translations.soon}
+    />
     <HomeFooter
       {...data.translations}
       firstTrackSlug={`${data.translations.localePath}${data.tracks[0] &&

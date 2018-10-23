@@ -53,78 +53,109 @@ type Props = {
     locale: string,
   },
 }
-const FillInTheBlank = ({
-  data: {values},
-  finished,
-  handleAnswer,
-  number,
-  orderedValues,
-  remainingValues,
-  score,
-  state: {answers = []},
-  textParts,
-  t: {fillInTheBlankTitle, locale},
-}: Props) => (
-  <div>
-    <div className="pb2 flex bb items-center">
-      <div className="flex-no-shrink mr2 b">{number} -&nbsp;</div>
-      <div className="f4 b">{fillInTheBlankTitle}</div>
-    </div>
-    <div className="mt3 mb0 f4">
-      {textParts.map(
-        (part, i) =>
-          i === 0 ? (
-            <span key={`part${i}`} className="lh1-75rem">
-              {part}
-            </span> // eslint-disable-line react/no-array-index-key
-          ) : (
-            [
-              <div
-                className="dib"
-                key={`value${i - 1}`}
-                //   className="bg-light-green"
-              >
-                {finished ? (
-                  <DisplayAnswer
-                    answer={
-                      answers[i - 1] !== undefined ? values[answers[i - 1]] : ''
-                    }
-                    answerIndex={answers[i - 1]}
-                    index={i - 1}
-                    value={values[i - 1]}
-                  />
-                ) : (
-                  <SelectInput
-                    name={i - 1}
-                    onChange={handleAnswer}
-                    options={remainingValues}
-                    value={orderedValues.find(
-                      ({index}) => index === answers[i - 1],
+class FillInTheBlank extends React.PureComponent<Props> {
+  state = {}
+
+  myRefs = []
+
+  componentDidMount() {
+    // We fix the width of selects so it does not change
+    setTimeout(() => {
+      const maxWidth = this.myRefs.reduce((max, ref) => {
+        if (ref) {
+          const width = ref.offsetWidth
+          max = width > max ? width : max // eslint-disable-line no-param-reassign
+        }
+        return max
+      }, 0)
+      this.setState({width: maxWidth}) // eslint-disable-line react/no-unused-state
+    }, 500)
+  }
+
+  setRef = (ref, index) => {
+    this.myRefs[index] = ref
+  }
+
+  render() {
+    const {
+      data: {values},
+      finished,
+      handleAnswer,
+      number,
+      orderedValues,
+      remainingValues,
+      score,
+      state: {answers = []},
+      textParts,
+      t: {fillInTheBlankTitle, locale},
+    } = this.props
+    return (
+      <div>
+        <div className="pb2 flex bb items-center">
+          <div className="flex-no-shrink mr2 b">{number} -&nbsp;</div>
+          <div className="f4 b">{fillInTheBlankTitle}</div>
+        </div>
+        <div className="mt3 mb0 f4">
+          {textParts.map(
+            (part, i) =>
+              i === 0 ? (
+                <span key={`part${i}`} className="lh1-75rem">
+                  {part}
+                </span> // eslint-disable-line react/no-array-index-key
+              ) : (
+                [
+                  <div
+                    className="dib"
+                    key={`value${i - 1}`}
+                    //   className="bg-light-green"
+                  >
+                    {finished ? (
+                      <DisplayAnswer
+                        answer={
+                          answers[i - 1] !== undefined
+                            ? values[answers[i - 1]]
+                            : ''
+                        }
+                        answerIndex={answers[i - 1]}
+                        index={i - 1}
+                        value={values[i - 1]}
+                      />
+                    ) : (
+                      <SelectInput
+                        name={i - 1}
+                        onChange={handleAnswer}
+                        options={remainingValues}
+                        setRef={this.setRef}
+                        style={this.state}
+                        value={orderedValues.find(
+                          ({index}) => index === answers[i - 1],
+                        )}
+                      />
                     )}
-                  />
-                )}
-              </div>,
-              <span key={`part${i}`} className="lh1-75rem">
-                {part}
-              </span>, // eslint-disable-line react/no-array-index-key
-            ]
-          ),
-      )}
-    </div>
-    {finished && (
-      <div
-        className={cx('mt3 f3', {
-          tl: locale === 'ar',
-          tr: locale !== 'ar',
-          green: score > answers.length / 2,
-          red: score <= answers.length / 2,
-        })}
-      >
-        {score}/{answers.length}
+                  </div>,
+                  <span key={`part${i}`} className="lh1-75rem">
+                    {part}
+                  </span>, // eslint-disable-line react/no-array-index-key
+                ]
+              ),
+          )}
+        </div>
+        {finished && (
+          <div
+            className={cx('mt3 f3', {
+              tl: locale === 'ar',
+              tr: locale !== 'ar',
+              green: score > answers.length / 2,
+              red: score <= answers.length / 2,
+            })}
+          >
+            {score}/{answers.length}
+          </div>
+        )}
       </div>
-    )}
-  </div>
-)
+    )
+  }
+}
 
 const enhance = compose(
   setPropTypes({

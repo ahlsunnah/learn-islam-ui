@@ -2,7 +2,7 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 // TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
 import cx from 'classnames'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import leftSvg from 'images/chevron-left.svg'
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
@@ -41,6 +41,7 @@ type Props = {
   quizsState: Object,
   toggleDrawer: Function,
   t: {
+    locale: string,
     localePath: string,
     quiz: string,
   },
@@ -57,10 +58,13 @@ const Sidebar = ({
 }: Props) => (
   <aside
     className={cx(
-      'bg-custom-dark-blue bg-pattern flex-no-shrink transition-width overflow-hidden',
+      'z-999 fixed w320px min-vh-100 bg-custom-dark-blue bg-pattern flex-no-shrink transition-transform overflow-hidden',
       {
-        'w320px ': isOpen,
-        w0: !isOpen,
+        'left-0': t.locale !== 'ar',
+        'right-0': t.locale === 'ar',
+        'translate-x-0': isOpen,
+        'translate-x-100': !isOpen && t.locale === 'ar',
+        'translate-x--100': !isOpen && t.locale !== 'ar',
       },
     )}
   >

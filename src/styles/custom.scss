@@ -150,12 +150,20 @@ div.raised-bottom {
   transition: color 0.2s linear;
 }
 
-.transition-width {
-  transition: width 0.2s linear;
+.transition-transform {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.w0 {
-  width: 0;
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+.translate-x-100 {
+  transform: translateX(100%);
+}
+
+.translate-x--100 {
+  transform: translateX(-100%);
 }
 
 .w2-5 {
@@ -164,6 +172,10 @@ div.raised-bottom {
 
 .w320px {
   width: 270px;
+}
+
+.w-100.widthWithoutSidebar {
+  width: calc(100vw - 270px);
 }
 
 @media screen and (min-width: 30em) {

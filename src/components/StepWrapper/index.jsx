@@ -3,6 +3,7 @@ import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
+import cx from 'classnames'
 
 type Props = {
   children: React.Node,
@@ -47,14 +48,20 @@ class StepWrapper extends React.Component<Props, State> {
     } = this.props
     const {isSideBarVisible} = this.state
     return (
-      <div className="flex">
+      <div>
         <Sidebar
           course={course}
           isOpen={isSideBarVisible}
           t={t}
           toggleDrawer={this.toggleSidebar}
         />
-        <div className="w-100 flex flex-column items-stretch">
+        <div
+          className={cx('absolute w-100 flex flex-column items-stretch', {
+            widthWithoutSidebar: isSideBarVisible,
+            'right-0': t.locale !== 'ar',
+            'left-0': t.locale === 'ar',
+          })}
+        >
           <Header
             otherLocaleName={otherLocaleName}
             otherLocalePath={otherLocalePath}

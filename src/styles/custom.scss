@@ -174,8 +174,25 @@ div.raised-bottom {
   width: 270px;
 }
 
-.w-100.widthWithoutSidebar {
+.w-100.wrapperWithoutSidebar {
   width: calc(100vw - 270px);
+  right: 0;
+}
+
+.wrapperWithoutSidebar .fixedChild {
+  width: calc(100vw - 270px);
+}
+
+html:lang(ar) {
+  .w-100.wrapperWithoutSidebar {
+    width: calc(100vw - 270px);
+    left: 0;
+  }
+
+  .wrapperWithoutSidebar .fixedChild {
+    width: calc(100vw - 270px);
+    left: 0;
+  }
 }
 
 @media screen and (min-width: 30em) {

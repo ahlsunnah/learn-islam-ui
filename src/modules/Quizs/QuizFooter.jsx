@@ -36,7 +36,7 @@ const QuizFooter = ({quizsState, submit, t, totalQuestions}: Props) => (
           {t.seeYourScore}
         </Button>
       )}
-      <Card className="fixed bottom-0 left-0 right-0 h3 ph4 w-100 flex justify-center items-start raised-bottom">
+      <Card className="fixed fixedChild bottom-0 right-0 h3 ph4 w-100 flex justify-center items-start raised-bottom">
         <ProgressWrapper
           progressText={t.progress}
           quizsState={quizsState}

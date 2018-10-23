@@ -57,9 +57,7 @@ class StepWrapper extends React.Component<Props, State> {
         />
         <div
           className={cx('absolute w-100 flex flex-column items-stretch', {
-            widthWithoutSidebar: isSideBarVisible,
-            'right-0': t.locale !== 'ar',
-            'left-0': t.locale === 'ar',
+            wrapperWithoutSidebar: isSideBarVisible,
           })}
         >
           <Header

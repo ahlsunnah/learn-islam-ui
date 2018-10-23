@@ -62,11 +62,11 @@ class FillInTheBlank extends React.PureComponent<Props> {
     // We fix the width of selects so it does not change
     setTimeout(() => {
       const maxWidth = this.myRefs.reduce((max, ref) => {
-        if (ref) {
-          const width = ref.offsetWidth
-          max = width > max ? width : max // eslint-disable-line no-param-reassign
+        if (!ref) {
+          return max
         }
-        return max
+        const width = ref.offsetWidth
+        return width > max ? width : max
       }, 0)
       this.setState({width: maxWidth}) // eslint-disable-line react/no-unused-state
     }, 500)

@@ -1,9 +1,9 @@
 // @flow
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
+import cx from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import cx from 'classnames'
 
 type Props = {
   children: React.Node,

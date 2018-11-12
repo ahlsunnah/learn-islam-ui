@@ -58,7 +58,7 @@ const Sidebar = ({
 }: Props) => (
   <aside
     className={cx(
-      'z-999 fixed w320px min-vh-100 bg-custom-dark-blue bg-pattern flex-no-shrink transition-transform overflow-hidden',
+      'z-999 fixed w320px min-vh-100 bg-custom-dark-blue bg-pattern flex-no-shrink transition-transform overflow-auto',
       {
         'left-0': t.locale !== 'ar',
         'right-0': t.locale === 'ar',
@@ -67,9 +67,10 @@ const Sidebar = ({
         'translate-x--100': !isOpen && t.locale !== 'ar',
       },
     )}
+    style={{height: '100vh'}}
   >
-    <nav className="">
-      <header className="">
+    <nav>
+      <header>
         <Link
           className="white no-underline"
           to={`${t.localePath}${track.slug}`}

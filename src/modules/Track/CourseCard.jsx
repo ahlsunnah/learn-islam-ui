@@ -2,6 +2,7 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
 import IconWithText from 'components/IconWithText'
+import Progress from 'modules/Quizs/Progress'
 import {Link} from 'gatsby'
 import target from 'images/target.svg'
 import * as React from 'react'
@@ -10,6 +11,7 @@ type Props = {
   chapters: Array<{
     slug: string,
   }>,
+  chaptersState: Object,
   currentPath: string,
   level: number,
   slug: string,
@@ -17,8 +19,11 @@ type Props = {
     title: string,
     description: string,
   }>,
+  quizs: Array<{difficulty: Boolean}>,
+  quizsState: Object,
   t: {
     course: string,
+    locale: string,
     startCourse: string,
   },
   topic: {
@@ -30,8 +35,12 @@ type Props = {
 }
 const CourseCard = ({
   chapters,
+  chaptersState,
   currentPath,
+  id,
   level = 1,
+  quizs,
+  quizsState,
   slug,
   strings,
   t,
@@ -40,6 +49,30 @@ const CourseCard = ({
   // TODO calculate next chapter with progress
   const nextCoursePath = `${currentPath}/${slug}/${chapters[0] &&
     chapters[0].slug}/`
+  const finishedChapters = chapters.reduce((sum, {id: chapterId}) => {
+    if (chaptersState[chapterId]) {
+      sum += 1 // eslint-disable-line no-param-reassign
+    }
+    return sum
+  }, 0)
+  const difficulties = quizs.reduce((acc, {difficulty}) => {
+    if (!acc.includes(difficulty)) acc.push(difficulty)
+    return acc
+  }, [])
+  const finishedQuizs = difficulties.reduce((acc, difficulty) => {
+    if (
+      quizsState &&
+      quizsState[t.locale] &&
+      quizsState[t.locale][difficulty] &&
+      quizsState[t.locale][difficulty].passed
+    ) {
+      return acc + 1
+    }
+    return acc
+  }, 0)
+  const percent =
+    (100 * (finishedChapters + finishedQuizs)) /
+    (difficulties.length + chapters.length)
   return (
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"
@@ -67,11 +100,16 @@ const CourseCard = ({
             }}
           />
         )}
-        <Link className="no-underline" to={nextCoursePath}>
-          <Button className="mt3" secondary stroked>
-            {t.startCourse}
-          </Button>
-        </Link>
+        <div className="flex justify-between items-center">
+          <Link className="no-underline" to={nextCoursePath}>
+            <Button className="mt3" secondary stroked>
+              {t.startCourse}
+            </Button>
+          </Link>
+          {percent !== 0 && (
+            <Progress className="mt3 w-60" progress={percent} />
+          )}
+        </div>
       </div>
     </Card>
   )

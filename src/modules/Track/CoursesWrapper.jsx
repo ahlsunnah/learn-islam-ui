@@ -1,15 +1,24 @@
 // @flow
 import * as React from 'react'
+import {connect} from 'react-redux'
 import CourseCard from './CourseCard'
 
 type Props = {
+  chaptersState: Object,
   courses: Array<{
     slug: string,
   }>,
   currentPath: string,
+  quizsState: Object,
   t: {},
 }
-const CoursesWrapper = ({courses, currentPath, t}: Props) => (
+const CoursesWrapper = ({
+  chaptersState,
+  courses,
+  currentPath,
+  quizsState,
+  t,
+}: Props) => (
   <div className="flex flex-column items-center">
     {courses &&
       courses
@@ -19,10 +28,17 @@ const CoursesWrapper = ({courses, currentPath, t}: Props) => (
           <CourseCard
             key={course.slug}
             {...course}
+            chaptersState={chaptersState}
+            quizsState={quizsState[course.id]}
             currentPath={currentPath}
             t={t}
           />
         ))}
   </div>
 )
-export default CoursesWrapper
+
+const enhance = connect(({chapters, quizs}) => ({
+  chaptersState: chapters,
+  quizsState: quizs,
+}))
+export default enhance(CoursesWrapper)

@@ -13,9 +13,7 @@ const ProgressWrapper = ({percent, progressText}: Props) => (
     <span className="pt2 f6">
       {progressText} {percent}%
     </span>
-    <div className="w5">
-      <Progress progress={percent} />
-    </div>
+    <Progress className="mv2" progress={percent} />
   </div>
 )
 

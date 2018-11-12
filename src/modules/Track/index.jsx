@@ -10,8 +10,8 @@ type Props = {
     otherLocaleTranslations: {
       localePath: string,
     },
-    track: {},
-    translations: {},
+    track: Object,
+    translations: Object,
   },
   pageContext: {
     locale: string,

@@ -69,6 +69,7 @@ export const pageQuery = graphql`
         title
       }
       courses {
+        id
         level
         order
         slug
@@ -79,10 +80,14 @@ export const pageQuery = graphql`
         }
         chapters {
           duration
+          id
           slug
           strings: chaptersStrings {
             locale
           }
+        }
+        quizs {
+          difficulty
         }
         topic {
           color

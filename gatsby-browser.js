@@ -10,6 +10,17 @@ type Props = {
   element: React.Node,
 }
 
+export const onClientEntry = () => {
+  if (process.env.NODE_ENV === 'production')
+    import('@sentry/browser').then((sentry) => {
+      sentry.init({
+        dsn: 'https://37ac93a8f3644b2fad4a3594da09c668@sentry.io/1205429',
+      })
+
+      window.sentry = sentry
+    })
+}
+
 export const wrapPageElement = ({element}: Props) => {
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it

@@ -11,15 +11,9 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-flow',
+    'gatsby-plugin-typescript',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
-    {
-      resolve: 'gatsby-plugin-sentry',
-      options: {
-        dsn: 'https://37ac93a8f3644b2fad4a3594da09c668@sentry.io/1205429',
-        version: '3.25.1',
-      },
-    },
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {

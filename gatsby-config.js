@@ -12,6 +12,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-flow',
     'gatsby-plugin-typescript',
+    'gatsby-plugin-emotion',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
     {

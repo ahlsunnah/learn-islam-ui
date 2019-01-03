@@ -75,6 +75,7 @@
     "babel-preset-flow": "^6.23.0",
     "caniuse-lite": "^1.0.30000925",
     "classnames": "^2.2.6",
+    "emotion-theming": "^10.0.5",
     "flow-bin": "^0.89.0",
     "gatsby": "^2.0.79",
     "gatsby-image": "^2.0.25",

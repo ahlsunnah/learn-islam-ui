@@ -7,7 +7,7 @@ type Props = {
 }
 
 const HomeContentPresentation = ({text, title}: Props) => (
-  <section className="pv3 flex flex-column items-center justify-center mdc-theme--secondary-bg bg-pattern white">
+  <section className="pv3 flex flex-column items-center justify-center mdc-theme--secondary-bg white">
     <h2>{title}</h2>
     <p className="mw6 f4 lh-copy tj">{text}</p>
   </section>

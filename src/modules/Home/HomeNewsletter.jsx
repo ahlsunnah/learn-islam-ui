@@ -25,7 +25,7 @@ const HomeNewsletter = ({
   message,
   success,
 }: Props) => (
-  <section className="pv5 min-h-512-ns flex flex-column justify-center items-center mdc-theme--primary-bg bg-pattern">
+  <section className="pv5 min-h-512-ns flex flex-column justify-center items-center mdc-theme--primary-bg">
     <div className="ph4 tc white">
       <h2>{homeEmailTitle}</h2>
     </div>

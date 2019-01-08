@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import Home from 'react-icons/lib/io/ios-home-outline'
 import cx from 'classnames'
 
@@ -12,7 +12,7 @@ const TrackSidebar = ({locale, localePath}: Props) => (
   <div className="w2 w3-ns">
     <div
       className={cx(
-        'z-9999 fixed pt2 w2 w3-ns top-0 bottom-0 mdc-theme--primary-bg bg-pattern tc',
+        'z-9999 fixed pt2 w2 w3-ns top-0 bottom-0 mdc-theme--primary-bg tc',
         {
           'right-0': locale === 'ar',
           'left-0': locale !== 'ar',

@@ -24,7 +24,7 @@ const AboutUsContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
       otherLanguagePath={otherLanguagePath}
       title={data.translations.aboutUsPageTitle}
     />
-    <RawHTML className="about-us-content center pt3 pb4 ph3 ph4-m ph0-l tj">
+    <RawHTML className="about-us-content center pt3 pb4 ph3 ph4-m ph0-l">
       {data.translations.aboutUsPageContent}
     </RawHTML>
     <HomeFooter

@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
-import { Link } from 'gatsby'
+import {Link} from 'gatsby'
 import cx from 'classnames'
 // import logoAr from 'images/logo-ar.png'
 // import logoFr from 'images/logo-fr.png'
-import logoAr from 'images/site-h-ar-1.0.png'
-import logoFr from 'images/site-h-fr-1.0.png'
+import logoAr from 'images/logo-horizontal-ar.svg'
+import logoFr from 'images/logo-horizontal-fr.svg'
 
 type Props = {
   locale: string,

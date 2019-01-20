@@ -20,7 +20,9 @@
     "start": "npm run start:prod",
     "start:dev": "eval $(cat .env.dev) gatsby develop",
     "start:prod": "eval $(cat .env.prod) gatsby develop",
-    "test:security": "nsp check"
+    "test:security": "nsp check",
+    "type-check": "tsc --noEmit",
+    "lint": "tslint --project ."
   },
   "config": {
     "commitizen": {
@@ -71,6 +73,9 @@
     "@material/toolbar": "^0.35.0",
     "@material/typography": "^0.35.0",
     "@sentry/browser": "^4.4.2",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/recompose": "^0.30.2",
     "babel-eslint": "^10.0.1",
     "babel-preset-flow": "^6.23.0",
     "caniuse-lite": "^1.0.30000925",
@@ -139,6 +144,10 @@
     "nsp": "^3.2.1",
     "prettier": "^1.15.3",
     "stylelint": "^9.9.0",
-    "stylelint-config-primer": "^3.0.1"
+    "stylelint-config-primer": "^3.0.1",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
   }
 }

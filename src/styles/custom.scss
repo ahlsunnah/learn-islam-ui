@@ -196,9 +196,6 @@ html:lang(ar) {
 }
 
 @media screen and (min-width: 30em) {
-  // .bg-pattern {
-  //   background-size: 50%;
-  // }
   div.w-95-ns {
     width: 95%;
   }
@@ -212,20 +209,10 @@ html:lang(ar) {
 }
 
 @media screen and (min-width: 60em) {
-  // .bg-pattern {
-  //   background-size: 30%;
-  // }
   .mdc-toolbar__section.dn-l {
     display: none;
   }
   .mdc-toolbar__section.inline-flex-l {
     display: inline-flex;
-  }
-}
-
-html:lang(ar) {
-  font-size: 24px;
-  p {
-    line-height: 1.7;
   }
 }

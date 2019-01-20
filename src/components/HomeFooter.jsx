@@ -42,7 +42,7 @@ const HomeFooter = ({
   ...props
 }: Props) => (
   <section
-    className={cx('pt5 pb4 ph4 ph5-l flex flex-column white bg-pattern', {
+    className={cx('pt5 pb4 ph4 ph5-l flex flex-column white', {
       'mdc-theme--primary-bg': !dark,
       'mdc-theme--secondary-bg': dark,
     })}

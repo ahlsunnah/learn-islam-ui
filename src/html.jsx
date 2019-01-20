@@ -38,12 +38,10 @@ const HTML = ({
           type="image/vnd.microsoft.icon"
         /> */}
         {headComponents}
-        {process.env.NODE_ENV === 'production' && (
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
-          />
-        )}
+        {/* process.env.NODE_ENV === 'production' && (<link
+          rel="stylesheet"
+          href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
+        />) */}
       </head>
       <body>
         {preBodyComponents}

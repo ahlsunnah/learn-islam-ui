@@ -4,7 +4,7 @@ import AboutUs from 'react-icons/lib/md/info'
 interface Item {
   title: string
   link: string
-  Icon: JSX.Element
+  Icon: any
 }
 
 const items: Item[] = [

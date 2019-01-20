@@ -20,7 +20,7 @@ const StepContent = ({active, arabic, children, content = ''}: Props) => (
     {content && (
       <div
         className={cx('', {
-          'rtl f3': arabic,
+          'rtl f3 font-book': arabic,
           'f4-5': !arabic,
         })}
         dangerouslySetInnerHTML={{

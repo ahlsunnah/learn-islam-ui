@@ -58,7 +58,7 @@ const Sidebar = ({
 }: Props) => (
   <aside
     className={cx(
-      'z-999 fixed w320px min-vh-100 bg-custom-dark-blue bg-pattern flex-no-shrink transition-transform overflow-auto',
+      'z-999 fixed w320px min-vh-100 bg-custom-dark-blue flex-no-shrink transition-transform overflow-auto',
       {
         'left-0': t.locale !== 'ar',
         'right-0': t.locale === 'ar',

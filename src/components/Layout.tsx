@@ -4,9 +4,6 @@ import {ThemeProvider} from 'emotion-theming'
 import Footer from 'components/Footer'
 import 'normalize.css'
 import 'styles/theme.scss'
-import 'fonts/noto-kufi-arabic-font.css'
-import 'fonts/open-sans-font.css'
-import 'fonts/shahwan-font.css'
 
 interface Props {
   children: JSX.Element

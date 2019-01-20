@@ -35,6 +35,7 @@ const HomeTrackCard = ({localePath, slug, soon, strings: s, t}: Props) => (
     {soon ? (
       <Button
         className="mv2 cursor-default no-underline"
+        disabled
         raised
         rounded
         secondary

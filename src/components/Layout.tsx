@@ -3,6 +3,7 @@ import {Global, css} from '@emotion/core'
 import {ThemeProvider} from 'emotion-theming'
 import Footer from 'components/Footer'
 import 'normalize.css'
+import 'styles/fonts.scss'
 import 'styles/theme.scss'
 
 interface Props {

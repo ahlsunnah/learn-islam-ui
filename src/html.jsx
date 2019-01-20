@@ -24,14 +24,6 @@ const HTML = ({
         <meta name="author" content="name" />
         <meta name="description" content="description here" />
         <meta name="keywords" content="keywords,here" />
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css?family=Amiri:400,700|Open+Sans:400,600&amp;subset=arabic"
-          rel="stylesheet"
-        />
         {/* <link
           rel="shortcut icon"
           href="favicon.ico"

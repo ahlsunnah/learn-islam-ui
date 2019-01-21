@@ -37,11 +37,16 @@ Abu Hafs made a team composed of
 
 The app will be multilingual with arabic as main language
 
-The courses will we organized as follow (it may change in future):
+The courses will we organized as follow:
 
-- [x] Sections: Usul addin, tafsir, fiqh, non-muslims, ...
+- [x] Tracks: First track, second track, third track, ...
 - [x] Courses: Nawaqid alislam, chourout la ilaha illa Allah, tafsir surat alikhlas, ...
 - [x] Chapters: Chirk, Ikhlas, etc ...
+
+- A track can have multiple Courses and a course has one track.
+- A course have multiple chapters and a chapter have one course
+- a course can have a topic (Aquida, Fiqh, ...) and a topic can have multiple courses
+- a chapter can have multiple quizzes and a quizz have one chapter
 
 Also:
 
@@ -59,7 +64,7 @@ Also:
 - SEO
 - UX
 - User registration (google, facebook auth)
-- User progress in back-end
+- User progress saved in the backend
 - Notification system
 
 ### Direction we took
@@ -105,8 +110,6 @@ The app and the content are separated. Developers on this project usually work o
 ### Architecture explication
 
 We have the data in the backend, currently it is a small nodejs app, in the future it should be a django project.
-
-Basic structure of the data can be find [here](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Learn%20Islam#R7Zpbb6M4FMc%2FTV5XsYG0eWzo3KRWGm12tbuPLjhgjbGRMU0yn36PwYRQwiybUGYeXEUVPviCz8%2BX%2F7G88MLs8EmRPH2WMeULvIwPC%2B9xgfGdv4b%2FxnCsDcHaGhLF4tqEWsOWfafWuLTWksW06GTUUnLN8q4xkkLQSHdsRCm572bbSd5tNScJ7Rm2EeF9618s1mltvcd3rf0zZUnatIxWtn8vJPqWKFkK294Ce7vqr36dkaYu29EiJbHcn5m8DwsvVFLq%2Bik7hJQb1zZuq8t9HHh7%2Bm5FhR5TANcFXgkvbde34E8mhf08fWxcUuxZxomA1GYnhd7aN0tIRynj8RM5ytK0WWjwQZPapFKx75CfcHiFwACvlbbE8crUxjgPJZcKDEJWDbSFtqYy24yiBRT72vQNvTE9k0Mn4xMpdPOBknOSF%2Byl%2BmRTMCMqYWIjtZaZzdR08OPZ97T4vE3ftdbbr1RpejgzWVd%2FojKjWh0hSzMvLHU7K%2B7u6%2BS%2BHWLIt1nS8%2BEVrOzQtsM6OdXcooUHS%2Fcyaa9HeoE3Zl4xbbzyAI%2FPW62YSHrooXe6IqfkN%2FoG1QV6hLNEQJLTnSlm3MNgaj1Ys5a5qSwnEbT1VOV59FvL77bfxiSh7I5X8yNlcUyFgSs10eTlNPhyyYSu%2FBJs4AfuC5e%2FBYsAPjyENGrT8DPZlQ6lgL4QVnGkMEz21AyVC4TxaMIWKV6NQ4onIOoPEJUqpqomKsrsBZ4d0KuBBng%2BoMEAUNgKI8XyalmuJ%2Brzo2N6PdOx6%2B4UTPH9AFQuE1nT%2FJIZNeJ4Xs0TLf35gHrLAaAFL5MaqNtGbybaeHkOoqhPNJSlKvpz0mng2zWwf60IbsrdhBr1UDsV%2FJ%2FT9zRBfkkZjPoxrNPB0yOdUwijoWDVKeGJqY5dfT08gRS%2Bc1L43YEiNFI5eRNsp97Qduq08JRI%2FRmRov6pUpiSXF%2FYPZ0anl4Ne2NZT3ImjIZOnJwc%2FtEM9kdT%2FhlyeOXk8AxIZ5XDQ8IpghWx6oOTwrcTnfVUeD0U4JSKtNGNm6c3U533bHgobnV6eEqkcx4O40shzht4VMQP5tIJpGJGMiniP1JmHAkvjHa0boRUo3KN51OdNQoYnKGOf58n%2FjFlwKc%2FEJmgmhNqTdaHNO5ca%2Bl78NxjK%2BsxRTksOa%2B0U%2Fkll9nqvprRcKZgV%2FcdBYt8r1tFIUsVUVuqdXy%2FItyVwqhZJJuK6g73KqoInvo4DuqlI8OpoQ6Cqx3SHf0%2Fg9yb0OPk%2F%2F8LLvDWnYpwsHw3cP0F9s%2FChabvEpqur41Mmx33pmV36HILzQjjbiu9iPg0O37JwHTwesuOUXM90yDVx9wd%2F94CdM6wFA%2BdNDig0wF9x6gUku1F43ozbi9zex%2F%2BBQ%3D%3D), it may not be up to date though.
 
 [GatsbyJS](https://www.gatsbyjs.org/) take the content from the api at build time and bundle it in the code, create static pages and js bundle. So we have a static website (for SEO and pre-rendering) and a js app
 

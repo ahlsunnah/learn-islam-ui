@@ -10,7 +10,6 @@ module.exports = {
     siteUrl: `https://demo.m-minhaj.com`,
   },
   plugins: [
-    'gatsby-plugin-flow',
     'gatsby-plugin-typescript',
     'gatsby-plugin-emotion',
     // 'gatsby-plugin-webpack-bundle-analyzer',

@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb',
-    'plugin:flowtype/recommended',
-    'prettier',
-    'prettier/react',
-  ],
+  extends: ['airbnb', 'prettier', 'prettier/react'],
 
   parser: 'babel-eslint',
   parserOptions: {
@@ -13,7 +8,6 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['flowtype'],
   env: {
     browser: true,
     node: true,
@@ -24,8 +18,6 @@ module.exports = {
   rules: {
     'arrow-body-style': 0,
     camelcase: 0,
-    'flowtype/space-after-type-colon': 0,
-    'flowtype/space-before-type-colon': 0,
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

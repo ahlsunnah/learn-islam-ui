@@ -1,8 +1,7 @@
-// @flow
 import cx from 'classnames'
 import * as React from 'react'
 
-type Props = {
+interface Props {
   className?: string,
   name: number,
   onChange: Function,

@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
@@ -16,7 +15,7 @@ import Error from 'react-icons/lib/md/do-not-disturb-alt'
 import addScoreWhenFinished from './addScoreWhenFinished'
 import MultilineSelect from './MultilineSelect'
 
-type Props = {
+interface Props {
   data: {
     title: string,
     values: Array<{

@@ -1,11 +1,10 @@
-// @flow
 import cx from 'classnames'
 import * as React from 'react'
 import 'styles/radio-button.scss'
 
-type Props = {
+interface Props {
   checked: boolean,
-  children: React.Node,
+  children: JSX.Element,
   error: boolean,
   greenChecked: boolean,
   id: string,

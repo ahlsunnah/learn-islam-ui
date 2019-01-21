@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import Button from 'components/Button'
 import PropTypes from 'prop-types'
@@ -7,7 +6,7 @@ import {compose, setPropTypes, withHandlers, withPropsOnChange} from 'recompose'
 import addScoreWhenFinished from './addScoreWhenFinished'
 import ResultIndicator from './ResultIndicator'
 
-type Props = {
+interface Props {
   data: {
     isTrue: boolean,
     text: string,

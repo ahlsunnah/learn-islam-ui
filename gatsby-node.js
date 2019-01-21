@@ -34,12 +34,12 @@ exports.onCreateWebpackConfig = ({actions, getConfig}) => {
 exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
   new Promise((resolve, reject) => {
     // const MainLayout = path.resolve(`./src/templates/MainLayout.jsx`)
-    const homeTemplate = path.resolve(`./src/templates/Home.jsx`)
-    const tracksTemplate = path.resolve(`./src/templates/Tracks.jsx`)
-    const aboutUsTemplate = path.resolve(`./src/templates/AboutUs.jsx`)
-    const trackTemplate = path.resolve(`./src/templates/Track.jsx`)
-    const chapterTemplate = path.resolve(`./src/templates/Chapter.jsx`)
-    const quizsTemplate = path.resolve(`./src/templates/Quizs.jsx`)
+    const homeTemplate = path.resolve(`./src/templates/Home.tsx`)
+    const tracksTemplate = path.resolve(`./src/templates/Tracks.tsx`)
+    const aboutUsTemplate = path.resolve(`./src/templates/AboutUs.tsx`)
+    const trackTemplate = path.resolve(`./src/templates/Track.tsx`)
+    const chapterTemplate = path.resolve(`./src/templates/Chapter.tsx`)
+    const quizsTemplate = path.resolve(`./src/templates/Quizs.tsx`)
 
     // home pages
     console.log('Creating home pages')

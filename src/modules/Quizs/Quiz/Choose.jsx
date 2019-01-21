@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import Button from 'components/Button'
 import shuffle from 'lib/shuffle'
@@ -14,7 +13,7 @@ import {
 import addScoreWhenFinished from './addScoreWhenFinished'
 import ResultIndicator from './ResultIndicator'
 
-type Props = {
+interface Props {
   data: {
     text: string,
     values: Array<string>,

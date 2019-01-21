@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import * as React from 'react'
@@ -34,7 +33,7 @@ const DisplayAnswer = ({
   )
 }
 
-type Props = {
+interface Props {
   data: {
     values: Array<string>,
   },

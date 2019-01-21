@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import * as React from 'react'
 import Correct from 'react-icons/lib/md/check'
@@ -6,7 +5,7 @@ import {withHandlers} from 'recompose'
 import Select from 'react-select'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 
-type Props = {
+interface Props {
   chooseAnswerString: string,
   correctAnswer: string,
   finished: boolean,

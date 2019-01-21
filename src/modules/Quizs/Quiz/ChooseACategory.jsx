@@ -1,4 +1,3 @@
-// @flow
 import cx from 'classnames'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
@@ -14,7 +13,7 @@ import addScoreWhenFinished from './addScoreWhenFinished'
 import RadioButton from './RadioButton'
 import ResultIndicator from './ResultIndicator'
 
-type Props = {
+interface Props {
   categories: Array<string>,
   data: {
     values: Array<{

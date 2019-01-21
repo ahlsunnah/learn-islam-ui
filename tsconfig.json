@@ -3,9 +3,9 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "lib": ["dom", "es2017"],
-    // "allowJs": true,
-    // "checkJs": true,
+    "lib": ["dom", "esnext"],
+    "allowJs": true,
+    "checkJs": true,
     "jsx": "react",
     "baseUrl": "src",
     "strict": true,

@@ -1,4 +1,3 @@
-// @flow
 import Card from 'components/Card'
 import * as React from 'react'
 import Choose from './Choose'
@@ -29,7 +28,7 @@ const getComponentByType = (type) => {
   }
 }
 
-type Props = {
+interface Props {
   addData: Function,
   params: {
     courseId: string,

@@ -14,21 +14,23 @@ import addScoreWhenFinished from './addScoreWhenFinished'
 import ResultIndicator from './ResultIndicator'
 
 interface Props {
+  addData: (prop: {data: any; quizId: string}) => void
   data: {
-    text: string,
-    values: Array<string>,
-  },
-  finished: boolean,
-  handleAnswer: Function,
-  number: number,
-  score: number,
+    text: string
+    values: Array<string>
+  }
+  finished: boolean
+  handleAnswer: () => void
+  number: number
+  quizId: string
+  score: number
   state: {
-    answer?: number,
-  },
-  valuesOrder: Array<number>,
+    answer?: number
+  }
+  valuesOrder: Array<number>
   t: {
-    locale: string,
-  },
+    locale: string
+  }
 }
 const Choose = ({
   data: {text, values},
@@ -61,7 +63,7 @@ const Choose = ({
             secondary
             stroked={order !== answer}
             onClick={handleAnswer}
-            name={order}
+            name={`${order}`}
           >
             {values[order]}
           </Button>
@@ -97,7 +99,7 @@ const enhance = compose(
     addScore: PropTypes.func.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
-  lifecycle({
+  lifecycle<Props, {}>({
     componentDidMount() {
       const {
         data: {values},
@@ -105,6 +107,7 @@ const enhance = compose(
         state,
         quizId,
       } = this.props
+      // @ts-ignore
       if (!state.valuesOrder)
         addData({
           data: {
@@ -114,10 +117,14 @@ const enhance = compose(
         })
     },
   }),
+  // @ts-ignore
   withPropsOnChange(['state'], ({data: {values}, state: {valuesOrder}}) => ({
+    // @ts-ignore
     valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
   })),
+  // @ts-ignore
   withHandlers({
+    // @ts-ignore
     handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
       const newAnswer = parseInt(e.target.name, 10)
       if (!finished)
@@ -130,6 +137,7 @@ const enhance = compose(
         })
     },
   }),
+  // @ts-ignore
   withPropsOnChange(['finished'], ({finished, state: {answer}}) => {
     if (!finished) {
       return {score: 0}
@@ -140,4 +148,5 @@ const enhance = compose(
   }),
   addScoreWhenFinished,
 )
+// @ts-ignore
 export default enhance(Choose)

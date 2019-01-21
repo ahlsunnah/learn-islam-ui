@@ -3,7 +3,16 @@ import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
 import * as React from 'react'
 
-const LinkOrChildren = ({children, className = '', to}) => {
+interface LinkOrChildrenProps {
+  children: JSX.Element
+  className?: string
+  to: string | false
+}
+const LinkOrChildren = ({
+  children,
+  className = '',
+  to,
+}: LinkOrChildrenProps) => {
   if (to)
     return (
       <Link to={to} className={className}>
@@ -19,6 +28,7 @@ interface Props {
   soonString: string
   tracks: Array<{
     slug: string
+    soon: boolean
     strings: {
       title: string
       description: string

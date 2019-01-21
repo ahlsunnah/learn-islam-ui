@@ -17,27 +17,27 @@ import MultilineSelect from './MultilineSelect'
 
 interface Props {
   data: {
-    title: string,
+    title: string
     values: Array<{
-      a: string,
-      b: string,
-    }>,
-  },
-  finished: boolean,
-  handleAnswer: () => {},
-  leftValues: Array<string>,
-  number: number,
-  remainingValues: Array<{value: number, label: string}>,
-  rightValues: Array<{value: number, label: string}>,
-  score: number,
+      a: string
+      b: string
+    }>
+  }
+  finished: boolean
+  handleAnswer: () => {}
+  leftValues: Array<string>
+  number: number
+  remainingValues: Array<{value: number; label: string}>
+  rightValues: Array<{value: number; label: string}>
+  score: number
   state: {
-    answers?: Array<?number>,
-  },
-  valuesOrder: Array<number>,
+    answers?: Array<number>
+  }
+  valuesOrder: Array<number>
   t: {
-    chooseAnswer: string,
-    locale: string,
-  },
+    chooseAnswer: string
+    locale: string
+  }
 }
 const LinkTheSentences = ({
   data: {title, values},
@@ -115,11 +115,15 @@ const LinkTheSentences = ({
 )
 
 const enhance = compose(
+  // @ts-ignore
   withPropsOnChange(['data'], ({data: {values}}) => {
     return {
+      // @ts-ignore
       leftValues: values.map(({a}) => a),
       rightValues: values
+        // @ts-ignore
         .map(({b}, index) => ({value: index, label: b}))
+        // @ts-ignore
         .sort((a, b) => (a.label > b.label ? 1 : -1)),
     }
   }),
@@ -138,26 +142,33 @@ const enhance = compose(
   }),
   lifecycle({
     componentDidMount() {
+      // @ts-ignore
       const {leftValues, addData, quizId, state} = this.props
       if (!state.valuesOrder)
         addData({
           data: {
             answers: new Array(leftValues.length).fill(undefined),
             // valuesOrder: leftValues.map((_, i) => i),
+            // @ts-ignore
             valuesOrder: shuffle(leftValues.map((_, i) => i)),
           },
           quizId,
         })
     },
   }),
+  // @ts-ignore
   withPropsOnChange(['state'], ({leftValues, state: {valuesOrder}}) => ({
+    // @ts-ignore
     valuesOrder: valuesOrder || leftValues.map((_, i) => i), // default values for SSR
   })),
-
+  // @ts-ignore
   withHandlers({
     handleAnswer: ({addData, quizId, state: {answers}}) => (
+      // @ts-ignore
       event,
+      // @ts-ignore
       action,
+      // @ts-ignore
       name,
     ) => {
       const newAnswers = answers.slice()
@@ -179,13 +190,15 @@ const enhance = compose(
   }),
 
   // Remove already chosen values from rightValues
+  // @ts-ignore
   withPropsOnChange(['state'], ({rightValues, state: {answers = []}}) => {
+    // @ts-ignore
     const notChosen = ({value}) => !answers.includes(value)
     return {
       remainingValues: rightValues.filter(notChosen),
     }
   }),
-
+  // @ts-ignore
   withPropsOnChange(['finished'], ({finished, state: {answers = []}}) => {
     if (!finished) {
       return {score: 0}
@@ -199,4 +212,5 @@ const enhance = compose(
   }),
   addScoreWhenFinished,
 )
+// @ts-ignore
 export default enhance(LinkTheSentences)

@@ -1,22 +1,19 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import {ObjectOfStrings, ObjectOf} from 'interfaces'
 import CoursesWrapper from './CoursesWrapper'
 import TrackHeader from './TrackHeader'
 import TrackSidebar from './TrackSidebar'
 
 interface Props {
   data: {
-    otherLocaleTranslations: {
-      localePath: string
-    }
-    track: Object
-    translations: Object
+    otherLocaleTranslations: ObjectOfStrings
+    track: ObjectOf<any>
+    translations: ObjectOfStrings
   }
   pageContext: {
     locale: string
-    localesPaths: {
-      [string]: string
-    }
+    localesPaths: ObjectOfStrings
     slug: string
   }
 }
@@ -34,7 +31,7 @@ const TrackContainer = ({
     `${currentPath}/${track.courses[0].slug}/${track.courses[0].chapters[0] &&
       track.courses[0].chapters[0].slug}/`
   const trackDuration = track.courses.reduce(
-    (acc, {chapters}) =>
+    (acc: number, {chapters}: {chapters: Array<{duration: number}>}) =>
       acc + chapters.reduce((acc2, {duration}) => acc2 + duration, 0),
     0,
   )
@@ -42,8 +39,10 @@ const TrackContainer = ({
   const trackLevel =
     track.courses.length &&
     Math.round(
-      track.courses.reduce((acc, {level}) => acc + level, 0) /
-        track.courses.length,
+      track.courses.reduce(
+        (acc: number, {level}: {level: number}) => acc + level,
+        0,
+      ) / track.courses.length,
     )
   return (
     <div className="min-vh-100 flex">

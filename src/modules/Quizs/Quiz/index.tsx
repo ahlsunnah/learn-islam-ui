@@ -8,7 +8,7 @@ import TrueOrFalse from './TrueOrFalse'
 
 const NullComponent = () => null
 
-const getComponentByType = (type) => {
+const getComponentByType = (type: string) => {
   switch (type) {
     case 'choose': // {text, values: [ch1, ch2, ch3, ...]}
       return Choose
@@ -29,14 +29,14 @@ const getComponentByType = (type) => {
 }
 
 interface Props {
-  addData: Function,
+  addData: Function
   params: {
-    courseId: string,
-    difficulty: number,
-    locale: string,
-  },
-  t: {},
-  type: string,
+    courseId: string
+    difficulty: number
+    locale: string
+  }
+  t: {}
+  type: string
 }
 const Quiz = ({type, ...props}: Props) => {
   const QuizByType = getComponentByType(type)

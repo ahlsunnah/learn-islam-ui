@@ -3,14 +3,14 @@ import * as React from 'react'
 import 'styles/radio-button.scss'
 
 interface Props {
-  checked: boolean,
-  children: JSX.Element,
-  error: boolean,
-  greenChecked: boolean,
-  id: string,
-  name: number,
-  onChange: Function,
-  value: number,
+  checked: boolean
+  children: JSX.Element
+  error: boolean
+  greenChecked: boolean
+  id: string
+  name: number
+  onChange: () => void
+  value: number
 }
 const RadioButton = ({
   checked,
@@ -33,7 +33,7 @@ const RadioButton = ({
             checked: checked || greenChecked,
           })}
           id={id}
-          name={name}
+          name={`${name  }`}
           onClick={onChange}
           type="radio"
           value={value}

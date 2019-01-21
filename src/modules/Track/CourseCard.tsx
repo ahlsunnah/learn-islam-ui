@@ -5,12 +5,14 @@ import Progress from 'modules/Quizs/Progress'
 import {Link} from 'gatsby'
 import target from 'images/target.svg'
 import * as React from 'react'
+import {ObjectOfStrings, ObjectOf} from 'interfaces'
 
 interface Props {
   chapters: Array<{
+    id: string
     slug: string
   }>
-  chaptersState: Object
+  chaptersState: ObjectOf<any>
   currentPath: string
   level: number
   slug: string
@@ -18,13 +20,9 @@ interface Props {
     title: string
     description: string
   }>
-  quizs: Array<{difficulty: Boolean}>
-  quizsState: Object
-  t: {
-    course: string
-    locale: string
-    startCourse: string
-  }
+  quizs: Array<{difficulty: number}>
+  quizsState: ObjectOf<ObjectOf<ObjectOf<{passed: boolean}>>>
+  t: ObjectOfStrings
   topic: {
     color: string
     strings: Array<{
@@ -36,7 +34,6 @@ const CourseCard = ({
   chapters,
   chaptersState,
   currentPath,
-  id,
   level = 1,
   quizs,
   quizsState,
@@ -54,7 +51,7 @@ const CourseCard = ({
     }
     return sum
   }, 0)
-  const difficulties = quizs.reduce((acc, {difficulty}) => {
+  const difficulties = quizs.reduce((acc: number[], {difficulty}) => {
     if (!acc.includes(difficulty)) acc.push(difficulty)
     return acc
   }, [])
@@ -76,7 +73,7 @@ const CourseCard = ({
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"
       key={slug}
-      to={`${currentPath}/${slug}`}
+      // to={`${currentPath}/${slug}`}
     >
       <div className="self-end pv3 flex items-center">
         <IconWithText className="ph2" icon={target}>

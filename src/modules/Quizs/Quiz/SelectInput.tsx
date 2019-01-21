@@ -2,19 +2,19 @@ import cx from 'classnames'
 import * as React from 'react'
 
 interface Props {
-  className?: string,
-  name: number,
-  onChange: Function,
-  options: Array<{index: number, text: string}>,
-  setRef: Function,
-  style: Object,
-  value?: {index: number, text: string},
+  className?: string
+  name: number
+  onChange: () => void
+  options: Array<{index: number; text: string}>
+  setRef: (ref: HTMLDivElement | null, name: string) => void
+  style: Object
+  value?: {index: number; text: string}
 }
 class SelectInput extends React.PureComponent<Props> {
-  setRef = (ref) => {
+  setRef = (ref: HTMLDivElement | null) => {
     const {name, setRef} = this.props
     if (setRef) {
-      setRef(ref, name)
+      setRef(ref, `${name  }`)
     }
   }
 
@@ -24,7 +24,7 @@ class SelectInput extends React.PureComponent<Props> {
       <div className={cx('bb', className)} ref={this.setRef}>
         <select
           className={cx('bg-transparent bn pointer', className)}
-          name={name}
+          name={`${name  }`}
           onChange={onChange}
           style={style}
           value={value ? value.index : ''}

@@ -14,25 +14,25 @@ import RadioButton from './RadioButton'
 import ResultIndicator from './ResultIndicator'
 
 interface Props {
-  categories: Array<string>,
+  categories: Array<string>
   data: {
     values: Array<{
-      items: Array<string>,
-    }>,
-  },
-  finished: boolean,
-  handleAnswer: () => {},
-  items: Array<string>,
-  itemsOrder: Array<number>,
-  number: number,
-  score: number,
+      items: Array<string>
+    }>
+  }
+  finished: boolean
+  handleAnswer: () => {}
+  items: Array<string>
+  itemsOrder: Array<number>
+  number: number
+  score: number
   state: {
-    answers?: Array<?number>,
-  },
+    answers?: Array<number>
+  }
   t: {
-    chooseACategoryTitle: string,
-    locale: string,
-  },
+    chooseACategoryTitle: string
+    locale: string
+  }
 }
 const ChooseACategory = ({
   categories,
@@ -70,6 +70,7 @@ const ChooseACategory = ({
               <div>{item}</div>
               <div className="mt1">
                 {categories.map((category, categoryIndex) => (
+                  // @ts-ignore
                   <RadioButton
                     key={categoryIndex}
                     checked={answer === categoryIndex}
@@ -110,8 +111,11 @@ const ChooseACategory = ({
 
 const enhance = compose(
   // Separate the data
+  // @ts-ignore
   withPropsOnChange(['data'], ({data}) => ({
+    // @ts-ignore
     categories: data.values.map(({name}) => name),
+    // @ts-ignore
     items: data.values.reduce((acc, {items}) => acc.concat(items), []),
   })),
 
@@ -122,18 +126,22 @@ const enhance = compose(
   }),
   lifecycle({
     componentDidMount() {
+      // @ts-ignore
       const {items, addData, quizId, state} = this.props
       if (!state.itemsOrder)
         addData({
           data: {
             answers: new Array(items.length).fill(undefined),
+            // @ts-ignore
             itemsOrder: shuffle(items.map((_, i) => i)),
           },
           quizId,
         })
     },
   }),
+  // @ts-ignore
   withHandlers({
+    // @ts-ignore
     handleAnswer: ({addData, finished, quizId, state: {answers}}) => (e) => {
       if (!finished) {
         const {name: item, value} = e.target
@@ -151,16 +159,20 @@ const enhance = compose(
       }
     },
   }),
+  // @ts-ignore
   withPropsOnChange(['state'], ({items, state: {itemsOrder}}) => ({
+    // @ts-ignore
     itemsOrder: itemsOrder || items.map((_, i) => i), // default values for SSR
   })),
   withPropsOnChange(
     ['finished'],
+    // @ts-ignore
     ({data: {values}, finished, items, state: {answers}}) => {
       if (!finished) {
         return {score: 0}
       }
       return {
+        // @ts-ignore
         score: answers.reduce((acc, chosenCat, index) => {
           if (
             chosenCat !== undefined &&
@@ -175,4 +187,5 @@ const enhance = compose(
   ),
   addScoreWhenFinished,
 )
+// @ts-ignore
 export default enhance(ChooseACategory)

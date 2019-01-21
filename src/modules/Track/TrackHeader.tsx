@@ -6,17 +6,13 @@ import {Link} from 'gatsby'
 // import target from 'images/target.svg'
 // import {getHumanTime} from 'lib/time'
 import * as React from 'react'
+import {ObjectOfStrings} from 'interfaces'
 
 interface Props {
   duration: number
   level: number
   nextCoursePath: string
-  t: {
-    locale: string
-    start: string
-    trackLevel: string
-    toOtherLanguageCTA: string
-  }
+  t: ObjectOfStrings
   otherLocaleName: string
   otherLocaleUrl: string
   trackTitle: string

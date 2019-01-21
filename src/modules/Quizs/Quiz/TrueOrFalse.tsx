@@ -8,21 +8,21 @@ import ResultIndicator from './ResultIndicator'
 
 interface Props {
   data: {
-    isTrue: boolean,
-    text: string,
-  },
-  finished: boolean,
-  handleAnswer: Function,
-  number: number,
-  score: number,
+    isTrue: boolean
+    text: string
+  }
+  finished: boolean
+  handleAnswer: () => void
+  number: number
+  score: number
   state: {
-    answer?: boolean,
-  },
+    answer?: boolean
+  }
   t: {
-    quizFalse: string,
-    quizTrue: string,
-    locale: string,
-  },
+    quizFalse: string
+    quizTrue: string
+    locale: string
+  }
 }
 const TrueOrFalse = ({
   data: {isTrue, text},
@@ -112,7 +112,9 @@ const enhance = compose(
     finished: PropTypes.bool.isRequired,
     quizId: PropTypes.string.isRequired,
   }),
+  // @ts-ignore
   withHandlers({
+    // @ts-ignore
     handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
       const newAnswer = e.target.name === 'true'
       if (!finished)
@@ -127,6 +129,7 @@ const enhance = compose(
   }),
   withPropsOnChange(
     ['finished'],
+    // @ts-ignore
     ({data: {isTrue}, finished, state: {answer}}) => {
       if (!finished) {
         return {score: 0}
@@ -138,4 +141,5 @@ const enhance = compose(
   ),
   addScoreWhenFinished,
 )
+// @ts-ignore
 export default enhance(TrueOrFalse)

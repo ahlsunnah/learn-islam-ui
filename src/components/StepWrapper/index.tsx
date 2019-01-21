@@ -9,7 +9,7 @@ interface Props {
   children: JSX.Element | JSX.Element[]
   course: {
     slug: string
-    track: Object
+    track: object
   }
   otherLocaleName: string
   otherLocalePath: string
@@ -17,7 +17,7 @@ interface Props {
   title: string
 }
 
-type State = {
+interface State {
   isSideBarVisible: boolean
 }
 class StepWrapper extends React.Component<Props, State> {

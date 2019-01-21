@@ -15,17 +15,21 @@ interface Props {
   t: ObjectOfStrings
   toggleDrawer: () => void
 }
-const MobileSection = (props: Props) => (
-  <section className="pv0 dn-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
-    <Button onClick={props.toggleDrawer}>
-      <MenuIcon />
-    </Button>
-    <TemporaryDrawer {...props} />
-  </section>
-)
+class MobileSection extends React.Component<Props> {
+  render() {
+    return (
+      <section className="pv0 dn-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
+        <Button onClick={this.props.toggleDrawer}>
+          <MenuIcon />
+        </Button>
+        <TemporaryDrawer {...this.props} />
+      </section>
+    )
+  }
+}
 
 const enhance = connect(
-  ({drawer}) => ({isOpen: drawer}),
+  ({drawer}: {drawer: boolean}) => ({isOpen: drawer}),
   (dispatch) => ({toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'})}),
 )
 export default enhance(MobileSection)

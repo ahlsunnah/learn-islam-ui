@@ -2,24 +2,25 @@ import cx from 'classnames'
 import * as React from 'react'
 import Correct from 'react-icons/lib/md/check'
 import {withHandlers} from 'recompose'
+// @ts-ignore
 import Select from 'react-select'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 
 interface Props {
-  chooseAnswerString: string,
-  correctAnswer: string,
-  finished: boolean,
-  isCorrect: boolean,
-  isRtl: boolean,
-  onChange: Function,
+  chooseAnswerString: string
+  correctAnswer: string
+  finished: boolean
+  isCorrect: boolean
+  isRtl: boolean
+  onChange: Function
   value?: {
-    label: string,
-    value: number,
-  },
+    label: string
+    value: number
+  }
   options: Array<{
-    label: string,
-    value: number,
-  }>,
+    label: string
+    value: number
+  }>
 }
 
 const MultilineSelect = (props: Props) => {
@@ -55,6 +56,7 @@ const MultilineSelect = (props: Props) => {
           onChange={props.onChange}
           isSearchable={false}
           styles={{
+            // @ts-ignore
             singleValue: (styles) => {
               return {
                 color: styles.color,
@@ -73,7 +75,9 @@ const MultilineSelect = (props: Props) => {
   )
 }
 
+// @ts-ignore
 const enhance = withHandlers({
+  // @ts-ignore
   onChange: ({name, onChange}) => (value, action) => {
     onChange(value, action, name)
   },

@@ -3,19 +3,16 @@ import * as React from 'react'
 import {ObjectOfStrings} from 'interfaces'
 import Button from '../Button'
 import structure from './structure'
+import {IHomeOtherLocaleTranslations} from '../../types/home'
+import {INavBarTranslations} from '../../types/navbar'
 
 interface Props {
-  localePath: string
   otherLanguagePath: string
-  otherLocaleTranslations: ObjectOfStrings
-  t: ObjectOfStrings
+  otherLocaleTranslations: IHomeOtherLocaleTranslations
+  t: INavBarTranslations
 }
-const NavSection = ({
-  localePath,
-  otherLanguagePath,
-  otherLocaleTranslations,
-  t,
-}: Props) => (
+
+const NavSection = ({otherLanguagePath, otherLocaleTranslations, t}: Props) => (
   <section className="pv0 dn inline-flex-l mdc-toolbar__section mdc-toolbar__section mdc-toolbar__section--align-end">
     <nav className="flex1">
       <ul className="list flex flex-wrap justify-around items-center">
@@ -24,9 +21,11 @@ const NavSection = ({
             <Link
               activeClassName="bb b--blue"
               className="ph2 no-underline"
-              to={`${localePath}${link}`}
+              to={`${t.localePath}${link}`}
             >
-              <span className="toolbar-nav-link__text">{t[title]}</span>
+              <span className="toolbar-nav-link__text">
+                {t[title] as string}
+              </span>
             </Link>
           </li>
         ))}

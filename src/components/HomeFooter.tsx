@@ -8,6 +8,8 @@ import Youtube from 'react-icons/lib/fa/youtube-play'
 import {ObjectOfStrings} from 'interfaces'
 import Button from './Button'
 import RawHTML from './RawHTML'
+import {IHomeTranslations} from '../types/home'
+import {IFooterTranslations} from '../types/footer'
 
 const icons = Object.entries({
   Facebook,
@@ -19,7 +21,7 @@ const icons = Object.entries({
 interface Props {
   dark?: boolean
   firstTrackSlug: string
-  t: ObjectOfStrings
+  t: IFooterTranslations
 }
 
 const HomeFooter = ({
@@ -66,24 +68,27 @@ const HomeFooter = ({
         <div className="mt4 mt0-ns tc tr-ns">
           <div className="mh2">{footerSocialTitle}</div>
           <div className="mt3">
-            {icons.map(([icon, Icon], i) => (
-              <a
-                key={i}
-                href={t[`url${icon}`]}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon
-                  className={cx('mh2 pa1 f4 bg-white mdc-theme--primary', {
-                    'mdc-theme--primary': !dark,
-                    'mdc-theme--secondary': dark,
-                  })}
-                />
-                {/* <Button className="pa0" inverse>
+            {icons.map(([icon, Icon], i) => {
+              const href: string = t[`url${icon}`]
+              return (
+                <a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon
+                    className={cx('mh2 pa1 f4 bg-white mdc-theme--primary', {
+                      'mdc-theme--primary': !dark,
+                      'mdc-theme--secondary': dark,
+                    })}
+                  />
+                  {/* <Button className="pa0" inverse>
                   <Icon className="mdc-button__icon" />
                 </Button> */}
-              </a>
-            ))}
+                </a>
+              )
+            })}
           </div>
         </div>
       </div>

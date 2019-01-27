@@ -1,20 +1,13 @@
 import BlueHero from 'components/BlueHero'
 import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
-import {ObjectOfStrings} from 'interfaces'
 import Tracks from './Tracks'
+import {ITracksPageProps} from 'types/tracks'
 
-interface Props {
-  data: {
-    otherLocaleTranslations: ObjectOfStrings
-    tracks: Array<any>
-    translations: ObjectOfStrings
-  }
-  pageContext: {
-    otherLanguagePath: string
-  }
-}
-const TracksContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
+const TracksContainer = ({
+  data,
+  pageContext: {otherLanguagePath},
+}: ITracksPageProps) => (
   <div>
     <BlueHero
       description={data.translations.tracksPageDescription}
@@ -24,14 +17,14 @@ const TracksContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
       title={data.translations.tracksPageTitle}
     />
     <Tracks
-      tracks={data.tracks}
+      tracks={data.api.tracks.edges}
       localePath={data.translations.localePath}
       soonString={data.translations.soon}
     />
     <HomeFooter
       t={data.translations}
-      firstTrackSlug={`${data.translations.localePath}${data.tracks[0] &&
-        data.tracks[0].slug}`}
+      firstTrackSlug={`${data.translations.localePath}${data.api.tracks
+        .edges[0] && data.api.tracks.edges[0].node.slug}`}
     />
   </div>
 )

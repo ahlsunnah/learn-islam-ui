@@ -1,13 +1,14 @@
 import NavBar from 'components/NavBar'
 import * as React from 'react'
-import {ObjectOfStrings} from 'interfaces'
+import {ITracksOtherLocaleTranslations} from '../types/tracks'
+import {INavBarTranslations} from 'types/navbar'
 
 interface Props {
   description?: string
   otherLanguagePath: string
-  otherLocaleTranslations: ObjectOfStrings
+  otherLocaleTranslations: ITracksOtherLocaleTranslations
   title: string
-  translations: ObjectOfStrings
+  translations: INavBarTranslations
 }
 const HomeHero = ({
   description,
@@ -20,7 +21,7 @@ const HomeHero = ({
     <NavBar
       otherLocaleTranslations={otherLocaleTranslations}
       otherLanguagePath={otherLanguagePath}
-      translations={t}
+      t={t}
     />
     <div className="mt64 pt4 pb3 tc white">
       <h1 className="f3 f2-ns fw4">{title}</h1>

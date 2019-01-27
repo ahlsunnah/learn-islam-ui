@@ -5,23 +5,21 @@ import logoAr from 'images/logo-ar.png'
 import logoFr from 'images/logo-fr.png'
 import * as React from 'react'
 import 'styles/drawer.scss'
-import {ObjectOfStrings} from 'interfaces'
 import Button from '../Button'
 import structure from './structure'
+import {INavBarTranslations} from '../../types/navbar'
 
 interface Props {
   isOpen: boolean
-  localePath: string
   otherLocaleTranslations: {
     localeName: string
     localePath: string
   }
-  t: ObjectOfStrings
+  t: INavBarTranslations
   toggleDrawer: () => void
 }
 const TemporaryDrawer = ({
   isOpen,
-  localePath,
   otherLocaleTranslations,
   t,
   toggleDrawer,
@@ -39,7 +37,7 @@ const TemporaryDrawer = ({
     <nav className="mdc-drawer__drawer">
       <header className="mdc-drawer__header">
         <div className="mdc-drawer__header-content">
-          <Link to={localePath}>
+          <Link to={t.localePath}>
             <img
               alt={t.siteName}
               height="60px"
@@ -64,7 +62,7 @@ const TemporaryDrawer = ({
             className="mdc-list-item"
             // activeClassName="bb b--blue"
             // className="ph2 no-underline"
-            to={`${localePath}${link}`}
+            to={`${t.localePath}${link}`}
           >
             <Icon className="mdc-list-item__graphic" />
             <span className="">{t[title]}</span>

@@ -1,34 +1,18 @@
 import * as React from 'react'
 import 'styles/toolbar.scss'
-import {ObjectOfStrings} from 'interfaces'
 import LogoSection from './LogoSection'
 import MobileSection from './MobileSection'
 import NavSection from './NavSection'
+import {IHomeOtherLocaleTranslations, IHomeTranslations} from 'types/home'
+import {INavBarTranslations} from '../../types/navbar'
 
 interface Props {
   otherLanguagePath: string
-  otherLocaleTranslations: ObjectOfStrings
-  // otherLocaleTranslations: {
-  //   localeName: string
-  //   localePath: string
-  // }
-  translations: ObjectOfStrings
-  // translations: {
-  //   aboutUs: string
-  //   connect: string
-  //   courses: string
-  //   locale: string
-  //   localePath: string
-  //   siteName: string
-  //   tracks: string
-  // }
+  otherLocaleTranslations: IHomeOtherLocaleTranslations
+  t: INavBarTranslations
 }
 
-const NavBar = ({
-  otherLanguagePath,
-  otherLocaleTranslations,
-  translations: t,
-}: Props) => (
+const NavBar = ({otherLanguagePath, otherLocaleTranslations, t}: Props) => (
   <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
     <div className="dn-ns db">
       <div className="flex justify-between pv1 mdc-toolbar__row">
@@ -40,8 +24,6 @@ const NavBar = ({
         />
         <div className="flex2 tl">
           <MobileSection
-            localePath={t.localePath}
-            otherLanguagePath={otherLanguagePath}
             otherLocaleTranslations={otherLocaleTranslations}
             t={t}
           />
@@ -57,14 +39,11 @@ const NavBar = ({
           siteName={t.siteName}
         />
         <NavSection
-          localePath={t.localePath}
           otherLanguagePath={otherLanguagePath}
           otherLocaleTranslations={otherLocaleTranslations}
           t={t}
         />
         <MobileSection
-          localePath={t.localePath}
-          otherLanguagePath={otherLanguagePath}
           otherLocaleTranslations={otherLocaleTranslations}
           t={t}
         />

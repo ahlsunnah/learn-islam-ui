@@ -1,59 +1,22 @@
 import React from 'react'
 import {graphql} from 'gatsby'
-import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TracksContainer from 'modules/Tracks'
 import './styles.css'
+import {ITracksPageProps} from 'types/tracks'
 
-interface Props {
-  data: {
-    tracks: {
-      edges: Array<{
-        node: {
-          strings: Array<{
-            locale: string
-          }>
-        }
-      }>
-    }
-    translations: Object
-  }
-  pageContext: Object
-}
-
-const filterLanguage = R.curry((locale, str) =>
-  R.evolve(
-    {
-      strings: R.find(R.propEq('locale', locale)),
-    },
-    str,
-  ),
-)
-
-const enhance = (props, locale) =>
-  R.evolve({
-    data: {
-      tracks: (tracks) =>
-        R.map(
-          (node) => filterLanguage(locale, R.prop('node', node)),
-          R.prop('edges', tracks),
-        ),
-    },
-  })(props)
-
-const Tracks = (props: Props) => (
+const Tracks = (props: ITracksPageProps) => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
-    <TracksContainer {...enhance(props, props.pageContext.locale)} />
+    <TracksContainer {...props} />
   </div>
 )
 
 export default Tracks
 
-// $FlowIgnore
 export const pageQuery = graphql`
   query tracksQuery($locale: String!) {
     translations: translationsJson(locale: {eq: $locale}) {
@@ -82,19 +45,21 @@ export const pageQuery = graphql`
       localeName
       localePath
     }
-    tracks: allFeathersTracks(
-      limit: 1000
-      sort: {fields: [order], order: ASC}
-    ) {
-      edges {
-        node {
-          order
-          slug
-          soon
-          strings: tracksStrings {
-            title
-            description
-            locale
+    api {
+      tracks: allTracks {
+        edges {
+          node {
+            id
+            slug
+            soon
+            translations(locale: $locale) {
+              edges {
+                node {
+                  title
+                  description
+                }
+              }
+            }
           }
         }
       }

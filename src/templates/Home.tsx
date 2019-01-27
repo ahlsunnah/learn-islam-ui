@@ -1,53 +1,17 @@
 import * as React from 'react'
 import {graphql} from 'gatsby'
-import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import HomeContainer from 'modules/Home'
+import {IHomePageProps} from 'types/home'
 import './styles.css'
 
-interface Props {
-  data: {
-    tracks: {
-      edges: {
-        node: {
-          strings: {
-            locale: string
-          }[]
-        }
-      }[]
-    }
-    translations: Record<string, any>
-  }
-  pageContext: Record<string, any>
-}
-
-const filterLanguage = R.curry((locale, str) =>
-  R.evolve(
-    {
-      strings: R.find(R.propEq('locale', locale)),
-    },
-    str,
-  ),
-)
-
-const enhance = (props, locale) =>
-  R.evolve({
-    data: {
-      tracks: (tracks) =>
-        R.map(
-          (node) => filterLanguage(locale, R.prop('node', node)),
-          R.prop('edges', tracks),
-        ),
-    },
-  })(props)
-
-const Home = (props: Props) => (
+const Home = (props: IHomePageProps): React.ReactNode => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
-    <HomeContainer {...enhance(props, props.pageContext.locale)} />
+    <HomeContainer {...props} />
   </div>
 )
 
@@ -100,16 +64,22 @@ export const pageQuery = graphql`
       localeName
       localePath
     }
-    tracks: allFeathersTracks(limit: 3, sort: {fields: [order], order: ASC}) {
-      edges {
-        node {
-          order
-          slug
-          soon
-          strings: tracksStrings {
-            title
-            description
-            locale
+    api {
+      tracks: allTracks(first: 3) {
+        edges {
+          node {
+            id
+            order
+            slug
+            soon
+            translations(locale: $locale) {
+              edges {
+                node {
+                  title
+                  description
+                }
+              }
+            }
           }
         }
       }

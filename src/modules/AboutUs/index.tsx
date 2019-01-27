@@ -3,21 +3,12 @@ import HomeFooter from 'components/HomeFooter'
 import * as React from 'react'
 import RawHTML from 'components/RawHTML'
 import './styles.scss'
-import {ObjectOfStrings} from 'interfaces'
+import {IAboutUsProps} from '../../types/aboutUs'
 
-interface Props {
-  data: {
-    firstTrack: {
-      slug: string
-    }
-    otherLocaleTranslations: ObjectOfStrings
-    translations: ObjectOfStrings
-  }
-  pageContext: {
-    otherLanguagePath: string
-  }
-}
-const AboutUsContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
+const AboutUsContainer = ({
+  data,
+  pageContext: {otherLanguagePath},
+}: IAboutUsProps) => (
   <div>
     <BlueHero
       {...data}
@@ -28,7 +19,8 @@ const AboutUsContainer = ({data, pageContext: {otherLanguagePath}}: Props) => (
       {data.translations.aboutUsPageContent}
     </RawHTML>
     <HomeFooter
-      firstTrackSlug={`${data.translations.localePath}${data.firstTrack.slug}`}
+      firstTrackSlug={`${data.translations.localePath}${data.api.tracks
+        .edges[0] && data.api.tracks.edges[0].node.slug}`}
       t={data.translations}
     />
   </div>

@@ -4,6 +4,7 @@ module.exports = {
     // 'airbnb',
     'prettier',
     'prettier/react',
+    'plugin:react/recommended',
   ],
 
   parser: '@typescript-eslint/parser',
@@ -47,7 +48,17 @@ module.exports = {
     // 'react/self-closing-comp': 0,
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/indent': 0,
-    '@typescript-eslint/no-var-requires': ['warning', 2],
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/member-delimiter-style': ['error',
+    "multiline": {
+      "delimiter": "none",
+      "requireLast": false
+  },
+  "singleline": {
+      "delimiter": "comma",
+      "requireLast": true
+  },
+  ],
   },
   settings: {
     'import/resolver': {

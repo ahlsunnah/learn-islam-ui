@@ -1,18 +1,17 @@
 import * as React from 'react'
 import MenuIcon from 'react-icons/lib/md/menu'
 import {connect} from 'react-redux'
-import {ObjectOfStrings} from 'interfaces'
 import Button from '../Button'
 import TemporaryDrawer from './TemporaryDrawer'
+import {INavBarTranslations} from '../../types/navbar'
 
 interface Props {
   isOpen: boolean
-  localePath: string
   otherLocaleTranslations: {
     localeName: string
     localePath: string
   }
-  t: ObjectOfStrings
+  t: INavBarTranslations
   toggleDrawer: () => void
 }
 class MobileSection extends React.Component<Props> {

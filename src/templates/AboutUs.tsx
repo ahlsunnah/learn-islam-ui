@@ -4,19 +4,9 @@ import {graphql} from 'gatsby'
 import cx from 'classnames'
 import AboutUsContainer from 'modules/AboutUs'
 import './styles.css'
+import {IAboutUsProps} from 'types/aboutUs'
 
-interface Props {
-  data: {
-    firstTrack: {
-      slug: string
-    }
-    translations: Object
-    otherLocaleTranslations: Object
-  }
-  pageContext: Object
-}
-
-const AboutUs = (props: Props) => (
+const AboutUs = (props: IAboutUsProps) => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
@@ -27,11 +17,17 @@ const AboutUs = (props: Props) => (
 
 export default AboutUs
 
-// $FlowIgnore
 export const pageQuery = graphql`
   query aboutUsQuery($locale: String!) {
-    firstTrack: feathersTracks(order: {eq: 1}) {
-      slug
+    api {
+      tracks: allTracks(first: 1) {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
     }
     translations: translationsJson(locale: {eq: $locale}) {
       aboutUs

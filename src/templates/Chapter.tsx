@@ -117,7 +117,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    translations: feathersTranslations(locale: {eq: $locale}) {
+    translations: translationsJson(locale: {eq: $locale}) {
       chapter
       clickHere
       chapterAudio
@@ -147,7 +147,7 @@ export const pageQuery = graphql`
       takeQuiz
       track
     }
-    otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       localeName
       localePath
       readIn

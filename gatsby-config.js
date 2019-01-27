@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 const path = require(`path`)
+
 const {API, USER, PASSWORD} = process.env
 if (!API || !USER || !PASSWORD) {
   console.error('We need API USER AND PASSWORD env variables set', API, USER)
@@ -10,6 +11,22 @@ module.exports = {
     siteUrl: `https://demo.m-minhaj.com`,
   },
   plugins: [
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./data/`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'api',
+        fieldName: 'api',
+        url: 'https://learn-islam-api.herokuapp.com/graphql',
+      },
+    },
+
     'gatsby-plugin-typescript',
     'gatsby-plugin-emotion',
     // 'gatsby-plugin-webpack-bundle-analyzer',

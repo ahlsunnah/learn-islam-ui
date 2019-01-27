@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {graphql} from 'gatsby'
 import * as R from 'ramda'
 import Helmet from 'react-helmet'
@@ -9,17 +9,17 @@ import './styles.css'
 interface Props {
   data: {
     tracks: {
-      edges: Array<{
+      edges: {
         node: {
-          strings: Array<{
+          strings: {
             locale: string
-          }>
+          }[]
         }
-      }>
+      }[]
     }
-    translations: Object
+    translations: Record<string, any>
   }
-  pageContext: Object
+  pageContext: Record<string, any>
 }
 
 const filterLanguage = R.curry((locale, str) =>
@@ -56,7 +56,7 @@ export default Home
 // $FlowIgnore
 export const pageQuery = graphql`
   query homeQuery($locale: String!) {
-    translations: feathersTranslations(locale: {eq: $locale}) {
+    translations: translationsJson(locale: {eq: $locale}) {
       aboutUs
       connect
       copyright
@@ -95,7 +95,7 @@ export const pageQuery = graphql`
       urlTwitter
       urlYoutube
     }
-    otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       locale
       localeName
       localePath

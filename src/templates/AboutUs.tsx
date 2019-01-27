@@ -33,7 +33,7 @@ export const pageQuery = graphql`
     firstTrack: feathersTracks(order: {eq: 1}) {
       slug
     }
-    translations: feathersTranslations(locale: {eq: $locale}) {
+    translations: translationsJson(locale: {eq: $locale}) {
       aboutUs
       aboutUsPageTitle
       aboutUsPageContent
@@ -54,7 +54,7 @@ export const pageQuery = graphql`
       urlTwitter
       urlYoutube
     }
-    otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       localeName
       localePath
     }

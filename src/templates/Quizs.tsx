@@ -134,7 +134,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    translations: feathersTranslations(locale: {eq: $locale}) {
+    translations: translationsJson(locale: {eq: $locale}) {
       assessmentPerfect
       assessmentVeryGood
       assessmentGood
@@ -169,7 +169,7 @@ export const pageQuery = graphql`
       yourLastScore
       yourScore
     }
-    otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       localeName
       localePath
     }

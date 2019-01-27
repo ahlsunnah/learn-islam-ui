@@ -56,7 +56,7 @@ export default Tracks
 // $FlowIgnore
 export const pageQuery = graphql`
   query tracksQuery($locale: String!) {
-    translations: feathersTranslations(locale: {eq: $locale}) {
+    translations: translationsJson(locale: {eq: $locale}) {
       aboutUs
       connect
       copyright
@@ -78,7 +78,7 @@ export const pageQuery = graphql`
       urlTwitter
       urlYoutube
     }
-    otherLocaleTranslations: feathersTranslations(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       localeName
       localePath
     }

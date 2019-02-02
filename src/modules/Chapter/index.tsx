@@ -5,77 +5,28 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
-import {compose, setPropTypes, withPropsOnChange} from 'recompose'
 import NavigationButtons from './NavigationButtons'
 import StepContent from './StepContent'
 import './styles.scss'
 import Tab from './Tab'
 import VideoIframe from './VideoIframe'
-import {Strings} from 'types'
-import {ObjectOfStrings} from 'interfaces'
+import {IChapterProps} from '../../types/chapter'
 
-interface Props {
-  data: {
-    chapter: {
-      id: string
-      audio: string
-      slug: string
-      course: {
-        slug: string
-        track: {
-          slug: string
-          strings: Strings
-          courses: Array<{
-            order: number
-            slug: string
-            strings: Strings
-            chapters: Array<{
-              order: number
-              slug: string
-              strings: Array<{
-                title: string
-              }>
-            }>
-          }>
-        }
-      }
-      strings: Array<{
-        locale: string
-        title: string
-        transcription: string
-        video: string
-        vocabulary?: string
-      }>
-    }
-    translations: ObjectOfStrings
-    otherLocaleTranslations: {
-      readIn: string
-      localeName: string
-      localePath: string
-    }
-  }
+interface ReduxProps {
   dToggleCompleteChapter: () => void
   isChapterComplete: boolean
-  navigationButtons: JSX.Element
-  pageContext: {
-    next: {
-      path: string
-      title: string
-      type: 'quiz' | 'tracks' | 'course' | 'chapter'
-    }
-    locale: string
-    slug: string
-  }
 }
 interface State {
   activeTab: string
 }
 
-class Chapter extends React.Component<Props, State> {
-  constructor(props: Props, context: Object) {
+class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
+  constructor(props: ReduxProps & IChapterProps, context: Object) {
     super(props, context)
     this.state = {
-      activeTab: props.data.chapter.strings.length > 1 ? 'FR' : 'AR',
+      // TODO: fix this
+      activeTab:
+        props.data.api.chapter.translations.edges.length > 1 ? 'FR' : 'AR',
     }
   }
 
@@ -93,25 +44,30 @@ class Chapter extends React.Component<Props, State> {
       isChapterComplete,
       pageContext,
     } = this.props
-    const {chapter, otherLocaleTranslations, translations: t} = data
+    const {
+      api: {chapter},
+      otherLocaleTranslations,
+      translations: t,
+    } = data
     const {activeTab} = this.state
 
     // TODO: momoize this:
-    const arabicChapter = data.chapter.strings.find(
-      ({locale}) => locale === 'ar',
+    const arabicChapter = data.api.chapter.translations.edges.find(
+      ({node: {locale}}) => locale === 'ar',
     )
 
-    const arabicTranscription = arabicChapter && arabicChapter.transcription
-    const chapterStrings = data.chapter.strings.find(
-      ({locale}) => locale === pageContext.locale,
+    const arabicTranscription =
+      arabicChapter && arabicChapter.node.transcription
+    const chapterStrings = data.api.chapter.translations.edges.find(
+      ({node: {locale}}) => locale === pageContext.locale,
     )
 
     if (!chapterStrings) {
       return 'Error, we didn\'t find any strings for this chapter ...'
     }
     const otherLocalePath = `${data.otherLocaleTranslations.localePath}${
-      data.chapter.course.track.slug
-    }/${data.chapter.course.slug}/${data.chapter.slug}`
+      data.api.chapter.course.track.slug
+    }/${data.api.chapter.course.slug}/${data.api.chapter.slug}`
 
     const navigationButtons = (
       <NavigationButtons
@@ -128,15 +84,15 @@ class Chapter extends React.Component<Props, State> {
         t={t}
         otherLocaleName={otherLocaleTranslations.localeName}
         otherLocalePath={otherLocalePath}
-        title={chapterStrings.title}
+        title={chapterStrings.node.title}
       >
-        <Helmet title={chapterStrings.title} />
+        <Helmet title={chapterStrings.node.title} />
         <VideoIframe
-          source={chapterStrings.video}
-          title={chapterStrings.title}
+          source={chapterStrings.node.video}
+          title={chapterStrings.node.title}
         />
         <nav className="chapter-tabs w-100 flex justify-around items-center">
-          {chapter.strings.length > 1 && (
+          {chapter.translations.edges.length > 1 && (
             <Tab
               type="FR"
               active={activeTab === 'FR'}
@@ -154,7 +110,7 @@ class Chapter extends React.Component<Props, State> {
           >
             {t.tabTranscription}
           </Tab>
-          {chapterStrings.vocabulary && (
+          {chapterStrings.node.vocabulary && (
             <Tab
               type="VOC"
               active={activeTab === 'VOC'}
@@ -189,7 +145,7 @@ class Chapter extends React.Component<Props, State> {
 
         <StepContent
           active={activeTab === 'FR'}
-          content={chapterStrings.transcription}
+          content={chapterStrings.node.transcription}
         >
           {navigationButtons}
         </StepContent>
@@ -202,7 +158,7 @@ class Chapter extends React.Component<Props, State> {
         </StepContent>
         <StepContent
           active={activeTab === 'VOC'}
-          content={chapterStrings.vocabulary}
+          content={chapterStrings.node.vocabulary}
         >
           {navigationButtons}
         </StepContent>
@@ -219,7 +175,7 @@ class Chapter extends React.Component<Props, State> {
                 <a
                   className="b"
                   href={chapter.audio}
-                  title={chapterStrings.title}
+                  title={chapterStrings.node.title}
                   download
                   rel="noopener noreferrer"
                   target="_blank"
@@ -242,13 +198,13 @@ class Chapter extends React.Component<Props, State> {
 const enhance = connect(
   (
     {chapters}: {chapters: any},
-    {data}: Props,
+    {data}: IChapterProps,
   ): {isChapterComplete: boolean} => ({
-    isChapterComplete: chapters[data.chapter.id] || false,
+    isChapterComplete: chapters[data.api.chapter.id] || false,
   }),
   (dispatch: Function, {data}): {dToggleCompleteChapter: () => void} => ({
     dToggleCompleteChapter: () => {
-      dispatch(toggleCompleteChapter(data.chapter.id))
+      dispatch(toggleCompleteChapter(data.api.chapter.id))
     },
   }),
 )

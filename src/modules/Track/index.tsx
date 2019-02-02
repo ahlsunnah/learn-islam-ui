@@ -15,7 +15,6 @@ const TrackContainer = ({
 }: ITrackPageProps) => {
   const {locale, localesPaths, slug} = pageContext
   const localePath = localesPaths[locale]
-  console.log(localesPaths, localePath)
   const currentPath = `${localePath}${slug}`
   // TODO calculate next course with progress
   const nextCoursePath =

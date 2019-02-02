@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TrackContainer from 'modules/Track'
 import './styles.css'
-import logProps from '../hoc/logProps'
 import {ITrackPageProps} from '../types/track'
 
 const TrackTemplate = (props: ITrackPageProps) => (
@@ -16,7 +15,7 @@ const TrackTemplate = (props: ITrackPageProps) => (
   </div>
 )
 
-export default logProps(TrackTemplate)
+export default TrackTemplate
 
 export const pageQuery = graphql`
   query trackQuery($locale: String!, $id: ID!) {

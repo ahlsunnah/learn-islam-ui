@@ -1,19 +1,16 @@
 import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import cx from 'classnames'
-import {ObjectOfStrings} from 'interfaces'
 import Header from './Header'
 import Sidebar from './Sidebar'
+import {IChapterTranslations, IChapterChapter} from '../../types/chapter'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
-  course: {
-    slug: string
-    track: object
-  }
+  course: IChapterChapter['course']
   otherLocaleName: string
   otherLocalePath: string
-  t: ObjectOfStrings
+  t: IChapterTranslations
   title: string
 }
 

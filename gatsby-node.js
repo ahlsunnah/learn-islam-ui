@@ -173,159 +173,150 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
             })
           })
 
-          // courses.edges.forEach(({node: course}, courseIndex) => {
-          //   const {chapters, id: courseId, quizs, slug: courseSlug} = course
-          //   // Which quiz difficulties do we have ?
-          //   const difficultiesByLocale =
-          //     quizs && quizs.length
-          //       ? quizs.reduce((acc, {difficulty, quizsStrings}) => {
-          //           const currentTitle = `difficulty${difficulty}`
-          //           quizsStrings.forEach(({locale}) => {
-          //             if (!acc[locale]) {
-          //               acc[locale] = []
-          //             }
-          //             if (
-          //               !acc[locale].some(({title}) => title === currentTitle)
-          //             ) {
-          //               acc[locale].push({
-          //                 title: currentTitle,
-          //                 path: `${
-          //                   localesPaths[locale]
-          //                 }${slug}/${courseSlug}/ikhtibar-${difficulty}/`,
-          //               })
-          //               acc[locale].sort((a, b) => (a.title > b.title ? 1 : -1))
-          //             }
-          //           })
-          //           return acc
-          //         }, {})
-          //       : {}
-          //   // create chapter pages
-          //   chapters.forEach((chapter, chapterIndex) => {
-          //     const {slug: chapterSlug, chaptersStrings} = chapter
-          //     chaptersStrings.forEach(({locale}) => {
-          //       console.log(
-          //         `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
-          //       )
-          //       const next = {}
-          //       if (chapterIndex < chapters.length - 1) {
-          //         next.type = 'chapter'
-          //         next.path = `${localesPaths[locale]}${slug}/${courseSlug}/${
-          //           chapters[chapterIndex + 1].slug
-          //         }/`
-          //         next.title = chapters[chapterIndex + 1].chaptersStrings.find(
-          //           (item) => item.locale === locale,
-          //         ).title
-          //       } else if (
-          //         difficultiesByLocale[locale] &&
-          //         difficultiesByLocale[locale].length
-          //       ) {
-          //         next.type = 'quiz'
-          //         next.path = difficultiesByLocale[locale][0].path
-          //         next.title = difficultiesByLocale[locale][0].title
-          //       } else if (courseIndex < courses.length - 1) {
-          //         const nextCourse = courses[courseIndex + 1]
-          //         next.type = 'course'
-          //         next.path = `${localesPaths[locale]}${slug}/${
-          //           nextCourse.slug
-          //         }/${nextCourse.chapters[0].slug}/`
-          //         next.title = nextCourse.coursesStrings.find(
-          //           (item) => item.locale === locale,
-          //         ).title
-          //       } else {
-          //         // TODO next track
-          //         next.type = 'tracks'
-          //         next.path = '/masar/'
-          //         next.title = strings.find(
-          //           (item) => item.locale === locale,
-          //         ).title
-          //       }
+          courses.edges.forEach(({node: course}, courseIndex) => {
+            const {
+              chapters,
+              id: courseId,
+              quizDifficulties,
+              slug: courseSlug,
+            } = course
 
-          //       const chapterPath = `${
-          //         localesPaths[locale]
-          //       }${slug}/${courseSlug}/${chapterSlug}/`
-          //       createPage({
-          //         path: chapterPath,
-          //         component: slash(chapterTemplate),
-          //         context: {
-          //           locale,
-          //           localesPaths: R.pick(
-          //             R.map(R.prop('locale'), strings),
-          //             localesPaths,
-          //           ),
-          //           next,
-          //           slug: chapterSlug,
-          //         },
-          //       })
+            // create chapter pages
+            chapters.edges.forEach(({node: chapter}, chapterIndex) => {
+              const {
+                id: chapterId,
+                slug: chapterSlug,
+                translations: chaptersTranslations,
+              } = chapter
+              chaptersTranslations.edges.forEach(({node: {locale}}) => {
+                console.log(
+                  `creating CHAPTER page for slug (${chapterSlug}) and locale (${locale}) `,
+                )
+                const next = {}
+                if (chapterIndex < chapters.edges.length - 1) {
+                  next.type = 'chapter'
+                  next.path = `${
+                    localesPaths[locale]
+                  }${trackSlug}/${courseSlug}/${
+                    chapters.edges[chapterIndex + 1].node.slug
+                  }/`
+                  next.title = chapters.edges[
+                    chapterIndex + 1
+                  ].node.translations.edges.find(
+                    ({node: item}) => item.locale === locale,
+                  ).node.title
+                } else if (quizDifficulties.length) {
+                  next.type = 'quiz'
+                  next.path = `${
+                    localesPaths[locale]
+                  }${trackSlug}/${courseSlug}/ikhtibar-${quizDifficulties[0]}/`
+                  next.title = `difficulty${quizDifficulties[0]}`
+                } else if (courseIndex < courses.edges.length - 1) {
+                  const nextCourse = courses.edges[courseIndex + 1].node
+                  next.type = 'course'
+                  next.path = `${localesPaths[locale]}${trackSlug}/${
+                    nextCourse.slug
+                  }/${nextCourse.chapters.edges[0].node.slug}/`
+                  next.title = nextCourse.translations.edges.find(
+                    ({node: item}) => item.locale === locale,
+                  ).node.title
+                } else {
+                  // TODO next track
+                  next.type = 'tracks'
+                  next.path = '/masar/'
+                  next.title = translations.find(
+                    ({node: item}) => item.locale === locale,
+                  ).node.title
+                }
 
-          //       if (chapterIndex === 0) {
-          //         // course link redirects to first chapter
-          //         createRedirect({
-          //           fromPath: `${localesPaths[locale]}${slug}/${courseSlug}/`,
-          //           isPermanent: true,
-          //           redirectInBrowser: true,
-          //           toPath: chapterPath,
-          //         })
-          //       }
-          //     })
-          //   })
+                const chapterPath = `${
+                  localesPaths[locale]
+                }${trackSlug}/${courseSlug}/${chapterSlug}/`
+                createPage({
+                  path: chapterPath,
+                  component: slash(chapterTemplate),
+                  context: {
+                    locale,
+                    localesPaths,
+                    next,
+                    slug: chapterSlug,
+                    id: chapterId,
+                  },
+                })
 
-          //   // Create quizs:
-          //   if (quizs && quizs.length) {
-          //     Object.entries(difficultiesByLocale).forEach(
-          //       ([locale, difficulties]) => {
-          //         difficulties.forEach((difficulty, difficultyIndex) => {
-          //           console.log(
-          //             `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${
-          //               difficulty.title
-          //             }`,
-          //           )
-          //           let nextQuiz
-          //           if (difficultyIndex < difficulties.length - 1) {
-          //             nextQuiz = {
-          //               type: 'quiz',
-          //               path: difficulties[difficultyIndex + 1].path,
-          //               title: difficulties[difficultyIndex + 1].title,
-          //             }
-          //           }
-          //           const next = {}
-          //           if (courseIndex < courses.length - 1) {
-          //             const nextCourse = courses[courseIndex + 1]
-          //             next.type = 'course'
-          //             next.path = `${localesPaths[locale]}${slug}/${
-          //               nextCourse.slug
-          //             }/${nextCourse.chapters[0].slug}/`
-          //             next.title = nextCourse.coursesStrings.find(
-          //               (item) => item.locale === locale,
-          //             ).title
-          //           } else {
-          //             // TODO next track
-          //             next.type = 'tracks'
-          //             next.path = '/masar/'
-          //             next.title = strings.find(
-          //               (item) => item.locale === locale,
-          //             ).title
-          //           }
+                if (chapterIndex === 0) {
+                  // course link redirects to first chapter
+                  createRedirect({
+                    fromPath: `${
+                      localesPaths[locale]
+                    }${trackSlug}/${courseSlug}/`,
+                    isPermanent: true,
+                    redirectInBrowser: true,
+                    toPath: chapterPath,
+                  })
+                }
+              })
+            })
 
-          //           createPage({
-          //             path: difficulty.path,
-          //             component: slash(quizsTemplate),
-          //             context: {
-          //               difficulty: parseInt(difficulty.title.slice(-1), 10),
-          //               locale,
-          //               localesPaths: R.pick(
-          //                 R.map(R.prop('locale'), strings),
-          //                 localesPaths,
-          //               ),
-          //               next,
-          //               nextQuiz,
-          //               slug: courseSlug,
-          //             },
-          //           })
-          //         })
-          //       },
-          //     )
-          //   }
-          // })
+            // Create quizs:
+            if (quizDifficulties && quizDifficulties.length) {
+              locales.forEach((locale) => {
+                quizDifficulties.forEach((difficulty, difficultyIndex) => {
+                  console.log(
+                    `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${difficulty}`,
+                  )
+                  let nextQuiz
+
+                  if (difficultyIndex < quizDifficulties.length - 1) {
+                    nextQuiz = {
+                      type: 'quiz',
+                      path: `${
+                        localesPaths[locale]
+                      }${trackSlug}/${courseSlug}/ikhtibar-${difficultyIndex +
+                        1}/`,
+                      title: `difficulty${
+                        quizDifficulties[difficultyIndex + 1]
+                      }`,
+                    }
+                  }
+                  const next = {}
+                  if (courseIndex < courses.length - 1) {
+                    const nextCourse = courses[courseIndex + 1]
+                    next.type = 'course'
+                    next.path = `${localesPaths[locale]}${trackSlug}/${
+                      nextCourse.slug
+                    }/${nextCourse.chapters[0].slug}/`
+                    next.title = nextCourse.coursesStrings.find(
+                      (item) => item.locale === locale,
+                    ).title
+                  } else {
+                    // TODO next track
+                    next.type = 'tracks'
+                    next.path = '/masar/'
+                    next.title = translations.edges.find(
+                      ({node: item}) => item.locale === locale,
+                    ).title
+                  }
+
+                  createPage({
+                    path: `${
+                      localesPaths[locale]
+                    }${trackSlug}/${courseSlug}/ikhtibar-${difficulty}/`,
+                    title: `difficulty${quizDifficulties[difficulty]}`,
+                    component: slash(quizsTemplate),
+                    context: {
+                      difficulty,
+                      locale,
+                      localesPaths,
+                      next,
+                      nextQuiz,
+                      slug: courseSlug,
+                    },
+                  })
+                })
+              })
+            }
+          })
         }
       })
 

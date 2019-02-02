@@ -3,17 +3,13 @@ import Button from 'components/Button'
 import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
 import * as React from 'react'
-import {ObjectOfStrings} from 'interfaces'
 import Checkbox from './Checkbox'
+import {IChapterTranslations, IChapterNext} from '../../types/chapter'
 
 interface Props {
   isChapterComplete: boolean
-  next: {
-    path: string
-    title: string
-    type: 'quiz' | 'tracks' | 'course' | 'chapter'
-  }
-  t: ObjectOfStrings
+  next: IChapterNext
+  t: IChapterTranslations
   toggleCompleteChapter: () => void
 }
 const NavigationButtons = ({

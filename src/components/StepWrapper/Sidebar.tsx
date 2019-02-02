@@ -9,33 +9,11 @@ import {connect} from 'react-redux'
 import 'styles/drawer.scss'
 import {ObjectOf, ObjectOfStrings} from 'interfaces'
 import ChapterCursor from './ChapterCursor'
+import {IChapterTranslations, IChapterChapter} from '../../types/chapter'
 
-interface Course {
-  id: string
-  order: number
-  slug: string
-  strings: Array<{
-    locale: string
-    title: string
-  }>
-  chapters: Array<{
-    id: string
-    slug: string
-    order: number
-    strings: Array<{
-      locale: string
-      title: string
-    }>
-    // quizs?: Array<number>,
-  }>
-  quizs?: Array<number>
-}
 interface Props {
   chaptersState: ObjectOf<boolean>
-  course: {
-    slug: string
-    track: ObjectOf<any>
-  }
+  course: IChapterChapter['course']
   isOpen: boolean
   quizsState: ObjectOf<
     ObjectOf<
@@ -45,7 +23,7 @@ interface Props {
     >
   >
   toggleDrawer: () => void
-  t: ObjectOfStrings
+  t: IChapterTranslations
 }
 
 class Sidebar extends React.Component<Props> {
@@ -66,24 +44,7 @@ class Sidebar extends React.Component<Props> {
       t,
     } = this.props
 
-    // TODO: memoize this:
-    const courses: Course[] = track.courses
-      .map((course: any) => ({
-        ...course,
-        chapters: course.chapters
-          .slice()
-          .sort((c1: any, c2: any) => c1.order - c2.order),
-        quizs:
-          course.quizs &&
-          course.quizs
-            .reduce((acc: any[], {difficulty}: {difficulty: number}) => {
-              if (!acc.includes(difficulty)) acc.push(difficulty)
-              return acc
-            }, [])
-            .sort(),
-      }))
-      .sort((c1: any, c2: any) => c1.order - c2.order)
-
+    const {courses} = track
     return (
       <aside
         className={cx(
@@ -106,19 +67,23 @@ class Sidebar extends React.Component<Props> {
             >
               <div className="pv2 flex items-center">
                 <img alt="" className="w2-5 rtl-rotate-180" src={leftSvg} />
-                <div className="f4">{track.strings[0].title}</div>
+                <div className="f4">
+                  {track.translations.edges[0].node.title}
+                </div>
               </div>
             </Link>
           </header>
 
           <div className="flex flex-column">
-            {courses.map(
+            {courses.edges.map(
               ({
-                chapters,
-                id: courseId,
-                quizs,
-                slug: courseSlug,
-                strings: courseStrings,
+                node: {
+                  chapters,
+                  id: courseId,
+                  quizDifficulties,
+                  slug: courseSlug,
+                  translations: courseStrings,
+                },
               }) => {
                 return (
                   <div key={courseSlug} className="pv2 bt b--black">
@@ -127,10 +92,21 @@ class Sidebar extends React.Component<Props> {
                         'white b': currentCourseSlug === courseSlug,
                       })}
                     >
-                      <span className="ph1">{courseStrings[0].title}</span>
+                      <span className="ph1">
+                        {courseStrings.edges[0].node.title}
+                      </span>
                     </div>
-                    {chapters.map(
-                      ({id, slug: chapterSlug, strings: chapterStrings}, j) => (
+                    {chapters.edges.map(
+                      (
+                        {
+                          node: {
+                            id,
+                            slug: chapterSlug,
+                            translations: chapterStrings,
+                          },
+                        },
+                        j,
+                      ) => (
                         <Link
                           key={`${courseSlug}-${chapterSlug}`}
                           activeClassName="white b"
@@ -145,45 +121,46 @@ class Sidebar extends React.Component<Props> {
                             isComplete={chaptersState[id]}
                           />
                           <span className="ph1">
-                            {j + 1}. {chapterStrings[0].title}
+                            {j + 1}. {chapterStrings.edges[0].node.title}
                           </span>
                         </Link>
                       ),
                     )}
-                    {quizs &&
-                      quizs.map((difficulty, j) => {
-                        return (
-                          <Link
-                            key={`${courseSlug}-quiz${difficulty}`}
-                            activeClassName="white b"
-                            className="ph1 pv2 flex items-center moon-gray no-underline"
-                            onClick={this.closeDrawerOnMobile}
-                            to={`${t.localePath}${
-                              track.slug
-                            }/${courseSlug}/ikhtibar-${difficulty}`}
-                          >
-                            <ChapterCursor
-                              className="h2 ph1"
-                              isComplete={
-                                quizsState[courseId] &&
-                                quizsState[courseId][courseStrings[0].locale] &&
-                                quizsState[courseId][courseStrings[0].locale][
-                                  difficulty
-                                ] &&
-                                quizsState[courseId][courseStrings[0].locale][
-                                  difficulty
-                                ].passed
-                              }
-                              isQuiz
-                            />
-                            <span className="ph1">
-                              {`${courses.length + j + 1}. ${t.quiz} ${
-                                t[`difficulty${difficulty}`]
-                              }`}
-                            </span>
-                          </Link>
-                        )
-                      })}
+                    {quizDifficulties.map((difficulty, j) => {
+                      return (
+                        <Link
+                          key={`${courseSlug}-quiz${difficulty}`}
+                          activeClassName="white b"
+                          className="ph1 pv2 flex items-center moon-gray no-underline"
+                          onClick={this.closeDrawerOnMobile}
+                          to={`${t.localePath}${
+                            track.slug
+                          }/${courseSlug}/ikhtibar-${difficulty}`}
+                        >
+                          <ChapterCursor
+                            className="h2 ph1"
+                            isComplete={
+                              quizsState[courseId] &&
+                              quizsState[courseId][
+                                courseStrings.edges[0].node.locale
+                              ] &&
+                              quizsState[courseId][
+                                courseStrings.edges[0].node.locale
+                              ][difficulty] &&
+                              quizsState[courseId][
+                                courseStrings.edges[0].node.locale
+                              ][difficulty].passed
+                            }
+                            isQuiz
+                          />
+                          <span className="ph1">
+                            {`${courses.edges.length + j + 1}. ${t.quiz} ${
+                              t[`difficulty${difficulty}`]
+                            }`}
+                          </span>
+                        </Link>
+                      )
+                    })}
                   </div>
                 )
               },

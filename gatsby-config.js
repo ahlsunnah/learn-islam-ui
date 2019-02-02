@@ -1,8 +1,8 @@
 /* eslint no-console: 0 */
 const path = require(`path`)
 
-const {API, USER, PASSWORD} = process.env
-if (!API || !USER || !PASSWORD) {
+const {API, API2, USER, PASSWORD} = process.env
+if (!API2 || !USER || !PASSWORD) {
   console.error('We need API USER AND PASSWORD env variables set', API, USER)
 }
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
       options: {
         typeName: 'api',
         fieldName: 'api',
-        url: 'https://learn-islam-api.herokuapp.com/graphql',
+        url: API2,
       },
     },
 

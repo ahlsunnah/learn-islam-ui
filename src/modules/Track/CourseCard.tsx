@@ -6,56 +6,39 @@ import {Link} from 'gatsby'
 import target from 'images/target.svg'
 import * as React from 'react'
 import {ObjectOfStrings, ObjectOf} from 'interfaces'
+import {ITrackTranslations, ITrackCourse} from '../../types/track'
 
 interface Props {
-  chapters: Array<{
-    id: string
-    slug: string
-  }>
   chaptersState: ObjectOf<any>
   currentPath: string
-  level: number
-  slug: string
-  strings: Array<{
-    title: string
-    description: string
-  }>
-  quizs: Array<{difficulty: number}>
   quizsState: ObjectOf<ObjectOf<ObjectOf<{passed: boolean}>>>
-  t: ObjectOfStrings
-  topic: {
-    color: string
-    strings: Array<{
-      title: string
-    }>
-  }
+  t: ITrackTranslations
 }
 const CourseCard = ({
   chapters,
   chaptersState,
   currentPath,
   level = 1,
-  quizs,
+  quizDifficulties,
   quizsState,
   slug,
-  strings,
+  translations,
   t,
   topic,
-}: Props) => {
+}: Props & ITrackCourse) => {
   // TODO calculate next chapter with progress
-  const nextCoursePath = `${currentPath}/${slug}/${chapters[0] &&
-    chapters[0].slug}/`
-  const finishedChapters = chapters.reduce((sum, {id: chapterId}) => {
-    if (chaptersState[chapterId]) {
-      sum += 1 // eslint-disable-line no-param-reassign
-    }
-    return sum
-  }, 0)
-  const difficulties = quizs.reduce((acc: number[], {difficulty}) => {
-    if (!acc.includes(difficulty)) acc.push(difficulty)
-    return acc
-  }, [])
-  const finishedQuizs = difficulties.reduce((acc, difficulty) => {
+  const nextCoursePath = `${currentPath}/${slug}/${chapters.edges[0] &&
+    chapters.edges[0].node.slug}/`
+  const finishedChapters = chapters.edges.reduce(
+    (sum, {node: {id: chapterId}}) => {
+      if (chaptersState[chapterId]) {
+        sum += 1 // eslint-disable-line no-param-reassign
+      }
+      return sum
+    },
+    0,
+  )
+  const finishedQuizs = quizDifficulties.reduce((acc, difficulty) => {
     if (
       quizsState &&
       quizsState[t.locale] &&
@@ -68,7 +51,7 @@ const CourseCard = ({
   }, 0)
   const percent =
     (100 * (finishedChapters + finishedQuizs)) /
-    (difficulties.length + chapters.length)
+    (quizDifficulties.length + chapters.edges.length)
   return (
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"
@@ -83,16 +66,16 @@ const CourseCard = ({
           className="ph4 pv2 br-pill white f7"
           style={{backgroundColor: topic.color}}
         >
-          {topic.strings[0].title}
+          {topic.translations.edges[0].node.title}
         </div>
       </div>
       <div className=" pt2 pb4 bt b--black-20">
-        <h2 className="f5">{strings[0].title}</h2>
-        {strings[0].description && (
+        <h2 className="f5">{translations.edges[0].node.title}</h2>
+        {translations.edges[0].node.description && (
           <div
             className="w-90-m w-70-l f6"
             dangerouslySetInnerHTML={{
-              __html: strings[0].description,
+              __html: translations.edges[0].node.description,
             }}
           />
         )}

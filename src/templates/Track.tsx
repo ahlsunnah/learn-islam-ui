@@ -1,98 +1,79 @@
 import React from 'react'
 import {graphql} from 'gatsby'
-import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TrackContainer from 'modules/Track'
 import './styles.css'
+import logProps from '../hoc/logProps'
+import {ITrackPageProps} from '../types/track'
 
-const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
-const filterStrings = R.curry((locale, str) =>
-  R.evolve(
-    {
-      strings: filterLanguage(locale),
-    },
-    str,
-  ),
-)
-const enhanceCourse = (locale) =>
-  R.evolve({
-    strings: filterLanguage(locale),
-    chapters: R.map(filterStrings(locale)),
-    topic: filterStrings(locale),
-  })
-const enhanceTrack = (locale) =>
-  R.evolve({
-    strings: filterLanguage(locale),
-    courses: R.map(enhanceCourse(locale)),
-    topic: filterStrings(locale),
-  })
-const enhance = (props, locale) =>
-  R.over(R.lensPath(['data', 'track']), enhanceTrack(locale), props)
-
-type Strings = Array<{locale: string}>
-interface Props {
-  data: {
-    track: {
-      strings: Strings
-      courses: Array<{
-        chapters: Array<{strings: Strings}>
-        strings: Strings
-        topic: {strings: Strings}
-      }>
-    }
-  }
-  pageContext: {
-    locale: string
-  }
-}
-
-const TrackTemplate = (props: Props) => (
+const TrackTemplate = (props: ITrackPageProps) => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
-    <TrackContainer {...enhance(props, props.pageContext.locale)} />
+    <TrackContainer {...props} />
   </div>
 )
 
-export default TrackTemplate
+export default logProps(TrackTemplate)
 
-// $FlowIgnore
 export const pageQuery = graphql`
-  query trackQuery($locale: String!, $slug: String!) {
-    track: feathersTracks(slug: {eq: $slug}) {
-      slug
-      strings: tracksStrings {
-        locale
-        title
-      }
-      courses {
+  query trackQuery($locale: String!, $id: ID!) {
+    api {
+      track(id: $id) {
         id
-        level
-        order
         slug
-        strings: coursesStrings {
-          locale
-          title
-          description
-        }
-        chapters {
-          duration
-          id
-          slug
-          strings: chaptersStrings {
-            locale
+        translations(locale: $locale) {
+          edges {
+            node {
+              title
+            }
           }
         }
-        quizs {
-          difficulty
-        }
-        topic {
-          color
-          strings: topicsStrings {
-            locale
-            title
+        courses: courseSet {
+          edges {
+            node {
+              id
+              level
+              slug
+              translations(locale: $locale) {
+                edges {
+                  node {
+                    title
+                    description
+                  }
+                }
+              }
+              chapters: chapterSet {
+                edges {
+                  node {
+                    duration
+                    id
+                    slug
+                    translations(locale: $locale) {
+                      edges {
+                        node {
+                          locale
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              quizDifficulties
+              topic {
+                id
+                color
+                translations(locale: $locale) {
+                  edges {
+                    node {
+                      title
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

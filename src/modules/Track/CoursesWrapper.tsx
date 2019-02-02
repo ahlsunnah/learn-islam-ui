@@ -2,6 +2,7 @@ import * as React from 'react'
 import {connect} from 'react-redux'
 import {ObjectOf, ObjectOfStrings} from 'interfaces'
 import CourseCard from './CourseCard'
+import {ITrackTranslations, ITrackTrack} from '../../types/track'
 
 interface StateProps {
   chapters: ObjectOf<any>
@@ -12,43 +13,20 @@ interface ConnectProps {
   quizsState: ObjectOf<ObjectOf<ObjectOf<ObjectOf<{passed: boolean}>>>>
 }
 
-interface DispatchProps {}
-
 interface Props {
-  courses: Array<{
-    id: string
-    order: number
-    slug: string
-    chapters: Array<{
-      id: string
-      slug: string
-    }>
-    level: number
-    strings: Array<{
-      title: string
-      description: string
-    }>
-    quizs: Array<{difficulty: number}>
-    topic: {
-      color: string
-      strings: Array<{
-        title: string
-      }>
-    }
-  }>
+  courses: ITrackTrack['courses']
   currentPath: string
-  t: ObjectOfStrings
+  t: ITrackTranslations
 }
 class CoursesWrapper extends React.Component<Props & ConnectProps> {
   render() {
     const {chaptersState, courses, currentPath, quizsState, t} = this.props
     return (
       <div className="flex flex-column items-center">
-        {courses &&
-          courses
+        {courses.edges &&
+          courses.edges
             .slice()
-            .sort((a, b) => a.order - b.order) // TODO: sort in the query ?
-            .map((course) => (
+            .map(({node: course}) => (
               <CourseCard
                 key={course.slug}
                 {...course}

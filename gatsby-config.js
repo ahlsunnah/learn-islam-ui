@@ -8,7 +8,7 @@ if (!API2) {
 module.exports = {
   siteMetadata: {
     title: 'Madrassah Minhaj',
-    siteUrl: `https://demo.m-minhaj.com`,
+    siteUrl: `https://m-minhaj.com`,
   },
   plugins: [
     `gatsby-transformer-json`,

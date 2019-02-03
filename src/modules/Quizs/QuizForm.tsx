@@ -129,7 +129,6 @@ const enhance = compose<QuizFormProps, QuizComponentProps>(
       }
       return acc
     }
-    console.log('new quizes', quizs.edges.reduce(enhanceQuiz, new Map()))
     return {
       quizs: quizs.edges.reduce(enhanceQuiz, new Map()),
     }

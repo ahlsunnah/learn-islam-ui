@@ -1,4 +1,5 @@
 import {IEdges, Locale, IPageContext} from './index'
+import {ISidebarTrack} from './sidebar'
 
 export interface IChapterChapter {
   id: string
@@ -15,29 +16,7 @@ export interface IChapterChapter {
   course: {
     id: string
     slug: string
-    track: {
-      id: string
-      slug: string
-      translations: IEdges<{
-        title: string
-      }>
-      courses: IEdges<{
-        id: string
-        slug: string
-        quizDifficulties: number[]
-        translations: IEdges<{
-          locale: Locale
-          title: string
-        }>
-        chapters: IEdges<{
-          id: string
-          slug: string
-          translations: IEdges<{
-            title: string
-          }>
-        }>
-      }>
-    }
+    track: ISidebarTrack
   }
 }
 

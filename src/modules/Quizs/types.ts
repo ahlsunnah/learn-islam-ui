@@ -1,6 +1,3 @@
-import {Strings} from 'types'
-import {ObjectOfStrings} from 'interfaces'
-
 export interface INext {
   path: string
   title: string
@@ -13,23 +10,4 @@ export interface IParams {
   locale: string
 }
 
-export interface IQuizData {
-  course: {
-    id: string
-    slug: string
-    quizs: Array<{
-      id: string
-      type: string
-      strings: Array<{
-        locale: string
-        data: string
-      }>
-    }>
-    strings: Strings
-    track: {
-      slug: string
-    }
-  }
-  otherLocaleTranslations: ObjectOfStrings
-  translations: ObjectOfStrings
-}
+export type Difficulties = 1 | 2

@@ -4,11 +4,11 @@ import {Link} from 'gatsby'
 import scrollTo from 'lib/scrollTo'
 import * as React from 'react'
 import {withPropsOnChange} from 'recompose'
-import {ObjectOfStrings} from 'interfaces'
+import {IQuizsTranslations} from '../../types/quizs'
 
 const scrollToStart = () => scrollTo('quizs-start')
 
-const assessment = ({average, t}: {average: number; t: ObjectOfStrings}) => {
+const assessment = ({average, t}: {average: number; t: IQuizsTranslations}) => {
   if (average === 20) {
     return t.assessmentPerfect
   }
@@ -42,7 +42,7 @@ interface Props {
   }
   restartQuizs: () => void
   started: boolean
-  t: ObjectOfStrings
+  t: IQuizsTranslations
   totalQuestions?: number
 }
 

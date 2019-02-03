@@ -5,6 +5,9 @@ import ChooseACategory from './ChooseACategory'
 import FillInTheBlank from './FillInTheBlank'
 import LinkTheSentences from './LinkTheSentences'
 import TrueOrFalse from './TrueOrFalse'
+import {IParams} from '../types'
+import {IQuizsTranslations} from 'types/quizs'
+import {QuizComponentProps} from '../QuizForm'
 
 const NullComponent = () => null
 
@@ -30,21 +33,24 @@ const getComponentByType = (type: string) => {
 
 interface Props {
   addData: Function
-  params: {
-    courseId: string
-    difficulty: number
-    locale: string
-  }
-  t: {}
+  data: any
+  finished?: boolean
+  number: number
+  params: IParams
+  quizId: string
+  state: any
+  t: IQuizsTranslations
   type: string
 }
-const Quiz = ({type, ...props}: Props) => {
-  const QuizByType = getComponentByType(type)
-  return (
-    <Card className="mb5 pv4 ph4 w-60-l w-75-m w-100 center" rounded>
-      <QuizByType {...props} />
-    </Card>
-  )
+class Quiz extends React.PureComponent<QuizComponentProps & Props> {
+  render() {
+    const {type} = this.props
+    const QuizByType = getComponentByType(type)
+    return (
+      <Card className="mb5 pv4 ph4 w-60-l w-75-m w-100 center" rounded>
+        <QuizByType {...this.props} />
+      </Card>
+    )
+  }
 }
-
 export default Quiz

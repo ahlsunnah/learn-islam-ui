@@ -7,30 +7,35 @@ import {calculateTotalQuestions, getQuizsState} from 'selectors/quizs'
 import Quiz from './Quiz'
 import QuizFooter from './QuizFooter'
 import QuizHeader from './QuizHeader'
-import {INext, IQuizData, IParams} from './types'
+import {INext, IParams} from './types'
+import {IQuizsCourse, IQuizsQuiz, IQuizsTranslations} from 'types/quizs'
 
-type QuizType = {
-  type: string
-  data: object
-}
-interface Props {
-  addData: () => void
-  addScore: () => void
+interface QuizFormProps {
   coursePathname: string
   courseStrings: {
+    id: string
     title: string
   }
-  dAddTotal: (total: number) => void
-  dStartQuizs: () => void
+  params: IParams
   levelSubtitle: string
   next: INext
-  nextQuiz?: INext
-  params: {
-    courseId: string
-    difficulty: number
-    locale: string
-  }
-  quizs: Map<string, QuizType>
+  nextQuiz: INext
+  quizs: IQuizsCourse['quizs']
+  t: IQuizsTranslations
+}
+
+interface EnhanceProps {
+  addData: () => void
+  addScore: () => void
+  dAddTotal: (total: number) => void
+  dStartQuizs: () => void
+  quizs: Map<
+    string,
+    {
+      type: string
+      data: any
+    }
+  >
   quizsIds?: Array<string>
   quizsState: {
     finished: boolean
@@ -38,14 +43,16 @@ interface Props {
     started: boolean
     [key: string]: any
   }
-  t: IQuizData['translations']
+  t: IQuizsTranslations
   totalQuestions?: number
 }
 interface QuizsIdsProps {
   quizsIds: Array<string>
 }
 
-class QuizForm extends React.Component<Props & QuizsIdsProps> {
+export type QuizComponentProps = QuizFormProps & EnhanceProps & QuizsIdsProps
+
+class QuizForm extends React.Component<QuizComponentProps> {
   render() {
     const {
       coursePathname,
@@ -78,15 +85,14 @@ class QuizForm extends React.Component<Props & QuizsIdsProps> {
         <div id="quizs-start" key={quizsState.try}>
           {quizsIds.map((quizId, i) => {
             return (
-              // @ts-ignore
               <Quiz
                 {...quizs.get(quizId)}
                 {...props}
                 key={quizId}
+                finished={quizsState.finished}
                 number={i + 1}
                 quizId={quizId}
                 state={quizsState[quizId] || {}}
-                finished={quizsState.finished}
               />
             )
           }, quizs)}
@@ -103,30 +109,31 @@ class QuizForm extends React.Component<Props & QuizsIdsProps> {
   }
 }
 
-const enhance = compose(
-  withPropsOnChange(
-    ['quizs'],
-    ({quizs}: {quizs: IQuizData['course']['quizs']}) => {
-      const enhanceQuiz = (
-        acc: Map<string, object>,
-        quiz: IQuizData['course']['quizs'][0],
-      ) => {
-        try {
-          acc.set(quiz.id, {
-            type: quiz.type,
-            data: JSON.parse(quiz.strings[0].data),
-          })
-        } catch (e) {
-          // TODO: log to sentry
-          console.error('Could not parse quiz', quiz) // eslint-disable-line no-console
-        }
-        return acc
+const enhance = compose<QuizFormProps, QuizComponentProps>(
+  withPropsOnChange(['quizs'], ({quizs}: QuizFormProps) => {
+    const enhanceQuiz = (
+      acc: Map<string, object>,
+      {node: quiz}: {node: IQuizsQuiz},
+    ) => {
+      try {
+        const data = JSON.parse(
+          JSON.parse(quiz.translations.edges[0].node.data),
+        )
+        acc.set(quiz.id, {
+          type: quiz.type,
+          data,
+        })
+      } catch (e) {
+        // TODO: log to sentry
+        console.error('Could not parse quiz', quiz) // eslint-disable-line no-console
       }
-      return {
-        quizs: quizs.reduce(enhanceQuiz, new Map()),
-      }
-    },
-  ),
+      return acc
+    }
+    console.log('new quizes', quizs.edges.reduce(enhanceQuiz, new Map()))
+    return {
+      quizs: quizs.edges.reduce(enhanceQuiz, new Map()),
+    }
+  }),
   setPropTypes({
     params: PropTypes.shape({
       courseId: PropTypes.string.isRequired,
@@ -172,7 +179,7 @@ const enhance = compose(
         ),
     }),
   ),
-  lifecycle<Props, {}>({
+  lifecycle<EnhanceProps, {}>({
     componentDidMount() {
       const {
         dAddTotal,
@@ -206,13 +213,12 @@ const enhance = compose(
     //   }
     // },
   }),
-  withPropsOnChange<Props, Props & QuizsIdsProps>(
+  withPropsOnChange<EnhanceProps, EnhanceProps & QuizsIdsProps>(
     ['quizsIds'],
-    // @ts-ignore
     ({quizs, quizsIds}) => ({
       quizsIds: quizsIds || Array.from(quizs.keys()), // default value for SSR
     }),
   ),
 )
-// @ts-ignore
+
 export default enhance(QuizForm)

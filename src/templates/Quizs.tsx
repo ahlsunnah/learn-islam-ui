@@ -1,135 +1,94 @@
 import * as React from 'react'
 import {graphql} from 'gatsby'
-import * as R from 'ramda'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import QuizsContainer from 'modules/Quizs'
 import './styles.css'
+import {IQuizsPageProps} from '../types/quizs'
 
-const filterLanguage = (locale) => R.filter(R.propEq('locale', locale))
-const filterStrings = R.curry((locale, str) =>
-  R.evolve(
-    {
-      strings: filterLanguage(locale),
-    },
-    str,
-  ),
-)
-const enhanceSubCourse = (locale) =>
-  R.evolve({
-    strings: filterLanguage(locale),
-    chapters: R.map(filterStrings(locale)),
-  })
-const enhanceTrack = (locale) =>
-  R.evolve({
-    strings: filterLanguage(locale),
-    courses: R.map(enhanceSubCourse(locale)),
-  })
-const filterQuizs = (difficulty) => R.propEq('difficulty', difficulty)
-const enhanceChapter = (locale, difficulty) =>
-  R.evolve({
-    strings: filterLanguage(locale),
-    quizs: R.compose(
-      R.filter(filterQuizs(difficulty)),
-      R.map(filterStrings(locale)),
-    ),
-    track: enhanceTrack(locale),
-  })
-const enhance = (props, locale, difficulty) =>
-  R.over(
-    R.lensPath(['data', 'course']),
-    enhanceChapter(locale, difficulty),
-    props,
-  )
-
-type Strings = Array<{locale: string}>
-interface Props {
-  data: {
-    course: {
-      id: string
-      slug: string
-      strings: Strings
-      quizs: Array<{
-        difficulty: number
-        id: string
-        strings: Strings
-        type: string
-      }>
-      track: {
-        strings: Strings
-        courses: Array<{
-          strings: Strings
-        }>
-      }
-    }
-  }
-  pageContext: {
-    difficulty: number
-    locale: string
-  }
-}
-
-const Quizs = (props: Props) => (
+const Quizs = (props: IQuizsPageProps) => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
-    <QuizsContainer
-      {...enhance(
-        props,
-        props.pageContext.locale,
-        props.pageContext.difficulty,
-      )}
-    />
+    <QuizsContainer {...props} />
   </div>
 )
 
 export default Quizs
 
-// $FlowIgnore
 export const pageQuery = graphql`
-  query quizQuery($locale: String!, $slug: String!) {
-    course: feathersCourses(slug: {eq: $slug}) {
-      id
-      slug
-      strings: coursesStrings {
-        locale
-        title
-      }
-      quizs {
-        difficulty
+  query quizQuery($locale: String!, $id: ID!) {
+    api {
+      course(id: $id) {
         id
-        type
-        strings: quizsStrings {
-          locale
-          data
-        }
-      }
-      track {
         slug
-        strings: tracksStrings {
-          title
-          locale
-        }
-        courses {
-          id
-          order
-          slug
-          strings: coursesStrings {
-            locale
-            title
-          }
-          chapters {
-            id
-            slug
-            order
-            strings: chaptersStrings {
-              locale
+        translations(locale: $locale) {
+          edges {
+            node {
+              id
               title
             }
           }
-          quizs {
-            difficulty
+        }
+        quizs: quizSet {
+          edges {
+            node {
+              id
+              difficulty
+              type
+              translations(locale: $locale) {
+                edges {
+                  node {
+                    id
+                    data
+                  }
+                }
+              }
+            }
+          }
+        }
+        track {
+          id
+          slug
+          translations(locale: $locale) {
+            edges {
+              node {
+                title
+              }
+            }
+          }
+          courses: courseSet {
+            edges {
+              node {
+                id
+                slug
+                quizDifficulties
+                translations(locale: $locale) {
+                  edges {
+                    node {
+                      locale
+                      title
+                    }
+                  }
+                }
+                chapters: chapterSet {
+                  edges {
+                    node {
+                      id
+                      slug
+                      translations(locale: $locale) {
+                        edges {
+                          node {
+                            title
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

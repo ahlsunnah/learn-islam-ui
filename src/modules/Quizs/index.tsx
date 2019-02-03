@@ -3,32 +3,23 @@ import * as React from 'react'
 import Helmet from 'react-helmet'
 import './styles.scss'
 import QuizForm from './QuizForm'
-import {INext, IQuizData} from './types'
-
-interface Props {
-  data: IQuizData
-  location: {
-    pathname: string
-  }
-  pageContext: {
-    difficulty: number
-    locale: string
-    next: INext
-    nextQuiz?: INext
-  }
-}
+import {IQuizsPageProps} from '../../types/quizs'
 
 const QuizsContainer = ({
-  data: {course, otherLocaleTranslations, translations: t},
+  data: {
+    api: {course},
+    otherLocaleTranslations,
+    translations: t,
+  },
   location: {pathname},
   pageContext: {difficulty, locale, next, nextQuiz},
-}: Props) => {
+}: IQuizsPageProps) => {
   const otherLocalePath = `${otherLocaleTranslations.localePath}${
     course.track.slug
   }/${course.slug}/ikhtibar-${difficulty}`
   const levelSubtitle = `${t.level} ${t[`difficulty${difficulty}`]}`
   const title = `${t.quiz} ${t[`difficulty${difficulty}`]}`
-  const longTitle = `${course.strings[0].title}: ${t.quiz} ${
+  const longTitle = `${course.translations.edges[0].node.title}: ${t.quiz} ${
     t[`difficulty${difficulty}`]
   }`
   return (
@@ -42,7 +33,7 @@ const QuizsContainer = ({
       <Helmet title={longTitle} />
       <div className="relative z-2">
         <QuizForm
-          courseStrings={course.strings[0]}
+          courseStrings={course.translations.edges[0].node}
           params={{
             courseId: course.id,
             difficulty,

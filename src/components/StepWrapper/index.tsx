@@ -3,14 +3,15 @@ import * as React from 'react'
 import cx from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import {IChapterTranslations, IChapterChapter} from '../../types/chapter'
+import {IChapterChapter} from 'types/chapter'
+import {ISidebarTranslations} from 'types/sidebar'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
   course: IChapterChapter['course']
   otherLocaleName: string
   otherLocalePath: string
-  t: IChapterTranslations
+  t: ISidebarTranslations
   title: string
 }
 

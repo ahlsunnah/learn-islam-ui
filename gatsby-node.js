@@ -311,6 +311,7 @@ exports.createPages = ({graphql, actions: {createPage, createRedirect}}) =>
                       next,
                       nextQuiz,
                       slug: courseSlug,
+                      id: courseId,
                     },
                   })
                 })

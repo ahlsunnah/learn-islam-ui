@@ -7,9 +7,10 @@ import getWindowWidth from 'lib/getWindowWidth'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import 'styles/drawer.scss'
-import {ObjectOf, ObjectOfStrings} from 'interfaces'
+import {ObjectOf} from 'interfaces'
 import ChapterCursor from './ChapterCursor'
-import {IChapterTranslations, IChapterChapter} from '../../types/chapter'
+import {IChapterChapter} from '../../types/chapter'
+import {ISidebarTranslations} from '../../types/sidebar'
 
 interface Props {
   chaptersState: ObjectOf<boolean>
@@ -23,7 +24,7 @@ interface Props {
     >
   >
   toggleDrawer: () => void
-  t: IChapterTranslations
+  t: ISidebarTranslations
 }
 
 class Sidebar extends React.Component<Props> {

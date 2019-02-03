@@ -1,9 +1,9 @@
 /* eslint no-console: 0 */
 const path = require(`path`)
 
-const {API, API2, USER, PASSWORD} = process.env
-if (!API2 || !USER || !PASSWORD) {
-  console.error('We need API USER AND PASSWORD env variables set', API, USER)
+const {API2} = process.env
+if (!API2) {
+  console.error('We need API USER AND PASSWORD env variables set', API)
 }
 module.exports = {
   siteMetadata: {
@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://madrassaminhaj.com`,
+        siteUrl: `https://m-minhaj.com`,
       },
     },
     'gatsby-plugin-sitemap',
@@ -51,31 +51,7 @@ module.exports = {
       options: {includePaths: [path.resolve(__dirname, './node_modules')]},
     },
     'gatsby-plugin-postcss',
-    {
-      resolve: `gatsby-source-rest`,
-      options: {
-        type: 'Feathers',
-        api: API,
-        email: USER,
-        password: PASSWORD,
-        name: 'learn-islam',
-        path: 'data',
-        params: '?$populate=true',
-        services: [
-          'topics',
-          'topics-strings',
-          'tracks',
-          'tracks-strings',
-          'courses',
-          'courses-strings',
-          'chapters',
-          'chapters-strings',
-          'quizs',
-          'quizs-strings',
-          'translations',
-        ],
-      },
-    },
+
     {
       resolve: `gatsby-plugin-favicon`,
       options: {

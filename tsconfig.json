@@ -1,18 +1,36 @@
 {
   "include": ["./src/**/*"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "lib": ["dom", "esnext"],
+    // Process & infer types from .js files.
     "allowJs": true,
+
+    "baseUrl": "./src",
     "checkJs": true,
-    "jsx": "react",
-    "baseUrl": "src",
-    "strict": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "jsx": "preserve", // or "react"
+    "lib": ["dom", "esnext"],
+    "module": "commonjs",
+    "paths": {"*": ["*", "types/*"]},
+    // Useless because we are using babel to compile
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true,
+    // "emitDecoratorMetadata": true,
+    // "experimentalDecorators": true,
     "noEmit": true,
-    "skipLibCheck": true
-  }
+    // "skipLibCheck": true,
+
+    // Be strict
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": true,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "public", ".cache"]
 }

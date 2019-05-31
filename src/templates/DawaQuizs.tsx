@@ -6,7 +6,7 @@ import QuizsContainer from 'modules/Quizs'
 import './styles.css'
 import {IQuizsPageProps} from '../types/quizs'
 
-const Quizs = (props: IQuizsPageProps): JSX.Element => (
+const DawaQuizs = (props: IQuizsPageProps): JSX.Element => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
@@ -15,10 +15,10 @@ const Quizs = (props: IQuizsPageProps): JSX.Element => (
   </div>
 )
 
-export default Quizs
+export default DawaQuizs
 
 export const pageQuery = graphql`
-  query quizQuery($locale: String!, $id: ID!) {
+  query dawaQuizQuery($locale: String!, $id: ID!) {
     api {
       course(id: $id) {
         id

@@ -13,8 +13,8 @@ const TrackContainer = ({
   },
   pageContext,
 }: ITrackPageProps) => {
-  const {locale, localesPaths, slug} = pageContext
-  const localePath = localesPaths[locale]
+  const {locale, localePaths, slug} = pageContext
+  const localePath = localePaths[locale]
   const currentPath = `${localePath}${slug}`
   // TODO calculate next course with progress
   const nextCoursePath =

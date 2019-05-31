@@ -1,0 +1,404 @@
+{
+  "data": {
+    "tracks": {
+      "edges": [
+        {
+          "node": {
+            "id": "VHJhY2tOb2RlOjE=",
+            "slug": "iktichaf",
+            "translations": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6MQ==",
+                    "locale": "fr",
+                    "title": "Parcours découverte"
+                  }
+                },
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6NA==",
+                    "locale": "ar",
+                    "title": "المستوى التمهيدي"
+                  }
+                }
+              ]
+            },
+            "courseSet": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "Q291cnNlTm9kZTox",
+                    "slug": "tawhid",
+                    "quizDifficulties": [],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjE=",
+                            "locale": "ar",
+                            "title": "التوحيد وأقسامه"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjI=",
+                            "locale": "fr",
+                            "title": "Le Tawhid et ses catégories"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6MQ==",
+                            "slug": "rububiyya",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTox",
+                                    "locale": "ar",
+                                    "title": "توحيد الربوبية"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToy",
+                                    "locale": "fr",
+                                    "title": "Le Tawhid de la Seigneurie"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6NQ==",
+                            "slug": "3ibada",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTo5",
+                                    "locale": "ar",
+                                    "title": "توحيد الألوهية"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToxMA==",
+                                    "locale": "fr",
+                                    "title": "Le Tawhid de l’Adoration"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6Ng==",
+                            "slug": "asmawasifat",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToxMQ==",
+                                    "locale": "ar",
+                                    "title": "توحيد الأسماء والصفات"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToxMg==",
+                                    "locale": "fr",
+                                    "title": "Le Tawhid des Noms et Attributs"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "id": "Q291cnNlTm9kZToy",
+                    "slug": "sira-annabiy",
+                    "quizDifficulties": [1, 2],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjM=",
+                            "locale": "ar",
+                            "title": "سيرة النبي ﷺ"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjQ=",
+                            "locale": "fr",
+                            "title": "Vie du Prophète ﷺ"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6Mg==",
+                            "slug": "sira-annabiy",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToz",
+                                    "locale": "ar",
+                                    "title": "أهم أحداث سيرة النبي ﷺ"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTo0",
+                                    "locale": "fr",
+                                    "title": "Les évènements les plus importants de la vie du Prophète ﷺ"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "id": "Q291cnNlTm9kZToz",
+                    "slug": "quran",
+                    "quizDifficulties": [1, 2],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjU=",
+                            "locale": "ar",
+                            "title": "القرآن الكريم"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjY=",
+                            "locale": "fr",
+                            "title": "Le Coran"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6Mw==",
+                            "slug": "quran",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTo1",
+                                    "locale": "ar",
+                                    "title": "القرآن الكريم"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTo2",
+                                    "locale": "fr",
+                                    "title": "Le Saint Coran"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "VHJhY2tOb2RlOjI=",
+            "slug": "mubtadi",
+            "translations": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6Mg==",
+                    "locale": "fr",
+                    "title": "Parcours débutant"
+                  }
+                },
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6NQ==",
+                    "locale": "ar",
+                    "title": "المستوى الأول"
+                  }
+                }
+              ]
+            },
+            "courseSet": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "Q291cnNlTm9kZTox",
+                    "slug": "track2-course",
+                    "quizDifficulties": [],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjE=",
+                            "locale": "ar",
+                            "title": "التوحيد وأقسامه"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q291cnNlVHJhbnNsYXRpb25Ob2RlOjI=",
+                            "locale": "fr",
+                            "title": "Le Tawhid et ses catégories"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlck5vZGU6MQ==",
+                            "slug": "track2-course-chapter1",
+                            "translations": {
+                              "edges": [
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTox",
+                                    "locale": "ar",
+                                    "title": "المثال"
+                                  }
+                                },
+                                {
+                                  "node": {
+                                    "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToy",
+                                    "locale": "fr",
+                                    "title": "Example"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "VHJhY2tOb2RlOjM=",
+            "slug": "mutawassit",
+            "translations": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6Mw==",
+                    "locale": "fr",
+                    "title": "Parcours confirmé"
+                  }
+                },
+                {
+                  "node": {
+                    "id": "VHJhY2tUcmFuc2xhdGlvbk5vZGU6Ng==",
+                    "locale": "ar",
+                    "title": "المستوى الثاني"
+                  }
+                }
+              ]
+            },
+            "courseSet": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "Q2hhcHRlck5vZGU6MQ==",
+                    "slug": "track3-course1",
+                    "quizDifficulties": [2],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTox",
+                            "locale": "ar",
+                            "title": "المثال الآخر"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToy",
+                            "locale": "fr",
+                            "title": "another example"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {"edges": []}
+                  }
+                },
+                {
+                  "node": {
+                    "id": "Q2hhcHRlck5vZGU6MQ==",
+                    "slug": "track3-course1",
+                    "quizDifficulties": [1],
+                    "translations": {
+                      "edges": [
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZTox",
+                            "locale": "ar",
+                            "title": "المثال الآخر"
+                          }
+                        },
+                        {
+                          "node": {
+                            "id": "Q2hhcHRlclRyYW5zbGF0aW9uTm9kZToy",
+                            "locale": "fr",
+                            "title": "another example"
+                          }
+                        }
+                      ]
+                    },
+                    "chapterSet": {"edges": []}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

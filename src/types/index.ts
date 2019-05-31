@@ -4,12 +4,11 @@ export type Strings = Array<ObjectOfStrings>
 
 export type Locale = 'ar' | 'fr'
 
+export type ILocalePaths = {[locale in Locale]: string}
+
 export interface IPageContext {
   locale: Locale
-  localesPaths: {
-    ar: string
-    fr: string
-  }
+  localePaths: ILocalePaths
   otherLanguagePath: string
 }
 

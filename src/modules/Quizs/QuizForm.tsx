@@ -19,7 +19,6 @@ interface QuizFormProps {
   params: IParams
   levelSubtitle: string
   next: INext
-  nextQuiz: INext
   quizs: IQuizsCourse['quizs']
   t: IQuizsTranslations
 }
@@ -60,7 +59,6 @@ class QuizForm extends React.Component<QuizComponentProps> {
       dStartQuizs,
       levelSubtitle,
       next,
-      nextQuiz,
       quizs,
       quizsIds,
       quizsState,
@@ -76,7 +74,6 @@ class QuizForm extends React.Component<QuizComponentProps> {
           lastScore={quizsState.lastScore}
           levelSubtitle={levelSubtitle}
           next={next}
-          nextQuiz={nextQuiz}
           restartQuizs={dStartQuizs}
           started={quizsState.started}
           t={props.t}

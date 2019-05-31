@@ -12,7 +12,7 @@ const QuizsContainer = ({
     translations: t,
   },
   location: {pathname},
-  pageContext: {difficulty, locale, next, nextQuiz},
+  pageContext: {difficulty, locale, next},
 }: IQuizsPageProps) => {
   const otherLocalePath = `${otherLocaleTranslations.localePath}${
     course.track.slug
@@ -45,7 +45,6 @@ const QuizsContainer = ({
             .join('/')}/`}
           levelSubtitle={levelSubtitle}
           next={next}
-          nextQuiz={nextQuiz}
           quizs={course.quizs}
           t={t}
         />

@@ -1,4 +1,7 @@
 /* eslint react/jsx-filename-extension: 0 */
+import 'core-js/modules/es6.set'
+import 'core-js/modules/es6.map'
+import 'raf/polyfill'
 import * as React from 'react'
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
@@ -7,10 +10,10 @@ import createStore from './src/createStore'
 import Layout from './src/components/Layout'
 
 export const onClientEntry = () => {
-  if (process.env.NODE_ENV === 'production')
+  if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN)
     import('@sentry/browser').then((sentry) => {
       sentry.init({
-        dsn: 'https://37ac93a8f3644b2fad4a3594da09c668@sentry.io/1205429',
+        dsn: process.env.SENTRY_DSN,
       })
 
       window.sentry = sentry

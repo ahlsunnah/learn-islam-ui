@@ -64,7 +64,7 @@ class Sidebar extends React.Component<Props> {
           <header>
             <Link
               className="white no-underline"
-              to={`${t.localePath}${track.slug}`}
+              to={`${t.localePath}${track.slug}/`}
             >
               <div className="pv2 flex items-center">
                 <img alt="" className="w2-5 rtl-rotate-180" src={leftSvg} />
@@ -115,7 +115,7 @@ class Sidebar extends React.Component<Props> {
                           onClick={this.closeDrawerOnMobile}
                           to={`${t.localePath}${
                             track.slug
-                          }/${courseSlug}/${chapterSlug}`}
+                          }/${courseSlug}/${chapterSlug}/`}
                         >
                           <ChapterCursor
                             className="h2 ph1"
@@ -136,7 +136,7 @@ class Sidebar extends React.Component<Props> {
                           onClick={this.closeDrawerOnMobile}
                           to={`${t.localePath}${
                             track.slug
-                          }/${courseSlug}/ikhtibar-${difficulty}`}
+                          }/${courseSlug}/ikhtibar-${difficulty}/`}
                         >
                           <ChapterCursor
                             className="h2 ph1"

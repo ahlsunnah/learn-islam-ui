@@ -57,9 +57,9 @@ export interface IChapterOtherLocaleTranslations {
   readIn: string
 }
 
-export interface IChapterNext {
+export interface INext {
   path: string
-  title: string
+  title?: string
   type: 'quiz' | 'tracks' | 'course' | 'chapter'
 }
 
@@ -72,6 +72,6 @@ export interface IChapterProps {
     otherLocaleTranslations: IChapterOtherLocaleTranslations
   }
   pageContext: IPageContext & {
-    next: IChapterNext
+    next: INext
   }
 }

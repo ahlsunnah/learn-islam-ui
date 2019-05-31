@@ -35,11 +35,6 @@ interface Props {
     title: string
     type: string
   }
-  nextQuiz?: {
-    path: string
-    title: string
-    type: string
-  }
   restartQuizs: () => void
   started: boolean
   t: IQuizsTranslations
@@ -62,7 +57,6 @@ class QuizHeader extends React.Component<Props> {
       lastScore = 0,
       levelSubtitle,
       next,
-      nextQuiz,
       restartQuizs,
       started,
       t,
@@ -106,13 +100,6 @@ class QuizHeader extends React.Component<Props> {
                   <Link to={coursePathname}>
                     <Button autoSize className="ma2 ph3 pointer b" secondary>
                       {t.backToCourse}
-                    </Button>
-                  </Link>
-                )}
-                {nextQuiz && (
-                  <Link to={nextQuiz.path}>
-                    <Button autoSize className="ma2 ph3 pointer b" secondary>
-                      {`${t.takeExam}${t[nextQuiz.title]}`}
                     </Button>
                   </Link>
                 )}

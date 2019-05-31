@@ -1,6 +1,14 @@
 import {IEdges, IPageContext} from './index'
 import {ISidebarTrack} from './sidebar'
-import {INext} from '../modules/Quizs/types'
+import {INext} from './chapter'
+
+export interface IParams {
+  courseId: string
+  difficulty: number
+  locale: string
+}
+
+export type Difficulties = 1 | 2
 
 export interface IQuizsQuiz {
   id: string
@@ -77,6 +85,5 @@ export interface IQuizsPageProps {
   pageContext: IPageContext & {
     difficulty: 1 | 2
     next: INext
-    nextQuiz: INext
   }
 }

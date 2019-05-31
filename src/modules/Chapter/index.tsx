@@ -1,7 +1,6 @@
 /* eslint react/no-unused-prop-types: 0 */
 import {toggleCompleteChapter} from 'actions/chapters'
 import StepWrapper from 'components/StepWrapper'
-import PropTypes from 'prop-types'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import {connect} from 'react-redux'
@@ -21,7 +20,7 @@ interface State {
 }
 
 class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
-  constructor(props: ReduxProps & IChapterProps, context: Object) {
+  public constructor(props: ReduxProps & IChapterProps, context: object) {
     super(props, context)
     this.state = {
       // TODO: fix this
@@ -30,14 +29,16 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
     }
   }
 
-  toggleActiveTab: (event: React.MouseEvent) => void = (event) => {
+  private toggleActiveTab: (event: React.MouseEvent) => void = (
+    event,
+  ): void => {
     const el = event.currentTarget as HTMLButtonElement
     this.setState({
       activeTab: el.name,
     })
   }
 
-  render() {
+  public render(): JSX.Element | string {
     const {
       data,
       dToggleCompleteChapter,
@@ -80,7 +81,8 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
 
     return (
       <StepWrapper
-        course={chapter.course}
+        currentCourseSlug={chapter.course.slug}
+        track={chapter.course.track}
         t={t}
         otherLocaleName={otherLocaleTranslations.localeName}
         otherLocalePath={otherLocalePath}
@@ -203,7 +205,7 @@ const enhance = connect(
     isChapterComplete: chapters[data.api.chapter.id] || false,
   }),
   (dispatch: Function, {data}): {dToggleCompleteChapter: () => void} => ({
-    dToggleCompleteChapter: () => {
+    dToggleCompleteChapter: (): void => {
       dispatch(toggleCompleteChapter(data.api.chapter.id))
     },
   }),

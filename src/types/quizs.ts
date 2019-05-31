@@ -1,5 +1,4 @@
 import {IEdges, IPageContext} from './index'
-import {ISidebarTrack} from './sidebar'
 import {INext} from './chapter'
 
 export interface IParams {
@@ -19,7 +18,7 @@ export interface IQuizsQuiz {
     data: string
   }>
 }
-export interface IQuizsCourse {
+export interface IQuizsCourse<SidebarTrack> {
   id: string
   slug: string
   translations: IEdges<{
@@ -27,7 +26,7 @@ export interface IQuizsCourse {
     title: string
   }>
   quizs: IEdges<IQuizsQuiz>
-  track: ISidebarTrack
+  track: SidebarTrack
 }
 
 export interface IQuizsTranslations {
@@ -71,10 +70,10 @@ export interface IQuizsOtherLocaleTranslations {
   localePath: string
 }
 
-export interface IQuizsPageProps {
+export interface IQuizsPageProps<SidebarTrack> {
   data: {
     api: {
-      course: IQuizsCourse
+      course: IQuizsCourse<SidebarTrack>
     }
     translations: IQuizsTranslations
     otherLocaleTranslations: IQuizsOtherLocaleTranslations

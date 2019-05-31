@@ -2,9 +2,9 @@ import cx from 'classnames'
 import * as React from 'react'
 import 'styles/radio-button.scss'
 
-interface Props {
+interface IProps {
   checked: boolean
-  children: JSX.Element
+  children: JSX.Element | string
   error: boolean
   greenChecked: boolean
   id: string
@@ -21,7 +21,7 @@ const RadioButton = ({
   name,
   onChange,
   value,
-}: Props) => (
+}: IProps): JSX.Element => (
   <div className="mdc-form-field db">
     <label className="flex items-center f4" htmlFor={id}>
       <div className="mdc-radio">
@@ -33,8 +33,8 @@ const RadioButton = ({
             checked: checked || greenChecked,
           })}
           id={id}
-          name={`${name  }`}
-          onClick={onChange}
+          name={`${name}`}
+          onChange={onChange}
           type="radio"
           value={value}
         />

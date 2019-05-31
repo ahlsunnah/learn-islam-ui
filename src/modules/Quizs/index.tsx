@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import './styles.scss'
 import QuizForm from './QuizForm'
 import {IQuizsPageProps} from '../../types/quizs'
+import {IDawaSidebarTrack} from 'types/sidebar'
 
 const QuizsContainer = ({
   data: {
@@ -13,7 +14,7 @@ const QuizsContainer = ({
   },
   location: {pathname},
   pageContext: {difficulty, locale, next},
-}: IQuizsPageProps) => {
+}: IQuizsPageProps<IDawaSidebarTrack>): JSX.Element => {
   const otherLocalePath = `${otherLocaleTranslations.localePath}${
     course.track.slug
   }/${course.slug}/ikhtibar-${difficulty}`
@@ -24,7 +25,8 @@ const QuizsContainer = ({
   }`
   return (
     <StepWrapper
-      course={course}
+      currentCourseSlug={course.slug}
+      track={course.track}
       t={t}
       otherLocaleName={otherLocaleTranslations.localeName}
       otherLocalePath={otherLocalePath}

@@ -9,26 +9,35 @@ import {connect} from 'react-redux'
 import 'styles/drawer.scss'
 import {ObjectOf} from 'interfaces'
 import ChapterCursor from './ChapterCursor'
-import {IChapterChapter} from '../../types/chapter'
-import {ISidebarTranslations} from '../../types/sidebar'
 
-interface Props {
-  chaptersState: ObjectOf<boolean>
-  course: IChapterChapter['course']
+import {
+  ISidebarTranslations,
+  ISidebarTrack,
+  IDawaSidebarTrack,
+} from '../../types/sidebar'
+
+interface IProps {
+  currentCourseSlug: string
+  track: ISidebarTrack | IDawaSidebarTrack
   isOpen: boolean
-  quizsState: ObjectOf<
-    ObjectOf<
-      ObjectOf<{
-        passed: boolean
-      }>
-    >
-  >
   toggleDrawer: () => void
   t: ISidebarTranslations
 }
 
-class Sidebar extends React.Component<Props> {
-  closeDrawerOnMobile = () => {
+type TQuizState = ObjectOf<
+  ObjectOf<
+    ObjectOf<{
+      passed: boolean
+    }>
+  >
+>
+interface IConnectReturn {
+  chaptersState: ObjectOf<boolean>
+  quizsState: TQuizState
+}
+
+class Sidebar extends React.Component<IProps & IConnectReturn> {
+  private closeDrawerOnMobile = (): void => {
     const {toggleDrawer} = this.props
     // TODO: don't work, need to use redux for this, right now we don't have any animation
     if (getWindowWidth() < 800) {
@@ -36,10 +45,11 @@ class Sidebar extends React.Component<Props> {
     }
   }
 
-  render() {
+  public render(): JSX.Element {
     const {
       chaptersState,
-      course: {slug: currentCourseSlug, track},
+      currentCourseSlug,
+      track,
       isOpen,
       quizsState,
       t,
@@ -85,7 +95,7 @@ class Sidebar extends React.Component<Props> {
                   slug: courseSlug,
                   translations: courseStrings,
                 },
-              }) => {
+              }): JSX.Element => {
                 return (
                   <div key={courseSlug} className="pv2 bt b--black">
                     <div
@@ -97,71 +107,74 @@ class Sidebar extends React.Component<Props> {
                         {courseStrings.edges[0].node.title}
                       </span>
                     </div>
-                    {chapters.edges.map(
-                      (
-                        {
-                          node: {
-                            id,
-                            slug: chapterSlug,
-                            translations: chapterStrings,
+                    {chapters &&
+                      chapters.edges.map(
+                        (
+                          {
+                            node: {
+                              id,
+                              slug: chapterSlug,
+                              translations: chapterStrings,
+                            },
                           },
-                        },
-                        j,
-                      ) => (
-                        <Link
-                          key={`${courseSlug}-${chapterSlug}`}
-                          activeClassName="white b"
-                          className="ph1 pv2 flex items-center moon-gray no-underline"
-                          onClick={this.closeDrawerOnMobile}
-                          to={`${t.localePath}${
-                            track.slug
-                          }/${courseSlug}/${chapterSlug}/`}
-                        >
-                          <ChapterCursor
-                            className="h2 ph1"
-                            isComplete={chaptersState[id]}
-                          />
-                          <span className="ph1">
-                            {j + 1}. {chapterStrings.edges[0].node.title}
-                          </span>
-                        </Link>
-                      ),
+                          j,
+                        ): JSX.Element => (
+                          <Link
+                            key={`${courseSlug}-${chapterSlug}`}
+                            activeClassName="white b"
+                            className="ph1 pv2 flex items-center moon-gray no-underline"
+                            onClick={this.closeDrawerOnMobile}
+                            to={`${t.localePath}${
+                              track.slug
+                            }/${courseSlug}/${chapterSlug}/`}
+                          >
+                            <ChapterCursor
+                              className="h2 ph1"
+                              isComplete={chaptersState[id]}
+                            />
+                            <span className="ph1">
+                              {j + 1}. {chapterStrings.edges[0].node.title}
+                            </span>
+                          </Link>
+                        ),
+                      )}
+                    {quizDifficulties.map(
+                      (difficulty, j): JSX.Element => {
+                        return (
+                          <Link
+                            key={`${courseSlug}-quiz${difficulty}`}
+                            activeClassName="white b"
+                            className="ph1 pv2 flex items-center moon-gray no-underline"
+                            onClick={this.closeDrawerOnMobile}
+                            to={`${t.localePath}${
+                              track.slug
+                            }/${courseSlug}/ikhtibar-${difficulty}/`}
+                          >
+                            <ChapterCursor
+                              className="h2 ph1"
+                              isComplete={
+                                quizsState[courseId] &&
+                                quizsState[courseId][
+                                  courseStrings.edges[0].node.locale
+                                ] &&
+                                quizsState[courseId][
+                                  courseStrings.edges[0].node.locale
+                                ][difficulty] &&
+                                quizsState[courseId][
+                                  courseStrings.edges[0].node.locale
+                                ][difficulty].passed
+                              }
+                              isQuiz
+                            />
+                            <span className="ph1">
+                              {`${courses.edges.length + j + 1}. ${t.quiz} ${
+                                t[`difficulty${difficulty}`]
+                              }`}
+                            </span>
+                          </Link>
+                        )
+                      },
                     )}
-                    {quizDifficulties.map((difficulty, j) => {
-                      return (
-                        <Link
-                          key={`${courseSlug}-quiz${difficulty}`}
-                          activeClassName="white b"
-                          className="ph1 pv2 flex items-center moon-gray no-underline"
-                          onClick={this.closeDrawerOnMobile}
-                          to={`${t.localePath}${
-                            track.slug
-                          }/${courseSlug}/ikhtibar-${difficulty}/`}
-                        >
-                          <ChapterCursor
-                            className="h2 ph1"
-                            isComplete={
-                              quizsState[courseId] &&
-                              quizsState[courseId][
-                                courseStrings.edges[0].node.locale
-                              ] &&
-                              quizsState[courseId][
-                                courseStrings.edges[0].node.locale
-                              ][difficulty] &&
-                              quizsState[courseId][
-                                courseStrings.edges[0].node.locale
-                              ][difficulty].passed
-                            }
-                            isQuiz
-                          />
-                          <span className="ph1">
-                            {`${courses.edges.length + j + 1}. ${t.quiz} ${
-                              t[`difficulty${difficulty}`]
-                            }`}
-                          </span>
-                        </Link>
-                      )
-                    })}
                   </div>
                 )
               },
@@ -173,14 +186,16 @@ class Sidebar extends React.Component<Props> {
   }
 }
 
-interface State {
-  chapters: any
-  quizs: any
+interface IConnectState {
+  chapters: ObjectOf<boolean>
+  quizs: TQuizState
 }
 
-const enhance = connect(({chapters, quizs}: State) => ({
-  chaptersState: chapters,
-  quizsState: quizs || {},
-}))
+const enhance = connect(
+  ({chapters, quizs}: IConnectState): IConnectReturn => ({
+    chaptersState: chapters,
+    quizsState: quizs || {},
+  }),
+)
 
 export default enhance(Sidebar)

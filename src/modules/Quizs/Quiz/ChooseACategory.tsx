@@ -45,54 +45,59 @@ const ChooseACategory = ({
   score,
   state: {answers = []},
   t: {chooseACategoryTitle, locale},
-}: Props) => (
+}: Props): JSX.Element => (
   <div>
     <div className="pb2 flex bb items-center">
       <div className="flex-no-shrink mr2 b">{number} - &nbsp;</div>
       <div className="f4 b">{chooseACategoryTitle}</div>
     </div>
     <div className="mt3 f4">
-      {itemsOrder.map((itemIndex) => {
-        const item = items[itemIndex]
-        const answer = answers[itemIndex] // category
-        const isCorrect =
-          answer !== undefined &&
-          answer !== null &&
-          values[answer].items.includes(item)
-        return (
-          <div className="pb4 flex" key={itemIndex}>
-            <ResultIndicator
-              finished={finished}
-              isCorrect={isCorrect}
-              selected={answer !== undefined}
-            />
-            <div>
-              <div>{item}</div>
-              <div className="mt1">
-                {categories.map((category, categoryIndex) => (
-                  // @ts-ignore
-                  <RadioButton
-                    key={categoryIndex}
-                    checked={answer === categoryIndex}
-                    error={finished && !isCorrect && answer === categoryIndex}
-                    greenChecked={
-                      finished &&
-                      !isCorrect &&
-                      values[categoryIndex].items.includes(item)
-                    }
-                    id={`radio${category}-${item}`}
-                    name={itemIndex}
-                    onChange={handleAnswer}
-                    value={categoryIndex}
-                  >
-                    {category}
-                  </RadioButton>
-                ))}
+      {itemsOrder.map(
+        (itemIndex): JSX.Element => {
+          const item = items[itemIndex]
+          const answer = answers[itemIndex] // category
+          const isCorrect =
+            answer !== undefined &&
+            answer !== null &&
+            values[answer].items.includes(item)
+          return (
+            <div className="pb4 flex" key={itemIndex}>
+              <ResultIndicator
+                finished={finished}
+                isCorrect={isCorrect}
+                selected={answer !== undefined}
+              />
+              <div>
+                <div>{item}</div>
+                <div className="mt1">
+                  {categories.map(
+                    (category, categoryIndex): JSX.Element => (
+                      <RadioButton
+                        key={categoryIndex}
+                        checked={answer === categoryIndex}
+                        error={
+                          finished && !isCorrect && answer === categoryIndex
+                        }
+                        greenChecked={
+                          finished &&
+                          !isCorrect &&
+                          values[categoryIndex].items.includes(item)
+                        }
+                        id={`radio${category}-${item}`}
+                        name={itemIndex}
+                        onChange={handleAnswer}
+                        value={categoryIndex}
+                      >
+                        {category}
+                      </RadioButton>
+                    ),
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        },
+      )}
     </div>
     {finished && (
       <div

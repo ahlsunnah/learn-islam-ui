@@ -3,42 +3,49 @@ import * as React from 'react'
 import cx from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import {IChapterChapter} from 'types/chapter'
-import {ISidebarTranslations} from 'types/sidebar'
+import {
+  ISidebarTranslations,
+  ISidebarTrack,
+  IDawaSidebarTrack,
+} from '../../types/sidebar'
 
-interface Props {
+interface IProps {
   children: JSX.Element | JSX.Element[]
-  course: IChapterChapter['course']
+  currentCourseSlug: string
+  track: ISidebarTrack | IDawaSidebarTrack
   otherLocaleName: string
   otherLocalePath: string
   t: ISidebarTranslations
   title: string
 }
 
-interface State {
+interface IState {
   isSideBarVisible: boolean
 }
-class StepWrapper extends React.Component<Props, State> {
-  state = {
+class StepWrapper extends React.Component<IProps, IState> {
+  public state = {
     isSideBarVisible: false,
   }
 
-  componentWillMount() {
+  public componentWillMount(): void {
     if (getWindowWidth() > 800) {
       this.setState({isSideBarVisible: true})
     }
   }
 
-  toggleSidebar = (): void => {
-    this.setState(({isSideBarVisible}) => ({
-      isSideBarVisible: !isSideBarVisible,
-    }))
+  private toggleSidebar = (): void => {
+    this.setState(
+      ({isSideBarVisible}): IState => ({
+        isSideBarVisible: !isSideBarVisible,
+      }),
+    )
   }
 
-  render() {
+  public render(): JSX.Element {
     const {
       children,
-      course,
+      currentCourseSlug,
+      track,
       otherLocaleName,
       otherLocalePath,
       t,
@@ -48,7 +55,8 @@ class StepWrapper extends React.Component<Props, State> {
     return (
       <div>
         <Sidebar
-          course={course}
+          currentCourseSlug={currentCourseSlug}
+          track={track}
           isOpen={isSideBarVisible}
           t={t}
           toggleDrawer={this.toggleSidebar}

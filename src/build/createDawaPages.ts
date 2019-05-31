@@ -2,6 +2,7 @@ import path from 'path'
 import slash from 'slash'
 import {GatsbyCreatePages} from '../types/gatsbyNode'
 import createLocalesPaths from './createLocalesPaths'
+import nextStepCalculatorGenerator from './nextStepCalculatorGenerator'
 import {Locale, IEdges} from '../types/index'
 
 const createDawaPages: GatsbyCreatePages = async ({
@@ -34,8 +35,10 @@ const createDawaPages: GatsbyCreatePages = async ({
     api: {
       track: {
         id: string
+        slug: string
         courseSet: IEdges<{
           id: string
+          slug: string
           quizDifficulties: number[]
         }>
       }
@@ -46,10 +49,12 @@ const createDawaPages: GatsbyCreatePages = async ({
         api {
           track(id: "VHJhY2tOb2RlOjE=") {
             id
+            slug
             courseSet {
               edges {
                 node {
                   id
+                  slug
                   quizDifficulties
                 }
               }
@@ -66,7 +71,52 @@ const createDawaPages: GatsbyCreatePages = async ({
   const {
     api: {track},
   } = result.data
-  console.log(track.id)
+
+  const trackIndex = 0
+  const {courseSet, slug: trackSlug} = track
+  const nextStepCalculatorWithTrack = nextStepCalculatorGenerator({
+    edges: [{node: track}],
+  })(trackIndex)
+  courseSet.edges.forEach(
+    ({node: course}, courseIndex): void => {
+      const nextStepCalculatorWithCourse = nextStepCalculatorWithTrack(
+        courseIndex,
+      )
+      const {id: courseId, quizDifficulties, slug: courseSlug} = course
+      locales.forEach(
+        (locale): void => {
+          quizDifficulties.forEach(
+            (difficulty, quizDifficultyIndex): void => {
+              console.log(
+                `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${difficulty}`,
+              )
+              const next = nextStepCalculatorWithCourse({
+                locale,
+                localePath: localePaths[locale],
+                quizDifficultyIndex,
+              })
+
+              createPage({
+                path: `${
+                  localePaths[locale]
+                }${trackSlug}/${courseSlug}/ikhtibar-${difficulty}/`,
+                title: `difficulty${quizDifficulties[difficulty]}`,
+                component: slash(dawaQuizsTemplate),
+                context: {
+                  difficulty,
+                  locale,
+                  localePaths,
+                  next,
+                  slug: courseSlug,
+                  id: courseId,
+                },
+              })
+            },
+          )
+        },
+      )
+    },
+  )
 }
 
 export default createDawaPages

@@ -24,6 +24,42 @@ export interface ISidebarTrack {
   }>
 }
 
+export interface ISidebarCourse {
+  id: string
+  slug: string
+  quizDifficulties: number[]
+  translations: IEdges<{
+    locale: Locale
+    title: string
+  }>
+}
+export type SidebarCourseWithChapters = ISidebarCourse & {
+  chapters: IEdges<{
+    id: string
+    slug: string
+    translations: IEdges<{
+      title: string
+    }>
+  }>
+}
+
+export interface IDawaSidebarTrack {
+  id: string
+  slug: string
+  translations: IEdges<{
+    title: string
+  }>
+  courses: IEdges<{
+    id: string
+    slug: string
+    quizDifficulties: number[]
+    translations: IEdges<{
+      locale: Locale
+      title: string
+    }>
+  }>
+}
+
 export interface ISidebarTranslations {
   difficulty1: string
   difficulty2: string

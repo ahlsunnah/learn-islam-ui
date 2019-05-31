@@ -4,21 +4,11 @@ import {INext} from '../types/chapter'
 export interface INextStepTrack {
   id: string
   slug: string
-  translations: IEdges<{
-    id: string
-    locale: string
-    title: string
-  }>
   courseSet: IEdges<{
     id: string
     slug: string
     quizDifficulties: number[]
-    translations: IEdges<{
-      id: string
-      locale: string
-      title: string
-    }>
-    chapterSet: IEdges<{
+    chapterSet?: IEdges<{
       id: string
       slug: string
       translations: IEdges<{
@@ -51,6 +41,7 @@ const nextStepCalculatorGenerator = (
   const {chapterSet, slug: courseSlug, quizDifficulties} = course
 
   if (
+    chapterSet &&
     chapterIndex !== undefined &&
     chapterSet.edges.length > chapterIndex + 1
   ) {
@@ -87,7 +78,7 @@ const nextStepCalculatorGenerator = (
 
   if (courseIndex + 1 < courseSet.edges.length) {
     const nextCourse = courseSet.edges[courseIndex + 1].node
-    if (nextCourse.chapterSet.edges.length) {
+    if (nextCourse.chapterSet && nextCourse.chapterSet.edges.length) {
       // next step is the first chapter
       const nextChapter = nextCourse.chapterSet.edges[0].node
       const translation = nextChapter.translations.edges.find(
@@ -114,13 +105,14 @@ const nextStepCalculatorGenerator = (
     }
   }
 
-  if (trackIndex + 1 < tracks.edges.length) {
+  if (
+    trackIndex + 1 < tracks.edges.length &&
+    tracks.edges[trackIndex + 1].node.courseSet.edges.length > 0 // track with not course
+  ) {
     const nextTrack = tracks.edges[trackIndex + 1].node
-    if (nextTrack.courseSet.edges.length === 0) {
-      throw new Error('A track should have at least a course')
-    }
+
     const nextCourse = nextTrack.courseSet.edges[0].node
-    if (nextCourse.chapterSet.edges.length > 0) {
+    if (nextCourse.chapterSet && nextCourse.chapterSet.edges.length > 0) {
       const nextChapter = nextCourse.chapterSet.edges[0].node
       const translation = nextChapter.translations.edges.find(
         ({node}): boolean => node.locale === locale,

@@ -5,8 +5,9 @@ import cx from 'classnames'
 import QuizsContainer from 'modules/Quizs'
 import './styles.css'
 import {IQuizsPageProps} from '../types/quizs'
+import {IDawaSidebarTrack} from 'types/sidebar'
 
-const DawaQuizs = (props: IQuizsPageProps): JSX.Element => (
+const DawaQuizs = (props: IQuizsPageProps<IDawaSidebarTrack>): JSX.Element => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
@@ -69,21 +70,6 @@ export const pageQuery = graphql`
                     node {
                       locale
                       title
-                    }
-                  }
-                }
-                chapters: chapterSet {
-                  edges {
-                    node {
-                      id
-                      slug
-                      translations(locale: $locale) {
-                        edges {
-                          node {
-                            title
-                          }
-                        }
-                      }
                     }
                   }
                 }

@@ -2,7 +2,7 @@ overwrite: true
 schema: 'http://localhost:8000/___graphql'
 documents:
   - ./src/**/*.{ts,tsx}
-  - ./node_modules/gatsby-*/**/*.js
+  - ./node_modules/gatsby-*/*.js
 generates:
   src/types/gatsbyGraphql.ts:
     plugins:

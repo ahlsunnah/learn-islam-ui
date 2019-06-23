@@ -89,6 +89,14 @@ module.exports = {
         icon: 'src/images/logo-square-1500.png',
       },
     },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        disable: !process.env.SENTRY_DSN,
+        src: 'https://browser.sentry-cdn.com/5.4.0/bundle.min.js',
+        onLoad: `() => Sentry.init({dsn:"${process.env.SENTRY_DSN}"})`,
+      },
+    },
     'gatsby-plugin-offline',
     `gatsby-plugin-netlify`,
   ],

@@ -9,17 +9,6 @@ import PropTypes from 'prop-types'
 import createStore from './src/createStore'
 import Layout from './src/components/Layout'
 
-export const onClientEntry = () => {
-  if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN)
-    import('@sentry/browser').then((sentry) => {
-      sentry.init({
-        dsn: process.env.SENTRY_DSN,
-      })
-
-      window.sentry = sentry
-    })
-}
-
 export const wrapPageElement = ({element}) => {
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it

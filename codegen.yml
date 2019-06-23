@@ -10,3 +10,6 @@ generates:
       - 'typescript-operations'
     config:
       avoidOptionals: true
+      maybeValue: T
+      immutableTypes: true
+      typesPrefix: T

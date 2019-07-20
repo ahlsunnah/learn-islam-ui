@@ -3,7 +3,7 @@ const path = require(`path`)
 
 const {API2} = process.env
 if (!API2) {
-  console.error('We need API USER AND PASSWORD env variables set', API)
+  console.error('We need an API2 environment variable !')
 }
 module.exports = {
   siteMetadata: {

@@ -2,83 +2,52 @@ import * as React from 'react'
 import {graphql} from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import HomeContainer from 'modules/Home'
-import {IHomePageProps} from 'types/home'
+import DawaHomeContainer from 'modules/DawaHome'
+import {IDawaHomeProps} from '../types/dawaHome'
 import './styles.css'
 
-const DawaHome = (props: IHomePageProps): React.ReactNode => (
+const DawaHome = (props: IDawaHomeProps): React.ReactNode => (
   <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
-    <HomeContainer {...props} />
+    <DawaHomeContainer {...props} />
   </div>
 )
 
 export default DawaHome
 
-// $FlowIgnore
 export const dawaHomeQuery = graphql`
-  query dawaHomeQuery($locale: String!) {
-    translations: translationsJson(locale: {eq: $locale}) {
-      aboutUs
-      connect
-      copyright
-      courses
-      enroll
-      feature1Text
-      feature2Text
-      feature3Text
-      feature1Title
-      feature2Title
-      feature3Title
-      featuredCoursesTitle
-      featuresTitle
-      footerSocialTitle
-      homeTitle
-      homeDescription
-      homeEmailTitle
-      homeEmailPlaceHolder
-      homeFooterCTA
-      homeStartTrack
-      locale
-      localeName
-      localePath
-      newsletterEmailNotValid
-      newsletterSubscribed
-      newsletterSuccess
-      siteContentPresentation
-      homeContentTitle
-      siteName
-      siteSlogan
-      soon
-      start
-      tracks
-      urlFacebook
-      urlTelegram
-      urlTwitter
-      urlYoutube
-    }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
-      locale
-      localeName
-      localePath
-    }
+  query dawaHome($trackId: ID!, $locale: String!) {
     api {
-      tracks: allTracks(first: 3) {
-        edges {
-          node {
-            id
-            order
-            slug
-            soon
-            translations(locale: $locale) {
-              edges {
-                node {
-                  title
-                  description
+      track(id: $trackId) {
+        id
+        order
+        slug
+        soon
+        translations(locale: $locale) {
+          edges {
+            node {
+              title
+              description
+            }
+          }
+        }
+        courseSet {
+          edges {
+            node {
+              id
+              slug
+              translations(locale: $locale) {
+                edges {
+                  node {
+                    id
+                    title
+                    description
+                  }
                 }
               }
+              quizDifficulties
             }
           }
         }

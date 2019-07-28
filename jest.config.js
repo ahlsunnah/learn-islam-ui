@@ -17,6 +17,4 @@ module.exports = {
   },
   preset: 'ts-jest',
   testURL: 'http://localhost',
-  setupFiles: [
-  ],
 }

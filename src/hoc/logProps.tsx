@@ -2,7 +2,7 @@
 import * as React from 'react'
 
 const logProps = (Component: any): any => (props: object): React.ReactNode => {
-  console.log(props)
+      console.log(props)
   return <Component {...props} />
 }
 

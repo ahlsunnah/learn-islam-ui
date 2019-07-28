@@ -1,5 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3e59182a-67c6-4d2d-b37b-86037e78b431/deploy-status)](https://app.netlify.com/sites/m-minhaj/deploys)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f22f178c-3aee-4831-8df6-631ab79cc15a/deploy-status)](https://app.netlify.com/sites/ceci-est-notre-croyance/deploys)
+
 # بسم الله الرحمن الرحيم
 
 إن الحمد لله نحمده ونستعينه ونتوب إليه، ونعوذ بالله من شرور أنفسنا ومن سيئات أعمالنا، من يهده الله فلا مضل له ومن يضلل فلا هادي الله، ونشهد ألا إله إلا الله وحده لا شريك له وأن محمدا عبده ورسوله

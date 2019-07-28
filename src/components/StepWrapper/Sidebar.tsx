@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/no-static-element-interactions: 0 */
-// TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
 import cx from 'classnames'
 import {Link} from 'gatsby'
 import leftSvg from 'images/chevron-left.svg'
@@ -15,6 +13,8 @@ import {
   ISidebarTrack,
   IDawaSidebarTrack,
 } from '../../types/sidebar'
+
+const GATSBY_IS_DAWA_APP = process.env.GATSBY_IS_DAWA_APP
 
 interface IProps {
   currentCourseSlug: string
@@ -74,7 +74,11 @@ class Sidebar extends React.Component<IProps & IConnectReturn> {
           <header>
             <Link
               className="white no-underline"
-              to={`${t.localePath}${track.slug}/`}
+              to={
+                GATSBY_IS_DAWA_APP
+                  ? `${t.localePath}`
+                  : `${t.localePath}${track.slug}/`
+              }
             >
               <div className="pv2 flex items-center">
                 <img alt="" className="w2-5 rtl-rotate-180" src={leftSvg} />
@@ -86,7 +90,7 @@ class Sidebar extends React.Component<IProps & IConnectReturn> {
           </header>
 
           <div className="flex flex-column">
-            {courses.edges.map(
+            {/* TODO: fix typescript error */ courses.edges.map(
               ({
                 node: {
                   chapters,
@@ -124,9 +128,7 @@ class Sidebar extends React.Component<IProps & IConnectReturn> {
                             activeClassName="white b"
                             className="ph1 pv2 flex items-center moon-gray no-underline"
                             onClick={this.closeDrawerOnMobile}
-                            to={`${t.localePath}${
-                              track.slug
-                            }/${courseSlug}/${chapterSlug}/`}
+                            to={`${t.localePath}${track.slug}/${courseSlug}/${chapterSlug}/`}
                           >
                             <ChapterCursor
                               className="h2 ph1"
@@ -146,9 +148,7 @@ class Sidebar extends React.Component<IProps & IConnectReturn> {
                             activeClassName="white b"
                             className="ph1 pv2 flex items-center moon-gray no-underline"
                             onClick={this.closeDrawerOnMobile}
-                            to={`${t.localePath}${
-                              track.slug
-                            }/${courseSlug}/ikhtibar-${difficulty}/`}
+                            to={`${t.localePath}${track.slug}/${courseSlug}/ikhtibar-${difficulty}/`}
                           >
                             <ChapterCursor
                               className="h2 ph1"

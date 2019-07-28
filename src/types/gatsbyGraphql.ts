@@ -10,13 +10,17 @@ export type Scalars = {
    * representation of dates and times using the Gregorian calendar.
    */
   Date: any
-  /** JSON String */
-  api_JSONString: any
   /** The `DateTime` scalar type represents a DateTime
    * value as specified by
    * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
    */
   api_DateTime: any
+  /** Allows use of a JSON String for input / output from the GraphQL schema.
+   *
+   * Use of this type is *not recommended* as you lose the benefits of having a defined, static
+   * schema (one of the key benefits of GraphQL).
+   */
+  api_JSONString: any
   /** The `GenericScalar` scalar type represents a generic
    * GraphQL scalar value that could be:
    * String, Boolean, Int, Float, List or Object.
@@ -117,7 +121,7 @@ export type TApiAllQuizzesArgs = {
   after: Maybe<Scalars['String']>
   first: Maybe<Scalars['Int']>
   last: Maybe<Scalars['Int']>
-  difficulty: Maybe<Scalars['Float']>
+  difficulty: Maybe<Scalars['Int']>
   type: Maybe<Scalars['String']>
 }
 
@@ -203,10 +207,13 @@ export type TApi_ChapterNodeTranslationsArgs = {
 
 export type TApi_ChapterNodeConnection = {
   __typename?: 'api_ChapterNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_ChapterNodeEdge>>
 }
 
+/** A Relay edge containing a `ChapterNode` and its cursor. */
 export type TApi_ChapterNodeEdge = {
   __typename?: 'api_ChapterNodeEdge'
   /** The item at the end of the edge */
@@ -229,10 +236,13 @@ export type TApi_ChapterTranslationNode = TApi_Node & {
 
 export type TApi_ChapterTranslationNodeConnection = {
   __typename?: 'api_ChapterTranslationNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_ChapterTranslationNodeEdge>>
 }
 
+/** A Relay edge containing a `ChapterTranslationNode` and its cursor. */
 export type TApi_ChapterTranslationNodeEdge = {
   __typename?: 'api_ChapterTranslationNodeEdge'
   /** The item at the end of the edge */
@@ -277,16 +287,19 @@ export type TApi_CourseNodeQuizSetArgs = {
   after: Maybe<Scalars['String']>
   first: Maybe<Scalars['Int']>
   last: Maybe<Scalars['Int']>
-  difficulty: Maybe<Scalars['Float']>
+  difficulty: Maybe<Scalars['Int']>
   type: Maybe<Scalars['String']>
 }
 
 export type TApi_CourseNodeConnection = {
   __typename?: 'api_CourseNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_CourseNodeEdge>>
 }
 
+/** A Relay edge containing a `CourseNode` and its cursor. */
 export type TApi_CourseNodeEdge = {
   __typename?: 'api_CourseNodeEdge'
   /** The item at the end of the edge */
@@ -307,10 +320,13 @@ export type TApi_CourseTranslationNode = TApi_Node & {
 
 export type TApi_CourseTranslationNodeConnection = {
   __typename?: 'api_CourseTranslationNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_CourseTranslationNodeEdge>>
 }
 
+/** A Relay edge containing a `CourseTranslationNode` and its cursor. */
 export type TApi_CourseTranslationNodeEdge = {
   __typename?: 'api_CourseTranslationNodeEdge'
   /** The item at the end of the edge */
@@ -336,6 +352,7 @@ export type TApi_ObtainJsonWebToken = {
   readonly token: Maybe<Scalars['String']>
 }
 
+/** The Relay compliant `PageInfo` type, containing data necessary to paginate this connection. */
 export type TApi_PageInfo = {
   __typename?: 'api_PageInfo'
   /** When paginating forwards, are there more items? */
@@ -355,6 +372,7 @@ export type TApi_QuizNode = TApi_Node & {
   readonly course: Maybe<TApi_CourseNode>
   readonly difficulty: Scalars['Int']
   readonly type: Maybe<Scalars['String']>
+  readonly pubDate: Scalars['api_DateTime']
   readonly translations: Maybe<TApi_QuizTranslationNodeConnection>
 }
 
@@ -368,10 +386,13 @@ export type TApi_QuizNodeTranslationsArgs = {
 
 export type TApi_QuizNodeConnection = {
   __typename?: 'api_QuizNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_QuizNodeEdge>>
 }
 
+/** A Relay edge containing a `QuizNode` and its cursor. */
 export type TApi_QuizNodeEdge = {
   __typename?: 'api_QuizNodeEdge'
   /** The item at the end of the edge */
@@ -391,10 +412,13 @@ export type TApi_QuizTranslationNode = TApi_Node & {
 
 export type TApi_QuizTranslationNodeConnection = {
   __typename?: 'api_QuizTranslationNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_QuizTranslationNodeEdge>>
 }
 
+/** A Relay edge containing a `QuizTranslationNode` and its cursor. */
 export type TApi_QuizTranslationNodeEdge = {
   __typename?: 'api_QuizTranslationNodeEdge'
   /** The item at the end of the edge */
@@ -439,10 +463,13 @@ export type TApi_TopicNodeCourseSetArgs = {
 
 export type TApi_TopicNodeConnection = {
   __typename?: 'api_TopicNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_TopicNodeEdge>>
 }
 
+/** A Relay edge containing a `TopicNode` and its cursor. */
 export type TApi_TopicNodeEdge = {
   __typename?: 'api_TopicNodeEdge'
   /** The item at the end of the edge */
@@ -462,10 +489,13 @@ export type TApi_TopicTranslationNode = TApi_Node & {
 
 export type TApi_TopicTranslationNodeConnection = {
   __typename?: 'api_TopicTranslationNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_TopicTranslationNodeEdge>>
 }
 
+/** A Relay edge containing a `TopicTranslationNode` and its cursor. */
 export type TApi_TopicTranslationNodeEdge = {
   __typename?: 'api_TopicTranslationNodeEdge'
   /** The item at the end of the edge */
@@ -503,10 +533,13 @@ export type TApi_TrackNodeCourseSetArgs = {
 
 export type TApi_TrackNodeConnection = {
   __typename?: 'api_TrackNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_TrackNodeEdge>>
 }
 
+/** A Relay edge containing a `TrackNode` and its cursor. */
 export type TApi_TrackNodeEdge = {
   __typename?: 'api_TrackNodeEdge'
   /** The item at the end of the edge */
@@ -527,10 +560,13 @@ export type TApi_TrackTranslationNode = TApi_Node & {
 
 export type TApi_TrackTranslationNodeConnection = {
   __typename?: 'api_TrackTranslationNodeConnection'
+  /** Pagination data for this connection. */
   readonly pageInfo: TApi_PageInfo
+  /** Contains the nodes in this connection. */
   readonly edges: ReadonlyArray<Maybe<TApi_TrackTranslationNodeEdge>>
 }
 
+/** A Relay edge containing a `TrackTranslationNode` and its cursor. */
 export type TApi_TrackTranslationNodeEdge = {
   __typename?: 'api_TrackTranslationNodeEdge'
   /** The item at the end of the edge */
@@ -884,10 +920,8 @@ export type TDirectorySortInput = {
 
 export type TFile = TNode & {
   __typename?: 'File'
-  readonly id: Scalars['ID']
-  readonly parent: Maybe<TNode>
-  readonly children: ReadonlyArray<TNode>
-  readonly internal: TInternal
+  readonly birthtime: Maybe<Scalars['Date']>
+  readonly birthtimeMs: Maybe<Scalars['Float']>
   readonly sourceInstanceName: Maybe<Scalars['String']>
   readonly absolutePath: Maybe<Scalars['String']>
   readonly relativePath: Maybe<Scalars['String']>
@@ -916,13 +950,15 @@ export type TFile = TNode & {
   readonly atimeMs: Maybe<Scalars['Float']>
   readonly mtimeMs: Maybe<Scalars['Float']>
   readonly ctimeMs: Maybe<Scalars['Float']>
-  readonly birthtimeMs: Maybe<Scalars['Float']>
   readonly atime: Maybe<Scalars['Date']>
   readonly mtime: Maybe<Scalars['Date']>
   readonly ctime: Maybe<Scalars['Date']>
-  readonly birthtime: Maybe<Scalars['Date']>
   /** Copy file to static directory and return public url to it */
   readonly publicURL: Maybe<Scalars['String']>
+  readonly id: Scalars['ID']
+  readonly parent: Maybe<TNode>
+  readonly children: ReadonlyArray<TNode>
+  readonly internal: TInternal
   readonly childTranslationsJson: Maybe<TTranslationsJson>
 }
 
@@ -975,13 +1011,6 @@ export type TFileCtimeArgs = {
   locale: Maybe<Scalars['String']>
 }
 
-export type TFileBirthtimeArgs = {
-  formatString: Maybe<Scalars['String']>
-  fromNow: Maybe<Scalars['Boolean']>
-  difference: Maybe<Scalars['String']>
-  locale: Maybe<Scalars['String']>
-}
-
 export type TFileConnection = {
   __typename?: 'FileConnection'
   readonly totalCount: Scalars['Int']
@@ -1010,6 +1039,40 @@ export type TFileEdge = {
 }
 
 export enum TFileFieldsEnum {
+  Birthtime = 'birthtime',
+  BirthtimeMs = 'birthtimeMs',
+  SourceInstanceName = 'sourceInstanceName',
+  AbsolutePath = 'absolutePath',
+  RelativePath = 'relativePath',
+  Extension = 'extension',
+  Size = 'size',
+  PrettySize = 'prettySize',
+  ModifiedTime = 'modifiedTime',
+  AccessTime = 'accessTime',
+  ChangeTime = 'changeTime',
+  BirthTime = 'birthTime',
+  Root = 'root',
+  Dir = 'dir',
+  Base = 'base',
+  Ext = 'ext',
+  Name = 'name',
+  RelativeDirectory = 'relativeDirectory',
+  Dev = 'dev',
+  Mode = 'mode',
+  Nlink = 'nlink',
+  Uid = 'uid',
+  Gid = 'gid',
+  Rdev = 'rdev',
+  Blksize = 'blksize',
+  Ino = 'ino',
+  Blocks = 'blocks',
+  AtimeMs = 'atimeMs',
+  MtimeMs = 'mtimeMs',
+  CtimeMs = 'ctimeMs',
+  Atime = 'atime',
+  Mtime = 'mtime',
+  Ctime = 'ctime',
+  PublicUrl = 'publicURL',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -1096,47 +1159,147 @@ export enum TFileFieldsEnum {
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
-  SourceInstanceName = 'sourceInstanceName',
-  AbsolutePath = 'absolutePath',
-  RelativePath = 'relativePath',
-  Extension = 'extension',
-  Size = 'size',
-  PrettySize = 'prettySize',
-  ModifiedTime = 'modifiedTime',
-  AccessTime = 'accessTime',
-  ChangeTime = 'changeTime',
-  BirthTime = 'birthTime',
-  Root = 'root',
-  Dir = 'dir',
-  Base = 'base',
-  Ext = 'ext',
-  Name = 'name',
-  RelativeDirectory = 'relativeDirectory',
-  Dev = 'dev',
-  Mode = 'mode',
-  Nlink = 'nlink',
-  Uid = 'uid',
-  Gid = 'gid',
-  Rdev = 'rdev',
-  Blksize = 'blksize',
-  Ino = 'ino',
-  Blocks = 'blocks',
-  AtimeMs = 'atimeMs',
-  MtimeMs = 'mtimeMs',
-  CtimeMs = 'ctimeMs',
-  BirthtimeMs = 'birthtimeMs',
-  Atime = 'atime',
-  Mtime = 'mtime',
-  Ctime = 'ctime',
-  Birthtime = 'birthtime',
-  PublicUrl = 'publicURL',
+  ChildTranslationsJsonId = 'childTranslationsJson___id',
+  ChildTranslationsJsonParentId = 'childTranslationsJson___parent___id',
+  ChildTranslationsJsonParentParentId = 'childTranslationsJson___parent___parent___id',
+  ChildTranslationsJsonParentParentChildren = 'childTranslationsJson___parent___parent___children',
+  ChildTranslationsJsonParentChildren = 'childTranslationsJson___parent___children',
+  ChildTranslationsJsonParentChildrenId = 'childTranslationsJson___parent___children___id',
+  ChildTranslationsJsonParentChildrenChildren = 'childTranslationsJson___parent___children___children',
+  ChildTranslationsJsonParentInternalContent = 'childTranslationsJson___parent___internal___content',
+  ChildTranslationsJsonParentInternalContentDigest = 'childTranslationsJson___parent___internal___contentDigest',
+  ChildTranslationsJsonParentInternalDescription = 'childTranslationsJson___parent___internal___description',
+  ChildTranslationsJsonParentInternalFieldOwners = 'childTranslationsJson___parent___internal___fieldOwners',
+  ChildTranslationsJsonParentInternalIgnoreType = 'childTranslationsJson___parent___internal___ignoreType',
+  ChildTranslationsJsonParentInternalMediaType = 'childTranslationsJson___parent___internal___mediaType',
+  ChildTranslationsJsonParentInternalOwner = 'childTranslationsJson___parent___internal___owner',
+  ChildTranslationsJsonParentInternalType = 'childTranslationsJson___parent___internal___type',
+  ChildTranslationsJsonChildren = 'childTranslationsJson___children',
+  ChildTranslationsJsonChildrenId = 'childTranslationsJson___children___id',
+  ChildTranslationsJsonChildrenParentId = 'childTranslationsJson___children___parent___id',
+  ChildTranslationsJsonChildrenParentChildren = 'childTranslationsJson___children___parent___children',
+  ChildTranslationsJsonChildrenChildren = 'childTranslationsJson___children___children',
+  ChildTranslationsJsonChildrenChildrenId = 'childTranslationsJson___children___children___id',
+  ChildTranslationsJsonChildrenChildrenChildren = 'childTranslationsJson___children___children___children',
+  ChildTranslationsJsonChildrenInternalContent = 'childTranslationsJson___children___internal___content',
+  ChildTranslationsJsonChildrenInternalContentDigest = 'childTranslationsJson___children___internal___contentDigest',
+  ChildTranslationsJsonChildrenInternalDescription = 'childTranslationsJson___children___internal___description',
+  ChildTranslationsJsonChildrenInternalFieldOwners = 'childTranslationsJson___children___internal___fieldOwners',
+  ChildTranslationsJsonChildrenInternalIgnoreType = 'childTranslationsJson___children___internal___ignoreType',
+  ChildTranslationsJsonChildrenInternalMediaType = 'childTranslationsJson___children___internal___mediaType',
+  ChildTranslationsJsonChildrenInternalOwner = 'childTranslationsJson___children___internal___owner',
+  ChildTranslationsJsonChildrenInternalType = 'childTranslationsJson___children___internal___type',
+  ChildTranslationsJsonInternalContent = 'childTranslationsJson___internal___content',
+  ChildTranslationsJsonInternalContentDigest = 'childTranslationsJson___internal___contentDigest',
+  ChildTranslationsJsonInternalDescription = 'childTranslationsJson___internal___description',
+  ChildTranslationsJsonInternalFieldOwners = 'childTranslationsJson___internal___fieldOwners',
+  ChildTranslationsJsonInternalIgnoreType = 'childTranslationsJson___internal___ignoreType',
+  ChildTranslationsJsonInternalMediaType = 'childTranslationsJson___internal___mediaType',
+  ChildTranslationsJsonInternalOwner = 'childTranslationsJson___internal___owner',
+  ChildTranslationsJsonInternalType = 'childTranslationsJson___internal___type',
+  ChildTranslationsJsonHomeTitle = 'childTranslationsJson___homeTitle',
+  ChildTranslationsJsonHomeDescription = 'childTranslationsJson___homeDescription',
+  ChildTranslationsJsonHomeEmailTitle = 'childTranslationsJson___homeEmailTitle',
+  ChildTranslationsJsonHomeEmailPlaceHolder = 'childTranslationsJson___homeEmailPlaceHolder',
+  ChildTranslationsJsonHomeStartTrack = 'childTranslationsJson___homeStartTrack',
+  ChildTranslationsJsonSiteName = 'childTranslationsJson___siteName',
+  ChildTranslationsJsonSiteSlogan = 'childTranslationsJson___siteSlogan',
+  ChildTranslationsJsonFooterSocialTitle = 'childTranslationsJson___footerSocialTitle',
+  ChildTranslationsJsonHomeFooterCta = 'childTranslationsJson___homeFooterCTA',
+  ChildTranslationsJsonStart = 'childTranslationsJson___start',
+  ChildTranslationsJsonSoon = 'childTranslationsJson___soon',
+  ChildTranslationsJsonAboutUs = 'childTranslationsJson___aboutUs',
+  ChildTranslationsJsonTracks = 'childTranslationsJson___tracks',
+  ChildTranslationsJsonCourses = 'childTranslationsJson___courses',
+  ChildTranslationsJsonConnect = 'childTranslationsJson___connect',
+  ChildTranslationsJsonFeature1Title = 'childTranslationsJson___feature1Title',
+  ChildTranslationsJsonFeature2Title = 'childTranslationsJson___feature2Title',
+  ChildTranslationsJsonFeature3Title = 'childTranslationsJson___feature3Title',
+  ChildTranslationsJsonFeature1Text = 'childTranslationsJson___feature1Text',
+  ChildTranslationsJsonFeature2Text = 'childTranslationsJson___feature2Text',
+  ChildTranslationsJsonFeature3Text = 'childTranslationsJson___feature3Text',
+  ChildTranslationsJsonEnroll = 'childTranslationsJson___enroll',
+  ChildTranslationsJsonFeaturesTitle = 'childTranslationsJson___featuresTitle',
+  ChildTranslationsJsonFeaturedCoursesTitle = 'childTranslationsJson___featuredCoursesTitle',
+  ChildTranslationsJsonUrlTelegram = 'childTranslationsJson___urlTelegram',
+  ChildTranslationsJsonUrlTwitter = 'childTranslationsJson___urlTwitter',
+  ChildTranslationsJsonUrlFacebook = 'childTranslationsJson___urlFacebook',
+  ChildTranslationsJsonUrlYoutube = 'childTranslationsJson___urlYoutube',
+  ChildTranslationsJsonStartCourse = 'childTranslationsJson___startCourse',
+  ChildTranslationsJsonLevel1 = 'childTranslationsJson___level1',
+  ChildTranslationsJsonLevel2 = 'childTranslationsJson___level2',
+  ChildTranslationsJsonLevel3 = 'childTranslationsJson___level3',
+  ChildTranslationsJsonLevel = 'childTranslationsJson___level',
+  ChildTranslationsJsonTrack = 'childTranslationsJson___track',
+  ChildTranslationsJsonLocalePath = 'childTranslationsJson___localePath',
+  ChildTranslationsJsonLocaleName = 'childTranslationsJson___localeName',
+  ChildTranslationsJsonToOtherLanguageCta = 'childTranslationsJson___toOtherLanguageCTA',
+  ChildTranslationsJsonTracksPageTitle = 'childTranslationsJson___tracksPageTitle',
+  ChildTranslationsJsonTracksPageDescription = 'childTranslationsJson___tracksPageDescription',
+  ChildTranslationsJsonFocus = 'childTranslationsJson___focus',
+  ChildTranslationsJsonNextCourse = 'childTranslationsJson___nextCourse',
+  ChildTranslationsJsonTakeQuiz = 'childTranslationsJson___takeQuiz',
+  ChildTranslationsJsonQuiz = 'childTranslationsJson___quiz',
+  ChildTranslationsJsonQuizTrue = 'childTranslationsJson___quizTrue',
+  ChildTranslationsJsonQuizFalse = 'childTranslationsJson___quizFalse',
+  ChildTranslationsJsonFillintheblankTitle = 'childTranslationsJson___fillintheblankTitle',
+  ChildTranslationsJsonReadIn = 'childTranslationsJson___readIn',
+  ChildTranslationsJsonDifficulty1 = 'childTranslationsJson___difficulty1',
+  ChildTranslationsJsonDifficulty2 = 'childTranslationsJson___difficulty2',
+  ChildTranslationsJsonQuizCta = 'childTranslationsJson___quizCTA',
+  ChildTranslationsJsonNewsletterSuccess = 'childTranslationsJson___newsletterSuccess',
+  ChildTranslationsJsonNewsletterSubscribed = 'childTranslationsJson___newsletterSubscribed',
+  ChildTranslationsJsonNewsletterEmailNotValid = 'childTranslationsJson___newsletterEmailNotValid',
+  ChildTranslationsJsonFillInTheBlankTitle = 'childTranslationsJson___fillInTheBlankTitle',
+  ChildTranslationsJsonChooseACategoryTitle = 'childTranslationsJson___chooseACategoryTitle',
+  ChildTranslationsJsonAssessmentPerfect = 'childTranslationsJson___assessmentPerfect',
+  ChildTranslationsJsonAssessmentVeryGood = 'childTranslationsJson___assessmentVeryGood',
+  ChildTranslationsJsonAssessmentGood = 'childTranslationsJson___assessmentGood',
+  ChildTranslationsJsonYourScore = 'childTranslationsJson___yourScore',
+  ChildTranslationsJsonYourLastScore = 'childTranslationsJson___yourLastScore',
+  ChildTranslationsJsonGrade = 'childTranslationsJson___grade',
+  ChildTranslationsJsonAverage = 'childTranslationsJson___average',
+  ChildTranslationsJsonAssessmentFail = 'childTranslationsJson___assessmentFail',
+  ChildTranslationsJsonNextTrack = 'childTranslationsJson___nextTrack',
+  ChildTranslationsJsonBackToCourse = 'childTranslationsJson___backToCourse',
+  ChildTranslationsJsonRestartQuizs = 'childTranslationsJson___restartQuizs',
+  ChildTranslationsJsonSeeYourScore = 'childTranslationsJson___seeYourScore',
+  ChildTranslationsJsonGoToTop = 'childTranslationsJson___goToTop',
+  ChildTranslationsJsonTabTranslation = 'childTranslationsJson___tabTranslation',
+  ChildTranslationsJsonTabTranscription = 'childTranslationsJson___tabTranscription',
+  ChildTranslationsJsonTabVocabulary = 'childTranslationsJson___tabVocabulary',
+  ChildTranslationsJsonTabAudio = 'childTranslationsJson___tabAudio',
+  ChildTranslationsJsonTabCompleted = 'childTranslationsJson___tabCompleted',
+  ChildTranslationsJsonContinue = 'childTranslationsJson___continue',
+  ChildTranslationsJsonCopyright = 'childTranslationsJson___copyright',
+  ChildTranslationsJsonQuizTitle = 'childTranslationsJson___quizTitle',
+  ChildTranslationsJsonProgress = 'childTranslationsJson___progress',
+  ChildTranslationsJsonNext = 'childTranslationsJson___next',
+  ChildTranslationsJsonICompletedTheChapter = 'childTranslationsJson___iCompletedTheChapter',
+  ChildTranslationsJsonChapter = 'childTranslationsJson___chapter',
+  ChildTranslationsJsonCourse = 'childTranslationsJson___course',
+  ChildTranslationsJsonGoToTracks = 'childTranslationsJson___goToTracks',
+  ChildTranslationsJsonCongratulations = 'childTranslationsJson___congratulations',
+  ChildTranslationsJsonCongratulationsCta = 'childTranslationsJson___congratulationsCTA',
+  ChildTranslationsJsonTakeExam = 'childTranslationsJson___takeExam',
+  ChildTranslationsJsonAboutUsPageTitle = 'childTranslationsJson___aboutUsPageTitle',
+  ChildTranslationsJsonAboutUsPageContent = 'childTranslationsJson___aboutUsPageContent',
+  ChildTranslationsJsonListenAudio = 'childTranslationsJson___listenAudio',
+  ChildTranslationsJsonDownloadAudio = 'childTranslationsJson___downloadAudio',
+  ChildTranslationsJsonHere = 'childTranslationsJson___here',
+  ChildTranslationsJsonClickHere = 'childTranslationsJson___clickHere',
+  ChildTranslationsJsonTrackLevel = 'childTranslationsJson___trackLevel',
+  ChildTranslationsJsonNextHelp = 'childTranslationsJson___nextHelp',
+  ChildTranslationsJsonChapterAudio = 'childTranslationsJson___chapterAudio',
+  ChildTranslationsJsonSiteContentPresentation = 'childTranslationsJson___siteContentPresentation',
+  ChildTranslationsJsonHomeContentTitle = 'childTranslationsJson___homeContentTitle',
+  ChildTranslationsJsonChooseAnswer = 'childTranslationsJson___chooseAnswer',
+  ChildTranslationsJsonLocale = 'childTranslationsJson___locale',
 }
 
 export type TFileFilterInput = {
-  readonly id: Maybe<TStringQueryOperatorInput>
-  readonly parent: Maybe<TNodeFilterInput>
-  readonly children: Maybe<TNodeFilterListInput>
-  readonly internal: Maybe<TInternalFilterInput>
+  readonly birthtime: Maybe<TDateQueryOperatorInput>
+  readonly birthtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly sourceInstanceName: Maybe<TStringQueryOperatorInput>
   readonly absolutePath: Maybe<TStringQueryOperatorInput>
   readonly relativePath: Maybe<TStringQueryOperatorInput>
@@ -1165,12 +1328,15 @@ export type TFileFilterInput = {
   readonly atimeMs: Maybe<TFloatQueryOperatorInput>
   readonly mtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly ctimeMs: Maybe<TFloatQueryOperatorInput>
-  readonly birthtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly atime: Maybe<TDateQueryOperatorInput>
   readonly mtime: Maybe<TDateQueryOperatorInput>
   readonly ctime: Maybe<TDateQueryOperatorInput>
-  readonly birthtime: Maybe<TDateQueryOperatorInput>
   readonly publicURL: Maybe<TStringQueryOperatorInput>
+  readonly id: Maybe<TStringQueryOperatorInput>
+  readonly parent: Maybe<TNodeFilterInput>
+  readonly children: Maybe<TNodeFilterListInput>
+  readonly internal: Maybe<TInternalFilterInput>
+  readonly childTranslationsJson: Maybe<TTranslationsJsonFilterInput>
 }
 
 export type TFileGroupConnection = {
@@ -1434,10 +1600,8 @@ export type TQuery = {
 }
 
 export type TQueryFileArgs = {
-  id: Maybe<TStringQueryOperatorInput>
-  parent: Maybe<TNodeFilterInput>
-  children: Maybe<TNodeFilterListInput>
-  internal: Maybe<TInternalFilterInput>
+  birthtime: Maybe<TDateQueryOperatorInput>
+  birthtimeMs: Maybe<TFloatQueryOperatorInput>
   sourceInstanceName: Maybe<TStringQueryOperatorInput>
   absolutePath: Maybe<TStringQueryOperatorInput>
   relativePath: Maybe<TStringQueryOperatorInput>
@@ -1466,12 +1630,15 @@ export type TQueryFileArgs = {
   atimeMs: Maybe<TFloatQueryOperatorInput>
   mtimeMs: Maybe<TFloatQueryOperatorInput>
   ctimeMs: Maybe<TFloatQueryOperatorInput>
-  birthtimeMs: Maybe<TFloatQueryOperatorInput>
   atime: Maybe<TDateQueryOperatorInput>
   mtime: Maybe<TDateQueryOperatorInput>
   ctime: Maybe<TDateQueryOperatorInput>
-  birthtime: Maybe<TDateQueryOperatorInput>
   publicURL: Maybe<TStringQueryOperatorInput>
+  id: Maybe<TStringQueryOperatorInput>
+  parent: Maybe<TNodeFilterInput>
+  children: Maybe<TNodeFilterListInput>
+  internal: Maybe<TInternalFilterInput>
+  childTranslationsJson: Maybe<TTranslationsJsonFilterInput>
 }
 
 export type TQueryAllFileArgs = {
@@ -1535,8 +1702,8 @@ export type TQuerySiteArgs = {
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>
   port: Maybe<TIntQueryOperatorInput>
   host: Maybe<TStringQueryOperatorInput>
-  pathPrefix: Maybe<TStringQueryOperatorInput>
   polyfill: Maybe<TBooleanQueryOperatorInput>
+  pathPrefix: Maybe<TStringQueryOperatorInput>
   buildTime: Maybe<TDateQueryOperatorInput>
 }
 
@@ -1731,8 +1898,8 @@ export type TSite = TNode & {
   readonly siteMetadata: Maybe<TSiteSiteMetadata>
   readonly port: Maybe<Scalars['Int']>
   readonly host: Maybe<Scalars['String']>
-  readonly pathPrefix: Maybe<Scalars['String']>
   readonly polyfill: Maybe<Scalars['Boolean']>
+  readonly pathPrefix: Maybe<Scalars['String']>
   readonly buildTime: Maybe<Scalars['Date']>
 }
 
@@ -1861,8 +2028,8 @@ export enum TSiteFieldsEnum {
   SiteMetadataSiteUrl = 'siteMetadata___siteUrl',
   Port = 'port',
   Host = 'host',
-  PathPrefix = 'pathPrefix',
   Polyfill = 'polyfill',
+  PathPrefix = 'pathPrefix',
   BuildTime = 'buildTime',
 }
 
@@ -1874,8 +2041,8 @@ export type TSiteFilterInput = {
   readonly siteMetadata: Maybe<TSiteSiteMetadataFilterInput>
   readonly port: Maybe<TIntQueryOperatorInput>
   readonly host: Maybe<TStringQueryOperatorInput>
-  readonly pathPrefix: Maybe<TStringQueryOperatorInput>
   readonly polyfill: Maybe<TBooleanQueryOperatorInput>
+  readonly pathPrefix: Maybe<TStringQueryOperatorInput>
   readonly buildTime: Maybe<TDateQueryOperatorInput>
 }
 
@@ -1930,44 +2097,40 @@ export type TSitePageContext = {
   __typename?: 'SitePageContext'
   readonly locale: Maybe<Scalars['String']>
   readonly localePaths: Maybe<TSitePageContextLocalePaths>
-  readonly otherLanguagePath: Maybe<Scalars['String']>
-  readonly id: Maybe<Scalars['String']>
-  readonly slug: Maybe<Scalars['String']>
-  readonly next: Maybe<TSitePageContextNext>
+  readonly trackId: Maybe<Scalars['String']>
   readonly difficulty: Maybe<Scalars['Int']>
+  readonly next: Maybe<TSitePageContextNext>
+  readonly slug: Maybe<Scalars['String']>
+  readonly id: Maybe<Scalars['String']>
 }
 
 export type TSitePageContextFilterInput = {
   readonly locale: Maybe<TStringQueryOperatorInput>
   readonly localePaths: Maybe<TSitePageContextLocalePathsFilterInput>
-  readonly otherLanguagePath: Maybe<TStringQueryOperatorInput>
-  readonly id: Maybe<TStringQueryOperatorInput>
-  readonly slug: Maybe<TStringQueryOperatorInput>
-  readonly next: Maybe<TSitePageContextNextFilterInput>
+  readonly trackId: Maybe<TStringQueryOperatorInput>
   readonly difficulty: Maybe<TIntQueryOperatorInput>
+  readonly next: Maybe<TSitePageContextNextFilterInput>
+  readonly slug: Maybe<TStringQueryOperatorInput>
+  readonly id: Maybe<TStringQueryOperatorInput>
 }
 
 export type TSitePageContextLocalePaths = {
   __typename?: 'SitePageContextLocalePaths'
-  readonly ar: Maybe<Scalars['String']>
   readonly fr: Maybe<Scalars['String']>
 }
 
 export type TSitePageContextLocalePathsFilterInput = {
-  readonly ar: Maybe<TStringQueryOperatorInput>
   readonly fr: Maybe<TStringQueryOperatorInput>
 }
 
 export type TSitePageContextNext = {
   __typename?: 'SitePageContextNext'
   readonly type: Maybe<Scalars['String']>
-  readonly title: Maybe<Scalars['String']>
   readonly path: Maybe<Scalars['String']>
 }
 
 export type TSitePageContextNextFilterInput = {
   readonly type: Maybe<TStringQueryOperatorInput>
-  readonly title: Maybe<TStringQueryOperatorInput>
   readonly path: Maybe<TStringQueryOperatorInput>
 }
 
@@ -2071,15 +2234,13 @@ export enum TSitePageFieldsEnum {
   ComponentChunkName = 'componentChunkName',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   ContextLocale = 'context___locale',
-  ContextLocalePathsAr = 'context___localePaths___ar',
   ContextLocalePathsFr = 'context___localePaths___fr',
-  ContextOtherLanguagePath = 'context___otherLanguagePath',
-  ContextId = 'context___id',
-  ContextSlug = 'context___slug',
-  ContextNextType = 'context___next___type',
-  ContextNextTitle = 'context___next___title',
-  ContextNextPath = 'context___next___path',
+  ContextTrackId = 'context___trackId',
   ContextDifficulty = 'context___difficulty',
+  ContextNextType = 'context___next___type',
+  ContextNextPath = 'context___next___path',
+  ContextSlug = 'context___slug',
+  ContextId = 'context___id',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -3309,99 +3470,77 @@ export type TChapterQueryQuery = {readonly __typename?: 'Query'} & {
   >
 }
 
-export type TDawaHomeQueryQueryVariables = {
+export type TDawaHomeQueryVariables = {
+  trackId: Scalars['ID']
   locale: Scalars['String']
 }
 
-export type TDawaHomeQueryQuery = {readonly __typename?: 'Query'} & {
-  readonly translations: Maybe<
-    {readonly __typename?: 'TranslationsJson'} & Pick<
-      TTranslationsJson,
-      | 'aboutUs'
-      | 'connect'
-      | 'copyright'
-      | 'courses'
-      | 'enroll'
-      | 'feature1Text'
-      | 'feature2Text'
-      | 'feature3Text'
-      | 'feature1Title'
-      | 'feature2Title'
-      | 'feature3Title'
-      | 'featuredCoursesTitle'
-      | 'featuresTitle'
-      | 'footerSocialTitle'
-      | 'homeTitle'
-      | 'homeDescription'
-      | 'homeEmailTitle'
-      | 'homeEmailPlaceHolder'
-      | 'homeFooterCTA'
-      | 'homeStartTrack'
-      | 'locale'
-      | 'localeName'
-      | 'localePath'
-      | 'newsletterEmailNotValid'
-      | 'newsletterSubscribed'
-      | 'newsletterSuccess'
-      | 'siteContentPresentation'
-      | 'homeContentTitle'
-      | 'siteName'
-      | 'siteSlogan'
-      | 'soon'
-      | 'start'
-      | 'tracks'
-      | 'urlFacebook'
-      | 'urlTelegram'
-      | 'urlTwitter'
-      | 'urlYoutube'
-    >
-  >
-  readonly otherLocaleTranslations: Maybe<
-    {readonly __typename?: 'TranslationsJson'} & Pick<
-      TTranslationsJson,
-      'locale' | 'localeName' | 'localePath'
-    >
-  >
+export type TDawaHomeQuery = {readonly __typename?: 'Query'} & {
   readonly api: Maybe<
     {readonly __typename?: 'api'} & {
-      readonly tracks: Maybe<
-        {readonly __typename?: 'api_TrackNodeConnection'} & {
-          readonly edges: ReadonlyArray<
-            Maybe<
-              {readonly __typename?: 'api_TrackNodeEdge'} & {
-                readonly node: Maybe<
-                  {readonly __typename?: 'api_TrackNode'} & Pick<
-                    TApi_TrackNode,
-                    'id' | 'order' | 'slug' | 'soon'
-                  > & {
-                      readonly translations: Maybe<
+      readonly track: Maybe<
+        {readonly __typename?: 'api_TrackNode'} & Pick<
+          TApi_TrackNode,
+          'id' | 'order' | 'slug' | 'soon'
+        > & {
+            readonly translations: Maybe<
+              {readonly __typename?: 'api_TrackTranslationNodeConnection'} & {
+                readonly edges: ReadonlyArray<
+                  Maybe<
+                    {readonly __typename?: 'api_TrackTranslationNodeEdge'} & {
+                      readonly node: Maybe<
                         {
-                          readonly __typename?: 'api_TrackTranslationNodeConnection'
-                        } & {
-                          readonly edges: ReadonlyArray<
-                            Maybe<
+                          readonly __typename?: 'api_TrackTranslationNode'
+                        } & Pick<
+                          TApi_TrackTranslationNode,
+                          'title' | 'description'
+                        >
+                      >
+                    }
+                  >
+                >
+              }
+            >
+            readonly courseSet: Maybe<
+              {readonly __typename?: 'api_CourseNodeConnection'} & {
+                readonly edges: ReadonlyArray<
+                  Maybe<
+                    {readonly __typename?: 'api_CourseNodeEdge'} & {
+                      readonly node: Maybe<
+                        {readonly __typename?: 'api_CourseNode'} & Pick<
+                          TApi_CourseNode,
+                          'id' | 'slug' | 'quizDifficulties'
+                        > & {
+                            readonly translations: Maybe<
                               {
-                                readonly __typename?: 'api_TrackTranslationNodeEdge'
+                                readonly __typename?: 'api_CourseTranslationNodeConnection'
                               } & {
-                                readonly node: Maybe<
-                                  {
-                                    readonly __typename?: 'api_TrackTranslationNode'
-                                  } & Pick<
-                                    TApi_TrackTranslationNode,
-                                    'title' | 'description'
+                                readonly edges: ReadonlyArray<
+                                  Maybe<
+                                    {
+                                      readonly __typename?: 'api_CourseTranslationNodeEdge'
+                                    } & {
+                                      readonly node: Maybe<
+                                        {
+                                          readonly __typename?: 'api_CourseTranslationNode'
+                                        } & Pick<
+                                          TApi_CourseTranslationNode,
+                                          'id' | 'title' | 'description'
+                                        >
+                                      >
+                                    }
                                   >
                                 >
                               }
                             >
-                          >
-                        }
+                          }
                       >
                     }
+                  >
                 >
               }
             >
-          >
-        }
+          }
       >
     }
   >

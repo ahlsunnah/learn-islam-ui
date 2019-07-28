@@ -9,6 +9,14 @@ const createDawaPages: GatsbyCreatePages = async ({
   graphql,
   actions: {createPage, createRedirect},
 }): Promise<void> => {
+  createRedirect({
+    fromPath: `/`,
+    isPermanent: false,
+    redirectInBrowser: true,
+    toPath: '/fr/',
+  })
+
+  const trackId = 'VHJhY2tOb2RlOjE='
   const locales: Locale[] = ['fr']
   const {localePaths, otherLocalesPaths} = createLocalesPaths(locales)
 
@@ -17,19 +25,21 @@ const createDawaPages: GatsbyCreatePages = async ({
 
   // home pages
   console.log('Creating dawa home pages')
-  locales.forEach(
-    (locale): void => {
-      createPage({
-        path: localePaths[locale] as string,
-        component: slash(dawaHomeTemplate),
-        context: {
-          locale,
-          localePaths,
-          otherLanguagePath: otherLocalesPaths && otherLocalesPaths[locale],
-        },
-      })
-    },
-  )
+  locales.forEach((locale): void => {
+    console.log(
+      `Creating home page for locale ${locale} and path ${localePaths[locale]}`,
+    )
+    createPage({
+      path: localePaths[locale] as string,
+      component: slash(dawaHomeTemplate),
+      context: {
+        locale,
+        localePaths,
+        otherLanguagePath: otherLocalesPaths && otherLocalesPaths[locale],
+        trackId,
+      },
+    })
+  })
   console.log('fetching data')
   const result = await graphql<{
     api: {
@@ -77,46 +87,38 @@ const createDawaPages: GatsbyCreatePages = async ({
   const nextStepCalculatorWithTrack = nextStepCalculatorGenerator({
     edges: [{node: track}],
   })(trackIndex)
-  courseSet.edges.forEach(
-    ({node: course}, courseIndex): void => {
-      const nextStepCalculatorWithCourse = nextStepCalculatorWithTrack(
-        courseIndex,
-      )
-      const {id: courseId, quizDifficulties, slug: courseSlug} = course
-      locales.forEach(
-        (locale): void => {
-          quizDifficulties.forEach(
-            (difficulty, quizDifficultyIndex): void => {
-              console.log(
-                `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${difficulty}`,
-              )
-              const next = nextStepCalculatorWithCourse({
-                locale,
-                localePath: localePaths[locale],
-                quizDifficultyIndex,
-              })
+  courseSet.edges.forEach(({node: course}, courseIndex): void => {
+    const nextStepCalculatorWithCourse = nextStepCalculatorWithTrack(
+      courseIndex,
+    )
+    const {id: courseId, quizDifficulties, slug: courseSlug} = course
+    locales.forEach((locale): void => {
+      quizDifficulties.forEach((difficulty, quizDifficultyIndex): void => {
+        console.log(
+          `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${difficulty}`,
+        )
+        const next = nextStepCalculatorWithCourse({
+          locale,
+          localePath: localePaths[locale],
+          quizDifficultyIndex,
+        })
 
-              createPage({
-                path: `${
-                  localePaths[locale]
-                }${trackSlug}/${courseSlug}/ikhtibar-${difficulty}/`,
-                title: `difficulty${quizDifficulties[difficulty]}`,
-                component: slash(dawaQuizsTemplate),
-                context: {
-                  difficulty,
-                  locale,
-                  localePaths,
-                  next,
-                  slug: courseSlug,
-                  id: courseId,
-                },
-              })
-            },
-          )
-        },
-      )
-    },
-  )
+        createPage({
+          path: `${localePaths[locale]}${trackSlug}/${courseSlug}/ikhtibar-${difficulty}/`,
+          title: `difficulty${quizDifficulties[difficulty]}`,
+          component: slash(dawaQuizsTemplate),
+          context: {
+            difficulty,
+            locale,
+            localePaths,
+            next,
+            slug: courseSlug,
+            id: courseId,
+          },
+        })
+      })
+    })
+  })
 }
 
 export default createDawaPages

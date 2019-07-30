@@ -25,12 +25,12 @@ const CourseCard = ({
   translations,
   t,
   topic,
-}: Props & ITrackCourse) => {
+}: Props & ITrackCourse): JSX.Element => {
   // TODO calculate next chapter with progress
   const nextCoursePath = `${currentPath}/${slug}/${chapters.edges[0] &&
     chapters.edges[0].node.slug}/`
   const finishedChapters = chapters.edges.reduce(
-    (sum, {node: {id: chapterId}}) => {
+    (sum, {node: {id: chapterId}}): number => {
       if (chaptersState[chapterId]) {
         sum += 1 // eslint-disable-line no-param-reassign
       }
@@ -38,7 +38,7 @@ const CourseCard = ({
     },
     0,
   )
-  const finishedQuizs = quizDifficulties.reduce((acc, difficulty) => {
+  const finishedQuizs = quizDifficulties.reduce((acc, difficulty): number => {
     if (
       quizsState &&
       quizsState[t.locale] &&

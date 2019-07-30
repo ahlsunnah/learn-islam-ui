@@ -76,7 +76,7 @@
     "@material/radio": "^0.35.0",
     "@material/select": "^0.35.2",
     "@material/textfield": "^0.35.1",
-    "@material/theme": "^0.35.0",
+    "@material/theme": "^3.1.0",
     "@material/toolbar": "^0.35.0",
     "@material/typography": "^0.35.0",
     "@rebass/emotion": "^3.1.1",

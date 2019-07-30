@@ -73,7 +73,7 @@
     "@material/drawer": "^0.35.0",
     "@material/form-field": "^0.37.1",
     "@material/list": "^0.35.0",
-    "@material/radio": "^0.35.0",
+    "@material/radio": "^3.1.0",
     "@material/select": "^0.35.2",
     "@material/textfield": "^0.35.1",
     "@material/theme": "^0.35.0",

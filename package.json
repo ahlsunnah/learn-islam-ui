@@ -81,7 +81,7 @@
     "@material/typography": "^0.35.0",
     "@rebass/emotion": "^3.1.1",
     "babel-eslint": "^10.0.2",
-    "caniuse-lite": "^1.0.30000987",
+    "caniuse-lite": "^1.0.30000988",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
     "emotion-theming": "^10.0.14",

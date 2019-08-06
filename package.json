@@ -79,7 +79,7 @@
     "@material/theme": "^0.35.0",
     "@material/toolbar": "^0.35.0",
     "@material/typography": "^0.35.0",
-    "@rebass/emotion": "^3.1.1",
+    "@rebass/emotion": "^3.2.0",
     "babel-eslint": "^10.0.2",
     "caniuse-lite": "^1.0.30000988",
     "classnames": "^2.2.6",

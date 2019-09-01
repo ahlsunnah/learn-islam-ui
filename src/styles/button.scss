@@ -1,18 +1,9 @@
 @import './variables';
-@import '@material/button/mdc-button';
+// @import '@material/react-button/index.scss';
 
 .mdc-button {
   text-transform: none;
-}
-
-.button-fill__secondary {
-  @include mdc-button-container-fill-color($mdc-theme-secondary);
-  @include mdc-button-ink-color(white);
-}
-
-.button-color_and_outlined__secondary {
-  @include mdc-button-ink-color($mdc-theme-secondary);
-  @include mdc-button-outline-color($mdc-theme-secondary);
+  letter-spacing: 0em;
 }
 
 .button-elevated {
@@ -29,12 +20,14 @@
   }
 }
 
-.button-inverse {
-  @include mdc-button-ink-color($mdc-theme-primary);
-  @include mdc-button-container-fill-color(white);
+.mdc-button.button-inverse {
+  background-color: white;
+  color: black;
+  //   @include mdc-button-ink-color($mdc-theme-primary);
+  //   @include mdc-button-container-fill-color(white);
 }
 
-.mdc-button.button-stroked-green {
+.mdc-button.button-outlined-green {
   border-color: green;
   color: green;
 }

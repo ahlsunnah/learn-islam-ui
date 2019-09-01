@@ -40,13 +40,12 @@ const HomeTrackCard = ({
           disabled
           raised
           rounded
-          secondary
         >
           {t.soon}
         </Button>
       ) : (
         <Link className="mv2 no-underline" to={`${localePath}${slug}/`}>
-          <Button raised rounded secondary>
+          <Button raised rounded>
             {t.start}
           </Button>
         </Link>

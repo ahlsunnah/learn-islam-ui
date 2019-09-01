@@ -28,7 +28,7 @@ const Header = ({
     <h3 className="white f5 f4-ns">{title}</h3>
     <div className="flex1 flex justify-end">
       <Link className="mh2 mh3-ns no-underline" to={otherLocalePath}>
-        <Button rounded stroked className="white">
+        <Button rounded outlined className="white">
           {otherLocaleName}
         </Button>
       </Link>

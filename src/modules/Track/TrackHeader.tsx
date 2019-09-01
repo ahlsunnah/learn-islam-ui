@@ -29,7 +29,7 @@ const TrackHeader = ({
   <div className="ph3 pb4 pt3 flex flex-column flex-row-ns justify-around bg-white raised-header">
     <div className="self-end dn-ns">
       <Link className="ph2 no-underline" to={otherLocaleUrl}>
-        <Button rounded stroked>
+        <Button rounded outlined>
           {otherLocaleName}
         </Button>
       </Link>
@@ -45,16 +45,14 @@ const TrackHeader = ({
     <div className="pt2 flex1 flex flex-column-reverse flex-column-ns">
       <div className="self-end dn db-ns">
         <Link className="ph2 no-underline" to={otherLocaleUrl}>
-          <Button rounded stroked>
+          <Button rounded outlined>
             {otherLocaleName}
           </Button>
         </Link>
       </div>
       <div className="mt3 mb2 mt4-ns mb4-ns mh3-l">
         <Link to={nextCoursePath}>
-          <Button raised secondary>
-            {t.start}
-          </Button>
+          <Button raised>{t.start}</Button>
         </Link>
       </div>
       {/* <IconWithText className="mv2 mh3-l" icon={clock}>

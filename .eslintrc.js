@@ -25,6 +25,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     '@typescript-eslint/array-type': 0,
     '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/explicit-function-return-type': 0
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/interface-name-prefix': [1, 'always'],
     '@typescript-eslint/member-delimiter-style': 0,

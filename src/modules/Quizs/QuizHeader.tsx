@@ -93,25 +93,26 @@ const QuizHeader = (props: IProps): JSX.Element => {
                 autoSize
                 className="ma2 ph3 b"
                 onClick={restartQuizs}
-                secondary
+                raised
               >
                 {t.restartQuizs}
               </Button>
               {average < 15 && (
-                <Link to={coursePathname}>
-                  <Button autoSize className="ma2 ph3 pointer b" secondary>
-                    {t.backToCourse}
-                  </Button>
-                </Link>
+                <Button autoSize raised to={coursePathname}>
+                  {t.backToCourse}
+                </Button>
               )}
             </div>
             {average > 15 && next.type === 'course' && (
               <div className="ph3 ph4-l bt b--black-60 flex flex-column flex-row-l justify-center items-center tc">
-                <Link to={next.path}>
-                  <Button autoSize className="ma2 ph3 pointer b" secondary>
-                    {t.nextCourse}
-                  </Button>
-                </Link>
+                <Button
+                  autoSize
+                  className="ma2 ph3 pointer b"
+                  raised
+                  to={next.path}
+                >
+                  {t.nextCourse}
+                </Button>
                 ({next.title})
               </div>
             )}
@@ -119,25 +120,20 @@ const QuizHeader = (props: IProps): JSX.Element => {
               <div className="ph3 ph4-l bt b--black-60 flex flex-column justify-center items-center f4">
                 <p>{`${t.congratulations} [${next.title}]`}</p>
                 <p>{t.congratulationsCTA}</p>
-                <Link to={next.path}>
-                  <Button autoSize className="ma2 ph3 pointer b" secondary>
-                    {t.goToTracks}
-                  </Button>
-                </Link>
+                <Button autoSize className="ma2 ph3 pointer b" to={next.path}>
+                  {t.goToTracks}
+                </Button>
               </div>
             )}
           </div>
         ) : (
           <div className="flex flex-column flex-row-ns justify-between items-center tc">
-            <Link to={coursePathname}>
-              <Button className="ma2 ph3 pointer b" secondary>
-                {t.backToCourse}
-              </Button>
-            </Link>
+            <Button className="ma2 ph3 pointer b" raised to={coursePathname}>
+              {t.backToCourse}
+            </Button>
 
             <Button
               className="ma2 ph3 pointer"
-              secondary
               onClick={scrollToStart}
               raised
               rounded
@@ -145,7 +141,7 @@ const QuizHeader = (props: IProps): JSX.Element => {
               {started ? t.continue : t.start}
             </Button>
             {started && (
-              <Button className="ma2 ph3" onClick={restartQuizs} secondary>
+              <Button className="ma2 ph3" onClick={restartQuizs} raised>
                 {t.restartQuizs}
               </Button>
             )}

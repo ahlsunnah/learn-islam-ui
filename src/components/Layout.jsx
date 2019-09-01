@@ -5,6 +5,7 @@ import Footer from 'components/Footer'
 import PropTypes from 'prop-types'
 import 'styles/fonts.scss'
 import 'styles/theme.scss'
+import '@material/react-ripple'
 
 const theme = {
   colors: {
@@ -17,7 +18,8 @@ const theme = {
 }
 
 const global = css`
-  html {
+  html,
+  .mdc-button {
     font-family: 'Open Sans', 'Noto Kufi Arabic', sans-serif;
   }
 `

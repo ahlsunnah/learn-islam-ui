@@ -42,7 +42,7 @@ const NavigationButtons = ({
           </p>
           <p>{t.congratulationsCTA}</p>
           <Link className={cx('mh1 no-underline')} to={path}>
-            <Button className="pv2 h-auto lh-title tl" raised secondary>
+            <Button className="pv2 h-auto lh-title tl" raised>
               {t.goToTracks}
             </Button>
           </Link>
@@ -51,7 +51,7 @@ const NavigationButtons = ({
       {type !== 'tracks' && (
         <div className="mt3 mb2">
           <Link className={cx('mh1 no-underline')} to={path}>
-            <Button disabled={!isChapterComplete} raised secondary>
+            <Button disabled={!isChapterComplete} raised>
               {t.next}
             </Button>
           </Link>

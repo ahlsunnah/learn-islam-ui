@@ -1623,17 +1623,19 @@
     "@material/shape" "^1.1.1"
     "@material/theme" "^1.1.0"
 
-"@material/checkbox@^0.37.1":
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/@material/checkbox/-/checkbox-0.37.1.tgz#b8f5f100a8c40110fa6f6b6ea11896fd7a49b7d8"
-  integrity sha512-blStJk0pZjL7jH9H2IjgrSUNgOpE8zrHWVCNsanyYFYr5sfHT2BGXRYnLa40+vB6RuUf44Wrn9uEzQ96k43ZEQ==
+"@material/checkbox@^2.1.1":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@material/checkbox/-/checkbox-2.3.0.tgz#3fd2d8ad4d602b8486f841fc561e01107f06b4a3"
+  integrity sha512-ejDn0CyXITF8mKcBZHCLa0fc0a/agej9o4viMLOXXkUIfOY3NJuY11MyZ07MxAgin11NK9HpUX7cIxu3upV+6w==
   dependencies:
-    "@material/animation" "^0.34.0"
-    "@material/base" "^0.35.0"
-    "@material/ripple" "^0.37.1"
-    "@material/rtl" "^0.36.0"
-    "@material/selection-control" "^0.37.1"
-    "@material/theme" "^0.35.0"
+    "@material/animation" "^1.0.0"
+    "@material/base" "^1.0.0"
+    "@material/dom" "^1.1.0"
+    "@material/feature-targeting" "^0.44.1"
+    "@material/ripple" "^2.3.0"
+    "@material/rtl" "^0.42.0"
+    "@material/theme" "^1.1.0"
+    tslib "^1.9.3"
 
 "@material/dom@^1.0.0", "@material/dom@^1.1.0":
   version "1.1.0"
@@ -1723,6 +1725,15 @@
   integrity sha512-84+hi8SipYPRzBf7NX/3K/FElx/yPGrts7Ip1DnOVcvTXlI4jVTNg0UTdGxEgG+xLdsjo9gQLMsz1EA4Y7nOCA==
   dependencies:
     "@material/card" "^2.1.1"
+    "@material/react-ripple" "^0.15.0"
+    classnames "^2.2.6"
+
+"@material/react-checkbox@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@material/react-checkbox/-/react-checkbox-0.15.0.tgz#0b90448ee95f7797f063477dcb0a79331077d13a"
+  integrity sha512-ce8RPho65SlMATjHbivP2GP7S7dr7ahhFqfuhL0a8dvLOhKl2CK+VQbaWEaoRcGGquCuVbetswpJFH11BIgQRQ==
+  dependencies:
+    "@material/checkbox" "^2.1.1"
     "@material/react-ripple" "^0.15.0"
     classnames "^2.2.6"
 

@@ -59,9 +59,8 @@ const Choose = ({
             className={cx('pv2 h-auto lh-title tl', {
               ph3: order === answer,
             })}
-            greenStroked={finished && order === 0 && answer !== order}
-            secondary
-            stroked={order !== answer}
+            greenOutlined={finished && order === 0 && answer !== order}
+            outlined={order !== answer}
             onClick={handleAnswer}
             name={`${order}`}
           >

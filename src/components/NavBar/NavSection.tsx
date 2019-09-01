@@ -31,7 +31,7 @@ const NavSection = ({otherLanguagePath, otherLocaleTranslations, t}: Props) => (
         ))}
         <li>
           <Link className="ph2 no-underline" to={otherLanguagePath}>
-            <Button rounded stroked>
+            <Button rounded outlined>
               {otherLocaleTranslations.localeName}
             </Button>
           </Link>

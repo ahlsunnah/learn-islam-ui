@@ -1,20 +1,23 @@
 import cx from 'classnames'
 import * as React from 'react'
+import MaterialButton, {ButtonProps} from './MaterialButton'
+import '@material/react-button/dist/button.css'
 import 'styles/button.scss'
 
-interface Props {
+interface IProps {
   autoSize?: boolean
   children: JSX.Element | string
   className?: string
   elevated?: boolean
-  greenStroked?: boolean
+  greenOutlined?: boolean
   inverse?: boolean
   pill?: boolean
   raised?: boolean
   rounded?: boolean
-  secondary?: boolean
-  stroked?: boolean
+  outlined?: boolean
 }
+
+type ButtonTypes = HTMLAnchorElement | HTMLButtonElement
 
 const Button = ({
   autoSize,
@@ -22,31 +25,24 @@ const Button = ({
   className = '',
   elevated,
   inverse,
-  greenStroked,
-  raised,
+  greenOutlined,
   rounded = true,
-  secondary,
-  stroked,
+  outlined,
   ...props
-}: Props & React.HTMLProps<HTMLButtonElement>) => (
-  <button
+}: IProps & ButtonProps<ButtonTypes>) => (
+  <MaterialButton
     className={cx('mdc-button', className, {
-      // br11: rounded,
       'br-pill': rounded,
-      'button-color_and_outlined__secondary': stroked && secondary,
-      'button-fill__secondary': secondary && !stroked,
       'button-inverse': inverse,
       'button-elevated': elevated,
-      'mdc-button--raised': raised,
-      'mdc-button--outlined': stroked,
-      'button-stroked-green': greenStroked,
+      'button-outlined-green': greenOutlined,
       'pv2 h-auto lh-title': autoSize,
     })}
+    outlined={outlined}
     {...props}
-    type="button"
   >
     {children}
-  </button>
+  </MaterialButton>
 )
 
 export default Button

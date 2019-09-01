@@ -15,9 +15,7 @@ const QuizsContainer = ({
   location: {pathname},
   pageContext: {difficulty, locale, next},
 }: IQuizsPageProps<IDawaSidebarTrack>): JSX.Element => {
-  const otherLocalePath = `${otherLocaleTranslations.localePath}${
-    course.track.slug
-  }/${course.slug}/ikhtibar-${difficulty}`
+  const otherLocalePath = `${otherLocaleTranslations.localePath}${course.track.slug}/${course.slug}/ikhtibar-${difficulty}`
   const levelSubtitle = `${t.level} ${t[`difficulty${difficulty}`]}`
   const title = `${t.quiz} ${t[`difficulty${difficulty}`]}`
   const longTitle = `${course.translations.edges[0].node.title}: ${t.quiz} ${
@@ -43,7 +41,7 @@ const QuizsContainer = ({
           }}
           coursePathname={`${pathname
             .split('/')
-            .slice(0, -1)
+            .slice(0, -2)
             .join('/')}/`}
           levelSubtitle={levelSubtitle}
           next={next}

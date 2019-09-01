@@ -27,11 +27,11 @@ const QuizFooter = ({quizsState, submit, t, totalQuestions}: Props) => (
   <div>
     <Card className="ph4 pt4 pb45vh w-100 flex justify-center items-start">
       {quizsState.finished ? (
-        <Button className="f4 ph4 pv2 h-auto" onClick={scrollToTop} secondary>
+        <Button className="f4 ph4 pv2 h-auto" onClick={scrollToTop} raised>
           {t.goToTop}
         </Button>
       ) : (
-        <Button className="f4 ph4 pv2 h-auto" onClick={submit} secondary>
+        <Button className="f4 ph4 pv2 h-auto" onClick={submit} raised>
           {t.seeYourScore}
         </Button>
       )}

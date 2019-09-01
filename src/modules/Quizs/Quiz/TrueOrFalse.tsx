@@ -6,7 +6,7 @@ import {compose, setPropTypes, withHandlers, withPropsOnChange} from 'recompose'
 import addScoreWhenFinished from './addScoreWhenFinished'
 import ResultIndicator from './ResultIndicator'
 
-interface Props {
+interface IProps {
   data: {
     isTrue: boolean
     text: string
@@ -32,78 +32,77 @@ const TrueOrFalse = ({
   score,
   state: {answer},
   t: {quizFalse, quizTrue, locale},
-}: Props) => (
-  <div>
-    <div className="flex">
-      <div className="flex-no-shrink w2-5 b">{number} -</div>
-      <div className="f4 b">{text}</div>
-    </div>
-    <div className="mt4 flex justify-between">
-      <div>
-        <div className="mt2">
-          <ResultIndicator
-            finished={finished}
-            isCorrect={isTrue}
-            selected={answer === true}
-          />
-          <Button
-            className={cx({
-              ph3: answer,
-            })}
-            greenStroked={finished && isTrue && answer !== true}
-            name="true"
-            onClick={handleAnswer}
-            rounded
-            secondary
-            stroked={!answer}
-          >
-            {quizTrue}
-          </Button>
-        </div>
-        <div className="mt2">
-          <ResultIndicator
-            finished={finished}
-            isCorrect={!isTrue}
-            selected={answer === false}
-          />
-          <Button
-            className={cx({
-              ph3: answer === false,
-            })}
-            greenStroked={finished && !isTrue && answer !== false}
-            name="false"
-            onClick={handleAnswer}
-            rounded
-            secondary
-            stroked={answer !== false}
-          >
-            {quizFalse}
-          </Button>
-        </div>
+}: IProps): JSX.Element => {
+  return (
+    <div>
+      <div className="flex">
+        <div className="flex-no-shrink w2-5 b">{number} -</div>
+        <div className="f4 b">{text}</div>
       </div>
-      {finished &&
-        (score ? (
-          <div
-            className={cx('self-end green f3', {
-              tl: locale === 'ar',
-              tr: locale !== 'ar',
-            })}
-          >
-            1/1
+      <div className="mt4 flex justify-between">
+        <div>
+          <div className="mt2">
+            <ResultIndicator
+              finished={finished}
+              isCorrect={isTrue}
+              selected={answer === true}
+            />
+            <Button
+              greenOutlined={finished && isTrue && answer !== true}
+              name="true"
+              onClick={handleAnswer}
+              rounded
+              raised={answer === true}
+              outlined={answer !== true}
+            >
+              {quizTrue}
+            </Button>
           </div>
-        ) : (
-          <div
-            className={cx('self-end green f3', {
-              tl: locale === 'ar',
-              tr: locale !== 'ar',
-            })}
-          >
-            0/1
+          <div className="mt2">
+            <ResultIndicator
+              finished={finished}
+              isCorrect={!isTrue}
+              selected={answer === false}
+            />
+            <Button
+              className={cx({
+                ph3: answer === false,
+              })}
+              greenOutlined={finished && !isTrue && answer !== false}
+              name="false"
+              onClick={handleAnswer}
+              rounded
+              raised={answer === false}
+              outlined={answer !== false}
+            >
+              {quizFalse}
+            </Button>
           </div>
-        ))}
+        </div>
+        {finished &&
+          (score ? (
+            <div
+              className={cx('self-end green f3', {
+                tl: locale === 'ar',
+                tr: locale !== 'ar',
+              })}
+            >
+              1/1
+            </div>
+          ) : (
+            <div
+              className={cx('self-end green f3', {
+                tl: locale === 'ar',
+                tr: locale !== 'ar',
+              })}
+            >
+              0/1
+            </div>
+          ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 const enhance = compose(
   setPropTypes({
@@ -116,7 +115,7 @@ const enhance = compose(
   withHandlers({
     // @ts-ignore
     handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
-      const newAnswer = e.target.name === 'true'
+      const newAnswer = e.currentTarget.name === 'true'
       if (!finished)
         addData({
           data: {

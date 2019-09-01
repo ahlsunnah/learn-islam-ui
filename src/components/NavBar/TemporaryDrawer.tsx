@@ -48,7 +48,7 @@ const TemporaryDrawer = ({
             className="absolute top-1 right-1 ph2 no-underline"
             to={otherLocaleTranslations.localePath}
           >
-            <Button rounded stroked>
+            <Button rounded outlined>
               {otherLocaleTranslations.localeName}
             </Button>
           </Link>

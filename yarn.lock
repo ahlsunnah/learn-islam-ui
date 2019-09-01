@@ -1598,17 +1598,6 @@
   dependencies:
     tslib "^1.9.3"
 
-"@material/button@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@material/button/-/button-0.35.0.tgz#2c1df47ac71a9dd16998925557ef91d80c01b42c"
-  integrity sha512-s51eDAT7CqkTP5YqOZiCtW0TWqME/mhB+b+/XOmGm6aGzX3wXSvV9tJJTjarFHIabXkz8BirGuqVyrLLIZp8Ng==
-  dependencies:
-    "@material/elevation" "^0.35.0"
-    "@material/ripple" "^0.35.0"
-    "@material/rtl" "^0.35.0"
-    "@material/theme" "^0.35.0"
-    "@material/typography" "^0.35.0"
-
 "@material/button@^1.1.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@material/button/-/button-1.1.1.tgz#35af0d295f6ce6e3df9d4978485b5294d794f682"
@@ -1687,16 +1676,6 @@
   resolved "https://registry.yarnpkg.com/@material/feature-targeting/-/feature-targeting-0.44.1.tgz#afafc80294e5efab94bee31a187273d43d34979a"
   integrity sha512-90cc7njn4aHbH9UxY8qgZth1W5JgOgcEdWdubH1t7sFkwqFxS5g3zgxSBt46TygFBVIXNZNq35Xmg80wgqO7Pg==
 
-"@material/floating-label@^0.35.2":
-  version "0.35.2"
-  resolved "https://registry.yarnpkg.com/@material/floating-label/-/floating-label-0.35.2.tgz#e2809c4201aaed1fbe8e0c2799d2785625a3fed3"
-  integrity sha512-Xo47tdp9Eli66D3kVcLcAwnPsYAqQgb94uVMU8y7KUWI0owBsRHejsMla7dvU0rBJSf/wWiGzNbETl0lo3x2Og==
-  dependencies:
-    "@material/base" "^0.35.0"
-    "@material/rtl" "^0.35.0"
-    "@material/theme" "^0.35.0"
-    "@material/typography" "^0.35.0"
-
 "@material/form-field@^0.37.1":
   version "0.37.1"
   resolved "https://registry.yarnpkg.com/@material/form-field/-/form-field-0.37.1.tgz#94922ad3cde4ecc91af6d058378e4bd52b64aa14"
@@ -1708,15 +1687,6 @@
     "@material/theme" "^0.35.0"
     "@material/typography" "^0.37.1"
 
-"@material/line-ripple@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@material/line-ripple/-/line-ripple-0.35.0.tgz#5975b3c7150057eabb997a9453d48b2979b6a4ff"
-  integrity sha512-0w0kLYo2dGBiR2kgHxybifO7z4UxIYbL55EKOqkg+rG0dC+NkzFoURhjwoll6910EOlS//5UNo1N/u3to3uNjg==
-  dependencies:
-    "@material/animation" "^0.34.0"
-    "@material/base" "^0.35.0"
-    "@material/theme" "^0.35.0"
-
 "@material/list@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@material/list/-/list-0.35.0.tgz#873e0e8596d9aeaee44d4c669f55bd938284b80d"
@@ -1726,15 +1696,6 @@
     "@material/rtl" "^0.35.0"
     "@material/theme" "^0.35.0"
     "@material/typography" "^0.35.0"
-
-"@material/notched-outline@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@material/notched-outline/-/notched-outline-0.35.0.tgz#df821f007ea84bf6d67859a2b7bcf5c44a248911"
-  integrity sha512-VXng7P2E0FPbhmoe0afSnKmHocrwOxVHSaEnt46lZL0nT4O19JISprgCWrFHblbhq92SrppHdS73PHzxgfI9HQ==
-  dependencies:
-    "@material/animation" "^0.34.0"
-    "@material/base" "^0.35.0"
-    "@material/theme" "^0.35.0"
 
 "@material/radio@^0.35.0":
   version "0.35.0"
@@ -1851,21 +1812,6 @@
   integrity sha512-Jge/h1XBLjdLlam4QMSzVgM99e/N8+elQROPkltqVP7eyLc17BwM3aP5cLVfZDgrJgvsjUxbgAP1H1j8sqmUyg==
   dependencies:
     "@material/feature-targeting" "^0.44.1"
-
-"@material/textfield@^0.35.1":
-  version "0.35.2"
-  resolved "https://registry.yarnpkg.com/@material/textfield/-/textfield-0.35.2.tgz#deeff078a4ad798a25a22786afedbbe324f93f7b"
-  integrity sha512-bXavNL4N/19GrMYDnGkjxqbNxkMoLg5rBTOf+aN4p9RMDmoU+y7eS94pwsghfO44t5jqrSUxmlZ/TLQTDQBBog==
-  dependencies:
-    "@material/animation" "^0.34.0"
-    "@material/base" "^0.35.0"
-    "@material/floating-label" "^0.35.2"
-    "@material/line-ripple" "^0.35.0"
-    "@material/notched-outline" "^0.35.0"
-    "@material/ripple" "^0.35.0"
-    "@material/rtl" "^0.35.0"
-    "@material/theme" "^0.35.0"
-    "@material/typography" "^0.35.0"
 
 "@material/theme@^0.35.0":
   version "0.35.0"

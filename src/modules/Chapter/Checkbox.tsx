@@ -9,9 +9,7 @@ interface Props {
 }
 const Checkbox = ({checked, children, handleChange}: Props) => (
   <label className="flex items-center">
-    <div className="mdc-form-field">
-      <MaterialCheckBox checked={checked} onChange={handleChange} />
-    </div>
+    <MaterialCheckBox checked={checked} onChange={handleChange} />
     {children}
   </label>
 )

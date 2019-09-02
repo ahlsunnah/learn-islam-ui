@@ -76,7 +76,7 @@
     "@material/react-checkbox": "^0.15.0",
     "@material/theme": "^0.35.0",
     "@material/toolbar": "^0.35.0",
-    "@material/typography": "^0.35.0",
+    "@material/typography": "^3.1.0",
     "babel-eslint": "^10.0.3",
     "caniuse-lite": "^1.0.30000989",
     "classnames": "^2.2.6",

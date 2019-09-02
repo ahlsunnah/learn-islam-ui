@@ -70,7 +70,7 @@
     "@material/drawer": "^0.35.0",
     "@material/form-field": "^0.37.1",
     "@material/list": "^0.35.0",
-    "@material/radio": "^0.35.0",
+    "@material/radio": "^2.3.0",
     "@material/react-button": "^0.15.0",
     "@material/react-card": "^0.15.0",
     "@material/react-checkbox": "^0.15.0",

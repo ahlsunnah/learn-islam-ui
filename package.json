@@ -80,7 +80,7 @@
     "babel-eslint": "^10.0.3",
     "caniuse-lite": "^1.0.30000989",
     "classnames": "^2.2.6",
-    "core-js": "^2.6.5",
+    "core-js": "^2.6.9",
     "emotion-theming": "^10.0.17",
     "gatsby": "^2.15.2",
     "gatsby-image": "^2.2.16",

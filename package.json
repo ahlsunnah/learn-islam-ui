@@ -149,7 +149,7 @@
     "@types/react-redux": "^7.1.2",
     "@types/recompose": "^0.30.7",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
+    "@typescript-eslint/parser": "^2.1.0",
     "babel-jest": "^24.9.0",
     "babel-preset-gatsby": "^0.2.12",
     "commitizen": "^4.0.3",

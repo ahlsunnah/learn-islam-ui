@@ -64,7 +64,7 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.6.0",
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.17",
     "@material/drawer": "^0.35.0",

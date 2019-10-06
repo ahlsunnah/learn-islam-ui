@@ -2162,6 +2162,13 @@
   dependencies:
     "@material/feature-targeting" "^0.44.1"
 
+"@material/typography@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@material/typography/-/typography-2.3.0.tgz#fe2180c697172227f0745cda684ecafdaba3f8dd"
+  integrity sha512-NtWVVvwG9Te6/kuIl4fEwDcXGCS7mfPgo5CKPyxcK6y0hJHv6yRHpipJT9D4ZlXw0sQx9B33doOK7iYJtwBBZw==
+  dependencies:
+    "@material/feature-targeting" "^0.44.1"
+
 "@mdx-js/react@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.5.0.tgz#bb060963c459e4e1553130448006ab756c6fdc4c"

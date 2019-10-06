@@ -11,6 +11,7 @@ module.exports = {
     siteUrl: `https://m-minhaj.com`,
   },
   plugins: [
+    'gatsby-plugin-theme-ui',
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,

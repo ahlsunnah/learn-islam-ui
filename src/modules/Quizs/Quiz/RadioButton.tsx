@@ -1,10 +1,14 @@
+/** @jsx jsx */
+import {jsx} from 'theme-ui'
 import cx from 'classnames'
-import * as React from 'react'
+import React from 'react'
+import '@material/react-radio/dist/radio.css'
 import 'styles/radio-button.scss'
+import Radio, {NativeRadioControl} from '@material/react-radio'
 
 interface IProps {
   checked: boolean
-  children: JSX.Element | string
+  children: string
   error: boolean
   greenChecked: boolean
   id: string
@@ -22,34 +26,25 @@ const RadioButton = ({
   onChange,
   value,
 }: IProps): JSX.Element => (
-  <div className="mdc-form-field db">
-    <label className="flex items-center f4" htmlFor={id}>
-      <div className="mdc-radio">
-        <input
-          checked={checked || greenChecked}
-          className={cx('mdc-radio__native-control', {
-            // This is necessary to fix a strange bug
-            // that didn't allow to check 2 radios of a category
-            checked: checked || greenChecked,
-          })}
-          id={id}
-          name={`${name}`}
-          onChange={onChange}
-          type="radio"
-          value={value}
-        />
-        <div
-          className={cx('mdc-radio__background', {
-            isGreen: greenChecked,
-            isRed: error,
-          })}
-        >
-          <div className="mdc-radio__outer-circle" />
-          <div className="mdc-radio__inner-circle" />
-        </div>
-      </div>
-      {children}
-    </label>
+  <div>
+    <Radio
+      label={children}
+      key={id}
+      className={cx({isGreen: greenChecked, isRed: error})}
+    >
+      <NativeRadioControl
+        name={`${name}`}
+        value={value}
+        className={cx({
+          // This is necessary to fix a strange bug
+          // that didn't allow to check 2 radios of a category
+          checked: checked || greenChecked,
+        })}
+        checked={checked || greenChecked}
+        id={id}
+        onChange={onChange}
+      />
+    </Radio>
   </div>
 )
-export default RadioButton
+export default React.memo(RadioButton)

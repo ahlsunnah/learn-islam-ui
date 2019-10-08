@@ -167,7 +167,7 @@
     "identity-obj-proxy": "^3.0.0",
     "imagemin-lint-staged": "^0.4.0",
     "jest": "^24.9.0",
-    "lint-staged": "^9.4.1",
+    "lint-staged": "^9.4.2",
     "nsp": "^3.2.1",
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.10.2",

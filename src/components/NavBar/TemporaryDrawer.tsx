@@ -25,12 +25,9 @@ const TemporaryDrawer = ({
   toggleDrawer,
 }: Props) => (
   <aside
-    className={cx(
-      'mdc-drawer mdc-drawer--temporary mdc-typography mdc-drawer--animating',
-      {
-        'mdc-drawer--open': isOpen,
-      },
-    )}
+    className={cx('mdc-drawer mdc-drawer--temporary mdc-drawer--animating', {
+      'mdc-drawer--open': isOpen,
+    })}
     onKeyUp={toggleDrawer}
     onClick={toggleDrawer}
   >

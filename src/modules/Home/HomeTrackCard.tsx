@@ -2,10 +2,8 @@ import Button from 'components/Button'
 import Card from 'components/Card'
 import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
+import {Styled} from 'theme-ui'
 import React from 'react'
-// import Card from 'preact-material-components/Card'
-// import 'preact-material-components/Card/style.css'
-// import 'preact-material-components/Button/style.css'
 import {IHomeTrack} from '../../types/home'
 
 interface Props {
@@ -30,9 +28,9 @@ const HomeTrackCard = ({
     >
       <div className="mh2 flex flex-column item-center item-start-l">
         <h2 className="mb1 f5 self-center self-start-l">{s.title}</h2>
-        <RawHTML className="child-p-mt0 mdc-typography--body1 black-50">
+        <Styled.p as={RawHTML} className="child-p-mt0 black-50">
           {s.description}
-        </RawHTML>
+        </Styled.p>
       </div>
       {soon ? (
         <Button

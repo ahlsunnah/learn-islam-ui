@@ -2199,17 +2199,18 @@
   dependencies:
     "@material/feature-targeting" "^0.44.1"
 
-"@material/toolbar@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@material/toolbar/-/toolbar-0.35.0.tgz#f50a7ba7e6acda4fc03ca5044b1e88d5be974a23"
-  integrity sha512-TxRjulzd49IGTT+rvBHNa2cMkgxk3A2pbZ3z4Te191ynNVegNxjbbDpgIBVC3gqKqTEYy51iPKUh2tDHc+6oow==
+"@material/toolbar@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@material/toolbar/-/toolbar-1.1.0.tgz#6304845dc175fe3ebbaaae5245f0f0d12ece7f0a"
+  integrity sha512-NrO3Z1YH6AGbLjS91BT4BTaUL1ghXHB0Wrre+rT1mmQ7VXtr+AaTSshu9xc7z3wcVuPotR41OOdZqSCDWjzBrg==
   dependencies:
-    "@material/base" "^0.35.0"
-    "@material/elevation" "^0.35.0"
-    "@material/ripple" "^0.35.0"
-    "@material/rtl" "^0.35.0"
-    "@material/theme" "^0.35.0"
-    "@material/typography" "^0.35.0"
+    "@material/base" "^1.0.0"
+    "@material/elevation" "^1.1.0"
+    "@material/ripple" "^1.1.0"
+    "@material/rtl" "^0.42.0"
+    "@material/theme" "^1.1.0"
+    "@material/typography" "^1.0.0"
+    tslib "^1.9.3"
 
 "@material/typography@^0.35.0":
   version "0.35.0"
@@ -17859,15 +17860,10 @@ ts-toolbelt@^4.7.7:
   resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-4.8.4.tgz#110b13a6803c020c66345b6105e2208620069040"
   integrity sha512-Ih+y5GEsOlYugftG+Bk8ocE2bfobbSiJGGWeds4v+M3pEh/2QivzrU0VY6D3lztpv7OHYQ521xHVi8pZmJYBbA==
 
-tslib@1.10.0:
+tslib@1.10.0, tslib@^1.6.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
-
-tslib@^1.6.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
-  integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
 tsutils@^3.17.1, tsutils@^3.7.0:
   version "3.17.1"

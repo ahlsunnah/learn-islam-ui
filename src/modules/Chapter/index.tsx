@@ -23,9 +23,7 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
   public constructor(props: ReduxProps & IChapterProps, context: object) {
     super(props, context)
     this.state = {
-      // TODO: fix this
-      activeTab:
-        props.data.api.chapter.translations.edges.length > 1 ? 'FR' : 'AR',
+      activeTab: 'AR',
     }
   }
 
@@ -52,7 +50,7 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
     } = data
     const {activeTab} = this.state
 
-    // TODO: momoize this:
+    // TODO: memoize this:
     const arabicChapter = data.api.chapter.translations.edges.find(
       ({node: {locale}}) => locale === 'ar',
     )
@@ -66,9 +64,7 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
     if (!chapterStrings) {
       return 'Error, we didn\'t find any strings for this chapter ...'
     }
-    const otherLocalePath = `${data.otherLocaleTranslations.localePath}${
-      data.api.chapter.course.track.slug
-    }/${data.api.chapter.course.slug}/${data.api.chapter.slug}`
+    const otherLocalePath = `${data.otherLocaleTranslations.localePath}${data.api.chapter.course.track.slug}/${data.api.chapter.course.slug}/${data.api.chapter.slug}`
 
     const navigationButtons = (
       <NavigationButtons
@@ -94,16 +90,6 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
           title={chapterStrings.node.title}
         />
         <nav className="chapter-tabs w-100 flex justify-around items-center">
-          {chapter.translations.edges.length > 1 && (
-            <Tab
-              type="FR"
-              active={activeTab === 'FR'}
-              handleClick={this.toggleActiveTab}
-              svgPath="M8 12H4v28a4 4 0 0 0 4 4h28v-4H8V12m32-8H16a4 4 0 0 0-4 4v24a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4M8 12zm12.3 9.6v7.3h-3V11.1h10.1v2.4h-7.1v5.6H27v2.5h-6.7m17-6.4l1.3.1-.2 2.7-1.3-.2q-1.7 0-2.8 1.1-1 1.2-1 3v7h-3V15.4h2.3l.4 2.4h.1q.7-1.2 1.8-2 1-.6 2.3-.6m-17 6.4z"
-            >
-              {t.tabTranslation}
-            </Tab>
-          )}
           <Tab
             type="AR"
             active={activeTab === 'AR'}
@@ -144,13 +130,6 @@ class Chapter extends React.Component<ReduxProps & IChapterProps, State> {
                 }`}
           </Tab>
         </nav>
-
-        <StepContent
-          active={activeTab === 'FR'}
-          content={chapterStrings.node.transcription}
-        >
-          {navigationButtons}
-        </StepContent>
         <StepContent
           active={activeTab === 'AR'}
           arabic

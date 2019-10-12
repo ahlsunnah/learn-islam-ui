@@ -1,7 +1,7 @@
 {
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
   "editor.formatOnSave": true,
-  "javascript.validate.enable": false,
+  "javascript.validate.enable": true,
   "cSpell.words": [
     "abumalick",
     "babel",

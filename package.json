@@ -101,7 +101,7 @@
     "gatsby-plugin-theme-ui": "^0.2.43",
     "gatsby-plugin-typescript": "^2.1.12",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.4",
-    "gatsby-source-filesystem": "^2.1.31",
+    "gatsby-source-filesystem": "^2.1.32",
     "gatsby-source-graphql": "^2.1.18",
     "gatsby-transformer-json": "^2.2.13",
     "localforage": "^1.7.3",

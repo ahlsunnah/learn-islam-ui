@@ -91,7 +91,7 @@
     "gatsby-plugin-load-script": "^1.0.6",
     "gatsby-plugin-mailchimp": "^5.1.2",
     "gatsby-plugin-manifest": "^2.2.21",
-    "gatsby-plugin-netlify": "^2.1.19",
+    "gatsby-plugin-netlify": "^2.1.21",
     "gatsby-plugin-nprogress": "^2.1.10",
     "gatsby-plugin-offline": "^3.0.14",
     "gatsby-plugin-postcss": "^2.1.11",

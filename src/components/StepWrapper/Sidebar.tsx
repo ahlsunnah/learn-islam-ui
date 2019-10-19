@@ -1,10 +1,11 @@
+/** @jsx jsx */
+import {jsx} from 'theme-ui'
+import {Component} from 'react'
 import cx from 'classnames'
 import {Link} from 'gatsby'
 import leftSvg from 'images/chevron-left.svg'
 import getWindowWidth from 'lib/getWindowWidth'
-import * as React from 'react'
 import {connect} from 'react-redux'
-import 'styles/drawer.scss'
 import {ObjectOf} from 'interfaces'
 import ChapterCursor from './ChapterCursor'
 
@@ -36,7 +37,7 @@ interface IConnectReturn {
   quizsState: TQuizState
 }
 
-class Sidebar extends React.Component<IProps & IConnectReturn> {
+class Sidebar extends Component<IProps & IConnectReturn> {
   private closeDrawerOnMobile = (): void => {
     const {toggleDrawer} = this.props
     // TODO: don't work, need to use redux for this, right now we don't have any animation

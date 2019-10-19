@@ -1,13 +1,19 @@
-// TODO fix https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-static-element-interactions.md
-import cx from 'classnames'
+/** @jsx jsx */
+import {jsx} from 'theme-ui'
 import {Link} from 'gatsby'
 import logoAr from 'images/logo-ar.png'
 import logoFr from 'images/logo-fr.png'
-import * as React from 'react'
-import 'styles/drawer.scss'
+import Drawer, {DrawerHeader, DrawerContent} from '@material/react-drawer'
 import Button from '../Button'
 import structure from './structure'
 import {INavBarTranslations} from '../../types/navbar'
+import '@material/react-drawer/dist/drawer.css'
+import '@material/react-list/dist/list.css'
+import List, {
+  ListItem,
+  ListItemGraphic,
+  ListItemText,
+} from '@material/react-list'
 
 interface Props {
   isOpen: boolean
@@ -16,58 +22,61 @@ interface Props {
     localePath: string
   }
   t: INavBarTranslations
-  toggleDrawer: () => void
+  closeDrawer: () => void
 }
 const TemporaryDrawer = ({
   isOpen,
   otherLocaleTranslations,
   t,
-  toggleDrawer,
+  closeDrawer,
 }: Props) => (
-  <aside
-    className={cx('mdc-drawer mdc-drawer--temporary mdc-drawer--animating', {
-      'mdc-drawer--open': isOpen,
-    })}
-    onKeyUp={toggleDrawer}
-    onClick={toggleDrawer}
-  >
-    <nav className="mdc-drawer__drawer">
-      <header className="mdc-drawer__header">
-        <div className="mdc-drawer__header-content">
-          <Link to={t.localePath}>
-            <img
-              alt={t.siteName}
-              height="60px"
-              src={t.locale === 'ar' ? logoAr : logoFr}
-            />
-          </Link>
-          <Link
-            className="absolute top-1 right-1 ph2 no-underline"
-            to={otherLocaleTranslations.localePath}
-          >
+  <Drawer modal open={isOpen} onClose={closeDrawer}>
+    <DrawerHeader
+      sx={{
+        pt: 15,
+      }}
+    >
+      <Link onClick={closeDrawer} to={t.localePath}>
+        <img
+          alt={t.siteName}
+          height="60px"
+          src={t.locale === 'ar' ? logoAr : logoFr}
+        />
+      </Link>
+    </DrawerHeader>
+    <DrawerContent tag="nav">
+      <List singleSelection>
+        <Link
+          onClick={closeDrawer}
+          to={otherLocaleTranslations.localePath}
+          sx={{
+            textDecoration: 'none',
+          }}
+        >
+          <ListItem>
             <Button rounded outlined>
               {otherLocaleTranslations.localeName}
             </Button>
-          </Link>
-        </div>
-      </header>
-      <nav className="mdc-drawer__content mdc-list">
+          </ListItem>
+        </Link>
+
         {structure.map(({title, link, Icon}) => (
-          <Link
-            key={title}
-            activeClassName="mdc-list-item--activated"
-            className="mdc-list-item"
-            // activeClassName="bb b--blue"
-            // className="ph2 no-underline"
-            to={`${t.localePath}${link}`}
-          >
-            <Icon className="mdc-list-item__graphic" />
-            <span className="">{t[title]}</span>
-          </Link>
+          <ListItem>
+            <Link
+              onClick={closeDrawer}
+              key={title}
+              activeClassName="mdc-list-item--activated"
+              className="mdc-list-item"
+              to={`${t.localePath}${link}`}
+            >
+              <ListItemGraphic graphic={<Icon />} />
+              <ListItemText primaryText={t[title]} />
+            </Link>
+          </ListItem>
         ))}
-      </nav>
-    </nav>
-  </aside>
+      </List>
+    </DrawerContent>
+  </Drawer>
 )
 
 export default TemporaryDrawer

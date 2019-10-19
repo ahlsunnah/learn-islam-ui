@@ -1,5 +1,6 @@
+/** @jsx jsx */
+import {jsx} from 'theme-ui'
 import cx from 'classnames'
-import * as React from 'react'
 import MaterialButton, {ButtonProps} from './MaterialButton'
 import '@material/react-button/dist/button.css'
 import 'styles/button.scss'
@@ -31,7 +32,7 @@ const Button = ({
   ...props
 }: IProps & ButtonProps<ButtonTypes>) => (
   <MaterialButton
-    className={cx('mdc-button', className, {
+    className={cx(className, {
       'br-pill': rounded,
       'button-inverse': inverse,
       'button-elevated': elevated,

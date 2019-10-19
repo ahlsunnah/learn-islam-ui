@@ -1,54 +1,53 @@
-import * as React from 'react'
-import 'styles/toolbar.scss'
-import LogoSection from './LogoSection'
-import MobileSection from './MobileSection'
-import NavSection from './NavSection'
-import {IHomeOtherLocaleTranslations, IHomeTranslations} from 'types/home'
+/** @jsx jsx */
+import {jsx} from 'theme-ui'
+import {connect} from 'react-redux'
+import {IHomeOtherLocaleTranslations} from 'types/home'
 import {INavBarTranslations} from '../../types/navbar'
+import '@material/react-top-app-bar/index.scss'
+import {DrawerAppContent} from '@material/react-drawer'
+import TemporaryDrawer from './TemporaryDrawer'
+import TopBar from './TopBar'
 
 interface Props {
+  isOpen: boolean
   otherLanguagePath: string
   otherLocaleTranslations: IHomeOtherLocaleTranslations
   t: INavBarTranslations
+  closeDrawer: () => void
+  toggleDrawer: () => void
 }
 
-const NavBar = ({otherLanguagePath, otherLocaleTranslations, t}: Props) => (
-  <header className="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--platform">
-    <div className="dn-ns db">
-      <div className="flex justify-between pv1 mdc-toolbar__row">
-        <div className="flex2" />
-        <LogoSection
-          locale={t.locale}
-          localePath={t.localePath}
-          siteName={t.siteName}
-        />
-        <div className="flex2 tl">
-          <MobileSection
-            otherLocaleTranslations={otherLocaleTranslations}
-            t={t}
-          />
-        </div>
-      </div>
-    </div>
-
-    <div className="db-ns dn">
-      <div className="pv1 mdc-toolbar__row">
-        <LogoSection
-          locale={t.locale}
-          localePath={t.localePath}
-          siteName={t.siteName}
-        />
-        <NavSection
-          otherLanguagePath={otherLanguagePath}
-          otherLocaleTranslations={otherLocaleTranslations}
-          t={t}
-        />
-        <MobileSection
-          otherLocaleTranslations={otherLocaleTranslations}
-          t={t}
-        />
-      </div>
-    </div>
-  </header>
+const NavBar = ({
+  closeDrawer,
+  isOpen,
+  otherLanguagePath,
+  otherLocaleTranslations,
+  t,
+  toggleDrawer,
+}: Props) => (
+  <div>
+    <TemporaryDrawer
+      closeDrawer={closeDrawer}
+      isOpen={isOpen}
+      otherLocaleTranslations={otherLocaleTranslations}
+      t={t}
+    />
+    <DrawerAppContent>
+      <TopBar
+        otherLanguagePath={otherLanguagePath}
+        otherLocaleTranslations={otherLocaleTranslations}
+        t={t}
+        toggleDrawer={toggleDrawer}
+      />
+    </DrawerAppContent>
+  </div>
 )
-export default NavBar
+
+const enhance = connect(
+  ({drawer}: {drawer: boolean}) => ({isOpen: drawer}),
+  (dispatch) => ({
+    closeDrawer: () => dispatch({type: 'CLOSE_DRAWER'}),
+    toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
+  }),
+)
+export default enhance(NavBar)

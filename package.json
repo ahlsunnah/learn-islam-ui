@@ -106,7 +106,7 @@
     "gatsby-source-graphql": "^2.1.20",
     "gatsby-transformer-json": "^2.2.15",
     "localforage": "^1.7.3",
-    "make-plural": "^5.0.0",
+    "make-plural": "^6.0.1",
     "memoize-one": "^5.1.1",
     "node-sass": "^4.11.0",
     "postcss-browser-reporter": "^0.6.0",

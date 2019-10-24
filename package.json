@@ -78,7 +78,7 @@
     "@material/top-app-bar": "^3.2.0",
     "@mdx-js/react": "^1.5.1",
     "babel-eslint": "^10.0.3",
-    "caniuse-lite": "^1.0.30000999",
+    "caniuse-lite": "^1.0.30001004",
     "classnames": "^2.2.6",
     "core-js": "^2.6.9",
     "emotion-theming": "^10.0.19",

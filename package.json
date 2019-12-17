@@ -131,7 +131,7 @@
     "source-map-support": "^0.5.16",
     "svg-icon": "^0.8.2",
     "tachyons": "^4.11.1",
-    "theme-ui": "^0.2.49",
+    "theme-ui": "^0.2.52",
     "ts-node": "^8.5.4",
     "typeface-open-sans": "^0.0.75"
   },

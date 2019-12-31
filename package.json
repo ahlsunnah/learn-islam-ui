@@ -151,7 +151,7 @@
     "@types/recompose": "^0.30.7",
     "@types/theme-ui": "^0.2.6",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
-    "@typescript-eslint/parser": "^2.11.0",
+    "@typescript-eslint/parser": "^2.14.0",
     "babel-jest": "^24.9.0",
     "babel-preset-gatsby": "^0.2.26",
     "commitizen": "^4.0.3",

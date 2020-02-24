@@ -75,7 +75,7 @@
     "@material/react-radio": "^0.15.0",
     "@material/react-top-app-bar": "^0.15.0",
     "@material/theme": "^4.0.0",
-    "@mdx-js/react": "^1.5.1",
+    "@mdx-js/react": "^1.5.7",
     "babel-eslint": "^10.0.3",
     "caniuse-lite": "^1.0.30001015",
     "classnames": "^2.2.6",

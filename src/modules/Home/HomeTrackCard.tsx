@@ -4,14 +4,11 @@ import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
 import {Styled} from 'theme-ui'
 import React from 'react'
-import {IHomeTrack} from '../../types/home'
+import {THomeTrackFragment, THomeTranslationsFragment} from '../../graphqlTypes'
 
-interface Props {
+interface IProps {
   localePath: string
-  t: {
-    soon: string
-    start: string
-  }
+  t: THomeTranslationsFragment
 }
 const HomeTrackCard = ({
   localePath,
@@ -19,8 +16,8 @@ const HomeTrackCard = ({
   soon,
   translations,
   t,
-}: IHomeTrack & Props) => {
-  const s = translations.edges[0].node
+}: THomeTrackFragment & IProps) => {
+  const s = translations[0]
   return (
     <Card
       className="mt3 ph3 pv1 flex flex-column flex-row-l justify-between items-center"

@@ -3,7 +3,6 @@ import {jsx} from 'theme-ui'
 import LogoSection from './LogoSection'
 import MenuIcon from 'react-icons/lib/md/menu'
 import NavSection from './NavSection'
-import {IHomeOtherLocaleTranslations} from 'types/home'
 import {INavBarTranslations} from '../../types/navbar'
 import '@material/react-top-app-bar/index.scss'
 import TopAppBar, {
@@ -12,10 +11,11 @@ import TopAppBar, {
   TopAppBarSection,
   TopAppBarTitle,
 } from '@material/react-top-app-bar'
+import {TTracksPageOtherTranslationsFragment} from '../../graphqlTypes'
 
-interface Props {
+interface IProps {
   otherLanguagePath: string
-  otherLocaleTranslations: IHomeOtherLocaleTranslations
+  otherLocaleTranslations: TTracksPageOtherTranslationsFragment
   t: INavBarTranslations
   toggleDrawer: () => void
 }
@@ -25,7 +25,7 @@ const TopBar = ({
   otherLocaleTranslations,
   t,
   toggleDrawer,
-}: Props) => (
+}: IProps) => (
   <TopAppBar
     sx={{
       backgroundColor: 'white',

@@ -36,3 +36,5 @@ prototypes
 
 .chrome
 tmp
+
+.env*

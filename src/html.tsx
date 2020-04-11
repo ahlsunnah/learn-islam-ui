@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 // const BUILD_TIME = new Date().getTime()
 interface Props {

@@ -1,62 +1,79 @@
 import cx from 'classnames'
-import * as React from 'react'
+import React from 'react'
 import Correct from 'react-icons/lib/md/check'
-import {withHandlers} from 'recompose'
-// @ts-ignore
-import Select from 'react-select'
+import Select, {ValueType, ActionMeta} from 'react-select'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 
-interface Props {
+type SelectOnChange = (
+  value: ValueType<{
+    label: string
+    value: string
+  }>,
+  actionMeta: ActionMeta,
+) => void
+
+interface IProps {
   chooseAnswerString: string
   correctAnswer: string
   finished: boolean
   isCorrect: boolean
   isRtl: boolean
-  onChange: Function
-  value?: {
-    label: string
-    value: number
-  }
-  options: Array<{
-    label: string
-    value: number
-  }>
+  onChange: (name: string, value?: string) => void
+  value?: string
+  options: string[]
+  name: string
 }
 
-const MultilineSelect = (props: Props) => {
+const MultilineSelect = ({
+  finished,
+  isCorrect,
+  value,
+  correctAnswer,
+  isRtl,
+  onChange,
+  options,
+  chooseAnswerString,
+  name,
+}: IProps) => {
+  const handleChange: SelectOnChange = (option) => {
+    if (!option) {
+      onChange(name, undefined)
+      return
+    }
+    if ('value' in option) {
+      // We don't handle selecting multiple values
+      const {value} = option
+      onChange(name, value)
+    }
+  }
   return (
     <div className="relative w-100">
-      {props.finished && (
+      {finished && (
         <div
           className={cx('pa2 dark-blue ba br2 b--dark-gray', {
-            'w-95-ns w-90': !props.finished,
-            'w-100': props.finished,
+            'w-95-ns w-90': !finished,
+            'w-100': finished,
           })}
         >
           <div className="flex items-center">
-            {props.isCorrect ? (
+            {isCorrect ? (
               <Correct className="flex-no-shrink dn dib-ns f2 green" />
             ) : (
-              props.value && (
-                <Error className="flex-no-shrink dn dib-ns mh2 red" />
-              )
+              value && <Error className="flex-no-shrink dn dib-ns mh2 red" />
             )}
 
-            {props.value && props.value.label}
+            {value}
           </div>
-          {!props.isCorrect && (
-            <div className="green">{props.correctAnswer}</div>
-          )}
+          {!isCorrect && <div className="green">{correctAnswer}</div>}
         </div>
       )}
-      {!props.finished && (
+      {!finished && (
         <Select
           isClearable
-          isRtl={props.isRtl}
-          onChange={props.onChange}
+          isRtl={isRtl}
+          onChange={handleChange}
           isSearchable={false}
           styles={{
-            // @ts-ignore
             singleValue: (styles) => {
               return {
                 color: styles.color,
@@ -66,20 +83,13 @@ const MultilineSelect = (props: Props) => {
               }
             },
           }}
-          value={props.value}
-          options={props.options}
-          placeholder={props.chooseAnswerString}
+          value={value ? {label: value, value} : undefined}
+          options={options.map((value) => ({label: value, value}))}
+          placeholder={chooseAnswerString}
         />
       )}
     </div>
   )
 }
 
-// @ts-ignore
-const enhance = withHandlers({
-  // @ts-ignore
-  onChange: ({name, onChange}) => (value, action) => {
-    onChange(value, action, name)
-  },
-})
-export default enhance(MultilineSelect)
+export default MultilineSelect

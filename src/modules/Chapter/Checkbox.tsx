@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import '@material/react-checkbox/dist/checkbox.css'
 import MaterialCheckBox from '@material/react-checkbox'
 

@@ -18,50 +18,51 @@ const Tracks = (props: ITracksPageProps) => (
 export default Tracks
 
 export const pageQuery = graphql`
-  query tracksQuery($locale: String!) {
+  fragment TracksPageTranslations on TranslationsJson {
+    aboutUs
+    connect
+    copyright
+    courses
+    footerSocialTitle
+    homeFooterCTA
+    homeStartTrack
+    locale
+    localeName
+    localePath
+    siteName
+    siteSlogan
+    soon
+    tracks
+    tracksPageTitle
+    tracksPageDescription
+    urlFacebook
+    urlTelegram
+    urlTwitter
+    urlYoutube
+  }
+  fragment TracksPageOtherTranslations on TranslationsJson {
+    localeName
+    localePath
+  }
+  fragment TracksPageTrack on api_tracks {
+    id
+    slug
+    soon
+    translations(where: {locale_code: {_eq: $localeEnum}}) {
+      title
+      description
+    }
+  }
+  query tracksQuery($locale: String!, $localeEnum: api_locales_enum) {
     translations: translationsJson(locale: {eq: $locale}) {
-      aboutUs
-      connect
-      copyright
-      courses
-      footerSocialTitle
-      homeFooterCTA
-      homeStartTrack
-      locale
-      localeName
-      localePath
-      siteName
-      siteSlogan
-      soon
-      tracks
-      tracksPageTitle
-      tracksPageDescription
-      urlFacebook
-      urlTelegram
-      urlTwitter
-      urlYoutube
+      ...TracksPageTranslations
     }
     otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
-      localeName
-      localePath
+      ...TracksPageOtherTranslations
     }
     api {
-      tracks: allTracks {
-        edges {
-          node {
-            id
-            slug
-            soon
-            translations(locale: $locale) {
-              edges {
-                node {
-                  title
-                  description
-                }
-              }
-            }
-          }
-        }
+      tracks {
+        ...TracksPageTrack
       }
     }
   }

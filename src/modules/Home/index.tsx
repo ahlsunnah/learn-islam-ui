@@ -1,22 +1,10 @@
 import HomeFooter from 'components/HomeFooter'
-import * as React from 'react'
+import React from 'react'
 import HomeContentPresentation from './HomeContentPresentation'
 import HomeFeatures from './HomeFeatures'
 import HomeHero from './HomeHero'
 import HomeNewsletter from './HomeNewsletter'
-import {ObjectOfStrings} from 'interfaces/index'
 import {IHomePageProps} from 'types/home'
-
-interface Props {
-  data: {
-    otherLocaleTranslations: Object
-    tracks: Array<Object>
-    translations: ObjectOfStrings
-  }
-  pageContext: {
-    otherLanguagePath: string
-  }
-}
 
 const HomeContainer = ({
   data,
@@ -35,8 +23,9 @@ const HomeContainer = ({
     <HomeFooter
       t={data.translations}
       dark
-      firstTrackSlug={`${data.translations.localePath}${data.api.tracks
-        .edges[0] && data.api.tracks.edges[0].node.slug}`}
+      firstTrackSlug={`${data.translations.localePath}${
+        data.api.tracks[0] && data.api.tracks[0].slug
+      }`}
     />
   </div>
 )

@@ -1,13 +1,13 @@
-import * as React from 'react'
+import React from 'react'
 import {Link} from 'gatsby'
 import Home from 'react-icons/lib/io/ios-home-outline'
 import cx from 'classnames'
 
-interface Props {
+interface IProps {
   locale: string
   localePath: string
 }
-const TrackSidebar = ({locale, localePath}: Props) => (
+const TrackSidebar = ({locale, localePath}: IProps) => (
   <div className="w2 w3-ns">
     <div
       className={cx(

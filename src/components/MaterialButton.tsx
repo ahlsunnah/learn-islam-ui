@@ -1,3 +1,5 @@
+// TODO: remove this file?
+
 // The MIT License
 //
 // Copyright (c) 2018 Google, Inc.
@@ -25,7 +27,6 @@ import classnames from 'classnames'
 import {
   withRipple,
   InjectedProps,
-  // @ts-ignore TODO(issues/955) Remove once possible
   RippledComponentProps, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@material/react-ripple'
 import {Link} from 'gatsby'
@@ -42,7 +43,7 @@ const CSS_CLASSES = {
 
 type ButtonTypes = HTMLAnchorElement | HTMLButtonElement
 
-export interface ButtonProps<T extends ButtonTypes>
+export interface IButtonProps<T extends ButtonTypes>
   extends InjectedProps<T>,
     React.AnchorHTMLAttributes<T>,
     React.ButtonHTMLAttributes<T> {
@@ -77,7 +78,7 @@ export const Button = <T extends ButtonTypes>({
   // a warning.
   unbounded = false, // eslint-disable-line @typescript-eslint/no-unused-vars
   ...otherProps
-}: ButtonProps<T>) => {
+}: IButtonProps<T>) => {
   const props = {
     className: classnames(CSS_CLASSES.ROOT, className, {
       [CSS_CLASSES.RAISED]: raised,
@@ -131,4 +132,4 @@ const renderIcon = (
       })
     : null
 
-export default withRipple<ButtonProps<ButtonTypes>, ButtonTypes>(Button)
+export default withRipple<IButtonProps<ButtonTypes>, ButtonTypes>(Button)

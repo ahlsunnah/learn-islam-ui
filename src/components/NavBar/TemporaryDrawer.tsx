@@ -6,7 +6,6 @@ import logoFr from 'images/logo-fr.png'
 import Drawer, {DrawerHeader, DrawerContent} from '@material/react-drawer'
 import Button from '../Button'
 import structure from './structure'
-import {INavBarTranslations} from '../../types/navbar'
 import '@material/react-drawer/dist/drawer.css'
 import '@material/react-list/dist/list.css'
 import List, {
@@ -14,14 +13,22 @@ import List, {
   ListItemGraphic,
   ListItemText,
 } from '@material/react-list'
+import {
+  TTracksPageTranslationsFragment,
+  TAboutUsTranslationsFragment,
+  THomeTranslationsFragment,
+} from '../../graphqlTypes'
 
-interface Props {
+interface IProps {
   isOpen: boolean
   otherLocaleTranslations: {
     localeName: string
     localePath: string
   }
-  t: INavBarTranslations
+  t:
+    | THomeTranslationsFragment
+    | TTracksPageTranslationsFragment
+    | TAboutUsTranslationsFragment
   closeDrawer: () => void
 }
 const TemporaryDrawer = ({
@@ -29,7 +36,7 @@ const TemporaryDrawer = ({
   otherLocaleTranslations,
   t,
   closeDrawer,
-}: Props) => (
+}: IProps) => (
   <Drawer modal open={isOpen} onClose={closeDrawer}>
     <DrawerHeader
       sx={{
@@ -61,7 +68,7 @@ const TemporaryDrawer = ({
         </Link>
 
         {structure.map(({title, link, Icon}) => (
-          <ListItem>
+          <ListItem key={title}>
             <Link
               onClick={closeDrawer}
               key={title}

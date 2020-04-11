@@ -1,10 +1,9 @@
 import Button from 'components/Button'
 import Card from 'components/Card'
-import {Link} from 'gatsby'
 import scrollTo from 'lib/scrollTo'
-import * as React from 'react'
-import {withPropsOnChange} from 'recompose'
-import {IQuizsTranslations} from '../../types/quizs'
+import React from 'react'
+import {TQuizzesPageTranslationsFragment} from '../../graphqlTypes'
+import {INext} from 'types/chapter'
 
 const scrollToStart = (): void => {
   scrollTo('quizs-start')
@@ -15,7 +14,7 @@ const assessment = ({
   t,
 }: {
   average: number
-  t: IQuizsTranslations
+  t: TQuizzesPageTranslationsFragment
 }): string => {
   if (average === 20) {
     return t.assessmentPerfect
@@ -30,7 +29,6 @@ const assessment = ({
 }
 
 interface IProps {
-  average: number
   coursePathname: string
   courseStrings: {
     title: string
@@ -38,20 +36,15 @@ interface IProps {
   finished: boolean
   lastScore?: number
   levelSubtitle: string
-  next: {
-    path: string
-    title: string
-    type: string
-  }
+  next: INext
   restartQuizs: () => void
   started: boolean
-  t: IQuizsTranslations
+  t: TQuizzesPageTranslationsFragment
   totalQuestions?: number
 }
 
 const QuizHeader = (props: IProps): JSX.Element => {
   const {
-    average,
     coursePathname,
     courseStrings: {title: courseTitle},
     finished,
@@ -63,6 +56,7 @@ const QuizHeader = (props: IProps): JSX.Element => {
     t,
     totalQuestions = 1,
   } = props
+  const average = Math.round((lastScore * 40) / totalQuestions) / 2
   return (
     <div className="vh-100 flex justify-center items-center">
       <Card
@@ -152,11 +146,4 @@ const QuizHeader = (props: IProps): JSX.Element => {
   )
 }
 
-const enhance = withPropsOnChange(
-  ['lastScore'],
-  ({lastScore = 0, totalQuestions = 1}: IProps): {average: number} => ({
-    average: Math.round((lastScore * 40) / totalQuestions) / 2,
-  }),
-)
-
-export default enhance(QuizHeader)
+export default QuizHeader

@@ -1,10 +1,10 @@
 import cx from 'classnames'
 import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
-import * as React from 'react'
-import {ITracksTrack} from '../../types/tracks'
+import React from 'react'
+import {TTracksPageTrackFragment} from '../../graphqlTypes'
 
-interface LinkOrChildrenProps {
+interface ILinkOrChildrenProps {
   children: JSX.Element
   className?: string
   to: string | false
@@ -13,7 +13,7 @@ const LinkOrChildren = ({
   children,
   className = '',
   to,
-}: LinkOrChildrenProps) => {
+}: ILinkOrChildrenProps) => {
   if (to)
     return (
       <Link to={to} className={className}>
@@ -24,17 +24,15 @@ const LinkOrChildren = ({
   return children
 }
 
-interface Props {
+interface IProps {
   localePath: string
   soonString: string
-  tracks: {
-    node: ITracksTrack
-  }[]
+  tracks: TTracksPageTrackFragment[]
 }
-const Tracks = ({localePath, soonString, tracks}: Props) => (
+const Tracks = ({localePath, soonString, tracks}: IProps) => (
   <div>
-    {tracks.map(({node: {slug, soon, translations}}, i) => {
-      const strings = translations.edges[0].node
+    {tracks.map(({slug, soon, translations}, i) => {
+      const strings = translations[0]
       return (
         <LinkOrChildren
           key={slug}

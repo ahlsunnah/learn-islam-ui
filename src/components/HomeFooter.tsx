@@ -1,24 +1,26 @@
-import * as React from 'react'
+import React from 'react'
 import {Link} from 'gatsby'
 import cx from 'classnames'
 import Facebook from 'react-icons/lib/fa/facebook'
 import Telegram from 'react-icons/lib/fa/paper-plane'
 import Twitter from 'react-icons/lib/fa/twitter'
 import Youtube from 'react-icons/lib/fa/youtube-play'
-import {ObjectOfStrings} from 'interfaces'
 import Button from './Button'
 import RawHTML from './RawHTML'
-import {IHomeTranslations} from '../types/home'
 import {IFooterTranslations} from '../types/footer'
 
-const icons = Object.entries({
-  Facebook,
-  Twitter,
-  Youtube,
-  Telegram,
-})
+interface IIcon {
+  Icon: React.FC<{className?: string}>
+  href: keyof IFooterTranslations
+}
+const icons: IIcon[] = [
+  {Icon: Facebook, href: 'urlFacebook'},
+  {Icon: Twitter, href: 'urlTwitter'},
+  {Icon: Youtube, href: 'urlYoutube'},
+  {Icon: Telegram, href: 'urlTelegram'},
+]
 
-interface Props {
+interface IProps {
   dark?: boolean
   firstTrackSlug: string
   t: IFooterTranslations
@@ -34,9 +36,8 @@ const HomeFooter = ({
     homeStartTrack,
     siteName,
     siteSlogan,
-    ...t
   },
-}: Props) => (
+}: IProps) => (
   <section
     className={cx('pt5 pb4 ph4 ph5-l flex flex-column white', {
       'mdc-theme--primary-bg': !dark,
@@ -68,8 +69,7 @@ const HomeFooter = ({
         <div className="mt4 mt0-ns tc tr-ns">
           <div className="mh2">{footerSocialTitle}</div>
           <div className="mt3">
-            {icons.map(([icon, Icon], i) => {
-              const href: string = t[`url${icon}`]
+            {icons.map(({href, Icon}, i) => {
               return (
                 <a
                   key={i}

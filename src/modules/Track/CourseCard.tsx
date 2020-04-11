@@ -4,54 +4,58 @@ import IconWithText from 'components/IconWithText'
 import Progress from 'modules/Quizs/Progress'
 import {Link} from 'gatsby'
 import target from 'images/target.svg'
-import * as React from 'react'
-import {ObjectOfStrings, ObjectOf} from 'interfaces'
-import {ITrackTranslations, ITrackCourse} from '../../types/track'
+import React from 'react'
+import {
+  TTrackPageTranslationsFragment,
+  TTrackPageCourseFragment,
+} from '../../graphqlTypes'
 
-interface Props {
-  chaptersState: ObjectOf<any>
+type Props = {
   currentPath: string
-  quizsState: ObjectOf<ObjectOf<ObjectOf<{passed: boolean}>>>
-  t: ITrackTranslations
-}
+  t: TTrackPageTranslationsFragment
+} & TTrackPageCourseFragment
+
+const levelStrings: ['level1', 'level2'] = ['level1', 'level2']
+
 const CourseCard = ({
   chapters,
-  chaptersState,
+
   currentPath,
   level = 1,
-  quizDifficulties,
-  quizsState,
+  quiz_difficulties: {quiz_difficulties},
+
   slug,
   translations,
   t,
   topic,
-}: Props & ITrackCourse): JSX.Element => {
+}: Props): JSX.Element => {
   // TODO calculate next chapter with progress
-  const nextCoursePath = `${currentPath}/${slug}/${chapters.edges[0] &&
-    chapters.edges[0].node.slug}/`
-  const finishedChapters = chapters.edges.reduce(
-    (sum, {node: {id: chapterId}}): number => {
-      if (chaptersState[chapterId]) {
-        sum += 1 // eslint-disable-line no-param-reassign
-      }
-      return sum
-    },
-    0,
-  )
-  const finishedQuizs = quizDifficulties.reduce((acc, difficulty): number => {
-    if (
-      quizsState &&
-      quizsState[t.locale] &&
-      quizsState[t.locale][difficulty] &&
-      quizsState[t.locale][difficulty].passed
-    ) {
-      return acc + 1
-    }
-    return acc
-  }, 0)
-  const percent =
-    (100 * (finishedChapters + finishedQuizs)) /
-    (quizDifficulties.length + chapters.edges.length)
+  const nextCoursePath = `${currentPath}/${slug}/${
+    chapters[0] && chapters[0].slug
+  }/`
+  // const finishedChapters = chapters.reduce((sum, {id: chapterId}): number => {
+  //   if (chaptersState[chapterId]) {
+  //     sum += 1 // eslint-disable-line no-param-reassign
+  //   }
+  //   return sum
+  // }, 0)
+  // const finishedQuizs: number = (quiz_difficulties as number[]).reduce<number>(
+  //   (acc, difficulty) => {
+  //     if (
+  //       quizsState &&
+  //       quizsState[t.locale] &&
+  //       quizsState[t.locale][difficulty] &&
+  //       quizsState[t.locale][difficulty].passed
+  //     ) {
+  //       return acc + 1
+  //     }
+  //     return acc
+  //   },
+  //   0,
+  // )
+  // const percent =
+  //   (100 * (finishedChapters + finishedQuizs)) /
+  //   (quiz_difficulties.length + chapters.length)
   return (
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"
@@ -60,22 +64,22 @@ const CourseCard = ({
     >
       <div className="self-end pv3 flex items-center">
         <IconWithText className="ph2" icon={target}>
-          {`${t.course} ${t[`level${level}`]}`}
+          {`${t.course} ${t[levelStrings[level - 1]]}`}
         </IconWithText>
         <div
           className="ph4 pv2 br-pill white f7"
           style={{backgroundColor: topic.color}}
         >
-          {topic.translations.edges[0].node.title}
+          {topic.translations[0].title}
         </div>
       </div>
       <div className=" pt2 pb4 bt b--black-20">
-        <h2 className="f5">{translations.edges[0].node.title}</h2>
-        {translations.edges[0].node.description && (
+        <h2 className="f5">{translations[0].title}</h2>
+        {translations[0].description && (
           <div
             className="w-90-m w-70-l f6"
             dangerouslySetInnerHTML={{
-              __html: translations.edges[0].node.description,
+              __html: translations[0].description,
             }}
           />
         )}
@@ -85,9 +89,9 @@ const CourseCard = ({
               {t.startCourse}
             </Button>
           </Link>
-          {percent !== 0 && (
+          {/* {percent !== 0 && (
             <Progress className="mt3 w-60" progress={percent} />
-          )}
+          )} */}
         </div>
       </div>
     </Card>

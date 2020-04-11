@@ -1,22 +1,28 @@
 import NavBar from 'components/NavBar'
-import * as React from 'react'
-import {ITracksOtherLocaleTranslations} from '../types/tracks'
-import {INavBarTranslations} from 'types/navbar'
+import React from 'react'
+import {
+  TTracksPageOtherTranslationsFragment,
+  TAboutUsOtherTranslationFragment,
+  TTracksPageTranslationsFragment,
+  TAboutUsTranslationsFragment,
+} from '../graphqlTypes'
 
-interface Props {
+interface IProps {
   description?: string
   otherLanguagePath: string
-  otherLocaleTranslations: ITracksOtherLocaleTranslations
+  otherLocaleTranslations:
+    | TTracksPageOtherTranslationsFragment
+    | TAboutUsOtherTranslationFragment
   title: string
-  translations: INavBarTranslations
+  translations: TTracksPageTranslationsFragment | TAboutUsTranslationsFragment
 }
-const HomeHero = ({
+const BlueHero: React.FC<IProps> = ({
   description,
   otherLanguagePath,
   otherLocaleTranslations,
   title,
   translations: t,
-}: Props) => (
+}) => (
   <div className="flex flex-column mdc-theme--primary-bg">
     <NavBar
       otherLocaleTranslations={otherLocaleTranslations}
@@ -29,4 +35,4 @@ const HomeHero = ({
     </div>
   </div>
 )
-export default HomeHero
+export default BlueHero

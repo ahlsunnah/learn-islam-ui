@@ -1,9 +1,11 @@
-/* eslint no-console: 0 */
-const path = require(`path`)
+require('isomorphic-unfetch')
 
-const {API2} = process.env
-if (!API2) {
-  console.error('We need an API2 environment variable !')
+const {API, API_SECRET} = process.env
+if (!API) {
+  throw new Error('We need an API environment variable !')
+}
+if (!API_SECRET) {
+  throw new Error('We need an API_SECRET environment variable !')
 }
 module.exports = {
   siteMetadata: {
@@ -11,6 +13,18 @@ module.exports = {
     siteUrl: `https://m-minhaj.com`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: `generated/graphqlTypes.ts`,
+        codegenConfig: {
+          avoidOptionals: true,
+          maybeValue: 'T',
+          // immutableTypes: true,
+          typesPrefix: 'T',
+        },
+      },
+    },
     'gatsby-plugin-theme-ui',
     `gatsby-transformer-json`,
     {
@@ -24,12 +38,14 @@ module.exports = {
       options: {
         typeName: 'api',
         fieldName: 'api',
-        url: API2,
+        url: API,
+        headers: {
+          'x-hasura-admin-secret': API_SECRET,
+        },
       },
     },
 
     'gatsby-plugin-typescript',
-    'gatsby-plugin-emotion',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
     {
@@ -51,7 +67,7 @@ module.exports = {
       resolve: 'gatsby-plugin-sass',
       options: {includePaths: ['node_modules']},
     },
-    'gatsby-plugin-postcss',
+    // 'gatsby-plugin-postcss',
 
     {
       resolve: `gatsby-plugin-favicon`,
@@ -93,8 +109,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        disable: !process.env.SENTRY_DSN,
-        src: 'https://browser.sentry-cdn.com/5.4.0/bundle.min.js',
+        disable: !process.env.SENTRY_DSN, // When do you want to disable it ?
+        src: 'https://browser.sentry-cdn.com/5.15.4/bundle.min.js',
+        integrity:
+          'sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB',
+        crossorigin: 'anonymous',
         onLoad: `() => Sentry.init({dsn:"${process.env.SENTRY_DSN}"})`,
       },
     },

@@ -1,41 +1,40 @@
 import cx from 'classnames'
-import * as React from 'react'
+import React from 'react'
 
-interface Props {
+interface IProps {
   className?: string
-  name: number
-  onChange: () => void
-  options: Array<{index: number; text: string}>
-  setRef: (ref: HTMLDivElement | null, name: string) => void
-  style: Object
-  value?: {index: number; text: string}
+  style?: React.CSSProperties
+  name: string
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  options: string[]
+  setRef: (ref: HTMLDivElement, index: number) => void
+  index: number
+  value?: string
 }
-class SelectInput extends React.PureComponent<Props> {
+class SelectInput extends React.PureComponent<IProps> {
   setRef = (ref: HTMLDivElement | null) => {
-    const {name, setRef} = this.props
-    if (setRef) {
-      setRef(ref, `${name  }`)
+    const {index, setRef} = this.props
+    if (ref) {
+      setRef(ref, index)
     }
   }
 
   render() {
-    const {className, name, onChange, options = [], style, value} = this.props
+    const {className, name, onChange, options, style, value} = this.props
     return (
       <div className={cx('bb', className)} ref={this.setRef}>
         <select
           className={cx('bg-transparent bn pointer', className)}
-          name={`${name  }`}
+          name={name}
           onChange={onChange}
           style={style}
-          value={value ? value.index : ''}
+          value={value}
         >
           <option value="" />
-          {value !== undefined && (
-            <option value={value.index}>{value.text}</option>
-          )}
-          {options.map(({index, text}) => (
-            <option key={index} value={index}>
-              {text}
+          {value !== undefined && <option value={value}>{value}</option>}
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
         </select>

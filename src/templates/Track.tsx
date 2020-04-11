@@ -18,78 +18,68 @@ const TrackTemplate = (props: ITrackPageProps) => (
 export default TrackTemplate
 
 export const pageQuery = graphql`
-  query trackQuery($locale: String!, $id: ID!) {
+  fragment TrackPageCourse on api_courses {
+    id
+    level
+    slug
+    translations(where: {locale_code: {_eq: $localeEnum}}) {
+      title
+      description
+    }
+    chapters {
+      duration
+      id
+      slug
+      translations(where: {locale_code: {_eq: $localeEnum}}) {
+        locale_code
+      }
+    }
+    quiz_difficulties {
+      quiz_difficulties
+    }
+    topic {
+      id
+      color
+      translations(where: {locale_code: {_eq: $localeEnum}}) {
+        title
+      }
+    }
+  }
+
+  fragment TrackPageTranslations on TranslationsJson {
+    connect
+    course
+    level1
+    level2
+    level3
+    locale
+    localePath
+    start
+    startCourse
+    toOtherLanguageCTA
+    track
+    trackLevel
+  }
+
+  query trackQuery(
+    $locale: String!
+    $localeEnum: api_locales_enum!
+    $id: Int!
+  ) {
     api {
-      track(id: $id) {
+      track: tracks_by_pk(id: $id) {
         id
         slug
-        translations(locale: $locale) {
-          edges {
-            node {
-              title
-            }
-          }
+        translations(where: {locale_code: {_eq: $localeEnum}}) {
+          title
         }
-        courses: courseSet {
-          edges {
-            node {
-              id
-              level
-              slug
-              translations(locale: $locale) {
-                edges {
-                  node {
-                    title
-                    description
-                  }
-                }
-              }
-              chapters: chapterSet {
-                edges {
-                  node {
-                    duration
-                    id
-                    slug
-                    translations(locale: $locale) {
-                      edges {
-                        node {
-                          locale
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              quizDifficulties
-              topic {
-                id
-                color
-                translations(locale: $locale) {
-                  edges {
-                    node {
-                      title
-                    }
-                  }
-                }
-              }
-            }
-          }
+        courses {
+          ...TrackPageCourse
         }
       }
     }
     translations: translationsJson(locale: {eq: $locale}) {
-      connect
-      course
-      level1
-      level2
-      level3
-      locale
-      localePath
-      start
-      startCourse
-      toOtherLanguageCTA
-      track
-      trackLevel
+      ...TrackPageTranslations
     }
     otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
       localeName

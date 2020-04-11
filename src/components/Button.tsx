@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {jsx} from 'theme-ui'
 import cx from 'classnames'
-import MaterialButton, {ButtonProps} from './MaterialButton'
+import MaterialButton, {IButtonProps} from './MaterialButton'
 import '@material/react-button/dist/button.css'
 import 'styles/button.scss'
 
@@ -30,7 +30,7 @@ const Button = ({
   rounded = true,
   outlined,
   ...props
-}: IProps & ButtonProps<ButtonTypes>) => (
+}: IProps & IButtonProps<ButtonTypes>) => (
   <MaterialButton
     className={cx(className, {
       'br-pill': rounded,

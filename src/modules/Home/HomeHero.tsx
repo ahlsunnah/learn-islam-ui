@@ -1,19 +1,12 @@
-import * as React from 'react'
+import React from 'react'
 import cx from 'classnames'
 import NavBar from 'components/NavBar'
 import HomeTrackCard from './HomeTrackCard'
-import {
-  IHomeOtherLocaleTranslations,
-  IHomeTracks,
-  IHomeTranslations,
-} from 'types/home'
+import {THomeQueryQuery} from '../../graphqlTypes'
 
-interface Props {
-  api: {tracks: IHomeTracks}
+type Props = {
   otherLanguagePath: string
-  otherLocaleTranslations: IHomeOtherLocaleTranslations
-  translations: IHomeTranslations
-}
+} & THomeQueryQuery
 const HomeHero = ({
   api: {tracks},
   otherLanguagePath,
@@ -39,7 +32,7 @@ const HomeHero = ({
           <p className="mt4 pv3-ns f3-ns">{t.homeDescription}</p>
         </div>
         <div className="ph4 flex1">
-          {tracks.edges.map(({node: track}) => (
+          {tracks.map((track) => (
             <HomeTrackCard
               key={track.slug}
               {...track}

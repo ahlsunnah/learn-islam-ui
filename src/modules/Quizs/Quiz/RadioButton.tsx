@@ -12,9 +12,9 @@ interface IProps {
   error: boolean
   greenChecked: boolean
   id: string
-  name: number
-  onChange: () => void
-  value: number
+  name: string
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void
+  value: string
 }
 const RadioButton = ({
   checked,
@@ -33,7 +33,7 @@ const RadioButton = ({
       className={cx({isGreen: greenChecked, isRed: error})}
     >
       <NativeRadioControl
-        name={`${name}`}
+        name={name}
         value={value}
         className={cx({
           // This is necessary to fix a strange bug

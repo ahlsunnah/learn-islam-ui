@@ -2,14 +2,20 @@ import cx from 'classnames'
 import Button from 'components/Button'
 import RawHTML from 'components/RawHTML'
 import {Link} from 'gatsby'
-import * as React from 'react'
+import React from 'react'
 import Checkbox from './Checkbox'
-import {IChapterTranslations, IChapterNext} from '../../types/chapter'
+import {TChapterPageTranslationsFragment} from '../../graphqlTypes'
+import {INext} from 'types/chapter'
 
-interface Props {
+const difficultyStrings: ['difficulty1', 'difficulty2'] = [
+  'difficulty1',
+  'difficulty2',
+]
+
+interface IProps {
   isChapterComplete: boolean
-  next: IChapterNext
-  t: IChapterTranslations
+  next: INext
+  t: TChapterPageTranslationsFragment
   toggleCompleteChapter: () => void
 }
 const NavigationButtons = ({
@@ -17,7 +23,7 @@ const NavigationButtons = ({
   next: {path, title, type},
   t,
   toggleCompleteChapter,
-}: Props) =>
+}: IProps) =>
   path ? (
     <div className="mt2 mb4 ph2 ph4-ns">
       <h1 className="mb2">
@@ -58,7 +64,8 @@ const NavigationButtons = ({
           <span className="mh1">
             {type === 'chapter' && `(${t.chapter}: ${title})`}
             {type === 'course' && `(${t.course}: ${title})`}
-            {type === 'quiz' && `(${t.quiz} ${t[title]})`}
+            {type === 'quiz' &&
+              `(${t.quiz} ${t[difficultyStrings[parseInt(title, 10) - 1]]})`}
           </span>
         </div>
       )}

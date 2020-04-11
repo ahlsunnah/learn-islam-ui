@@ -6,7 +6,7 @@ export const DawaHome: React.FC<IDawaHomeProps> = ({
     api: {track},
   },
   pageContext: {locale, localePaths},
-}): JSX.Element => {
+}) => {
   const localePath = localePaths[locale]
   const {slug: trackSlug, translations, courseSet} = track
   const {title, description} = translations.edges[0].node

@@ -1,13 +1,12 @@
 import React from 'react'
 import {Link} from 'gatsby'
-import {css} from '@emotion/core'
 import logoAr from 'images/logo-ar.svg'
 import logoFr from 'images/logo-fr.svg'
 import logoHorizontalAr from 'images/logo-horizontal-ar.svg'
 import logoHorizontalFr from 'images/logo-horizontal-fr.svg'
 import {ObjectOfStrings} from 'interfaces'
 
-interface Props {
+interface IProps {
   isHidden?: boolean
   large?: boolean
   t: ObjectOfStrings
@@ -24,12 +23,12 @@ const Logo = ({
   isHidden,
   large = false,
   t: {locale, localePath, siteName},
-}: Props) => (
+}: IProps) => (
   <Link to={localePath}>
     <div
-      css={css`
-        display: ${isHidden ? 'none' : 'inline-block'};
-      `}
+      css={{
+        display: isHidden ? 'none' : 'inline-block',
+      }}
     >
       <img
         alt={siteName}

@@ -1,7 +1,7 @@
 import Button from 'components/Button'
 import {Link} from 'gatsby'
 import hamburgerSvg from 'images/hamburger.svg'
-import * as React from 'react'
+import React from 'react'
 
 interface Props {
   otherLocaleName: string

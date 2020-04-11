@@ -1,15 +1,12 @@
 import cx from 'classnames'
-import PropTypes from 'prop-types'
-import * as React from 'react'
-import {
-  compose,
-  lifecycle,
-  setPropTypes,
-  withHandlers,
-  withPropsOnChange,
-} from 'recompose'
-import addScoreWhenFinished from './addScoreWhenFinished'
+import React from 'react'
 import SelectInput from './SelectInput'
+import {QuizProps} from 'types/quizs'
+
+interface IFillInTheBlankData {
+  text: string
+  values: string[]
+}
 
 type DisplayAnswerProps = {
   answer?: string
@@ -33,29 +30,21 @@ const DisplayAnswer = ({
   )
 }
 
-interface Props {
-  data: {
-    values: Array<string>
-  }
-  handleAnswer: () => {}
-  finished: boolean
-  number: number
-  orderedValues: Array<{index: number; text: string}>
-  remainingValues: Array<{index: number; text: string}>
-  score: number
-  state: {
-    answers?: Array<number>
-  }
-  textParts: Array<string>
-  t: {
-    fillInTheBlankTitle: string
-    locale: string
-  }
+interface IFillInTheBlankState {
+  answers: string[]
+  selectStyle?: React.CSSProperties
 }
-class FillInTheBlank extends React.PureComponent<Props> {
-  state = {}
 
-  myRefs = []
+class FillInTheBlank extends React.PureComponent<
+  QuizProps,
+  IFillInTheBlankState
+> {
+  state: IFillInTheBlankState = {
+    answers: [],
+    selectStyle: undefined,
+  }
+
+  myRefs: HTMLDivElement[] = []
 
   componentDidMount() {
     // We fix the width of selects so it does not change
@@ -64,33 +53,40 @@ class FillInTheBlank extends React.PureComponent<Props> {
         if (!ref) {
           return max
         }
-        // @ts-ignore
         const width = ref.offsetWidth
         return width > max ? width : max
       }, 0)
-      this.setState({width: maxWidth}) // eslint-disable-line react/no-unused-state
-    }, 500)
+      this.setState({selectStyle: {width: maxWidth}})
+    }, 2000)
   }
 
-  // @ts-ignore
-  setRef = (ref, index) => {
-    // @ts-ignore
+  setRef = (ref: HTMLDivElement, index: number) => {
     this.myRefs[index] = ref
+  }
+  handleAnswer = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const {name, value} = e.currentTarget
+    const index = parseInt(name, 10)
+    const newAnswers = this.state.answers.slice()
+    newAnswers[index] = value
+    this.setState({
+      answers: newAnswers,
+    })
   }
 
   render() {
     const {
-      data: {values},
       finished,
-      handleAnswer,
       number,
-      orderedValues,
-      remainingValues,
-      score,
-      state: {answers = []},
-      textParts,
+      translations,
       t: {fillInTheBlankTitle, locale},
     } = this.props
+    const {answers, selectStyle} = this.state
+    const {text, values}: IFillInTheBlankData = translations[0].data
+    const textParts = text.split('##')
+    const orderedValues = values.slice().sort()
+    const remainingValues = orderedValues.filter(
+      (value) => !answers.includes(value),
+    )
     return (
       <div>
         <div className="pb2 flex bb items-center">
@@ -112,25 +108,19 @@ class FillInTheBlank extends React.PureComponent<Props> {
                 >
                   {finished ? (
                     <DisplayAnswer
-                      answer={
-                        answers[i - 1] !== undefined
-                          ? values[answers[i - 1]]
-                          : ''
-                      }
-                      answerIndex={answers[i - 1]}
+                      answer={answers[i - 1]}
                       index={i - 1}
                       value={values[i - 1]}
                     />
                   ) : (
                     <SelectInput
-                      name={i - 1}
-                      onChange={handleAnswer}
+                      index={i}
+                      name={(i - 1).toString()}
+                      onChange={this.handleAnswer}
                       options={remainingValues}
                       setRef={this.setRef}
-                      style={this.state}
-                      value={orderedValues.find(
-                        ({index}) => index === answers[i - 1],
-                      )}
+                      style={selectStyle}
+                      value={answers[i - 1]}
                     />
                   )}
                 </div>,
@@ -141,7 +131,7 @@ class FillInTheBlank extends React.PureComponent<Props> {
             ),
           )}
         </div>
-        {finished && (
+        {/* {finished && (
           <div
             className={cx('mt3 f3', {
               tl: locale === 'ar',
@@ -152,79 +142,10 @@ class FillInTheBlank extends React.PureComponent<Props> {
           >
             {score}/{answers.length}
           </div>
-        )}
+        )} */}
       </div>
     )
   }
 }
 
-const enhance = compose(
-  setPropTypes({
-    addData: PropTypes.func.isRequired,
-    data: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      values: PropTypes.array.isRequired,
-    }).isRequired,
-  }),
-  // @ts-ignore
-  withPropsOnChange(['data'], ({data: {text, values}}) => ({
-    orderedValues: values
-      // @ts-ignore
-      .map((value, index) => ({index, text: value}))
-      // @ts-ignore
-      .sort((a, b) => (a.text > b.text ? 1 : -1)),
-    textParts: text.split('##'),
-  })),
-  lifecycle({
-    componentDidMount() {
-      // @ts-ignore
-      const {addData, orderedValues, quizId, state} = this.props
-      if (!state.answers)
-        addData({
-          data: {
-            answers: new Array(orderedValues.length).fill(undefined),
-          },
-          quizId,
-        })
-    },
-  }),
-  // @ts-ignore
-  withHandlers({
-    // @ts-ignore
-    handleAnswer: ({addData, quizId, state: {answers}}) => (e) => {
-      const {name, value} = e.target
-      const newAnswers = answers.slice()
-      newAnswers[name] = value !== '' ? parseInt(value, 10) : undefined
-      addData({
-        data: {
-          answers: newAnswers,
-        },
-        quizId,
-        started: true,
-      })
-    },
-  }),
-  // @ts-ignore
-  withPropsOnChange(['state'], ({orderedValues, state: {answers = []}}) => {
-    // @ts-ignore
-    const notChosen = ({index}) => !answers.includes(index)
-    return {
-      remainingValues: orderedValues.filter(notChosen),
-    }
-  }),
-  // @ts-ignore
-  withPropsOnChange(['finished'], ({finished, state: {answers = []}}) => {
-    if (!finished) {
-      return {score: 0}
-    }
-    return {
-      score: answers.reduce((acc, answer, index) => {
-        if (answer === index) return acc + 1
-        return acc
-      }, 0),
-    }
-  }),
-  addScoreWhenFinished,
-)
-// @ts-ignore
-export default enhance(FillInTheBlank)
+export default FillInTheBlank

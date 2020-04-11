@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import * as React from 'react'
+import React from 'react'
 import MaterialCard from '@material/react-card'
 import '@material/react-card/dist/card.css'
 import 'styles/card.scss'

@@ -1,17 +1,24 @@
 declare module '*.jpg' {
-  const value: any
+  const value: string
   export = value
 }
 declare module '*.png' {
-  const value: any
+  const value: string
   export = value
 }
 declare module '*.svg' {
-  const value: any
+  const value: string
   export = value
 }
 
 declare module 'react-icons/lib/*' {
-  const value: JSX.Element
+  const value: React.FC<{className?: string}>
   export = value
+}
+
+declare module 'gatsby-plugin-mailchimp' {
+  const addToMailchimp: (
+    email: string,
+  ) => Promise<{msg: string; result: string}>
+  export = addToMailchimp
 }

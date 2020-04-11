@@ -1,6 +1,6 @@
 import BlueHero from 'components/BlueHero'
 import HomeFooter from 'components/HomeFooter'
-import * as React from 'react'
+import React from 'react'
 import RawHTML from 'components/RawHTML'
 import './styles.scss'
 import {IAboutUsProps} from '../../types/aboutUs'
@@ -19,8 +19,9 @@ const AboutUsContainer = ({
       {data.translations.aboutUsPageContent}
     </RawHTML>
     <HomeFooter
-      firstTrackSlug={`${data.translations.localePath}${data.api.tracks
-        .edges[0] && data.api.tracks.edges[0].node.slug}`}
+      firstTrackSlug={`${data.translations.localePath}${
+        data.api.tracks[0] && data.api.tracks[0].slug
+      }`}
       t={data.translations}
     />
   </div>

@@ -5,14 +5,14 @@ import {Link} from 'gatsby'
 // import clock from 'images/clock.svg'
 // import target from 'images/target.svg'
 // import {getHumanTime} from 'lib/time'
-import * as React from 'react'
-import {ITrackTranslations} from '../../types/track'
+import React from 'react'
+import {TTrackPageTranslationsFragment} from '../../graphqlTypes'
 
-interface Props {
+interface IProps {
   duration: number
   level: number
   nextCoursePath: string
-  t: ITrackTranslations
+  t: TTrackPageTranslationsFragment
   otherLocaleName: string
   otherLocaleUrl: string
   trackTitle: string
@@ -25,7 +25,7 @@ const TrackHeader = ({
   otherLocaleUrl,
   t,
   trackTitle,
-}: Props) => (
+}: IProps) => (
   <div className="ph3 pb4 pt3 flex flex-column flex-row-ns justify-around bg-white raised-header">
     <div className="self-end dn-ns">
       <Link className="ph2 no-underline" to={otherLocaleUrl}>

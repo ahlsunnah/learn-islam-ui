@@ -1,38 +1,28 @@
 import cx from 'classnames'
 import Button from 'components/Button'
-import PropTypes from 'prop-types'
-import * as React from 'react'
-import {compose, setPropTypes, withHandlers, withPropsOnChange} from 'recompose'
-import addScoreWhenFinished from './addScoreWhenFinished'
+import React, {useState} from 'react'
 import ResultIndicator from './ResultIndicator'
+import {QuizProps} from 'types/quizs'
 
-interface IProps {
-  data: {
-    isTrue: boolean
-    text: string
-  }
-  finished: boolean
-  handleAnswer: () => void
-  number: number
-  score: number
-  state: {
-    answer?: boolean
-  }
-  t: {
-    quizFalse: string
-    quizTrue: string
-    locale: string
-  }
+interface ITrueOrFalseData {
+  text: string
+  isTrue: boolean
 }
-const TrueOrFalse = ({
-  data: {isTrue, text},
+
+const TrueOrFalse: React.FC<QuizProps> = ({
   finished,
-  handleAnswer,
   number,
-  score,
-  state: {answer},
-  t: {quizFalse, quizTrue, locale},
-}: IProps): JSX.Element => {
+  t: {quizFalse, quizTrue},
+  translations,
+}) => {
+  const {text, isTrue}: ITrueOrFalseData = translations[0].data
+  const [answer, setAnswer] = useState<boolean>()
+  const handleAnswer = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>,
+  ) => {
+    const {name} = e.currentTarget
+    setAnswer(name === 'true')
+  }
   return (
     <div>
       <div className="flex">
@@ -79,7 +69,7 @@ const TrueOrFalse = ({
             </Button>
           </div>
         </div>
-        {finished &&
+        {/* {finished &&
           (score ? (
             <div
               className={cx('self-end green f3', {
@@ -98,47 +88,10 @@ const TrueOrFalse = ({
             >
               0/1
             </div>
-          ))}
+          ))} */}
       </div>
     </div>
   )
 }
 
-const enhance = compose(
-  setPropTypes({
-    addData: PropTypes.func.isRequired,
-    addScore: PropTypes.func.isRequired,
-    finished: PropTypes.bool.isRequired,
-    quizId: PropTypes.string.isRequired,
-  }),
-  // @ts-ignore
-  withHandlers({
-    // @ts-ignore
-    handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
-      const newAnswer = e.currentTarget.name === 'true'
-      if (!finished)
-        addData({
-          data: {
-            answer: answer === newAnswer ? undefined : newAnswer,
-          },
-          quizId,
-          started: true,
-        })
-    },
-  }),
-  withPropsOnChange(
-    ['finished'],
-    // @ts-ignore
-    ({data: {isTrue}, finished, state: {answer}}) => {
-      if (!finished) {
-        return {score: 0}
-      }
-      return {
-        score: answer === isTrue ? 1 : 0,
-      }
-    },
-  ),
-  addScoreWhenFinished,
-)
-// @ts-ignore
-export default enhance(TrueOrFalse)
+export default TrueOrFalse

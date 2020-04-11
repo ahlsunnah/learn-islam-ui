@@ -1,10 +1,14 @@
 import StepWrapper from 'components/StepWrapper'
-import * as React from 'react'
+import React from 'react'
 import Helmet from 'react-helmet'
 import './styles.scss'
 import QuizForm from './QuizForm'
 import {IQuizsPageProps} from '../../types/quizs'
-import {IDawaSidebarTrack} from 'types/sidebar'
+
+const difficultyStrings: ['difficulty1', 'difficulty1'] = [
+  'difficulty1',
+  'difficulty1',
+]
 
 const QuizsContainer = ({
   data: {
@@ -14,12 +18,12 @@ const QuizsContainer = ({
   },
   location: {pathname},
   pageContext: {difficulty, locale, next},
-}: IQuizsPageProps<IDawaSidebarTrack>): JSX.Element => {
+}: IQuizsPageProps): JSX.Element => {
   const otherLocalePath = `${otherLocaleTranslations.localePath}${course.track.slug}/${course.slug}/ikhtibar-${difficulty}`
-  const levelSubtitle = `${t.level} ${t[`difficulty${difficulty}`]}`
-  const title = `${t.quiz} ${t[`difficulty${difficulty}`]}`
-  const longTitle = `${course.translations.edges[0].node.title}: ${t.quiz} ${
-    t[`difficulty${difficulty}`]
+  const levelSubtitle = `${t.level} ${t[difficultyStrings[difficulty - 1]]}`
+  const title = `${t.quiz} ${t[difficultyStrings[difficulty - 1]]}`
+  const longTitle = `${course.translations[0].title}: ${t.quiz} ${
+    t[difficultyStrings[difficulty - 1]]
   }`
   return (
     <StepWrapper
@@ -33,19 +37,16 @@ const QuizsContainer = ({
       <Helmet title={longTitle} />
       <div className="relative z-2">
         <QuizForm
-          courseStrings={course.translations.edges[0].node}
+          courseStrings={course.translations[0]}
           params={{
             courseId: course.id,
             difficulty,
             locale,
           }}
-          coursePathname={`${pathname
-            .split('/')
-            .slice(0, -2)
-            .join('/')}/`}
+          coursePathname={`${pathname.split('/').slice(0, -2).join('/')}/`}
           levelSubtitle={levelSubtitle}
           next={next}
-          quizs={course.quizs}
+          quizzes={course.quizzes}
           t={t}
         />
       </div>

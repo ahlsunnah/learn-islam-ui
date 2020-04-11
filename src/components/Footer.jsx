@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import 'styles/custom.scss'
 // import 'tachyons/css/tachyons.min.css'
 

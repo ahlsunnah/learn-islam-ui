@@ -1,15 +1,15 @@
 import {Link} from 'gatsby'
 import cx from 'classnames'
-import * as React from 'react'
+import React from 'react'
 import Button from '../Button'
 import structure from './structure'
-import {IHomeOtherLocaleTranslations} from '../../types/home'
 import {INavBarTranslations} from '../../types/navbar'
+import {TTracksPageOtherTranslationsFragment} from '../../graphqlTypes'
 
-interface Props {
+interface IProps {
   className?: string
   otherLanguagePath: string
-  otherLocaleTranslations: IHomeOtherLocaleTranslations
+  otherLocaleTranslations: TTracksPageOtherTranslationsFragment
   t: INavBarTranslations
 }
 
@@ -18,7 +18,7 @@ const NavSection = ({
   otherLanguagePath,
   otherLocaleTranslations,
   t,
-}: Props) => (
+}: IProps) => (
   <nav className={cx('flex1', className)}>
     <ul className="list flex flex-wrap justify-around items-center">
       {structure.map(({title, link}) => (

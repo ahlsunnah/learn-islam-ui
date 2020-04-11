@@ -1,6 +1,6 @@
 import BlueHero from 'components/BlueHero'
 import HomeFooter from 'components/HomeFooter'
-import * as React from 'react'
+import React from 'react'
 import Tracks from './Tracks'
 import {ITracksPageProps} from 'types/tracks'
 
@@ -17,14 +17,15 @@ const TracksContainer = ({
       title={data.translations.tracksPageTitle}
     />
     <Tracks
-      tracks={data.api.tracks.edges}
+      tracks={data.api.tracks}
       localePath={data.translations.localePath}
       soonString={data.translations.soon}
     />
     <HomeFooter
       t={data.translations}
-      firstTrackSlug={`${data.translations.localePath}${data.api.tracks
-        .edges[0] && data.api.tracks.edges[0].node.slug}`}
+      firstTrackSlug={`${data.translations.localePath}${
+        data.api.tracks[0] && data.api.tracks[0].slug
+      }`}
     />
   </div>
 )

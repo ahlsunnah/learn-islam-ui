@@ -1,21 +1,21 @@
 import getWindowWidth from 'lib/getWindowWidth'
-import * as React from 'react'
+import React from 'react'
 import cx from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import {
-  ISidebarTranslations,
-  ISidebarTrack,
-  IDawaSidebarTrack,
-} from '../../types/sidebar'
+  TChapterPageTrackFragment,
+  TChapterPageTranslationsFragment,
+  TQuizzesPageTranslationsFragment,
+} from '../../graphqlTypes'
 
 interface IProps {
   children: JSX.Element | JSX.Element[]
   currentCourseSlug: string
-  track: ISidebarTrack | IDawaSidebarTrack
+  track: TChapterPageTrackFragment
   otherLocaleName: string
   otherLocalePath: string
-  t: ISidebarTranslations
+  t: TChapterPageTranslationsFragment | TQuizzesPageTranslationsFragment
   title: string
 }
 
@@ -27,7 +27,7 @@ class StepWrapper extends React.Component<IProps, IState> {
     isSideBarVisible: false,
   }
 
-  public componentWillMount(): void {
+  public componentDidMount(): void {
     if (getWindowWidth() > 800) {
       this.setState({isSideBarVisible: true})
     }
@@ -59,7 +59,7 @@ class StepWrapper extends React.Component<IProps, IState> {
           track={track}
           isOpen={isSideBarVisible}
           t={t}
-          toggleDrawer={this.toggleSidebar}
+          toggleSidebar={this.toggleSidebar}
         />
         <div
           className={cx('absolute w-100 flex flex-column items-stretch', {

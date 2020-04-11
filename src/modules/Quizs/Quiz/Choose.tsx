@@ -1,151 +1,88 @@
 import cx from 'classnames'
 import Button from 'components/Button'
 import shuffle from 'lib/shuffle'
-import PropTypes from 'prop-types'
-import * as React from 'react'
-import {
-  compose,
-  lifecycle,
-  setPropTypes,
-  withHandlers,
-  withPropsOnChange,
-} from 'recompose'
-import addScoreWhenFinished from './addScoreWhenFinished'
+import React, {useState} from 'react'
 import ResultIndicator from './ResultIndicator'
+import {QuizProps} from 'types/quizs'
 
-interface Props {
-  addData: (prop: {data: any; quizId: string}) => void
-  data: {
-    text: string
-    values: Array<string>
-  }
-  finished: boolean
-  handleAnswer: () => void
-  number: number
-  quizId: string
-  score: number
-  state: {
-    answer?: number
-  }
-  valuesOrder: Array<number>
-  t: {
-    locale: string
-  }
+interface IChooseData {
+  text: string
+  values: string[]
 }
-const Choose = ({
-  data: {text, values},
-  finished,
-  handleAnswer,
-  number,
-  score,
-  state: {answer},
-  valuesOrder,
-  t: {locale},
-}: Props) => (
-  <div>
-    <div className="flex">
-      <div className="flex-no-shrink w2-5 b">{number} -</div>
-      <div className="f4 b">{text}</div>
-    </div>
-    <div className="mt4">
-      {valuesOrder.map((order) => (
-        <div className="mt2 flex items-center" key={order}>
-          <ResultIndicator
-            finished={finished}
-            isCorrect={order === 0}
-            selected={answer === order}
-          />
-          <Button
-            className={cx('pv2 h-auto lh-title tl', {
-              ph3: order === answer,
-            })}
-            greenOutlined={finished && order === 0 && answer !== order}
-            outlined={order !== answer}
-            onClick={handleAnswer}
-            name={`${order}`}
-          >
-            {values[order]}
-          </Button>
-        </div>
-      ))}
-    </div>
-    {finished &&
-      (score ? (
-        <div
-          className={cx('mt3 green f3', {
-            tl: locale === 'ar',
-            tr: locale !== 'ar',
-          })}
-        >
-          1/1
-        </div>
-      ) : (
-        <div
-          className={cx('mt3 green f3', {
-            tl: locale === 'ar',
-            tr: locale !== 'ar',
-          })}
-        >
-          0/1
-        </div>
-      ))}
-  </div>
-)
 
-const enhance = compose(
-  setPropTypes({
-    addData: PropTypes.func.isRequired,
-    addScore: PropTypes.func.isRequired,
-    quizId: PropTypes.string.isRequired,
-  }),
-  lifecycle<Props, {}>({
-    componentDidMount() {
-      const {
-        data: {values},
-        addData,
-        state,
-        quizId,
-      } = this.props
-      // @ts-ignore
-      if (!state.valuesOrder)
-        addData({
-          data: {
-            valuesOrder: shuffle(values.map((_, i) => i)),
-          },
-          quizId,
-        })
-    },
-  }),
-  // @ts-ignore
-  withPropsOnChange(['state'], ({data: {values}, state: {valuesOrder}}) => ({
-    // @ts-ignore
-    valuesOrder: valuesOrder || values.map((_, i) => i), // default values for SSR
-  })),
-  // @ts-ignore
-  withHandlers({
-    // @ts-ignore
-    handleAnswer: ({addData, finished, quizId, state: {answer}}) => (e) => {
-      const newAnswer = parseInt(e.target.name, 10)
-      if (!finished)
-        addData({
-          data: {
-            answer: answer === newAnswer ? undefined : newAnswer,
-          },
-          quizId,
-          started: true,
-        })
-    },
-  }),
-  // @ts-ignore
-  withPropsOnChange(['finished'], ({finished, state: {answer}}) => {
-    if (!finished) {
-      return {score: 0}
-    }
-    return {
-      score: answer === 0 ? 1 : 0,
-    }
-  }),
-  addScoreWhenFinished,
-)
-// @ts-ignore
-export default enhance(Choose)
+const Choose: React.FC<QuizProps> = ({
+  finished,
+  number,
+  t,
+  id,
+  locale,
+  translations,
+}) => {
+  const data: IChooseData = translations[0].data
+  const [values] = useState<string[]>(shuffle(data.values))
+  const [answer, setAnswer] = useState<string | null>(null)
+  const handleAnswer = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const text = e.currentTarget.innerText
+    setAnswer(text)
+  }
+  const {text} = data
+  const correctAnswer = data.values[0]
+  const isAnswerCorrect = answer === correctAnswer
+  return (
+    <div>
+      <div className="flex">
+        <div className="flex-no-shrink w2-5 b">{number} -</div>
+        <div className="f4 b">{text}</div>
+      </div>
+      <div className="mt4">
+        {values.map((value, index) => {
+          const isSelected = answer === value
+          const isCorrectAnswer = value === correctAnswer
+          return (
+            <div className="mt2 flex items-center" key={index}>
+              <ResultIndicator
+                finished={finished}
+                isCorrect={isAnswerCorrect}
+                selected={isSelected}
+              />
+              <Button
+                className={cx('pv2 h-auto lh-title tl', {
+                  ph3: isSelected,
+                })}
+                raised={isSelected}
+                greenOutlined={finished && isCorrectAnswer && !isSelected}
+                outlined={!isSelected}
+                onClick={handleAnswer}
+                name={value}
+              >
+                {value}
+              </Button>
+            </div>
+          )
+        })}
+      </div>
+      {/* {finished &&
+        (score ? (
+          <div
+            className={cx('mt3 green f3', {
+              tl: locale === 'ar',
+              tr: locale !== 'ar',
+            })}
+          >
+            1/1
+          </div>
+        ) : (
+          <div
+            className={cx('mt3 green f3', {
+              tl: locale === 'ar',
+              tr: locale !== 'ar',
+            })}
+          >
+            0/1
+          </div>
+        ))} */}
+    </div>
+  )
+}
+
+export default Choose

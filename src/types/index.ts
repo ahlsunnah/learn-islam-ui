@@ -8,6 +8,7 @@ export type ILocalePaths = {[locale in Locale]: string}
 
 export interface IPageContext {
   locale: Locale
+  localeEnum: Locale
   localePaths: ILocalePaths
   otherLanguagePath: string
 }

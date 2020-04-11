@@ -5,14 +5,17 @@ import cx from 'classnames'
 import ChapterContainer from 'modules/Chapter'
 import './styles.css'
 import {IChapterProps} from '../types/chapter'
+import {ChapterStatesProvider} from 'hooks/useChapterState'
 
 const Chapter = (props: IChapterProps) => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
-    <Helmet>
-      <html lang={props.pageContext.locale} />
-    </Helmet>
-    <ChapterContainer {...props} />
-  </div>
+  <ChapterStatesProvider>
+    <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+      <Helmet>
+        <html lang={props.pageContext.locale} />
+      </Helmet>
+      <ChapterContainer {...props} />
+    </div>
+  </ChapterStatesProvider>
 )
 
 export default Chapter

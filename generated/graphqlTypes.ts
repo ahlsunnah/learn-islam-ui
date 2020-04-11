@@ -5300,12 +5300,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
-  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale';
+  'childTranslationsJson___locale' |
+  'childTranslationsJson___nextHelp';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -5712,15 +5712,15 @@ export type TQuerySitePageArgs = {
   internalComponentName: Maybe<TStringQueryOperatorInput>;
   componentChunkName: Maybe<TStringQueryOperatorInput>;
   matchPath: Maybe<TStringQueryOperatorInput>;
+  id: Maybe<TStringQueryOperatorInput>;
+  parent: Maybe<TNodeFilterInput>;
+  children: Maybe<TNodeFilterListInput>;
+  internal: Maybe<TInternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<TBooleanQueryOperatorInput>;
   context: Maybe<TSitePageContextFilterInput>;
   pluginCreator: Maybe<TSitePluginFilterInput>;
   pluginCreatorId: Maybe<TStringQueryOperatorInput>;
   componentPath: Maybe<TStringQueryOperatorInput>;
-  id: Maybe<TStringQueryOperatorInput>;
-  parent: Maybe<TNodeFilterInput>;
-  children: Maybe<TNodeFilterListInput>;
-  internal: Maybe<TInternalFilterInput>;
 };
 
 
@@ -5737,6 +5737,8 @@ export type TQuerySiteArgs = {
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
   port: Maybe<TIntQueryOperatorInput>;
   host: Maybe<TStringQueryOperatorInput>;
+  polyfill: Maybe<TBooleanQueryOperatorInput>;
+  pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
   parent: Maybe<TNodeFilterInput>;
   children: Maybe<TNodeFilterListInput>;
@@ -5867,12 +5869,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -5930,6 +5932,8 @@ export type TSite = TNode & {
   siteMetadata: Maybe<TSiteSiteMetadata>;
   port: Maybe<Scalars['Int']>;
   host: Maybe<Scalars['String']>;
+  polyfill: Maybe<Scalars['Boolean']>;
+  pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<TNode>;
   children: Array<TNode>;
@@ -6131,6 +6135,8 @@ export type TSiteFieldsEnum =
   'siteMetadata___siteUrl' |
   'port' |
   'host' |
+  'polyfill' |
+  'pathPrefix' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -6223,6 +6229,8 @@ export type TSiteFilterInput = {
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
   port: Maybe<TIntQueryOperatorInput>;
   host: Maybe<TStringQueryOperatorInput>;
+  polyfill: Maybe<TBooleanQueryOperatorInput>;
+  pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
   parent: Maybe<TNodeFilterInput>;
   children: Maybe<TNodeFilterListInput>;
@@ -6244,15 +6252,15 @@ export type TSitePage = TNode & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent: Maybe<TNode>;
+  children: Array<TNode>;
+  internal: TInternal;
   isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
   context: Maybe<TSitePageContext>;
   pluginCreator: Maybe<TSitePlugin>;
   pluginCreatorId: Maybe<Scalars['String']>;
   componentPath: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent: Maybe<TNode>;
-  children: Array<TNode>;
-  internal: TInternal;
 };
 
 export type TSitePageConnection = {
@@ -6332,6 +6340,92 @@ export type TSitePageFieldsEnum =
   'internalComponentName' |
   'componentChunkName' |
   'matchPath' |
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
   'isCreatedByStatefulCreatePages' |
   'context___locale' |
   'context___localeEnum' |
@@ -6443,93 +6537,7 @@ export type TSitePageFieldsEnum =
   'pluginCreator___packageJson___peerDependencies___version' |
   'pluginCreator___packageJson___keywords' |
   'pluginCreatorId' |
-  'componentPath' |
-  'id' |
-  'parent___id' |
-  'parent___parent___id' |
-  'parent___parent___parent___id' |
-  'parent___parent___parent___children' |
-  'parent___parent___children' |
-  'parent___parent___children___id' |
-  'parent___parent___children___children' |
-  'parent___parent___internal___content' |
-  'parent___parent___internal___contentDigest' |
-  'parent___parent___internal___description' |
-  'parent___parent___internal___fieldOwners' |
-  'parent___parent___internal___ignoreType' |
-  'parent___parent___internal___mediaType' |
-  'parent___parent___internal___owner' |
-  'parent___parent___internal___type' |
-  'parent___children' |
-  'parent___children___id' |
-  'parent___children___parent___id' |
-  'parent___children___parent___children' |
-  'parent___children___children' |
-  'parent___children___children___id' |
-  'parent___children___children___children' |
-  'parent___children___internal___content' |
-  'parent___children___internal___contentDigest' |
-  'parent___children___internal___description' |
-  'parent___children___internal___fieldOwners' |
-  'parent___children___internal___ignoreType' |
-  'parent___children___internal___mediaType' |
-  'parent___children___internal___owner' |
-  'parent___children___internal___type' |
-  'parent___internal___content' |
-  'parent___internal___contentDigest' |
-  'parent___internal___description' |
-  'parent___internal___fieldOwners' |
-  'parent___internal___ignoreType' |
-  'parent___internal___mediaType' |
-  'parent___internal___owner' |
-  'parent___internal___type' |
-  'children' |
-  'children___id' |
-  'children___parent___id' |
-  'children___parent___parent___id' |
-  'children___parent___parent___children' |
-  'children___parent___children' |
-  'children___parent___children___id' |
-  'children___parent___children___children' |
-  'children___parent___internal___content' |
-  'children___parent___internal___contentDigest' |
-  'children___parent___internal___description' |
-  'children___parent___internal___fieldOwners' |
-  'children___parent___internal___ignoreType' |
-  'children___parent___internal___mediaType' |
-  'children___parent___internal___owner' |
-  'children___parent___internal___type' |
-  'children___children' |
-  'children___children___id' |
-  'children___children___parent___id' |
-  'children___children___parent___children' |
-  'children___children___children' |
-  'children___children___children___id' |
-  'children___children___children___children' |
-  'children___children___internal___content' |
-  'children___children___internal___contentDigest' |
-  'children___children___internal___description' |
-  'children___children___internal___fieldOwners' |
-  'children___children___internal___ignoreType' |
-  'children___children___internal___mediaType' |
-  'children___children___internal___owner' |
-  'children___children___internal___type' |
-  'children___internal___content' |
-  'children___internal___contentDigest' |
-  'children___internal___description' |
-  'children___internal___fieldOwners' |
-  'children___internal___ignoreType' |
-  'children___internal___mediaType' |
-  'children___internal___owner' |
-  'children___internal___type' |
-  'internal___content' |
-  'internal___contentDigest' |
-  'internal___description' |
-  'internal___fieldOwners' |
-  'internal___ignoreType' |
-  'internal___mediaType' |
-  'internal___owner' |
-  'internal___type';
+  'componentPath';
 
 export type TSitePageFilterInput = {
   path: Maybe<TStringQueryOperatorInput>;
@@ -6537,15 +6545,15 @@ export type TSitePageFilterInput = {
   internalComponentName: Maybe<TStringQueryOperatorInput>;
   componentChunkName: Maybe<TStringQueryOperatorInput>;
   matchPath: Maybe<TStringQueryOperatorInput>;
+  id: Maybe<TStringQueryOperatorInput>;
+  parent: Maybe<TNodeFilterInput>;
+  children: Maybe<TNodeFilterListInput>;
+  internal: Maybe<TInternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<TBooleanQueryOperatorInput>;
   context: Maybe<TSitePageContextFilterInput>;
   pluginCreator: Maybe<TSitePluginFilterInput>;
   pluginCreatorId: Maybe<TStringQueryOperatorInput>;
   componentPath: Maybe<TStringQueryOperatorInput>;
-  id: Maybe<TStringQueryOperatorInput>;
-  parent: Maybe<TNodeFilterInput>;
-  children: Maybe<TNodeFilterListInput>;
-  internal: Maybe<TInternalFilterInput>;
 };
 
 export type TSitePageGroupConnection = {
@@ -7080,12 +7088,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -7294,12 +7302,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
-  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale';
+  'locale' |
+  'nextHelp';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -7398,12 +7406,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {

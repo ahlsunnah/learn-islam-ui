@@ -36,7 +36,6 @@ const Sidebar: React.FC<IProps> = ({
   t,
 }) => {
   const closeDrawerOnMobile = (): void => {
-    // TODO: works?
     if (getWindowWidth() < 800) {
       toggleSidebar()
     }

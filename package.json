@@ -51,7 +51,6 @@
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-source-graphql": "^2.3.2",
     "gatsby-transformer-json": "^2.3.1",
-    "isomorphic-unfetch": "^3.0.0",
     "make-plural": "^6.2.1",
     "memoize-one": "^5.1.1",
     "node-sass": "^4.13.1",
@@ -99,5 +98,9 @@
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^25.3.1",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "**/apollo-link": "1.2.13",
+    "**/apollo-link-http": "1.5.16"
   }
 }

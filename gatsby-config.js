@@ -1,5 +1,3 @@
-require('isomorphic-unfetch')
-
 const {API, API_SECRET} = process.env
 if (!API) {
   throw new Error('We need an API environment variable !')

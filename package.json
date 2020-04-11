@@ -11,13 +11,9 @@
     "preview": "npm run clean && npm run build && yarn serve",
     "serve": "http-server ./public -p 8000 -P http://localhost:8000",
     "start": "npm run start:prod",
-    "start-dawa": "npm run start-dawa:prod",
     "start:dev": "eval $(cat .env.dev) gatsby develop",
-    "start-dawa:dev": "eval $(cat .dawa.env.dev) gatsby develop",
-    "start-dawa:prod": "eval $(cat .dawa.env.prod) gatsby develop",
     "start:prod": "eval $(cat .env.prod) gatsby develop",
     "test": "jest",
-    "test:security": "nsp check",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

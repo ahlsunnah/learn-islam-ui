@@ -2,6 +2,7 @@ import {useState, useEffect, Dispatch, SetStateAction} from 'react'
 import {useIsFirstRender} from './useIsFirstRender'
 
 const getPersistedValue = (key: string) => {
+  if (typeof window === 'undefined') return
   const value = localStorage.getItem(key)
   if (value) {
     return JSON.parse(value)

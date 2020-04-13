@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "API": "@learn_islam_api",
+      "API_SECRET": "@learn_islam_api_secret"
+    }
+  }
+}

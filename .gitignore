@@ -38,3 +38,5 @@ prototypes
 tmp
 
 .env*
+
+.vscode

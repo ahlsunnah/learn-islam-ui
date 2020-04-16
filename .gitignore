@@ -38,5 +38,6 @@ prototypes
 tmp
 
 .env*
+!.env*.example
 
 .vscode

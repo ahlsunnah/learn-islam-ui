@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 const {API, API_SECRET} = process.env
 if (!API) {
   throw new Error('We need an API environment variable !')

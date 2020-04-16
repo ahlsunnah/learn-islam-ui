@@ -6,12 +6,9 @@
   "license": "Unlicense",
   "scripts": {
     "build": "gatsby build",
-    "build:prod": "eval $(cat .env.prod) gatsby build",
     "clean": "rimraf public .cache node_modules/.cache",
     "serve": "http-server ./public -p 8000 -P http://localhost:8000",
-    "start": "npm run start:dev",
-    "start:dev": "eval $(cat .env.dev) gatsby develop",
-    "start:prod": "eval $(cat .env.prod) gatsby develop",
+    "start": "gatsby develop",
     "test": "jest",
     "type-check": "tsc --noEmit"
   },
@@ -29,6 +26,7 @@
     "caniuse-lite": "^1.0.30001040",
     "classnames": "^2.2.6",
     "core-js": "^2.6.9",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.20.15",
     "gatsby-image": "^2.3.2",
     "gatsby-plugin-accessibilityjs": "^1.0.3",

@@ -1,15 +1,12 @@
-import HomeFooter from 'components/HomeFooter'
-import React from 'react'
-import HomeContentPresentation from './HomeContentPresentation'
-import HomeFeatures from './HomeFeatures'
-import HomeHero from './HomeHero'
-import HomeNewsletter from './HomeNewsletter'
-import {IHomePageProps} from 'types/home'
+import HomeFooter from 'components/HomeFooter';
+import React from 'react';
+import HomeContentPresentation from './HomeContentPresentation';
+import HomeFeatures from './HomeFeatures';
+import HomeHero from './HomeHero';
+import HomeNewsletter from './HomeNewsletter';
+import { IHomePageProps } from 'types/home';
 
-const HomeContainer = ({
-  data,
-  pageContext: {otherLanguagePath},
-}: IHomePageProps) => (
+const HomeContainer = ({ data, pageContext: { otherLanguagePath } }: IHomePageProps) => (
   <div>
     <HomeHero {...data} otherLanguagePath={otherLanguagePath} />
     <HomeContentPresentation
@@ -23,10 +20,8 @@ const HomeContainer = ({
     <HomeFooter
       t={data.translations}
       dark
-      firstTrackSlug={`${data.translations.localePath}${
-        data.api.tracks[0] && data.api.tracks[0].slug
-      }`}
+      firstTrackSlug={`${data.translations.localePath}${data.api.tracks[0] && data.api.tracks[0].slug}`}
     />
   </div>
-)
-export default HomeContainer
+);
+export default HomeContainer;

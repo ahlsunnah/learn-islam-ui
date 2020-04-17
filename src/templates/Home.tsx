@@ -1,21 +1,26 @@
-import React from 'react'
-import {graphql} from 'gatsby'
-import Helmet from 'react-helmet'
-import cx from 'classnames'
-import HomeContainer from 'modules/Home'
-import './styles.css'
-import {IHomePageProps} from 'types/home'
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
+import cx from 'classnames';
+import HomeContainer from 'modules/Home';
+import './styles.css';
+import { IHomePageProps } from 'types/home';
 
-const Home = (props: IHomePageProps): React.ReactNode => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
-    <Helmet>
-      <html lang={props.pageContext.locale} />
-    </Helmet>
-    <HomeContainer {...props} />
-  </div>
-)
+const Home = (props: IHomePageProps): React.ReactNode => {
+  const { i18n } = useTranslation();
 
-export default Home
+  return (
+    <div className={cx({ rtl: i18n.language === 'ar' })}>
+      <Helmet>
+        <html lang={i18n.language} />
+      </Helmet>
+      <HomeContainer {...props} />
+    </div>
+  );
+};
+
+export default Home;
 
 // $FlowIgnore
 export const pageQuery = graphql`
@@ -24,7 +29,7 @@ export const pageQuery = graphql`
     order
     slug
     soon
-    translations(where: {locale_code: {_eq: $localeEnum}}) {
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
       title
       description
     }
@@ -74,10 +79,10 @@ export const pageQuery = graphql`
     localePath
   }
   query homeQuery($locale: String!, $localeEnum: api_locales_enum!) {
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...HomeTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       ...HomeOtherTranslations
     }
     api {
@@ -86,4 +91,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

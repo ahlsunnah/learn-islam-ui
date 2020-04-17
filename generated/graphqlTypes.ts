@@ -106,6 +106,18 @@ export type TApi = {
   tracks_aggregate: TApi_Tracks_Aggregate;
   /** fetch data from the table: "tracks" using primary key columns */
   tracks_by_pk: Maybe<TApi_Tracks>;
+  /** fetch data from the table: "user_genders" */
+  user_genders: Array<TApi_User_Genders>;
+  /** fetch aggregated fields from the table: "user_genders" */
+  user_genders_aggregate: TApi_User_Genders_Aggregate;
+  /** fetch data from the table: "user_genders" using primary key columns */
+  user_genders_by_pk: Maybe<TApi_User_Genders>;
+  /** fetch data from the table: "users" */
+  users: Array<TApi_Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: TApi_Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk: Maybe<TApi_Users>;
 };
 
 
@@ -437,6 +449,58 @@ export type TApiTracks_AggregateArgs = {
 
 /** query root */
 export type TApiTracks_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type TApiUser_GendersArgs = {
+  distinct_on: Maybe<Array<TApi_User_Genders_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_User_Genders_Order_By>>;
+  where: Maybe<TApi_User_Genders_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiUser_Genders_AggregateArgs = {
+  distinct_on: Maybe<Array<TApi_User_Genders_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_User_Genders_Order_By>>;
+  where: Maybe<TApi_User_Genders_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiUser_Genders_By_PkArgs = {
+  letter: Scalars['String'];
+};
+
+
+/** query root */
+export type TApiUsersArgs = {
+  distinct_on: Maybe<Array<TApi_Users_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_Users_Order_By>>;
+  where: Maybe<TApi_Users_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiUsers_AggregateArgs = {
+  distinct_on: Maybe<Array<TApi_Users_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_Users_Order_By>>;
+  where: Maybe<TApi_Users_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiUsers_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -4602,6 +4666,458 @@ export type TApi_Tracks_Variance_Order_By = {
   order: Maybe<TApi_Order_By>;
 };
 
+/** columns and relationships of "user_genders" */
+export type TApi_User_Genders = {
+  description: Scalars['String'];
+  letter: Scalars['String'];
+};
+
+/** aggregated selection of "user_genders" */
+export type TApi_User_Genders_Aggregate = {
+  aggregate: Maybe<TApi_User_Genders_Aggregate_Fields>;
+  nodes: Array<TApi_User_Genders>;
+};
+
+/** aggregate fields of "user_genders" */
+export type TApi_User_Genders_Aggregate_Fields = {
+  count: Maybe<Scalars['Int']>;
+  max: Maybe<TApi_User_Genders_Max_Fields>;
+  min: Maybe<TApi_User_Genders_Min_Fields>;
+};
+
+
+/** aggregate fields of "user_genders" */
+export type TApi_User_Genders_Aggregate_FieldsCountArgs = {
+  columns: Maybe<Array<TApi_User_Genders_Select_Column>>;
+  distinct: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "user_genders" */
+export type TApi_User_Genders_Aggregate_Order_By = {
+  count: Maybe<TApi_Order_By>;
+  max: Maybe<TApi_User_Genders_Max_Order_By>;
+  min: Maybe<TApi_User_Genders_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_genders" */
+export type TApi_User_Genders_Arr_Rel_Insert_Input = {
+  data: Array<TApi_User_Genders_Insert_Input>;
+  on_conflict: Maybe<TApi_User_Genders_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "user_genders". All fields are combined with a logical 'AND'. */
+export type TApi_User_Genders_Bool_Exp = {
+  _and: Maybe<Array<Maybe<TApi_User_Genders_Bool_Exp>>>;
+  _not: Maybe<TApi_User_Genders_Bool_Exp>;
+  _or: Maybe<Array<Maybe<TApi_User_Genders_Bool_Exp>>>;
+  description: Maybe<TApi_String_Comparison_Exp>;
+  letter: Maybe<TApi_String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "user_genders" */
+export type TApi_User_Genders_Constraint = 
+  /** unique or primary key constraint */
+  'user_genders_pkey';
+
+export type TApi_User_Genders_Enum = 
+  /** Female */
+  'F' |
+  /** Male */
+  'M';
+
+/** expression to compare columns of type user_genders_enum. All fields are combined with logical 'AND'. */
+export type TApi_User_Genders_Enum_Comparison_Exp = {
+  _eq: Maybe<TApi_User_Genders_Enum>;
+  _in: Maybe<Array<TApi_User_Genders_Enum>>;
+  _is_null: Maybe<Scalars['Boolean']>;
+  _neq: Maybe<TApi_User_Genders_Enum>;
+  _nin: Maybe<Array<TApi_User_Genders_Enum>>;
+};
+
+/** input type for inserting data into table "user_genders" */
+export type TApi_User_Genders_Insert_Input = {
+  description: Maybe<Scalars['String']>;
+  letter: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type TApi_User_Genders_Max_Fields = {
+  description: Maybe<Scalars['String']>;
+  letter: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "user_genders" */
+export type TApi_User_Genders_Max_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  letter: Maybe<TApi_Order_By>;
+};
+
+/** aggregate min on columns */
+export type TApi_User_Genders_Min_Fields = {
+  description: Maybe<Scalars['String']>;
+  letter: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "user_genders" */
+export type TApi_User_Genders_Min_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  letter: Maybe<TApi_Order_By>;
+};
+
+/** response of any mutation on the table "user_genders" */
+export type TApi_User_Genders_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<TApi_User_Genders>;
+};
+
+/** input type for inserting object relation for remote table "user_genders" */
+export type TApi_User_Genders_Obj_Rel_Insert_Input = {
+  data: TApi_User_Genders_Insert_Input;
+  on_conflict: Maybe<TApi_User_Genders_On_Conflict>;
+};
+
+/** on conflict condition type for table "user_genders" */
+export type TApi_User_Genders_On_Conflict = {
+  constraint: TApi_User_Genders_Constraint;
+  update_columns: Array<TApi_User_Genders_Update_Column>;
+  where: Maybe<TApi_User_Genders_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "user_genders" */
+export type TApi_User_Genders_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  letter: Maybe<TApi_Order_By>;
+};
+
+/** select columns of table "user_genders" */
+export type TApi_User_Genders_Select_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'letter';
+
+/** input type for updating data in table "user_genders" */
+export type TApi_User_Genders_Set_Input = {
+  description: Maybe<Scalars['String']>;
+  letter: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "user_genders" */
+export type TApi_User_Genders_Update_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'letter';
+
+/** columns and relationships of "users" */
+export type TApi_Users = {
+  country: Maybe<Scalars['String']>;
+  created_at: Scalars['api_timestamptz'];
+  email: Scalars['String'];
+  first_name: Maybe<Scalars['String']>;
+  gender: Maybe<TApi_User_Genders_Enum>;
+  id: Scalars['Int'];
+  last_name: Maybe<Scalars['String']>;
+  updated_at: Scalars['api_timestamptz'];
+};
+
+/** aggregated selection of "users" */
+export type TApi_Users_Aggregate = {
+  aggregate: Maybe<TApi_Users_Aggregate_Fields>;
+  nodes: Array<TApi_Users>;
+};
+
+/** aggregate fields of "users" */
+export type TApi_Users_Aggregate_Fields = {
+  avg: Maybe<TApi_Users_Avg_Fields>;
+  count: Maybe<Scalars['Int']>;
+  max: Maybe<TApi_Users_Max_Fields>;
+  min: Maybe<TApi_Users_Min_Fields>;
+  stddev: Maybe<TApi_Users_Stddev_Fields>;
+  stddev_pop: Maybe<TApi_Users_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<TApi_Users_Stddev_Samp_Fields>;
+  sum: Maybe<TApi_Users_Sum_Fields>;
+  var_pop: Maybe<TApi_Users_Var_Pop_Fields>;
+  var_samp: Maybe<TApi_Users_Var_Samp_Fields>;
+  variance: Maybe<TApi_Users_Variance_Fields>;
+};
+
+
+/** aggregate fields of "users" */
+export type TApi_Users_Aggregate_FieldsCountArgs = {
+  columns: Maybe<Array<TApi_Users_Select_Column>>;
+  distinct: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "users" */
+export type TApi_Users_Aggregate_Order_By = {
+  avg: Maybe<TApi_Users_Avg_Order_By>;
+  count: Maybe<TApi_Order_By>;
+  max: Maybe<TApi_Users_Max_Order_By>;
+  min: Maybe<TApi_Users_Min_Order_By>;
+  stddev: Maybe<TApi_Users_Stddev_Order_By>;
+  stddev_pop: Maybe<TApi_Users_Stddev_Pop_Order_By>;
+  stddev_samp: Maybe<TApi_Users_Stddev_Samp_Order_By>;
+  sum: Maybe<TApi_Users_Sum_Order_By>;
+  var_pop: Maybe<TApi_Users_Var_Pop_Order_By>;
+  var_samp: Maybe<TApi_Users_Var_Samp_Order_By>;
+  variance: Maybe<TApi_Users_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "users" */
+export type TApi_Users_Arr_Rel_Insert_Input = {
+  data: Array<TApi_Users_Insert_Input>;
+  on_conflict: Maybe<TApi_Users_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type TApi_Users_Avg_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "users" */
+export type TApi_Users_Avg_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type TApi_Users_Bool_Exp = {
+  _and: Maybe<Array<Maybe<TApi_Users_Bool_Exp>>>;
+  _not: Maybe<TApi_Users_Bool_Exp>;
+  _or: Maybe<Array<Maybe<TApi_Users_Bool_Exp>>>;
+  country: Maybe<TApi_String_Comparison_Exp>;
+  created_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
+  email: Maybe<TApi_String_Comparison_Exp>;
+  first_name: Maybe<TApi_String_Comparison_Exp>;
+  gender: Maybe<TApi_User_Genders_Enum_Comparison_Exp>;
+  id: Maybe<TApi_Int_Comparison_Exp>;
+  last_name: Maybe<TApi_String_Comparison_Exp>;
+  updated_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "users" */
+export type TApi_Users_Constraint = 
+  /** unique or primary key constraint */
+  'users_email_key' |
+  /** unique or primary key constraint */
+  'users_pkey';
+
+/** input type for incrementing integer columne in table "users" */
+export type TApi_Users_Inc_Input = {
+  id: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "users" */
+export type TApi_Users_Insert_Input = {
+  country: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['api_timestamptz']>;
+  email: Maybe<Scalars['String']>;
+  first_name: Maybe<Scalars['String']>;
+  gender: Maybe<TApi_User_Genders_Enum>;
+  id: Maybe<Scalars['Int']>;
+  last_name: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type TApi_Users_Max_Fields = {
+  country: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['api_timestamptz']>;
+  email: Maybe<Scalars['String']>;
+  first_name: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  last_name: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
+};
+
+/** order by max() on columns of table "users" */
+export type TApi_Users_Max_Order_By = {
+  country: Maybe<TApi_Order_By>;
+  created_at: Maybe<TApi_Order_By>;
+  email: Maybe<TApi_Order_By>;
+  first_name: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  last_name: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
+};
+
+/** aggregate min on columns */
+export type TApi_Users_Min_Fields = {
+  country: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['api_timestamptz']>;
+  email: Maybe<Scalars['String']>;
+  first_name: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  last_name: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
+};
+
+/** order by min() on columns of table "users" */
+export type TApi_Users_Min_Order_By = {
+  country: Maybe<TApi_Order_By>;
+  created_at: Maybe<TApi_Order_By>;
+  email: Maybe<TApi_Order_By>;
+  first_name: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  last_name: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
+};
+
+/** response of any mutation on the table "users" */
+export type TApi_Users_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<TApi_Users>;
+};
+
+/** input type for inserting object relation for remote table "users" */
+export type TApi_Users_Obj_Rel_Insert_Input = {
+  data: TApi_Users_Insert_Input;
+  on_conflict: Maybe<TApi_Users_On_Conflict>;
+};
+
+/** on conflict condition type for table "users" */
+export type TApi_Users_On_Conflict = {
+  constraint: TApi_Users_Constraint;
+  update_columns: Array<TApi_Users_Update_Column>;
+  where: Maybe<TApi_Users_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "users" */
+export type TApi_Users_Order_By = {
+  country: Maybe<TApi_Order_By>;
+  created_at: Maybe<TApi_Order_By>;
+  email: Maybe<TApi_Order_By>;
+  first_name: Maybe<TApi_Order_By>;
+  gender: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  last_name: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
+};
+
+/** select columns of table "users" */
+export type TApi_Users_Select_Column = 
+  /** column name */
+  'country' |
+  /** column name */
+  'created_at' |
+  /** column name */
+  'email' |
+  /** column name */
+  'first_name' |
+  /** column name */
+  'gender' |
+  /** column name */
+  'id' |
+  /** column name */
+  'last_name' |
+  /** column name */
+  'updated_at';
+
+/** input type for updating data in table "users" */
+export type TApi_Users_Set_Input = {
+  country: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['api_timestamptz']>;
+  email: Maybe<Scalars['String']>;
+  first_name: Maybe<Scalars['String']>;
+  gender: Maybe<TApi_User_Genders_Enum>;
+  id: Maybe<Scalars['Int']>;
+  last_name: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type TApi_Users_Stddev_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "users" */
+export type TApi_Users_Stddev_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type TApi_Users_Stddev_Pop_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "users" */
+export type TApi_Users_Stddev_Pop_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type TApi_Users_Stddev_Samp_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "users" */
+export type TApi_Users_Stddev_Samp_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate sum on columns */
+export type TApi_Users_Sum_Fields = {
+  id: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "users" */
+export type TApi_Users_Sum_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** update columns of table "users" */
+export type TApi_Users_Update_Column = 
+  /** column name */
+  'country' |
+  /** column name */
+  'created_at' |
+  /** column name */
+  'email' |
+  /** column name */
+  'first_name' |
+  /** column name */
+  'gender' |
+  /** column name */
+  'id' |
+  /** column name */
+  'last_name' |
+  /** column name */
+  'updated_at';
+
+/** aggregate var_pop on columns */
+export type TApi_Users_Var_Pop_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "users" */
+export type TApi_Users_Var_Pop_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type TApi_Users_Var_Samp_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "users" */
+export type TApi_Users_Var_Samp_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate variance on columns */
+export type TApi_Users_Variance_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "users" */
+export type TApi_Users_Variance_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
 export type TBooleanQueryOperatorInput = {
   eq: Maybe<Scalars['Boolean']>;
   ne: Maybe<Scalars['Boolean']>;
@@ -5300,12 +5816,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
-  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale';
+  'childTranslationsJson___locale' |
+  'childTranslationsJson___nextHelp';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -5869,12 +6385,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -7088,12 +7604,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -7302,12 +7818,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
-  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale';
+  'locale' |
+  'nextHelp';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -7406,12 +7922,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {

@@ -13,14 +13,10 @@ import { useTranslation } from 'react-i18next';
 
 interface IProps {
   isOpen: boolean;
-  otherLocaleTranslations: {
-    localeName: string;
-    localePath: string;
-  };
   closeDrawer: () => void;
 }
 
-const TemporaryDrawer = ({ isOpen, otherLocaleTranslations, closeDrawer }: IProps) => {
+const TemporaryDrawer = ({ isOpen, closeDrawer }: IProps) => {
   const { t } = useTranslation();
   return (
     <Drawer modal open={isOpen} onClose={closeDrawer}>
@@ -37,14 +33,14 @@ const TemporaryDrawer = ({ isOpen, otherLocaleTranslations, closeDrawer }: IProp
         <List singleSelection>
           <Link
             onClick={closeDrawer}
-            to={otherLocaleTranslations.localePath}
+            to={t('localePath')}
             sx={{
               textDecoration: 'none',
             }}
           >
             <ListItem>
               <Button rounded outlined>
-                {otherLocaleTranslations.localeName}
+                {t('localeName')}
               </Button>
             </ListItem>
           </Link>

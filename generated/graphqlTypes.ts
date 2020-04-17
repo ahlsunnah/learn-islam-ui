@@ -8004,20 +8004,13 @@ export type TChapterQueryQuery = { api: { chapter: Maybe<(
 
 export type THomeTrackFragment = (
   Pick<TApi_Tracks, 'id' | 'order' | 'slug' | 'soon'>
-  & { translations: Array<Pick<TApi_Track_Translations, 'title' | 'description'>> }
+  & { translations: Array<Pick<TApi_Track_Translations, 'title' | 'description' | 'locale_code'>> }
 );
 
-export type THomeTranslationsFragment = Pick<TTranslationsJson, 'aboutUs' | 'connect' | 'copyright' | 'courses' | 'enroll' | 'feature1Text' | 'feature2Text' | 'feature3Text' | 'feature1Title' | 'feature2Title' | 'feature3Title' | 'featuredCoursesTitle' | 'featuresTitle' | 'footerSocialTitle' | 'homeTitle' | 'homeDescription' | 'homeEmailTitle' | 'homeEmailPlaceHolder' | 'homeFooterCTA' | 'homeStartTrack' | 'locale' | 'localeName' | 'localePath' | 'newsletterEmailNotValid' | 'newsletterSubscribed' | 'newsletterSuccess' | 'siteContentPresentation' | 'homeContentTitle' | 'siteName' | 'siteSlogan' | 'soon' | 'start' | 'tracks' | 'urlFacebook' | 'urlTelegram' | 'urlTwitter' | 'urlYoutube'>;
-
-export type THomeOtherTranslationsFragment = Pick<TTranslationsJson, 'locale' | 'localeName' | 'localePath'>;
-
-export type THomeQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: TApi_Locales_Enum;
-};
+export type THomeQueryQueryVariables = {};
 
 
-export type THomeQueryQuery = { translations: Maybe<THomeTranslationsFragment>, otherLocaleTranslations: Maybe<THomeOtherTranslationsFragment>, api: { tracks: Array<THomeTrackFragment> } };
+export type THomeQueryQuery = { api: { tracks: Array<THomeTrackFragment> } };
 
 export type TQuizzesPageQuizFragment = (
   Pick<TApi_Quizzes, 'id' | 'type_slug'>

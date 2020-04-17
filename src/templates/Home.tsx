@@ -29,62 +29,13 @@ export const pageQuery = graphql`
     order
     slug
     soon
-    translations(where: { locale_code: { _eq: $localeEnum } }) {
+    translations {
       title
       description
+      locale_code
     }
   }
-  fragment HomeTranslations on TranslationsJson {
-    aboutUs
-    connect
-    copyright
-    courses
-    enroll
-    feature1Text
-    feature2Text
-    feature3Text
-    feature1Title
-    feature2Title
-    feature3Title
-    featuredCoursesTitle
-    featuresTitle
-    footerSocialTitle
-    homeTitle
-    homeDescription
-    homeEmailTitle
-    homeEmailPlaceHolder
-    homeFooterCTA
-    homeStartTrack
-    locale
-    localeName
-    localePath
-    newsletterEmailNotValid
-    newsletterSubscribed
-    newsletterSuccess
-    siteContentPresentation
-    homeContentTitle
-    siteName
-    siteSlogan
-    soon
-    start
-    tracks
-    urlFacebook
-    urlTelegram
-    urlTwitter
-    urlYoutube
-  }
-  fragment HomeOtherTranslations on TranslationsJson {
-    locale
-    localeName
-    localePath
-  }
-  query homeQuery($locale: String!, $localeEnum: api_locales_enum!) {
-    translations: translationsJson(locale: { eq: $locale }) {
-      ...HomeTranslations
-    }
-    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
-      ...HomeOtherTranslations
-    }
+  query homeQuery {
     api {
       tracks(limit: 3) {
         ...HomeTrack

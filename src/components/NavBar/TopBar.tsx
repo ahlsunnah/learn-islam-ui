@@ -5,16 +5,14 @@ import MenuIcon from 'react-icons/lib/md/menu';
 import NavSection from './NavSection';
 import '@material/react-top-app-bar/index.scss';
 import TopAppBar, { TopAppBarIcon, TopAppBarRow, TopAppBarSection, TopAppBarTitle } from '@material/react-top-app-bar';
-import { TTracksPageOtherTranslationsFragment } from '../../graphqlTypes';
 import { useTranslation } from 'react-i18next';
 
-interface IProps {
+type Props = {
   otherLanguagePath: string;
-  otherLocaleTranslations: TTracksPageOtherTranslationsFragment;
   toggleDrawer: () => void;
-}
+};
 
-const TopBar = ({ otherLanguagePath, otherLocaleTranslations, toggleDrawer }: IProps) => {
+const TopBar = ({ otherLanguagePath, toggleDrawer }: Props) => {
   const { t } = useTranslation();
   return (
     <TopAppBar
@@ -36,7 +34,6 @@ const TopBar = ({ otherLanguagePath, otherLocaleTranslations, toggleDrawer }: IP
               display: ['none', 'none', 'block'],
             }}
             otherLanguagePath={otherLanguagePath}
-            otherLocaleTranslations={otherLocaleTranslations}
           />
           <button
             onClick={toggleDrawer}

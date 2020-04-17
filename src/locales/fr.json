@@ -96,5 +96,8 @@
   "homeContentTitle": "Résumé rapide de l'ensemble du site",
   "chooseAnswer": "Choisis la réponse...",
   "id": "fr",
-  "locale": "fr"
+  "locale": "fr",
+  "otherTranslationsLocale": "ar",
+  "otherTranslationsLocalePath": "/",
+  "otherTranslationsLocaleName": "العربية"
 }

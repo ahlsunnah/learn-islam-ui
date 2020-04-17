@@ -97,5 +97,8 @@
   "homeContentTitle": "نبذة عن محتويات الموقع",
   "chooseAnswer": "اختر الجواب...",
   "id": "ar",
-  "locale": "ar"
+  "locale": "ar",
+  "otherTranslationsLocale": "fr",
+  "otherTranslationsLocalePath": "/fr/",
+  "otherTranslationsLocaleName": "Français"
 }

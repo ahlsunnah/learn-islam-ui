@@ -8,11 +8,11 @@ import 'styles/theme.scss';
 import '@material/react-ripple';
 import { withTrans } from '../i18n/withTranslation';
 
-interface IProps {
+type Props = {
   children: JSX.Element;
-}
+};
 
-const Layout = ({ children }: IProps) => (
+const Layout = ({ children }: Props) => (
   <ThemeProvider theme={theme}>
     <Styled.root>
       {children}

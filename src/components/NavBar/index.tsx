@@ -7,10 +7,10 @@ import TopBar from './TopBar';
 import { TTracksPageOtherTranslationsFragment, TAboutUsOtherTranslationFragment } from '../../graphqlTypes';
 import { useState } from 'react';
 
-interface Props {
+type Props = {
   otherLanguagePath: string;
   otherLocaleTranslations: TTracksPageOtherTranslationsFragment | TAboutUsOtherTranslationFragment;
-}
+};
 
 const NavBar: React.FC<Props> = ({ otherLanguagePath, otherLocaleTranslations }) => {
   const [isOpen, setOpen] = useState<boolean>(false);

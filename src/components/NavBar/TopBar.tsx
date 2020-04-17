@@ -3,7 +3,6 @@ import { jsx } from 'theme-ui';
 import LogoSection from './LogoSection';
 import MenuIcon from 'react-icons/lib/md/menu';
 import NavSection from './NavSection';
-import { INavBarTranslations } from '../../types/navbar';
 import '@material/react-top-app-bar/index.scss';
 import TopAppBar, { TopAppBarIcon, TopAppBarRow, TopAppBarSection, TopAppBarTitle } from '@material/react-top-app-bar';
 import { TTracksPageOtherTranslationsFragment } from '../../graphqlTypes';
@@ -12,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
   otherLanguagePath: string;
   otherLocaleTranslations: TTracksPageOtherTranslationsFragment;
-  t: INavBarTranslations;
   toggleDrawer: () => void;
 }
 

@@ -1,9 +1,9 @@
 import { Link } from 'gatsby';
+import _get from 'lodash/get';
 import cx from 'classnames';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Button from '../Button';
 import structure from './structure';
-import { INavBarTranslations } from '../../types/navbar';
 import { TTracksPageOtherTranslationsFragment } from '../../graphqlTypes';
 import { useTranslation } from 'react-i18next';
 
@@ -11,11 +11,17 @@ interface IProps {
   className?: string;
   otherLanguagePath: string;
   otherLocaleTranslations: TTracksPageOtherTranslationsFragment;
-  t: INavBarTranslations;
 }
 
 const NavSection = ({ className, otherLanguagePath, otherLocaleTranslations }: IProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const otherLanguage = useMemo(() => _get(otherLocaleTranslations, 'locale'), [otherLocaleTranslations]);
+
+  const changeLanguage = useCallback(() => {
+    i18n.changeLanguage(otherLanguage);
+  }, [otherLanguage, i18n]);
+
   return (
     <nav className={cx('flex1', className)}>
       <ul className="list flex flex-wrap justify-around items-center">
@@ -28,7 +34,7 @@ const NavSection = ({ className, otherLanguagePath, otherLocaleTranslations }: I
         ))}
         <li>
           <Link className="ph2 no-underline" to={otherLanguagePath}>
-            <Button rounded outlined>
+            <Button rounded outlined onClick={changeLanguage}>
               {otherLocaleTranslations.localeName}
             </Button>
           </Link>

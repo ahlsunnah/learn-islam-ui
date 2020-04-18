@@ -5,12 +5,11 @@ import Button from '../Button';
 import structure from './structure';
 import { useTranslation } from 'react-i18next';
 
-interface IProps {
+type Props = {
   className?: string;
-  otherLanguagePath: string;
-}
+};
 
-const NavSection = ({ className, otherLanguagePath }: IProps) => {
+const NavSection = ({ className }: Props) => {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = useCallback(() => {
@@ -28,7 +27,7 @@ const NavSection = ({ className, otherLanguagePath }: IProps) => {
           </li>
         ))}
         <li>
-          <Link className="ph2 no-underline" to={otherLanguagePath}>
+          <Link className="ph2 no-underline" to={t('otherTranslationsLocalePath')}>
             <Button rounded outlined onClick={changeLanguage}>
               {t('otherTranslationsLocaleName')}
             </Button>

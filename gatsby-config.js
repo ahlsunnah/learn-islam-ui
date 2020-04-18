@@ -1,13 +1,15 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
-const {API, API_SECRET} = process.env
+console.log(process.env.NODE_ENV);
+
+const { API, API_SECRET } = process.env;
 if (!API) {
-  throw new Error('We need an API environment variable !')
+  throw new Error('We need an API environment variable !');
 }
 if (!API_SECRET) {
-  throw new Error('We need an API_SECRET environment variable !')
+  throw new Error('We need an API_SECRET environment variable !');
 }
 module.exports = {
   siteMetadata: {
@@ -67,7 +69,7 @@ module.exports = {
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-sass',
-      options: {includePaths: ['node_modules']},
+      options: { includePaths: ['node_modules'] },
     },
     // 'gatsby-plugin-postcss',
 
@@ -113,8 +115,7 @@ module.exports = {
       options: {
         disable: !process.env.SENTRY_DSN, // When do you want to disable it ?
         src: 'https://browser.sentry-cdn.com/5.15.4/bundle.min.js',
-        integrity:
-          'sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB',
+        integrity: 'sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB',
         crossorigin: 'anonymous',
         onLoad: `() => Sentry.init({dsn:"${process.env.SENTRY_DSN}"})`,
       },
@@ -122,4 +123,4 @@ module.exports = {
     'gatsby-plugin-offline',
     `gatsby-plugin-zeit-now`,
   ],
-}
+};

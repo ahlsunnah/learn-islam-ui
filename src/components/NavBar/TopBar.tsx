@@ -8,11 +8,10 @@ import TopAppBar, { TopAppBarIcon, TopAppBarRow, TopAppBarSection, TopAppBarTitl
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  otherLanguagePath: string;
   toggleDrawer: () => void;
 };
 
-const TopBar = ({ otherLanguagePath, toggleDrawer }: Props) => {
+const TopBar = ({ toggleDrawer }: Props) => {
   const { t } = useTranslation();
   return (
     <TopAppBar
@@ -33,7 +32,6 @@ const TopBar = ({ otherLanguagePath, toggleDrawer }: Props) => {
             sx={{
               display: ['none', 'none', 'block'],
             }}
-            otherLanguagePath={otherLanguagePath}
           />
           <button
             onClick={toggleDrawer}

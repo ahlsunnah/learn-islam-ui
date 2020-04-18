@@ -27,12 +27,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
     createPage({
       path: localePaths[locale],
       component: slash(homeTemplate),
-      context: {
-        locale,
-        localeEnum: locale,
-        localePaths,
-        otherLanguagePath: otherLocalesPaths && otherLocalesPaths[locale],
-      },
     });
   });
 

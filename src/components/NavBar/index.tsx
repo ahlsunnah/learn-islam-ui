@@ -6,11 +6,7 @@ import TemporaryDrawer from './TemporaryDrawer';
 import TopBar from './TopBar';
 import { useState } from 'react';
 
-type Props = {
-  otherLanguagePath: string;
-};
-
-const NavBar: React.FC<Props> = ({ otherLanguagePath }) => {
+const NavBar: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const toggleDrawer = () => setOpen(!isOpen);
   const closeDrawer = () => setOpen(false);
@@ -18,7 +14,7 @@ const NavBar: React.FC<Props> = ({ otherLanguagePath }) => {
     <div>
       <TemporaryDrawer closeDrawer={closeDrawer} isOpen={isOpen} />
       <DrawerAppContent>
-        <TopBar otherLanguagePath={otherLanguagePath} toggleDrawer={toggleDrawer} />
+        <TopBar toggleDrawer={toggleDrawer} />
       </DrawerAppContent>
     </div>
   );

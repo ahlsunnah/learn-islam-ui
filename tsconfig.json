@@ -23,7 +23,7 @@
     // Be strict
     "strict": true,
     "alwaysStrict": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitThis": true,
     // "strictFunctionTypes": true,
     "strictNullChecks": true,

@@ -5,15 +5,11 @@ import NavBar from 'components/NavBar';
 import HomeTrackCard from './HomeTrackCard';
 import { THomeQueryQuery } from '../../graphqlTypes';
 
-type Props = {
-  otherLanguagePath: string;
-} & THomeQueryQuery;
-
-const HomeHero = ({ api: { tracks }, otherLanguagePath }: Props) => {
+const HomeHero = ({ api: { tracks } }: THomeQueryQuery) => {
   const { t } = useTranslation();
   return (
     <div className="min-vh-100 flex flex-column mdc-theme--primary-bg bg-pattern">
-      <NavBar otherLanguagePath={otherLanguagePath} />
+      <NavBar />
       <div className="mt64 min-h-512-ns flex1 flex flex-column flex-row-ns justify-between items-center">
         <div className="mt4 mt0-ns ph5 flex1 white">
           <div

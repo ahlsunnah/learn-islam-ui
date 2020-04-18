@@ -4,16 +4,14 @@ import RawHTML from 'components/RawHTML';
 import feature1Svg from 'images/features-checklist.svg';
 // import feature3Svg from 'images/features-globe.svg'
 import feature2Svg from 'images/features-interface.svg';
-import { THomeTranslationsFragment } from '../../graphqlTypes';
 import { useTranslation } from 'react-i18next';
 
-type TProps = {} & THomeTranslationsFragment;
-
 interface IItem {
-  title: keyof THomeTranslationsFragment;
-  text: keyof THomeTranslationsFragment;
+  title: string;
+  text: string;
   svg: string;
 }
+
 const items: IItem[] = [
   {
     title: 'feature1Title',

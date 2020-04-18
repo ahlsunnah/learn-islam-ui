@@ -6,14 +6,17 @@ import { useTranslation } from 'react-i18next';
 
 const HomeNewsletter = () => {
   const { t } = useTranslation();
+
   const [email, setEmail] = useState<string>('');
   const [result, setResult] = useState<{
     message: string;
     success: boolean;
   }>({ message: '', success: false });
+
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
+
   const handleSubmit = () => {
     try {
       addToMailchimp(email).then((callResult) => {
@@ -32,6 +35,7 @@ const HomeNewsletter = () => {
       });
     }
   };
+
   return (
     <section className="pv5 min-h-512-ns flex flex-column justify-center items-center mdc-theme--primary-bg">
       <div className="ph4 tc white">

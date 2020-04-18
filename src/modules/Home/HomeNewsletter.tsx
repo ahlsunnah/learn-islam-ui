@@ -1,77 +1,58 @@
-import cx from 'classnames'
-import Button from 'components/Button'
-import addToMailchimp from 'gatsby-plugin-mailchimp'
-import React, {useState} from 'react'
+import cx from 'classnames';
+import Button from 'components/Button';
+import addToMailchimp from 'gatsby-plugin-mailchimp';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-interface IProps {
-  enroll: string
-  homeEmailPlaceHolder: string
-  homeEmailTitle: string
-  newsletterEmailNotValid: string
-  newsletterSubscribed: string
-  newsletterSuccess: string
-}
+const HomeNewsletter = () => {
+  const { t } = useTranslation();
 
-const HomeNewsletter = ({
-  enroll,
-  homeEmailPlaceHolder,
-  homeEmailTitle,
-  newsletterEmailNotValid,
-  newsletterSubscribed,
-  newsletterSuccess,
-}: IProps) => {
-  const [email, setEmail] = useState<string>('')
+  const [email, setEmail] = useState<string>('');
   const [result, setResult] = useState<{
-    message: string
-    success: boolean
-  }>({message: '', success: false})
+    message: string;
+    success: boolean;
+  }>({ message: '', success: false });
+
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
+
   const handleSubmit = () => {
     try {
       addToMailchimp(email).then((callResult) => {
-        const {msg, result} = callResult
-        let message = msg
-        if (msg.includes('already subscribed to list'))
-          message = newsletterSubscribed
-        else if (msg.includes('Thank you for subscribing!'))
-          message = newsletterSuccess
-        setResult({success: result === 'success', message})
-      })
+        const { msg, result } = callResult;
+        let message = msg;
+        if (msg.includes('already subscribed to list')) message = t('newsletterSubscribed');
+        else if (msg.includes('Thank you for subscribing!')) message = t('newsletterSuccess');
+        setResult({ success: result === 'success', message });
+      });
     } catch (e) {
       setResult({
         success: false,
-        message: e.includes(
-          'email must be of type string and a valid email address',
-        )
-          ? newsletterEmailNotValid
+        message: e.includes('email must be of type string and a valid email address')
+          ? t('newsletterEmailNotValid')
           : e,
-      })
+      });
     }
-  }
+  };
+
   return (
     <section className="pv5 min-h-512-ns flex flex-column justify-center items-center mdc-theme--primary-bg">
       <div className="ph4 tc white">
-        <h2>{homeEmailTitle}</h2>
+        <h2>{t('homeEmailTitle')}</h2>
       </div>
       <div className="relative flex flex-column flex-row-ns justify-around items-center">
         <input
           type="text"
           className="mh2 ph4 pv2 br-pill ba bw1 b--light-gray raised"
           onChange={handleChangeEmail}
-          placeholder={homeEmailPlaceHolder}
+          placeholder={t('homeEmailPlaceHolder')}
         />
         {/* <label className="mdc-floating-label" htmlFor="newsletter-field">
           {homeEmailPlaceHolder}
         </label> */}
-        <Button
-          className="mt4 mt0-ns mh2 ph3 ph4-ns"
-          onClick={handleSubmit}
-          elevated
-          inverse
-        >
-          {enroll}
+        <Button className="mt4 mt0-ns mh2 ph3 ph4-ns" onClick={handleSubmit} elevated inverse>
+          {t('enroll')}
         </Button>
         {result.message && (
           <div
@@ -85,7 +66,7 @@ const HomeNewsletter = ({
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HomeNewsletter
+export default HomeNewsletter;

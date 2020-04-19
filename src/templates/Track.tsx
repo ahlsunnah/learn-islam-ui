@@ -12,7 +12,7 @@ const TrackTemplate = (props: ITrackPageProps) => {
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
       <Helmet>
-        <html lang={props.pageContext.locale} />
+        <html lang={i18n.language} />
       </Helmet>
       <TrackContainer {...props} />
     </div>

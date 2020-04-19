@@ -10,7 +10,7 @@ const cleanPathName = (previousPath: string, currentLocale: string) => {
   return previousPath.replace(`/${currentLocale === 'ar' ? '' : currentLocale}`, '')
 }
 
-const removeExtraSlashes = (string: string) => string.replace(/([^:]\/)\/+/g, '$1')
+const removeExtraSlashes = (string: string) => string.replace(/^\/+/g, '')
 
 type Props = {
   className?: string
@@ -24,7 +24,7 @@ const NavSection = ({ className }: Props) => {
   const destination = useMemo(
     () =>
       removeExtraSlashes(
-        `/${otherTranslationsLocale === 'ar' ? '' : otherTranslationsLocale}/${cleanPathName(
+        `${otherTranslationsLocale === 'ar' ? '' : otherTranslationsLocale}/${cleanPathName(
           location.pathname,
           t('locale')
         )}`
@@ -47,7 +47,7 @@ const NavSection = ({ className }: Props) => {
           </li>
         ))}
         <li>
-          <Link className="ph2 no-underline" to={destination}>
+          <Link className="ph2 no-underline" to={`/${destination}`}>
             <Button rounded outlined onClick={changeLanguage}>
               {t('otherTranslationsLocaleName')}
             </Button>

@@ -1,15 +1,15 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
-console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV)
 
-const { API, API_SECRET } = process.env;
+const { API, API_SECRET } = process.env
 if (!API) {
-  throw new Error('We need an API environment variable !');
+  throw new Error('We need an API environment variable !')
 }
 if (!API_SECRET) {
-  throw new Error('We need an API_SECRET environment variable !');
+  throw new Error('We need an API_SECRET environment variable !')
 }
 module.exports = {
   siteMetadata: {
@@ -123,4 +123,4 @@ module.exports = {
     'gatsby-plugin-offline',
     `gatsby-plugin-zeit-now`,
   ],
-};
+}

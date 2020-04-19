@@ -1,10 +1,6 @@
-import {IPageContext, Locale} from './index'
-import {INext} from './chapter'
-import {
-  TQuizQueryQuery,
-  TQuizzesPageTranslationsFragment,
-  TQuizzesPageQuizFragment,
-} from '../graphqlTypes'
+import { IPageContext, Locale } from './index'
+import { INext } from './chapter'
+import { TQuizQueryQuery, TQuizzesPageTranslationsFragment, TQuizzesPageQuizFragment } from '../graphqlTypes'
 
 export interface IParams {
   courseId: number

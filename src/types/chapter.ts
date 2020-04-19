@@ -1,5 +1,5 @@
-import {IPageContext} from './index'
-import {TChapterQueryQuery} from '../graphqlTypes'
+import { IPageContext } from './index'
+import { TChapterQueryQuery } from '../graphqlTypes'
 
 export interface INext {
   path: string

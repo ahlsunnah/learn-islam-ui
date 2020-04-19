@@ -1,19 +1,23 @@
 import React from 'react'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TrackContainer from 'modules/Track'
 import './styles.css'
-import {ITrackPageProps} from '../types/track'
+import { ITrackPageProps } from '../types/track'
+import { useTranslation } from 'react-i18next'
 
-const TrackTemplate = (props: ITrackPageProps) => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
-    <Helmet>
-      <html lang={props.pageContext.locale} />
-    </Helmet>
-    <TrackContainer {...props} />
-  </div>
-)
+const TrackTemplate = (props: ITrackPageProps) => {
+  const { i18n } = useTranslation()
+  return (
+    <div className={cx({ rtl: i18n.language === 'ar' })}>
+      <Helmet>
+        <html lang={i18n.language} />
+      </Helmet>
+      <TrackContainer {...props} />
+    </div>
+  )
+}
 
 export default TrackTemplate
 
@@ -22,7 +26,7 @@ export const pageQuery = graphql`
     id
     level
     slug
-    translations(where: {locale_code: {_eq: $localeEnum}}) {
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
       title
       description
     }
@@ -30,7 +34,7 @@ export const pageQuery = graphql`
       duration
       id
       slug
-      translations(where: {locale_code: {_eq: $localeEnum}}) {
+      translations(where: { locale_code: { _eq: $localeEnum } }) {
         locale_code
       }
     }
@@ -40,7 +44,7 @@ export const pageQuery = graphql`
     topic {
       id
       color
-      translations(where: {locale_code: {_eq: $localeEnum}}) {
+      translations(where: { locale_code: { _eq: $localeEnum } }) {
         title
       }
     }
@@ -61,16 +65,12 @@ export const pageQuery = graphql`
     trackLevel
   }
 
-  query trackQuery(
-    $locale: String!
-    $localeEnum: api_locales_enum!
-    $id: Int!
-  ) {
+  query trackQuery($locale: String!, $localeEnum: api_locales_enum!, $id: Int!) {
     api {
       track: tracks_by_pk(id: $id) {
         id
         slug
-        translations(where: {locale_code: {_eq: $localeEnum}}) {
+        translations(where: { locale_code: { _eq: $localeEnum } }) {
           title
         }
         courses {
@@ -78,10 +78,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...TrackPageTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       localeName
       localePath
     }

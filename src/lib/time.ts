@@ -1,4 +1,4 @@
-import {ObjectOf} from 'interfaces'
+import { ObjectOf } from 'interfaces'
 
 // inspired of polyfill for IntlPluralRules
 

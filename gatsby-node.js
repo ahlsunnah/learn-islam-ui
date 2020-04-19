@@ -4,7 +4,7 @@
 require('source-map-support').install()
 require('ts-node').register()
 
-exports.onCreateWebpackConfig = ({actions, getConfig}) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   const config = getConfig()
   config.node.fs = 'empty' // fixes antlr4 build
   config.resolve.modules = ['src', 'node_modules']

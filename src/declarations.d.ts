@@ -12,13 +12,11 @@ declare module '*.svg' {
 }
 
 declare module 'react-icons/lib/*' {
-  const value: React.FC<{className?: string}>
+  const value: React.FC<{ className?: string }>
   export = value
 }
 
 declare module 'gatsby-plugin-mailchimp' {
-  const addToMailchimp: (
-    email: string,
-  ) => Promise<{msg: string; result: string}>
+  const addToMailchimp: (email: string) => Promise<{ msg: string; result: string }>
   export = addToMailchimp
 }

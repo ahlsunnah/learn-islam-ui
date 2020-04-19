@@ -1,5 +1,5 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
 
 i18n
   // pass the i18n instance to react-i18next.
@@ -24,8 +24,8 @@ i18n
     react: {
       wait: true,
     },
-  });
+  })
 
-i18n.languages = ['ar', 'fr'];
+i18n.languages = ['ar', 'fr']
 
-export default i18n;
+export default i18n

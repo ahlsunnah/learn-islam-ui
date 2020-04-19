@@ -1,5 +1,5 @@
-import {useState, useEffect, Dispatch, SetStateAction} from 'react'
-import {useIsFirstRender} from './useIsFirstRender'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import { useIsFirstRender } from './useIsFirstRender'
 
 const getPersistedValue = (key: string) => {
   if (typeof window === 'undefined') return
@@ -9,15 +9,10 @@ const getPersistedValue = (key: string) => {
   }
 }
 
-const usePersistedState = <T>(
-  key: string,
-  initialState: T,
-): [T, Dispatch<SetStateAction<T>>] => {
+const usePersistedState = <T>(key: string, initialState: T): [T, Dispatch<SetStateAction<T>>] => {
   const isFirstRender = useIsFirstRender()
 
-  const [state, setState] = useState(
-    (getPersistedValue(key) as T) || initialState,
-  )
+  const [state, setState] = useState((getPersistedValue(key) as T) || initialState)
 
   useEffect(() => {
     // When the key change we update the state

@@ -9,9 +9,7 @@ interface IProps {
   className?: string
   rounded?: boolean
 }
-const Card = ({children, className, rounded}: IProps): JSX.Element => (
-  <MaterialCard className={cx(className, {'card-rounded': rounded})}>
-    {children}
-  </MaterialCard>
+const Card = ({ children, className, rounded }: IProps): JSX.Element => (
+  <MaterialCard className={cx(className, { 'card-rounded': rounded })}>{children}</MaterialCard>
 )
 export default Card

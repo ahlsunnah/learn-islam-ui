@@ -29,29 +29,21 @@ class StepWrapper extends React.Component<IProps, IState> {
 
   public componentDidMount(): void {
     if (getWindowWidth() > 800) {
-      this.setState({isSideBarVisible: true})
+      this.setState({ isSideBarVisible: true })
     }
   }
 
   private toggleSidebar = (): void => {
     this.setState(
-      ({isSideBarVisible}): IState => ({
+      ({ isSideBarVisible }): IState => ({
         isSideBarVisible: !isSideBarVisible,
-      }),
+      })
     )
   }
 
   public render(): JSX.Element {
-    const {
-      children,
-      currentCourseSlug,
-      track,
-      otherLocaleName,
-      otherLocalePath,
-      t,
-      title,
-    } = this.props
-    const {isSideBarVisible} = this.state
+    const { children, currentCourseSlug, track, otherLocaleName, otherLocalePath, t, title } = this.props
+    const { isSideBarVisible } = this.state
     return (
       <div>
         <Sidebar

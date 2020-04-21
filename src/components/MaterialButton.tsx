@@ -29,7 +29,7 @@ import {
   InjectedProps,
   RippledComponentProps, // eslint-disable-line @typescript-eslint/no-unused-vars
 } from '@material/react-ripple'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 
 const CSS_CLASSES = {
   ROOT: 'mdc-button',
@@ -92,12 +92,7 @@ export const Button = <T extends ButtonTypes>({
   }
   if (to) {
     return (
-      <Link
-        {...(props as React.HTMLProps<HTMLAnchorElement>)}
-        innerRef={initRipple as Function}
-        ref={null}
-        to={to}
-      >
+      <Link {...(props as React.HTMLProps<HTMLAnchorElement>)} innerRef={initRipple as Function} ref={null} to={to}>
         {!trailingIcon ? renderIcon(icon) : null}
         <span className={CSS_CLASSES.LABEL}>{children}</span>
         {trailingIcon ? renderIcon(trailingIcon) : null}
@@ -123,9 +118,7 @@ export const Button = <T extends ButtonTypes>({
   )
 }
 
-const renderIcon = (
-  icon?: React.ReactElement<React.HTMLProps<HTMLOrSVGElement>>,
-) =>
+const renderIcon = (icon?: React.ReactElement<React.HTMLProps<HTMLOrSVGElement>>) =>
   icon
     ? React.cloneElement(icon, {
         className: classnames(CSS_CLASSES.ICON, icon.props.className),

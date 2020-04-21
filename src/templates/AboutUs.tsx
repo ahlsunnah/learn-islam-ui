@@ -1,13 +1,13 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import cx from 'classnames'
 import AboutUsContainer from 'modules/AboutUs'
-import {IAboutUsProps} from 'types/aboutUs'
+import { IAboutUsProps } from 'types/aboutUs'
 import './styles.css'
 
 const AboutUs = (props: IAboutUsProps) => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+  <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
@@ -56,10 +56,10 @@ export const pageQuery = graphql`
         ...AboutUsTrack
       }
     }
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...AboutUsTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       ...AboutUsOtherTranslation
     }
   }

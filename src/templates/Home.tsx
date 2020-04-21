@@ -1,14 +1,14 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { graphql } from 'gatsby';
-import Helmet from 'react-helmet';
-import cx from 'classnames';
-import HomeContainer from 'modules/Home';
-import './styles.css';
-import { IHomePageProps } from 'types/home';
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { graphql } from 'gatsby'
+import Helmet from 'react-helmet'
+import cx from 'classnames'
+import HomeContainer from 'modules/Home'
+import './styles.css'
+import { IHomePageProps } from 'types/home'
 
 const Home = (props: IHomePageProps): React.ReactNode => {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
 
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
@@ -17,10 +17,10 @@ const Home = (props: IHomePageProps): React.ReactNode => {
       </Helmet>
       <HomeContainer {...props} />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 // $FlowIgnore
 export const pageQuery = graphql`
@@ -42,4 +42,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

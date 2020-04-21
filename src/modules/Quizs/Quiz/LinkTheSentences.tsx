@@ -1,12 +1,12 @@
 import cx from 'classnames'
 import shuffle from 'lib/shuffle'
 import PropTypes from 'prop-types'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import Correct from 'react-icons/lib/md/check'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 import MultilineSelect from './MultilineSelect'
-import {QuizProps} from 'types/quizs'
+import { QuizProps } from 'types/quizs'
 
 interface ILinkTheSentencesData {
   title: string
@@ -15,23 +15,13 @@ interface ILinkTheSentencesData {
     b: string
   }>
 }
-const LinkTheSentences = ({
-  finished,
-  number,
-  t: {chooseAnswer, locale},
-  translations,
-}: QuizProps) => {
-  const {title, values}: ILinkTheSentencesData = translations[0].data
-  const valuesDictionary = values.reduce<{[left: string]: string}>(
-    (acc, {a, b}) => {
-      acc[a] = b
-      return acc
-    },
-    {},
-  )
-  const [leftValues] = useState<string[]>(
-    shuffle(Object.keys(valuesDictionary)),
-  )
+const LinkTheSentences = ({ finished, number, t: { chooseAnswer, locale }, translations }: QuizProps) => {
+  const { title, values }: ILinkTheSentencesData = translations[0].data
+  const valuesDictionary = values.reduce<{ [left: string]: string }>((acc, { a, b }) => {
+    acc[a] = b
+    return acc
+  }, {})
+  const [leftValues] = useState<string[]>(shuffle(Object.keys(valuesDictionary)))
   const rightValues = Object.values(valuesDictionary).sort()
   const [selectedValuesDictionary, setSelectedValuesDictionary] = useState<{
     [left: string]: string | undefined
@@ -43,9 +33,7 @@ const LinkTheSentences = ({
     })
   }
   const chosenValues = Object.values(selectedValuesDictionary)
-  const remainingValues = rightValues.filter(
-    (rightValue) => !chosenValues.includes(rightValue),
-  )
+  const remainingValues = rightValues.filter((rightValue) => !chosenValues.includes(rightValue))
   return (
     <div>
       <div className="pb2 mb3 flex bb items-center">
@@ -67,11 +55,7 @@ const LinkTheSentences = ({
               <div className="tc mb1 f2">
                 {finished &&
                   hasSelectedSomething &&
-                  (isCorrect ? (
-                    <Correct className="dn-ns green" />
-                  ) : (
-                    <Error className="dn-ns red" />
-                  ))}
+                  (isCorrect ? <Correct className="dn-ns green" /> : <Error className="dn-ns red" />)}
                 <ArrowForward
                   className={cx('moon-gray rotate-90 dib-ns', {
                     dn: finished && hasSelectedSomething,

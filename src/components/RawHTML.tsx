@@ -4,7 +4,7 @@ interface IProps {
   children: string
   className?: string
 }
-const RawHTML = ({children, className = ''}: IProps) => (
+const RawHTML = ({ children, className = '' }: IProps) => (
   <div
     className={className}
     dangerouslySetInnerHTML={{

@@ -1,13 +1,13 @@
 import React from 'react'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import TracksContainer from 'modules/Tracks'
 import './styles.css'
-import {ITracksPageProps} from 'types/tracks'
+import { ITracksPageProps } from 'types/tracks'
 
 const Tracks = (props: ITracksPageProps) => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+  <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
@@ -48,16 +48,16 @@ export const pageQuery = graphql`
     id
     slug
     soon
-    translations(where: {locale_code: {_eq: $localeEnum}}) {
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
       title
       description
     }
   }
   query tracksQuery($locale: String!, $localeEnum: api_locales_enum) {
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...TracksPageTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       ...TracksPageOtherTranslations
     }
     api {

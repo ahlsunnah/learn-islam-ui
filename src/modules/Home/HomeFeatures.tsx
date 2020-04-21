@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import RawHTML from 'components/RawHTML';
-import feature1Svg from 'images/features-checklist.svg';
+import { jsx } from 'theme-ui'
+import RawHTML from 'components/RawHTML'
+import feature1Svg from 'images/features-checklist.svg'
 // import feature3Svg from 'images/features-globe.svg'
-import feature2Svg from 'images/features-interface.svg';
-import { useTranslation } from 'react-i18next';
+import feature2Svg from 'images/features-interface.svg'
+import { useTranslation } from 'react-i18next'
 
 interface IItem {
-  title: string;
-  text: string;
-  svg: string;
+  title: string
+  text: string
+  svg: string
 }
 
 const items: IItem[] = [
@@ -28,10 +28,10 @@ const items: IItem[] = [
   //   text: 'feature3Text',
   //   svg: feature3Svg,
   // },
-];
+]
 
 const HomeFeatures: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <section className="pv5 min-h-512-ns flex flex-column">
       <div sx={{ textAlign: 'center' }}>
@@ -49,6 +49,6 @@ const HomeFeatures: React.FC = () => {
         ))}
       </div>
     </section>
-  );
-};
-export default HomeFeatures;
+  )
+}
+export default HomeFeatures

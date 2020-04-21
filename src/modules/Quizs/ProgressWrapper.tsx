@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {compose, setPropTypes, withPropsOnChange} from 'recompose'
+import { compose, setPropTypes, withPropsOnChange } from 'recompose'
 import Progress from './Progress'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 class ProgressWrapper extends React.Component<Props> {
   // TODO
   render() {
-    const {percent, progressText} = this.props
+    const { percent, progressText } = this.props
     return (
       <div>
         <span className="pt2 f6">

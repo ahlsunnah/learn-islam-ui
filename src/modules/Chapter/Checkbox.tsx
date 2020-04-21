@@ -7,7 +7,7 @@ interface Props {
   children: string
   handleChange: () => void
 }
-const Checkbox = ({checked, children, handleChange}: Props) => (
+const Checkbox = ({ checked, children, handleChange }: Props) => (
   <label className="flex items-center">
     <MaterialCheckBox checked={checked} onChange={handleChange} />
     {children}

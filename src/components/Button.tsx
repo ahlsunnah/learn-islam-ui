@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import {jsx} from 'theme-ui'
+import { jsx } from 'theme-ui'
 import cx from 'classnames'
-import MaterialButton, {IButtonProps} from './MaterialButton'
+import MaterialButton, { IButtonProps } from './MaterialButton'
 import '@material/react-button/dist/button.css'
 import 'styles/button.scss'
 

@@ -1,24 +1,24 @@
-import Button from 'components/Button';
-import _get from 'lodash/get';
-import Card from 'components/Card';
-import RawHTML from 'components/RawHTML';
-import { Link } from 'gatsby';
-import { Styled } from 'theme-ui';
-import React, { useMemo } from 'react';
-import { THomeTrackFragment } from '../../graphqlTypes';
-import { useTranslation } from 'react-i18next';
+import Button from 'components/Button'
+import _get from 'lodash/get'
+import Card from 'components/Card'
+import RawHTML from 'components/RawHTML'
+import { Link } from 'gatsby'
+import { Styled } from 'theme-ui'
+import React, { useMemo } from 'react'
+import { THomeTrackFragment } from '../../graphqlTypes'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
-  localePath: string;
-};
+  localePath: string
+}
 
 const HomeTrackCard = ({ localePath, slug, soon, translations }: THomeTrackFragment & Props) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
 
   const s = useMemo(() => translations.filter((translation) => translation.locale_code === i18n.language)[0], [
     i18n,
     translations,
-  ]);
+  ])
 
   return (
     <Card className="mt3 ph3 pv1 flex flex-column flex-row-l justify-between items-center" rounded>
@@ -40,7 +40,7 @@ const HomeTrackCard = ({ localePath, slug, soon, translations }: THomeTrackFragm
         </Link>
       )}
     </Card>
-  );
-};
+  )
+}
 
-export default HomeTrackCard;
+export default HomeTrackCard

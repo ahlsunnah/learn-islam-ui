@@ -1,9 +1,9 @@
 import cx from 'classnames'
 import shuffle from 'lib/shuffle'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import RadioButton from './RadioButton'
 import ResultIndicator from './ResultIndicator'
-import {QuizProps} from 'types/quizs'
+import { QuizProps } from 'types/quizs'
 
 interface IChooseACategoryData {
   values: Array<{
@@ -15,29 +15,27 @@ interface IChooseACategoryData {
 const ChooseACategory: React.FC<QuizProps> = ({
   finished,
   number,
-  t: {chooseACategoryTitle},
+  t: { chooseACategoryTitle },
   id,
   locale,
   translations,
 }) => {
   const data: IChooseACategoryData = translations[0].data
-  const categories = data.values.map(({name}) => name)
+  const categories = data.values.map(({ name }) => name)
   const itemsDictionary = data.values.reduce<{
     [item: string]: string
-  }>((acc, {name, items}) => {
+  }>((acc, { name, items }) => {
     items.forEach((value) => {
       acc[value] = name
     })
     return acc
   }, {})
-  const [shuffledItems] = useState<string[]>(
-    shuffle(Object.keys(itemsDictionary)),
-  )
+  const [shuffledItems] = useState<string[]>(shuffle(Object.keys(itemsDictionary)))
   const [answersDictionary, setAnswersDictionary] = useState<{
     [item: string]: string
   }>({})
   const handleAnswer = (e: React.FormEvent<HTMLInputElement>) => {
-    const {value: category, name: item} = e.currentTarget
+    const { value: category, name: item } = e.currentTarget
     setAnswersDictionary({
       ...answersDictionary,
       [item]: category,
@@ -57,27 +55,20 @@ const ChooseACategory: React.FC<QuizProps> = ({
 
             return (
               <div className="pb4 flex" key={item}>
-                <ResultIndicator
-                  finished={finished}
-                  isCorrect={isCorrect}
-                  selected={currentAnswer !== undefined}
-                />
+                <ResultIndicator finished={finished} isCorrect={isCorrect} selected={currentAnswer !== undefined} />
                 <div>
                   <div>{item}</div>
                   <div className="mt1">
                     {categories.map(
                       (category, categoryIndex): JSX.Element => {
                         const isCurrentAnswer = currentAnswer === category
-                        const isCorrectAnswer =
-                          category === itemsDictionary[item]
+                        const isCorrectAnswer = category === itemsDictionary[item]
                         return (
                           <RadioButton
                             key={categoryIndex}
                             checked={isCurrentAnswer}
                             error={finished && !isCorrect && isCurrentAnswer}
-                            greenChecked={
-                              finished && !isCorrect && isCorrectAnswer
-                            }
+                            greenChecked={finished && !isCorrect && isCorrectAnswer}
                             id={`radio${category}-${item}`}
                             name={item}
                             onChange={handleAnswer}
@@ -86,13 +77,13 @@ const ChooseACategory: React.FC<QuizProps> = ({
                             {category}
                           </RadioButton>
                         )
-                      },
+                      }
                     )}
                   </div>
                 </div>
               </div>
             )
-          },
+          }
         )}
       </div>
       {/* {finished && (

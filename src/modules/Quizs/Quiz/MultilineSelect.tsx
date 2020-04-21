@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 import Correct from 'react-icons/lib/md/check'
-import Select, {ValueType, ActionMeta} from 'react-select'
+import Select, { ValueType, ActionMeta } from 'react-select'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 
 type SelectOnChange = (
@@ -9,7 +9,7 @@ type SelectOnChange = (
     label: string
     value: string
   }>,
-  actionMeta: ActionMeta,
+  actionMeta: ActionMeta
 ) => void
 
 interface IProps {
@@ -42,7 +42,7 @@ const MultilineSelect = ({
     }
     if ('value' in option) {
       // We don't handle selecting multiple values
-      const {value} = option
+      const { value } = option
       onChange(name, value)
     }
   }
@@ -83,8 +83,8 @@ const MultilineSelect = ({
               }
             },
           }}
-          value={value ? {label: value, value} : undefined}
-          options={options.map((value) => ({label: value, value}))}
+          value={value ? { label: value, value } : undefined}
+          options={options.map((value) => ({ label: value, value }))}
           placeholder={chooseAnswerString}
         />
       )}

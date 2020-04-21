@@ -17,7 +17,7 @@ interface IProps {
   }
   totalQuestions: number
 }
-const QuizFooter = ({submit, t, totalQuestions}: IProps) => (
+const QuizFooter = ({ submit, t, totalQuestions }: IProps) => (
   <div>
     <Card className="ph4 pt4 pb45vh w-100 flex justify-center items-start">
       {/* {quizsState.finished ? (

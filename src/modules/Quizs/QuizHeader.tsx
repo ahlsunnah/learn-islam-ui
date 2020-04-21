@@ -2,20 +2,14 @@ import Button from 'components/Button'
 import Card from 'components/Card'
 import scrollTo from 'lib/scrollTo'
 import React from 'react'
-import {TQuizzesPageTranslationsFragment} from '../../graphqlTypes'
-import {INext} from 'types/chapter'
+import { TQuizzesPageTranslationsFragment } from '../../graphqlTypes'
+import { INext } from 'types/chapter'
 
 const scrollToStart = (): void => {
   scrollTo('quizs-start')
 }
 
-const assessment = ({
-  average,
-  t,
-}: {
-  average: number
-  t: TQuizzesPageTranslationsFragment
-}): string => {
+const assessment = ({ average, t }: { average: number; t: TQuizzesPageTranslationsFragment }): string => {
   if (average === 20) {
     return t.assessmentPerfect
   }
@@ -46,7 +40,7 @@ interface IProps {
 const QuizHeader = (props: IProps): JSX.Element => {
   const {
     coursePathname,
-    courseStrings: {title: courseTitle},
+    courseStrings: { title: courseTitle },
     finished,
     lastScore = 0,
     levelSubtitle,
@@ -59,10 +53,7 @@ const QuizHeader = (props: IProps): JSX.Element => {
   const average = Math.round((lastScore * 40) / totalQuestions) / 2
   return (
     <div className="vh-100 flex justify-center items-center">
-      <Card
-        className="pv3 w-50-ns w-90 center flex flex-column justify-around items-center"
-        rounded
-      >
+      <Card className="pv3 w-50-ns w-90 center flex flex-column justify-around items-center" rounded>
         <span className="ph3 ph4-l f3">{t.quizTitle}</span>
         <h1 className="ph3 ph4-l mb2 tc">{courseTitle}</h1>
         <p className="ph3 ph4-l mb4">({levelSubtitle})</p>
@@ -78,17 +69,12 @@ const QuizHeader = (props: IProps): JSX.Element => {
                   {t.average}: {average} / 20
                 </div>
                 <div className="mv2">
-                  {t.grade}: {assessment({average, t})}
+                  {t.grade}: {assessment({ average, t })}
                 </div>
               </div>
             )}
             <div className="ph3 ph4-l flex flex-column flex-row-l justify-between items-center tc">
-              <Button
-                autoSize
-                className="ma2 ph3 b"
-                onClick={restartQuizs}
-                raised
-              >
+              <Button autoSize className="ma2 ph3 b" onClick={restartQuizs} raised>
                 {t.restartQuizs}
               </Button>
               {average < 15 && (
@@ -99,12 +85,7 @@ const QuizHeader = (props: IProps): JSX.Element => {
             </div>
             {average > 15 && next.type === 'course' && (
               <div className="ph3 ph4-l bt b--black-60 flex flex-column flex-row-l justify-center items-center tc">
-                <Button
-                  autoSize
-                  className="ma2 ph3 pointer b"
-                  raised
-                  to={next.path}
-                >
+                <Button autoSize className="ma2 ph3 pointer b" raised to={next.path}>
                   {t.nextCourse}
                 </Button>
                 ({next.title})
@@ -126,12 +107,7 @@ const QuizHeader = (props: IProps): JSX.Element => {
               {t.backToCourse}
             </Button>
 
-            <Button
-              className="ma2 ph3 pointer"
-              onClick={scrollToStart}
-              raised
-              rounded
-            >
+            <Button className="ma2 ph3 pointer" onClick={scrollToStart} raised rounded>
               {started ? t.continue : t.start}
             </Button>
             {started && (

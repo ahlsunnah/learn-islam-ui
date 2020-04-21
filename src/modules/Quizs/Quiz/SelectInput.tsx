@@ -13,14 +13,14 @@ interface IProps {
 }
 class SelectInput extends React.PureComponent<IProps> {
   setRef = (ref: HTMLDivElement | null) => {
-    const {index, setRef} = this.props
+    const { index, setRef } = this.props
     if (ref) {
       setRef(ref, index)
     }
   }
 
   render() {
-    const {className, name, onChange, options, style, value} = this.props
+    const { className, name, onChange, options, style, value } = this.props
     return (
       <div className={cx('bb', className)} ref={this.setRef}>
         <select

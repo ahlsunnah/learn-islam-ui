@@ -10,9 +10,7 @@ import {
 interface IProps {
   description?: string
   otherLanguagePath: string
-  otherLocaleTranslations:
-    | TTracksPageOtherTranslationsFragment
-    | TAboutUsOtherTranslationFragment
+  otherLocaleTranslations: TTracksPageOtherTranslationsFragment | TAboutUsOtherTranslationFragment
   title: string
   translations: TTracksPageTranslationsFragment | TAboutUsTranslationsFragment
 }
@@ -24,11 +22,7 @@ const BlueHero: React.FC<IProps> = ({
   translations: t,
 }) => (
   <div className="flex flex-column mdc-theme--primary-bg">
-    <NavBar
-      otherLocaleTranslations={otherLocaleTranslations}
-      otherLanguagePath={otherLanguagePath}
-      t={t}
-    />
+    <NavBar otherLocaleTranslations={otherLocaleTranslations} otherLanguagePath={otherLanguagePath} t={t} />
     <div className="mt64 pt4 pb3 tc white">
       <h1 className="f3 f2-ns fw4">{title}</h1>
       <p className="">{description}</p>

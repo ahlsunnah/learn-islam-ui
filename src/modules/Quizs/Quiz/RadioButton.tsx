@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import {jsx} from 'theme-ui'
+import { jsx } from 'theme-ui'
 import cx from 'classnames'
 import React from 'react'
 import '@material/react-radio/dist/radio.css'
 import 'styles/radio-button.scss'
-import Radio, {NativeRadioControl} from '@material/react-radio'
+import Radio, { NativeRadioControl } from '@material/react-radio'
 
 interface IProps {
   checked: boolean
@@ -16,22 +16,9 @@ interface IProps {
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   value: string
 }
-const RadioButton = ({
-  checked,
-  children,
-  error,
-  greenChecked,
-  id,
-  name,
-  onChange,
-  value,
-}: IProps): JSX.Element => (
+const RadioButton = ({ checked, children, error, greenChecked, id, name, onChange, value }: IProps): JSX.Element => (
   <div>
-    <Radio
-      label={children}
-      key={id}
-      className={cx({isGreen: greenChecked, isRed: error})}
-    >
+    <Radio label={children} key={id} className={cx({ isGreen: greenChecked, isRed: error })}>
       <NativeRadioControl
         name={name}
         value={value}

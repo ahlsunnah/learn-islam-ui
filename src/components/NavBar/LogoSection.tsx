@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 // import logoAr from 'images/logo-ar.png'
 // import logoFr from 'images/logo-fr.png'
 import logoAr from 'images/logo-horizontal-ar.svg'
@@ -11,7 +11,7 @@ interface IProps {
   siteName: string
 }
 
-const LogoSection = ({locale, localePath, siteName}: IProps) => (
+const LogoSection = ({ locale, localePath, siteName }: IProps) => (
   <div>
     <section className="pv0-ns mdc-toolbar__section-ns mdc-toolbar__section-ns mdc-toolbar__section--align-start-ns">
       <Link className="mdc-toolbar__title-ns pv0-ns" to={localePath}>

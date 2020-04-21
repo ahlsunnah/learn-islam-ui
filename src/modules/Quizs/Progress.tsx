@@ -7,9 +7,9 @@ interface Props {
   progress: number
 }
 
-const Progress = ({className, progress}: Props) => (
+const Progress = ({ className, progress }: Props) => (
   <div className={cx('progress w5', className)}>
-    <div className="determinate" style={{width: `${progress}%`}} />
+    <div className="determinate" style={{ width: `${progress}%` }} />
   </div>
 )
 

@@ -1,12 +1,12 @@
 import Button from 'components/Button'
 // import IconWithText from 'components/IconWithText'
 import RawHTML from 'components/RawHTML'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 // import clock from 'images/clock.svg'
 // import target from 'images/target.svg'
 // import {getHumanTime} from 'lib/time'
 import React from 'react'
-import {TTrackPageTranslationsFragment} from '../../graphqlTypes'
+import { TTrackPageTranslationsFragment } from '../../graphqlTypes'
 
 interface IProps {
   duration: number
@@ -17,15 +17,7 @@ interface IProps {
   otherLocaleUrl: string
   trackTitle: string
 }
-const TrackHeader = ({
-  duration,
-  level,
-  nextCoursePath,
-  otherLocaleName,
-  otherLocaleUrl,
-  t,
-  trackTitle,
-}: IProps) => (
+const TrackHeader = ({ duration, level, nextCoursePath, otherLocaleName, otherLocaleUrl, t, trackTitle }: IProps) => (
   <div className="ph3 pb4 pt3 flex flex-column flex-row-ns justify-around bg-white raised-header">
     <div className="self-end dn-ns">
       <Link className="ph2 no-underline" to={otherLocaleUrl}>

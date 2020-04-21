@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 import logoAr from 'images/logo-ar.svg'
 import logoFr from 'images/logo-fr.svg'
 import logoHorizontalAr from 'images/logo-horizontal-ar.svg'
 import logoHorizontalFr from 'images/logo-horizontal-fr.svg'
-import {ObjectOfStrings} from 'interfaces'
+import { ObjectOfStrings } from 'interfaces'
 
 interface IProps {
   isHidden?: boolean
@@ -19,11 +19,7 @@ function getLogo(locale: string, large: boolean) {
   return large ? logoFr : logoHorizontalFr
 }
 
-const Logo = ({
-  isHidden,
-  large = false,
-  t: {locale, localePath, siteName},
-}: IProps) => (
+const Logo = ({ isHidden, large = false, t: { locale, localePath, siteName } }: IProps) => (
   <Link to={localePath}>
     <div
       css={{

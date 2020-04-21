@@ -2,13 +2,10 @@ import Button from 'components/Button'
 import Card from 'components/Card'
 import IconWithText from 'components/IconWithText'
 import Progress from 'modules/Quizs/Progress'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 import target from 'images/target.svg'
 import React from 'react'
-import {
-  TTrackPageTranslationsFragment,
-  TTrackPageCourseFragment,
-} from '../../graphqlTypes'
+import { TTrackPageTranslationsFragment, TTrackPageCourseFragment } from '../../graphqlTypes'
 
 type Props = {
   currentPath: string
@@ -22,7 +19,7 @@ const CourseCard = ({
 
   currentPath,
   level = 1,
-  quiz_difficulties: {quiz_difficulties},
+  quiz_difficulties: { quiz_difficulties },
 
   slug,
   translations,
@@ -30,9 +27,7 @@ const CourseCard = ({
   topic,
 }: Props): JSX.Element => {
   // TODO calculate next chapter with progress
-  const nextCoursePath = `${currentPath}/${slug}/${
-    chapters[0] && chapters[0].slug
-  }/`
+  const nextCoursePath = `${currentPath}/${slug}/${chapters[0] && chapters[0].slug}/`
   // const finishedChapters = chapters.reduce((sum, {id: chapterId}): number => {
   //   if (chaptersState[chapterId]) {
   //     sum += 1 // eslint-disable-line no-param-reassign
@@ -66,10 +61,7 @@ const CourseCard = ({
         <IconWithText className="ph2" icon={target}>
           {`${t.course} ${t[levelStrings[level - 1]]}`}
         </IconWithText>
-        <div
-          className="ph4 pv2 br-pill white f7"
-          style={{backgroundColor: topic.color}}
-        >
+        <div className="ph4 pv2 br-pill white f7" style={{ backgroundColor: topic.color }}>
           {topic.translations[0].title}
         </div>
       </div>

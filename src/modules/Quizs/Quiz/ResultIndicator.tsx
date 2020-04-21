@@ -8,7 +8,7 @@ interface IProps {
   finished: boolean
 }
 
-const ResultIndicator = ({isCorrect, selected, finished}: IProps) => {
+const ResultIndicator = ({ isCorrect, selected, finished }: IProps) => {
   if (!finished) {
     return <div className="flex-no-shrink w2-5 dib v-mid box-36px" />
   }

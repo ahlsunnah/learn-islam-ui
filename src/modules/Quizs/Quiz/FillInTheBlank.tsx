@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 import SelectInput from './SelectInput'
-import {QuizProps} from 'types/quizs'
+import { QuizProps } from 'types/quizs'
 
 interface IFillInTheBlankData {
   text: string
@@ -14,18 +14,12 @@ type DisplayAnswerProps = {
   index: number
   value: string
 }
-const DisplayAnswer = ({
-  answer,
-  answerIndex,
-  index,
-  value,
-}: DisplayAnswerProps) => {
+const DisplayAnswer = ({ answer, answerIndex, index, value }: DisplayAnswerProps) => {
   if (answerIndex === undefined) return <div className="green">{value}</div>
   if (answerIndex === index) return <div className="dark-blue">{value}</div>
   return (
     <div>
-      <span className="dib dark-blue bt bw2 b--red lh0-9">{answer}</span>{' '}
-      <div className="dib green">{value}</div>
+      <span className="dib dark-blue bt bw2 b--red lh0-9">{answer}</span> <div className="dib green">{value}</div>
     </div>
   )
 }
@@ -35,10 +29,7 @@ interface IFillInTheBlankState {
   selectStyle?: React.CSSProperties
 }
 
-class FillInTheBlank extends React.PureComponent<
-  QuizProps,
-  IFillInTheBlankState
-> {
+class FillInTheBlank extends React.PureComponent<QuizProps, IFillInTheBlankState> {
   state: IFillInTheBlankState = {
     answers: [],
     selectStyle: undefined,
@@ -56,7 +47,7 @@ class FillInTheBlank extends React.PureComponent<
         const width = ref.offsetWidth
         return width > max ? width : max
       }, 0)
-      this.setState({selectStyle: {width: maxWidth}})
+      this.setState({ selectStyle: { width: maxWidth } })
     }, 2000)
   }
 
@@ -64,7 +55,7 @@ class FillInTheBlank extends React.PureComponent<
     this.myRefs[index] = ref
   }
   handleAnswer = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const {name, value} = e.currentTarget
+    const { name, value } = e.currentTarget
     const index = parseInt(name, 10)
     const newAnswers = this.state.answers.slice()
     newAnswers[index] = value
@@ -78,15 +69,13 @@ class FillInTheBlank extends React.PureComponent<
       finished,
       number,
       translations,
-      t: {fillInTheBlankTitle, locale},
+      t: { fillInTheBlankTitle, locale },
     } = this.props
-    const {answers, selectStyle} = this.state
-    const {text, values}: IFillInTheBlankData = translations[0].data
+    const { answers, selectStyle } = this.state
+    const { text, values }: IFillInTheBlankData = translations[0].data
     const textParts = text.split('##')
     const orderedValues = values.slice().sort()
-    const remainingValues = orderedValues.filter(
-      (value) => !answers.includes(value),
-    )
+    const remainingValues = orderedValues.filter((value) => !answers.includes(value))
     return (
       <div>
         <div className="pb2 flex bb items-center">
@@ -107,11 +96,7 @@ class FillInTheBlank extends React.PureComponent<
                   //   className="bg-light-green"
                 >
                   {finished ? (
-                    <DisplayAnswer
-                      answer={answers[i - 1]}
-                      index={i - 1}
-                      value={values[i - 1]}
-                    />
+                    <DisplayAnswer answer={answers[i - 1]} index={i - 1} value={values[i - 1]} />
                   ) : (
                     <SelectInput
                       index={i}
@@ -128,7 +113,7 @@ class FillInTheBlank extends React.PureComponent<
                   {part}
                 </span>, // eslint-disable-line react/no-array-index-key
               ]
-            ),
+            )
           )}
         </div>
         {/* {finished && (

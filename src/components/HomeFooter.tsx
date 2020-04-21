@@ -1,33 +1,33 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import cx from 'classnames';
-import Facebook from 'react-icons/lib/fa/facebook';
-import Telegram from 'react-icons/lib/fa/paper-plane';
-import Twitter from 'react-icons/lib/fa/twitter';
-import Youtube from 'react-icons/lib/fa/youtube-play';
-import Button from './Button';
-import RawHTML from './RawHTML';
-import { IFooterTranslations } from '../types/footer';
-import { useTranslation } from 'react-i18next';
+import React from 'react'
+import { Link } from 'gatsby'
+import cx from 'classnames'
+import Facebook from 'react-icons/lib/fa/facebook'
+import Telegram from 'react-icons/lib/fa/paper-plane'
+import Twitter from 'react-icons/lib/fa/twitter'
+import Youtube from 'react-icons/lib/fa/youtube-play'
+import Button from './Button'
+import RawHTML from './RawHTML'
+import { IFooterTranslations } from '../types/footer'
+import { useTranslation } from 'react-i18next'
 
 interface IIcon {
-  Icon: React.FC<{ className?: string }>;
-  href: keyof IFooterTranslations;
+  Icon: React.FC<{ className?: string }>
+  href: keyof IFooterTranslations
 }
 const icons: IIcon[] = [
   { Icon: Facebook, href: 'urlFacebook' },
   { Icon: Twitter, href: 'urlTwitter' },
   { Icon: Youtube, href: 'urlYoutube' },
   { Icon: Telegram, href: 'urlTelegram' },
-];
+]
 
 type Props = {
-  dark?: boolean;
-  firstTrackSlug: string;
-};
+  dark?: boolean
+  firstTrackSlug: string
+}
 
 const HomeFooter = ({ dark, firstTrackSlug }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <section
       className={cx('pt5 pb4 ph4 ph5-l flex flex-column white', {
@@ -73,7 +73,7 @@ const HomeFooter = ({ dark, firstTrackSlug }: Props) => {
                   <Icon className="mdc-button__icon" />
                 </Button> */}
                   </a>
-                );
+                )
               })}
             </div>
           </div>
@@ -83,6 +83,6 @@ const HomeFooter = ({ dark, firstTrackSlug }: Props) => {
         <RawHTML>{t('copyright')}</RawHTML>
       </div>
     </section>
-  );
-};
-export default HomeFooter;
+  )
+}
+export default HomeFooter

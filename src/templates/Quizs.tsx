@@ -1,13 +1,13 @@
 import * as React from 'react'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import QuizsContainer from 'modules/Quizs'
 import './styles.css'
-import {IQuizsPageProps} from '../types/quizs'
+import { IQuizsPageProps } from '../types/quizs'
 
 const Quizs = (props: IQuizsPageProps): JSX.Element => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+  <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
@@ -21,7 +21,7 @@ export const pageQuery = graphql`
   fragment QuizzesPageQuiz on api_quizzes {
     id
     type_slug
-    translations(where: {locale_code: {_eq: $localeEnum}}) {
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
       id
       data
     }
@@ -63,27 +63,22 @@ export const pageQuery = graphql`
     yourScore
   }
 
-  query QuizQuery(
-    $locale: String!
-    $localeEnum: api_locales_enum
-    $id: Int!
-    $difficulty: Int!
-  ) {
+  query QuizQuery($locale: String!, $localeEnum: api_locales_enum, $id: Int!, $difficulty: Int!) {
     api {
       course: courses_by_pk(id: $id) {
         id
         slug
-        translations(where: {locale_code: {_eq: $localeEnum}}) {
+        translations(where: { locale_code: { _eq: $localeEnum } }) {
           id
           title
         }
-        quizzes(where: {difficulty: {_eq: $difficulty}}) {
+        quizzes(where: { difficulty: { _eq: $difficulty } }) {
           ...QuizzesPageQuiz
         }
         track {
           id
           slug
-          translations(where: {locale_code: {_eq: $localeEnum}}) {
+          translations(where: { locale_code: { _eq: $localeEnum } }) {
             title
           }
           courses {
@@ -92,14 +87,14 @@ export const pageQuery = graphql`
             quiz_difficulties {
               quiz_difficulties
             }
-            translations(where: {locale_code: {_eq: $localeEnum}}) {
+            translations(where: { locale_code: { _eq: $localeEnum } }) {
               locale_code
               title
             }
             chapters {
               id
               slug
-              translations(where: {locale_code: {_eq: $localeEnum}}) {
+              translations(where: { locale_code: { _eq: $localeEnum } }) {
                 title
               }
             }
@@ -107,10 +102,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...QuizzesPageTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       localeName
       localePath
     }

@@ -1,12 +1,12 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import cx from 'classnames';
-import NavBar from 'components/NavBar';
-import HomeTrackCard from './HomeTrackCard';
-import { THomeQueryQuery } from '../../graphqlTypes';
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import cx from 'classnames'
+import NavBar from 'components/NavBar'
+import HomeTrackCard from './HomeTrackCard'
+import { THomeQueryQuery } from '../../graphqlTypes'
 
 const HomeHero = ({ api: { tracks } }: THomeQueryQuery) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <div className="min-vh-100 flex flex-column mdc-theme--primary-bg bg-pattern">
       <NavBar />
@@ -28,6 +28,6 @@ const HomeHero = ({ api: { tracks } }: THomeQueryQuery) => {
         </div>
       </div>
     </div>
-  );
-};
-export default HomeHero;
+  )
+}
+export default HomeHero

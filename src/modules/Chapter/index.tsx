@@ -1,18 +1,18 @@
 /* eslint react/no-unused-prop-types: 0 */
 import StepWrapper from 'components/StepWrapper'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import NavigationButtons from './NavigationButtons'
 import StepContent from './StepContent'
 import './styles.scss'
 import Tab from './Tab'
 import VideoIframe from './VideoIframe'
-import {IChapterProps} from '../../types/chapter'
-import useChapterState, {ChapterStates} from 'hooks/useChapterState'
+import { IChapterProps } from '../../types/chapter'
+import useChapterState, { ChapterStates } from 'hooks/useChapterState'
 
-const Chapter: React.FC<IChapterProps> = ({data, pageContext}) => {
+const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
   const {
-    api: {chapter},
+    api: { chapter },
     otherLocaleTranslations,
     translations: t,
   } = data
@@ -32,14 +32,10 @@ const Chapter: React.FC<IChapterProps> = ({data, pageContext}) => {
   }
 
   // TODO: memoize this:
-  const arabicChapter = data.api.chapter.translations.find(
-    ({locale_code}) => locale_code === 'ar',
-  )
+  const arabicChapter = data.api.chapter.translations.find(({ locale_code }) => locale_code === 'ar')
 
   const arabicTranscription = arabicChapter && arabicChapter.transcription
-  const chapterStrings = data.api.chapter.translations.find(
-    ({locale_code}) => locale_code === pageContext.locale,
-  )
+  const chapterStrings = data.api.chapter.translations.find(({ locale_code }) => locale_code === pageContext.locale)
 
   if (!chapterStrings) {
     // TODO: Log to Sentry
@@ -103,22 +99,13 @@ const Chapter: React.FC<IChapterProps> = ({data, pageContext}) => {
         >
           {pageContext.next.type === 'tracks'
             ? t.next
-            : `${t.locale === 'ar' ? 'ال' : ''}${t[pageContext.next.type]} ${
-                t.next
-              }`}
+            : `${t.locale === 'ar' ? 'ال' : ''}${t[pageContext.next.type]} ${t.next}`}
         </Tab>
       </nav>
-      <StepContent
-        active={activeTab === 'AR'}
-        arabic
-        content={arabicTranscription}
-      >
+      <StepContent active={activeTab === 'AR'} arabic content={arabicTranscription}>
         {navigationButtons}
       </StepContent>
-      <StepContent
-        active={activeTab === 'VOC'}
-        content={chapterStrings.vocabulary}
-      >
+      <StepContent active={activeTab === 'VOC'} content={chapterStrings.vocabulary}>
         {navigationButtons}
       </StepContent>
       <StepContent active={activeTab === 'AUDIO'}>
@@ -146,9 +133,7 @@ const Chapter: React.FC<IChapterProps> = ({data, pageContext}) => {
           {navigationButtons}
         </div>
       </StepContent>
-      <StepContent active={activeTab === 'NEXT'}>
-        {navigationButtons}
-      </StepContent>
+      <StepContent active={activeTab === 'NEXT'}>{navigationButtons}</StepContent>
     </StepWrapper>
   )
 }

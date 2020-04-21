@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 import hamburgerSvg from 'images/hamburger.svg'
 import React from 'react'
 
@@ -9,19 +9,10 @@ interface Props {
   title: string
   toggleSidebar: () => void
 }
-const Header = ({
-  otherLocaleName,
-  otherLocalePath,
-  title,
-  toggleSidebar,
-}: Props) => (
+const Header = ({ otherLocaleName, otherLocalePath, title, toggleSidebar }: Props) => (
   <div className="z-2 flex justify-between items-center bg-black-90 w-100">
     <div className="flex-grow1 flex-no-shrink">
-      <button
-        className="mh2 mh3-ns bg-transparent bn pointer"
-        onClick={toggleSidebar}
-        type="button"
-      >
+      <button className="mh2 mh3-ns bg-transparent bn pointer" onClick={toggleSidebar} type="button">
         <img alt="menu" className="mt2 h2" src={hamburgerSvg} />
       </button>
     </div>

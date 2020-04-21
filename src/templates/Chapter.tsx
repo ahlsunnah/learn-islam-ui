@@ -1,15 +1,15 @@
 import * as React from 'react'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import ChapterContainer from 'modules/Chapter'
 import './styles.css'
-import {IChapterProps} from '../types/chapter'
-import {ChapterStatesProvider} from 'hooks/useChapterState'
+import { IChapterProps } from '../types/chapter'
+import { ChapterStatesProvider } from 'hooks/useChapterState'
 
 const Chapter = (props: IChapterProps) => (
   <ChapterStatesProvider>
-    <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+    <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
       <Helmet>
         <html lang={props.pageContext.locale} />
       </Helmet>
@@ -24,7 +24,7 @@ export const pageQuery = graphql`
   fragment ChapterPageTrack on api_tracks {
     id
     slug
-    translations(where: {locale_code: {_eq: $localeEnum}}) {
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
       title
     }
     courses {
@@ -36,11 +36,11 @@ export const pageQuery = graphql`
       chapters {
         id
         slug
-        translations(where: {locale_code: {_eq: $localeEnum}}) {
+        translations(where: { locale_code: { _eq: $localeEnum } }) {
           title
         }
       }
-      translations(where: {locale_code: {_eq: $localeEnum}}) {
+      translations(where: { locale_code: { _eq: $localeEnum } }) {
         locale_code
         title
       }
@@ -76,11 +76,7 @@ export const pageQuery = graphql`
     takeQuiz
     track
   }
-  query chapterQuery(
-    $locale: String!
-    $localeEnum: api_locales_enum
-    $id: Int!
-  ) {
+  query chapterQuery($locale: String!, $localeEnum: api_locales_enum, $id: Int!) {
     api {
       chapter: chapters_by_pk(id: $id) {
         id
@@ -103,17 +99,17 @@ export const pageQuery = graphql`
           chapters {
             id
             slug
-            translations(where: {locale_code: {_eq: $localeEnum}}) {
+            translations(where: { locale_code: { _eq: $localeEnum } }) {
               title
             }
           }
         }
       }
     }
-    translations: translationsJson(locale: {eq: $locale}) {
+    translations: translationsJson(locale: { eq: $locale }) {
       ...ChapterPageTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       localeName
       localePath
       readIn

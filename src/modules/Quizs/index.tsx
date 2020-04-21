@@ -3,28 +3,23 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import './styles.scss'
 import QuizForm from './QuizForm'
-import {IQuizsPageProps} from '../../types/quizs'
+import { IQuizsPageProps } from '../../types/quizs'
 
-const difficultyStrings: ['difficulty1', 'difficulty1'] = [
-  'difficulty1',
-  'difficulty1',
-]
+const difficultyStrings: ['difficulty1', 'difficulty1'] = ['difficulty1', 'difficulty1']
 
 const QuizsContainer = ({
   data: {
-    api: {course},
+    api: { course },
     otherLocaleTranslations,
     translations: t,
   },
-  location: {pathname},
-  pageContext: {difficulty, locale, next},
+  location: { pathname },
+  pageContext: { difficulty, locale, next },
 }: IQuizsPageProps): JSX.Element => {
   const otherLocalePath = `${otherLocaleTranslations.localePath}${course.track.slug}/${course.slug}/ikhtibar-${difficulty}`
   const levelSubtitle = `${t.level} ${t[difficultyStrings[difficulty - 1]]}`
   const title = `${t.quiz} ${t[difficultyStrings[difficulty - 1]]}`
-  const longTitle = `${course.translations[0].title}: ${t.quiz} ${
-    t[difficultyStrings[difficulty - 1]]
-  }`
+  const longTitle = `${course.translations[0].title}: ${t.quiz} ${t[difficultyStrings[difficulty - 1]]}`
   return (
     <StepWrapper
       currentCourseSlug={course.slug}

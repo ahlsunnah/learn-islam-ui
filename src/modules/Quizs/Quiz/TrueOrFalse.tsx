@@ -1,26 +1,19 @@
 import cx from 'classnames'
 import Button from 'components/Button'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import ResultIndicator from './ResultIndicator'
-import {QuizProps} from 'types/quizs'
+import { QuizProps } from 'types/quizs'
 
 interface ITrueOrFalseData {
   text: string
   isTrue: boolean
 }
 
-const TrueOrFalse: React.FC<QuizProps> = ({
-  finished,
-  number,
-  t: {quizFalse, quizTrue},
-  translations,
-}) => {
-  const {text, isTrue}: ITrueOrFalseData = translations[0].data
+const TrueOrFalse: React.FC<QuizProps> = ({ finished, number, t: { quizFalse, quizTrue }, translations }) => {
+  const { text, isTrue }: ITrueOrFalseData = translations[0].data
   const [answer, setAnswer] = useState<boolean>()
-  const handleAnswer = (
-    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>,
-  ) => {
-    const {name} = e.currentTarget
+  const handleAnswer = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
+    const { name } = e.currentTarget
     setAnswer(name === 'true')
   }
   return (
@@ -32,11 +25,7 @@ const TrueOrFalse: React.FC<QuizProps> = ({
       <div className="mt4 flex justify-between">
         <div>
           <div className="mt2">
-            <ResultIndicator
-              finished={finished}
-              isCorrect={isTrue}
-              selected={answer === true}
-            />
+            <ResultIndicator finished={finished} isCorrect={isTrue} selected={answer === true} />
             <Button
               greenOutlined={finished && isTrue && answer !== true}
               name="true"
@@ -49,11 +38,7 @@ const TrueOrFalse: React.FC<QuizProps> = ({
             </Button>
           </div>
           <div className="mt2">
-            <ResultIndicator
-              finished={finished}
-              isCorrect={!isTrue}
-              selected={answer === false}
-            />
+            <ResultIndicator finished={finished} isCorrect={!isTrue} selected={answer === false} />
             <Button
               className={cx({
                 ph3: answer === false,

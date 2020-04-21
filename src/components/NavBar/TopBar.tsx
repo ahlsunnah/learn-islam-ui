@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import LogoSection from './LogoSection';
-import MenuIcon from 'react-icons/lib/md/menu';
-import NavSection from './NavSection';
-import '@material/react-top-app-bar/index.scss';
-import TopAppBar, { TopAppBarIcon, TopAppBarRow, TopAppBarSection, TopAppBarTitle } from '@material/react-top-app-bar';
-import { useTranslation } from 'react-i18next';
+import { jsx } from 'theme-ui'
+import LogoSection from './LogoSection'
+import MenuIcon from 'react-icons/lib/md/menu'
+import NavSection from './NavSection'
+import '@material/react-top-app-bar/index.scss'
+import TopAppBar, { TopAppBarIcon, TopAppBarRow, TopAppBarSection, TopAppBarTitle } from '@material/react-top-app-bar'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
-  toggleDrawer: () => void;
-};
+  toggleDrawer: () => void
+}
 
 const TopBar = ({ toggleDrawer }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <TopAppBar
       sx={{
@@ -48,6 +48,6 @@ const TopBar = ({ toggleDrawer }: Props) => {
         </TopAppBarSection>
       </TopAppBarRow>
     </TopAppBar>
-  );
-};
-export default TopBar;
+  )
+}
+export default TopBar

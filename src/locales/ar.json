@@ -100,5 +100,12 @@
   "locale": "ar",
   "otherTranslationsLocale": "fr",
   "otherTranslationsLocalePath": "/fr/",
-  "otherTranslationsLocaleName": "Français"
+  "otherTranslationsLocaleName": "Français",
+  "login": "تسجيل الدخول",
+  "loginCheckBox": "بتحديد هذا المربع ، أوافق على استخدام بياناتي الشخصية",
+  "loginUserName": "اسم المستخدم",
+  "loginPassword": "كلمه السر",
+  "loginButton": "تسجيل الدخول",
+  "blueHeroLoginTitle": "مرحبا بعودتك",
+  "blueHeroLoginDescription": "بسم الله الرحمن الرحيم"
 }

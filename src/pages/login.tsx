@@ -7,14 +7,14 @@ import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
 
 const Login = () => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
       <div>
-        <BlueHero description="Login" title="Welcome" />
+        <BlueHero description={t('blueHeroLoginDescription')} title={t('blueHeroLoginTitle')} />
         <div
           sx={{
             maxWidth: 700,
@@ -26,11 +26,11 @@ const Login = () => {
         >
           <Box as="form" onSubmit={(e) => e.preventDefault()}>
             <Label htmlFor="username" mb={2}>
-              Username
+              {t('loginUserName')}
             </Label>
             <Input name="username" mb={3} />
             <Label htmlFor="password" mb={2}>
-              Password
+              {t('loginPassword')}
             </Label>
             <Input type="password" name="password" mb={3} />
             <Box mb={3}>
@@ -40,10 +40,10 @@ const Login = () => {
                 }}
               >
                 <Checkbox />
-                En cochant cette case, j&apos;accepte que mes données personnelles soient utilisées
+                {t('loginCheckBox')}
               </Label>
             </Box>
-            <Button>Login</Button>
+            <Button>{t('loginButton')}</Button>
           </Box>
         </div>
         <HomeFooter firstTrackSlug="add" withTrackSlug={false} />

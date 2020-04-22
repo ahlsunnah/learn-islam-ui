@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import QuizsContainer from 'modules/Quizs'
+import QuizsContainer from 'components/modules/Quizs'
 import './styles.css'
 import { IQuizsPageProps } from '../types/quizs'
 

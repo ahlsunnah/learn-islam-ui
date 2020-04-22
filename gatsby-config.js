@@ -76,7 +76,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
-        logo: './src/images/logo-square-1500.png',
+        logo: './src/assets/images/logo-square-1500.png',
         injectHTML: true,
         icons: {
           android: true,
@@ -107,7 +107,7 @@ module.exports = {
         background_color: '#6496f6',
         theme_color: '#000696',
         display: 'minimal-ui',
-        icon: 'src/images/logo-square-1500.png',
+        icon: 'src/assets/images/logo-square-1500.png',
       },
     },
     {

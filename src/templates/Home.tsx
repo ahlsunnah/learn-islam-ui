@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import HomeContainer from 'modules/Home'
+import HomeContainer from 'components/modules/Home'
 import './styles.css'
 import { IHomePageProps } from 'types/home'
 

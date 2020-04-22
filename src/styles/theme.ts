@@ -1,3 +1,8 @@
+type theme = {
+  colors: {
+    primary: string
+  }
+}
 const heading = {
   fontFamily: 'heading',
   textDecoration: 'inherit',
@@ -33,6 +38,20 @@ export const theme = {
     secondary: '#353535',
     // secondary: '#30c',
     muted: '#f6f6f6',
+  },
+  forms: {
+    label: {
+      fontSize: 1,
+      fontWeight: 'bold',
+    },
+    input: {
+      borderColor: 'gray',
+      '&:focus': {
+        borderColor: 'primary',
+        boxShadow: (t: theme) => `0 0 0 2px ${t.colors.primary}`,
+        outline: 'none',
+      },
+    },
   },
   // buttons: {
   //   primary: {},

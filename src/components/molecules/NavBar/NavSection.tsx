@@ -20,10 +20,10 @@ const NavSection = ({ className }: Props) => {
   const { t, i18n } = useTranslation()
   const location = useLocation()
   const otherTranslationsLocale = useMemo(() => t('otherTranslationsLocale'), [t])
-
+  console.log(location.pathname)
   const destination = useMemo(
     () =>
-      location.pathname === '/login'
+      location.pathname.indexOf('login') !== -1
         ? 'login'
         : removeExtraSlashes(
             `${otherTranslationsLocale === 'ar' ? '' : otherTranslationsLocale}/${cleanPathName(
@@ -43,7 +43,11 @@ const NavSection = ({ className }: Props) => {
       <ul className="list flex flex-wrap justify-around items-center">
         {structure.map(({ title, link }) => (
           <li key={title}>
-            <Link activeClassName="bb b--blue" className="ph2 no-underline" to={`${t('localePath')}${link}`}>
+            <Link
+              activeClassName="bb b--blue"
+              className="ph2 no-underline"
+              to={`${link === 'login/' ? '/' : t('localePath')}${link}`}
+            >
               <span>{t(`${title}`) as string}</span>
             </Link>
           </li>

@@ -97,3 +97,7 @@ We have the data in the backend, currently it is a small nodejs app, in the futu
 TODO: Explain gatsbyjs's architecture or link to explication
 
 وبالله التوفيك وله الحمد والمنة وصلى الله على نبيه المختار محمد وعلى أهله وسلم
+
+### Deployment
+
+The app is sponsored and deployed by [Vercel](https://vercel.com)

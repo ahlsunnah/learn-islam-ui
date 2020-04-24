@@ -5816,12 +5816,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
-  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale';
+  'childTranslationsJson___locale' |
+  'childTranslationsJson___nextHelp';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -6385,12 +6385,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -7604,12 +7604,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -7818,12 +7818,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
-  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale';
+  'locale' |
+  'nextHelp';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -7922,12 +7922,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {

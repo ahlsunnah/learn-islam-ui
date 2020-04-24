@@ -107,5 +107,6 @@
   "loginPassword": "كلمه السر",
   "loginButton": "تسجيل الدخول",
   "blueHeroLoginTitle": "مرحبا بعودتك",
-  "blueHeroLoginDescription": "بسم الله الرحمن الرحيم"
+  "blueHeroLoginDescription": "بسم الله الرحمن الرحيم",
+  "loginWithGoogle": "جوجل"
 }

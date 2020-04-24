@@ -120,7 +120,12 @@ module.exports = {
         onLoad: `() => Sentry.init({dsn:"${process.env.SENTRY_DSN}"})`,
       },
     },
-    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        navigateFallbackWhitelist: [/^(?!\/__).*/],
+      },
+    },
     `gatsby-plugin-zeit-now`,
   ],
 }

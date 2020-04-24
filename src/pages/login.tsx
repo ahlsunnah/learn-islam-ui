@@ -1,13 +1,43 @@
 /** @jsx jsx */
 import BlueHero from 'components/molecules/Hero/BlueHero'
 import HomeFooter from 'components/molecules/Footer/HomeFooter'
+import { useFormik, FormikErrors } from 'formik'
 import { Button, jsx, Label, Input, Box, Checkbox } from 'theme-ui'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
+import useAuth from 'services/auth'
+
+type FormValues = {
+  email: string
+  password: string
+}
 
 const Login = () => {
   const { i18n, t } = useTranslation()
+  const { signInWithEmailAndPwd } = useAuth()
+
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: (values) => {
+      const errors: FormikErrors<typeof values> = {}
+      if (!values.email) {
+        errors.email = 'Email is mandatory'
+      }
+      return errors
+    },
+    onSubmit: async (values) => {
+      try {
+        await signInWithEmailAndPwd(values.email, values.password)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+  })
+
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
       <Helmet>
@@ -24,15 +54,21 @@ const Login = () => {
             py: 4,
           }}
         >
-          <Box as="form" onSubmit={(e) => e.preventDefault()}>
-            <Label htmlFor="username" mb={2}>
+          <form onSubmit={formik.handleSubmit}>
+            <Label htmlFor="email" mb={2}>
               {t('loginUserName')}
             </Label>
-            <Input name="username" mb={3} />
+            <Input name="email" type="email" value={formik.values.email} onChange={formik.handleChange} mb={3} />
             <Label htmlFor="password" mb={2}>
               {t('loginPassword')}
             </Label>
-            <Input type="password" name="password" mb={3} />
+            <Input
+              type="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              mb={3}
+            />
             <Box mb={3}>
               <Label
                 sx={{
@@ -43,8 +79,15 @@ const Login = () => {
                 {t('loginCheckBox')}
               </Label>
             </Box>
-            <Button>{t('loginButton')}</Button>
-          </Box>
+            <Button
+              sx={{
+                ml: 2,
+              }}
+            >
+              {t('loginButton')}
+            </Button>
+            <Button type="submit">{t('loginWithGoogle')}</Button>
+          </form>
         </div>
         <HomeFooter firstTrackSlug="add" withTrackSlug={false} />
       </div>

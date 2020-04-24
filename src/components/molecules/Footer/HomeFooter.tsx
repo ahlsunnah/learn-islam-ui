@@ -9,6 +9,7 @@ import Button from '../../atoms/Button/Button'
 import RawHTML from '../../RawHTML'
 import { IFooterTranslations } from '../../../types/footer'
 import { useTranslation } from 'react-i18next'
+import PoweredByVercel from 'images/powered-by-vercel.svg'
 
 interface IIcon {
   Icon: React.FC<{ className?: string }>
@@ -84,6 +85,9 @@ const HomeFooter = ({ dark, firstTrackSlug, withTrackSlug = true }: Props) => {
       </div>
       <div className="pt3 tc">
         <RawHTML>{t('copyright')}</RawHTML>
+        <br />
+        <br />
+        <img src={PoweredByVercel} alt="logo powered by Vercel" />
       </div>
     </section>
   )

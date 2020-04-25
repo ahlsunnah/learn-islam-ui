@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import TracksContainer from 'modules/Tracks'
+import TracksContainer from 'components/modules/Tracks'
 import './styles.css'
 import { ITracksPageProps } from 'types/tracks'
 

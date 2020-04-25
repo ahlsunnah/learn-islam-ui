@@ -99,5 +99,12 @@
   "locale": "fr",
   "otherTranslationsLocale": "ar",
   "otherTranslationsLocalePath": "/",
-  "otherTranslationsLocaleName": "العربية"
+  "otherTranslationsLocaleName": "العربية",
+  "login": "connexion",
+  "loginCheckBox": "En cochant cette case, j'accepte que mes données personnelles soient utilisées",
+  "loginUserName": "Nom d'utilisateur",
+  "loginPassword": "Mot de passe",
+  "loginButton": "Connexion",
+  "blueHeroLoginTitle": "Bienvenu",
+  "blueHeroLoginDescription": "Bism Illah Al Rahman Rahim"
 }

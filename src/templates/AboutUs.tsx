@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import cx from 'classnames'
-import AboutUsContainer from 'modules/AboutUs'
+import AboutUsContainer from 'components/modules/AboutUs'
 import { IAboutUsProps } from 'types/aboutUs'
 import './styles.css'
 

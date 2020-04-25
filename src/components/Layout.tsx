@@ -1,7 +1,7 @@
 import React from 'react'
-import Footer from 'components/Footer'
 import { Styled, ThemeProvider } from 'theme-ui'
 import theme from 'styles/theme'
+import 'styles/custom.scss'
 import 'styles/fonts.scss'
 import 'styles/theme.scss'
 import '@material/react-ripple'
@@ -15,7 +15,7 @@ const Layout: React.FC<Props> = ({ children }) => (
   <ThemeProvider theme={theme}>
     <Styled.root>
       {children}
-      <Footer />
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css" />
     </Styled.root>
   </ThemeProvider>
 )

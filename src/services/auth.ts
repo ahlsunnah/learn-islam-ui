@@ -10,7 +10,8 @@ firebase.initializeApp({
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
 })
 
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+// TODO: set this if you want to manage session cookies
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
 
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
@@ -32,7 +33,7 @@ export default function useAuth() {
     }
   }, [setAuthState])
 
-  const signInWithEmailAndPwd = useCallback(
+  const signInWithEmailAndPwdAndCookie = useCallback(
     async (email, pwd) => {
       try {
         const user = await firebase.auth().signInWithEmailAndPassword(email, pwd)
@@ -45,6 +46,22 @@ export default function useAuth() {
 
         setAuthState({ status: 'in' })
       } catch (err) {
+        console.log(err)
+      }
+    },
+    [setAuthState]
+  )
+
+  const signInWithEmailAndPwd = useCallback(
+    async (email, pwd) => {
+      try {
+        setAuthState({ status: 'loading' })
+
+        await firebase.auth().signInWithEmailAndPassword(email, pwd)
+
+        setAuthState({ status: 'in' })
+      } catch (err) {
+        setAuthState({ status: 'out' })
         console.log(err)
       }
     },
@@ -72,6 +89,7 @@ export default function useAuth() {
   return {
     authState,
     addNewUser,
+    signInWithEmailAndPwdAndCookie,
     signInWithEmailAndPwd,
     signInWithGoogle,
     signOut,

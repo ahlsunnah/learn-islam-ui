@@ -51,12 +51,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
     createPage({
       path: `${localePaths[locale]}nahnu/`,
       component: slash(aboutUsTemplate),
-      context: {
-        locale,
-        localeEnum: locale,
-        localePaths,
-        otherLanguagePath: otherLocalesPaths && `${otherLocalesPaths[locale]}nahnu/`,
-      },
     })
   })
 

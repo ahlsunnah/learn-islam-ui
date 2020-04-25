@@ -3,7 +3,11 @@ import firebase from 'firebase/app'
 import axios from 'axios'
 
 import 'firebase/auth'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
+
+type FirebaseUser = {
+  authUser: firebase.User | null
+}
 
 firebase.initializeApp({
   apiKey: process.env.WEB_FIREBASE_API_KEY,
@@ -16,7 +20,25 @@ firebase.initializeApp({
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
 export default function useAuth() {
+  const [authUser, setAuthUser] = useState<FirebaseUser>({ authUser: null })
   const [authState, setAuthState] = useState({ status: 'loading' })
+
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged(
+      async (user) => {
+        if (user) {
+          localStorage.setItem('authUser', JSON.stringify(user))
+          setAuthUser({ authUser: user })
+        }
+      },
+      () => {
+        localStorage.removeItem('authUser')
+        setAuthUser({
+          authUser: null,
+        })
+      }
+    )
+  }, [])
 
   const signInWithGoogle = useCallback(async () => {
     try {
@@ -93,5 +115,6 @@ export default function useAuth() {
     signInWithEmailAndPwd,
     signInWithGoogle,
     signOut,
+    authUser,
   }
 }

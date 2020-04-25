@@ -20,7 +20,7 @@ const NavSection = ({ className }: Props) => {
   const { t, i18n } = useTranslation()
   const location = useLocation()
   const otherTranslationsLocale = useMemo(() => t('otherTranslationsLocale'), [t])
-  console.log(location.pathname)
+
   const destination = useMemo(
     () =>
       location.pathname.indexOf('login') !== -1

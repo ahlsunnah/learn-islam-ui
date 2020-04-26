@@ -100,4 +100,4 @@ TODO: Explain gatsbyjs's architecture or link to explication
 
 ### Deployment
 
- ![Alt text]( src/assets/images/powered-by-vercel.svg?raw=true "Title")
+[![Alt text]( src/assets/images/powered-by-vercel.svg?raw=true "Title")](https://vercel.com)

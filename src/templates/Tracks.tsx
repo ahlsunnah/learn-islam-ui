@@ -1,49 +1,27 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
+import { useTranslation } from 'react-i18next'
 import cx from 'classnames'
 import TracksContainer from 'components/modules/Tracks'
 import './styles.css'
 import { ITracksPageProps } from 'types/tracks'
 
-const Tracks = (props: ITracksPageProps) => (
-  <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
-    <Helmet>
-      <html lang={props.pageContext.locale} />
-    </Helmet>
-    <TracksContainer {...props} />
-  </div>
-)
+const Tracks = (props: ITracksPageProps) => {
+  const { i18n } = useTranslation()
+  return (
+    <div className={cx({ rtl: i18n.language === 'ar' })}>
+      <Helmet>
+        <html lang={i18n.language} />
+      </Helmet>
+      <TracksContainer {...props} />
+    </div>
+  )
+}
 
 export default Tracks
 
 export const pageQuery = graphql`
-  fragment TracksPageTranslations on TranslationsJson {
-    aboutUs
-    connect
-    copyright
-    courses
-    footerSocialTitle
-    homeFooterCTA
-    homeStartTrack
-    locale
-    localeName
-    localePath
-    siteName
-    siteSlogan
-    soon
-    tracks
-    tracksPageTitle
-    tracksPageDescription
-    urlFacebook
-    urlTelegram
-    urlTwitter
-    urlYoutube
-  }
-  fragment TracksPageOtherTranslations on TranslationsJson {
-    localeName
-    localePath
-  }
   fragment TracksPageTrack on api_tracks {
     id
     slug
@@ -53,13 +31,7 @@ export const pageQuery = graphql`
       description
     }
   }
-  query tracksQuery($locale: String!, $localeEnum: api_locales_enum) {
-    translations: translationsJson(locale: { eq: $locale }) {
-      ...TracksPageTranslations
-    }
-    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
-      ...TracksPageOtherTranslations
-    }
+  query tracksQuery($localeEnum: api_locales_enum) {
     api {
       tracks {
         ...TracksPageTrack

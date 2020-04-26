@@ -9,16 +9,14 @@ interface ILinkOrChildrenProps {
   className?: string
   to: string | false
 }
-const LinkOrChildren = ({ children, className = '', to }: ILinkOrChildrenProps) => {
-  if (to)
-    return (
-      <Link to={to} className={className}>
-        {children}
-      </Link>
-    )
-
-  return children
-}
+const LinkOrChildren = ({ children, className = '', to }: ILinkOrChildrenProps) =>
+  to ? (
+    <Link to={to} className={className}>
+      {children}
+    </Link>
+  ) : (
+    children
+  )
 
 interface IProps {
   localePath: string
@@ -28,7 +26,7 @@ interface IProps {
 const Tracks = ({ localePath, soonString, tracks }: IProps) => (
   <div>
     {tracks.map(({ slug, soon, translations }, i) => {
-      const strings = translations[0]
+      const { title, description } = translations[0]
       return (
         <LinkOrChildren key={slug} to={!soon && `${localePath}${slug}/`} className="no-underline">
           <div
@@ -40,8 +38,8 @@ const Tracks = ({ localePath, soonString, tracks }: IProps) => (
             <div className="mh3 w5 h4 bg-light-gray" />
             <div className="mh3 measure-narrow">
               {!!soon && <span>{soonString}</span>}
-              <h2>{strings.title}</h2>
-              <RawHTML>{strings.description}</RawHTML>
+              <h2>{title}</h2>
+              <RawHTML>{description}</RawHTML>
             </div>
           </div>
         </LinkOrChildren>

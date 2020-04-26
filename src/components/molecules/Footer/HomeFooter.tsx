@@ -9,7 +9,7 @@ import Button from '../../atoms/Button/Button'
 import RawHTML from '../../RawHTML'
 import { IFooterTranslations } from '../../../types/footer'
 import { useTranslation } from 'react-i18next'
-import PoweredByVercel from 'images/powered-by-vercel.svg'
+import PoweredByVercel from 'assets/images/powered-by-vercel.svg'
 
 interface IIcon {
   Icon: React.FC<{ className?: string }>

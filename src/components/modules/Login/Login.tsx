@@ -7,13 +7,18 @@ import Helmet from 'react-helmet'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
 import useAuth from 'services/auth'
+import { FC } from 'react'
 
 type FormValues = {
   email: string
   password: string
 }
 
-const Login = () => {
+type PropTypes = {
+  path?: string
+}
+
+const Login: FC<PropTypes> = () => {
   const { i18n, t } = useTranslation()
   const { signInWithEmailAndPwd } = useAuth()
 
@@ -80,13 +85,13 @@ const Login = () => {
               </Label>
             </Box>
             <Button
+              type="submit"
               sx={{
                 ml: 2,
               }}
             >
               {t('loginButton')}
             </Button>
-            <Button type="submit">{t('loginWithGoogle')}</Button>
           </form>
         </div>
         <HomeFooter firstTrackSlug="add" withTrackSlug={false} />

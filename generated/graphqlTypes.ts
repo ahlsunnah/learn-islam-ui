@@ -7960,16 +7960,10 @@ export type TMadrassahPageQueryQuery = { api: { tracks: Array<(
 
 export type TAboutUsTrackFragment = Pick<TApi_Tracks, 'id' | 'slug'>;
 
-export type TAboutUsTranslationsFragment = Pick<TTranslationsJson, 'aboutUs' | 'aboutUsPageTitle' | 'aboutUsPageContent' | 'connect' | 'courses' | 'copyright' | 'footerSocialTitle' | 'homeFooterCTA' | 'homeStartTrack' | 'locale' | 'localeName' | 'localePath' | 'siteName' | 'siteSlogan' | 'tracks' | 'urlFacebook' | 'urlTelegram' | 'urlTwitter' | 'urlYoutube'>;
-
-export type TAboutUsOtherTranslationFragment = Pick<TTranslationsJson, 'localeName' | 'localePath'>;
-
-export type TAboutUsQueryQueryVariables = {
-  locale: Scalars['String'];
-};
+export type TAboutUsQueryQueryVariables = {};
 
 
-export type TAboutUsQueryQuery = { api: { tracks: Array<TAboutUsTrackFragment> }, translations: Maybe<TAboutUsTranslationsFragment>, otherLocaleTranslations: Maybe<TAboutUsOtherTranslationFragment> };
+export type TAboutUsQueryQuery = { api: { tracks: Array<TAboutUsTrackFragment> } };
 
 export type TChapterPageTrackFragment = (
   Pick<TApi_Tracks, 'id' | 'slug'>

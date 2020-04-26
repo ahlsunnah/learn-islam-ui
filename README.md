@@ -100,4 +100,4 @@ TODO: Explain gatsbyjs's architecture or link to explication
 
 ### Deployment
 
-The app is sponsored and deployed by [Vercel](https://vercel.com)
+ ![Alt text]( src/assets/images/powered-by-vercel.svg?raw=true "Title")

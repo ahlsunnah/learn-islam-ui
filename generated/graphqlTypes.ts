@@ -5816,12 +5816,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
+  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale' |
-  'childTranslationsJson___nextHelp';
+  'childTranslationsJson___locale';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -6385,12 +6385,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -6801,22 +6801,20 @@ export type TSitePageConnectionGroupArgs = {
 };
 
 export type TSitePageContext = {
-  locale: Maybe<Scalars['String']>;
   localeEnum: Maybe<Scalars['String']>;
-  localePaths: Maybe<TSitePageContextLocalePaths>;
-  otherLanguagePath: Maybe<Scalars['String']>;
   id: Maybe<Scalars['Int']>;
+  locale: Maybe<Scalars['String']>;
+  localePaths: Maybe<TSitePageContextLocalePaths>;
   slug: Maybe<Scalars['String']>;
   next: Maybe<TSitePageContextNext>;
   difficulty: Maybe<Scalars['Int']>;
 };
 
 export type TSitePageContextFilterInput = {
-  locale: Maybe<TStringQueryOperatorInput>;
   localeEnum: Maybe<TStringQueryOperatorInput>;
-  localePaths: Maybe<TSitePageContextLocalePathsFilterInput>;
-  otherLanguagePath: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TIntQueryOperatorInput>;
+  locale: Maybe<TStringQueryOperatorInput>;
+  localePaths: Maybe<TSitePageContextLocalePathsFilterInput>;
   slug: Maybe<TStringQueryOperatorInput>;
   next: Maybe<TSitePageContextNextFilterInput>;
   difficulty: Maybe<TIntQueryOperatorInput>;
@@ -6943,12 +6941,11 @@ export type TSitePageFieldsEnum =
   'internal___owner' |
   'internal___type' |
   'isCreatedByStatefulCreatePages' |
-  'context___locale' |
   'context___localeEnum' |
+  'context___id' |
+  'context___locale' |
   'context___localePaths___ar' |
   'context___localePaths___fr' |
-  'context___otherLanguagePath' |
-  'context___id' |
   'context___slug' |
   'context___next___type' |
   'context___next___title' |
@@ -6999,6 +6996,7 @@ export type TSitePageFieldsEnum =
   'pluginCreator___pluginOptions___codegenConfig___avoidOptionals' |
   'pluginCreator___pluginOptions___codegenConfig___maybeValue' |
   'pluginCreator___pluginOptions___codegenConfig___typesPrefix' |
+  'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___typeName' |
   'pluginCreator___pluginOptions___fieldName' |
@@ -7223,6 +7221,7 @@ export type TSitePluginFieldsEnum =
   'pluginOptions___codegenConfig___avoidOptionals' |
   'pluginOptions___codegenConfig___maybeValue' |
   'pluginOptions___codegenConfig___typesPrefix' |
+  'pluginOptions___stylesProvider___injectFirst' |
   'pluginOptions___path' |
   'pluginOptions___typeName' |
   'pluginOptions___fieldName' |
@@ -7373,6 +7372,7 @@ export type TSitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type TSitePluginPluginOptions = {
   fileName: Maybe<Scalars['String']>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfig>;
+  stylesProvider: Maybe<TSitePluginPluginOptionsStylesProvider>;
   path: Maybe<Scalars['String']>;
   typeName: Maybe<Scalars['String']>;
   fieldName: Maybe<Scalars['String']>;
@@ -7415,6 +7415,7 @@ export type TSitePluginPluginOptionsCodegenConfigFilterInput = {
 export type TSitePluginPluginOptionsFilterInput = {
   fileName: Maybe<TStringQueryOperatorInput>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfigFilterInput>;
+  stylesProvider: Maybe<TSitePluginPluginOptionsStylesProviderFilterInput>;
   path: Maybe<TStringQueryOperatorInput>;
   typeName: Maybe<TStringQueryOperatorInput>;
   fieldName: Maybe<TStringQueryOperatorInput>;
@@ -7472,6 +7473,14 @@ export type TSitePluginPluginOptionsIconsFilterInput = {
   twitter: Maybe<TBooleanQueryOperatorInput>;
   yandex: Maybe<TBooleanQueryOperatorInput>;
   windows: Maybe<TBooleanQueryOperatorInput>;
+};
+
+export type TSitePluginPluginOptionsStylesProvider = {
+  injectFirst: Maybe<Scalars['Boolean']>;
+};
+
+export type TSitePluginPluginOptionsStylesProviderFilterInput = {
+  injectFirst: Maybe<TBooleanQueryOperatorInput>;
 };
 
 export type TSitePluginSortInput = {
@@ -7604,12 +7613,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -7818,12 +7827,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
+  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale' |
-  'nextHelp';
+  'locale';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -7922,12 +7931,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {
@@ -7944,135 +7953,3 @@ export type TTranslationsJsonSortInput = {
   order: Maybe<Array<Maybe<TSortOrderEnum>>>;
 };
 
-export type TMadrassahPageQueryQueryVariables = {};
-
-
-export type TMadrassahPageQueryQuery = { api: { tracks: Array<(
-      Pick<TApi_Tracks, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Track_Translations, 'id' | 'locale_code' | 'title'>>, courses: Array<(
-        Pick<TApi_Courses, 'id' | 'slug'>
-        & { quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, translations: Array<Pick<TApi_Course_Translations, 'id' | 'locale_code' | 'title'>>, chapters: Array<(
-          Pick<TApi_Chapters, 'id' | 'slug'>
-          & { translations: Array<Pick<TApi_Chapter_Translations, 'id' | 'locale_code' | 'title'>> }
-        )> }
-      )> }
-    )> } };
-
-export type TAboutUsTrackFragment = Pick<TApi_Tracks, 'id' | 'slug'>;
-
-export type TAboutUsQueryQueryVariables = {};
-
-
-export type TAboutUsQueryQuery = { api: { tracks: Array<TAboutUsTrackFragment> } };
-
-export type TChapterPageTrackFragment = (
-  Pick<TApi_Tracks, 'id' | 'slug'>
-  & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<(
-    Pick<TApi_Courses, 'id' | 'slug'>
-    & { quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, chapters: Array<(
-      Pick<TApi_Chapters, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-    )>, translations: Array<Pick<TApi_Course_Translations, 'locale_code' | 'title'>> }
-  )> }
-);
-
-export type TChapterPageTranslationsFragment = Pick<TTranslationsJson, 'chapter' | 'clickHere' | 'chapterAudio' | 'congratulations' | 'congratulationsCTA' | 'course' | 'difficulty1' | 'difficulty2' | 'downloadAudio' | 'focus' | 'goToTracks' | 'iCompletedTheChapter' | 'listenAudio' | 'locale' | 'localeName' | 'localePath' | 'next' | 'nextCourse' | 'nextHelp' | 'readIn' | 'quiz' | 'tabAudio' | 'tabCompleted' | 'tabTranscription' | 'tabTranslation' | 'tabVocabulary' | 'takeQuiz' | 'track'>;
-
-export type TChapterQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: Maybe<TApi_Locales_Enum>;
-  id: Scalars['Int'];
-};
-
-
-export type TChapterQueryQuery = { api: { chapter: Maybe<(
-      Pick<TApi_Chapters, 'id' | 'slug' | 'audio'>
-      & { translations: Array<Pick<TApi_Chapter_Translations, 'id' | 'title' | 'transcription' | 'vocabulary' | 'locale_code' | 'video'>>, course: (
-        Pick<TApi_Courses, 'id' | 'slug'>
-        & { track: TChapterPageTrackFragment, chapters: Array<(
-          Pick<TApi_Chapters, 'id' | 'slug'>
-          & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-        )> }
-      ) }
-    )> }, translations: Maybe<TChapterPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath' | 'readIn'>> };
-
-export type THomeTrackFragment = (
-  Pick<TApi_Tracks, 'id' | 'order' | 'slug' | 'soon'>
-  & { translations: Array<Pick<TApi_Track_Translations, 'title' | 'description' | 'locale_code'>> }
-);
-
-export type THomeQueryQueryVariables = {};
-
-
-export type THomeQueryQuery = { api: { tracks: Array<THomeTrackFragment> } };
-
-export type TQuizzesPageQuizFragment = (
-  Pick<TApi_Quizzes, 'id' | 'type_slug'>
-  & { translations: Array<Pick<TApi_Quiz_Translations, 'id' | 'data'>> }
-);
-
-export type TQuizzesPageTranslationsFragment = Pick<TTranslationsJson, 'assessmentPerfect' | 'assessmentVeryGood' | 'assessmentGood' | 'assessmentFail' | 'average' | 'backToCourse' | 'chooseACategoryTitle' | 'chooseAnswer' | 'congratulations' | 'congratulationsCTA' | 'continue' | 'difficulty1' | 'difficulty2' | 'fillInTheBlankTitle' | 'goToTop' | 'goToTracks' | 'grade' | 'level' | 'locale' | 'localePath' | 'nextCourse' | 'nextTrack' | 'progress' | 'quiz' | 'quizTitle' | 'quizTrue' | 'quizFalse' | 'restartQuizs' | 'seeYourScore' | 'start' | 'takeExam' | 'yourLastScore' | 'yourScore'>;
-
-export type TQuizQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: Maybe<TApi_Locales_Enum>;
-  id: Scalars['Int'];
-  difficulty: Scalars['Int'];
-};
-
-
-export type TQuizQueryQuery = { api: { course: Maybe<(
-      Pick<TApi_Courses, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Course_Translations, 'id' | 'title'>>, quizzes: Array<TQuizzesPageQuizFragment>, track: (
-        Pick<TApi_Tracks, 'id' | 'slug'>
-        & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<(
-          Pick<TApi_Courses, 'id' | 'slug'>
-          & { quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, translations: Array<Pick<TApi_Course_Translations, 'locale_code' | 'title'>>, chapters: Array<(
-            Pick<TApi_Chapters, 'id' | 'slug'>
-            & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-          )> }
-        )> }
-      ) }
-    )> }, translations: Maybe<TQuizzesPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
-
-export type TTrackPageCourseFragment = (
-  Pick<TApi_Courses, 'id' | 'level' | 'slug'>
-  & { translations: Array<Pick<TApi_Course_Translations, 'title' | 'description'>>, chapters: Array<(
-    Pick<TApi_Chapters, 'duration' | 'id' | 'slug'>
-    & { translations: Array<Pick<TApi_Chapter_Translations, 'locale_code'>> }
-  )>, quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, topic: (
-    Pick<TApi_Topics, 'id' | 'color'>
-    & { translations: Array<Pick<TApi_Topic_Translations, 'title'>> }
-  ) }
-);
-
-export type TTrackPageTranslationsFragment = Pick<TTranslationsJson, 'connect' | 'course' | 'level1' | 'level2' | 'level3' | 'locale' | 'localePath' | 'start' | 'startCourse' | 'toOtherLanguageCTA' | 'track' | 'trackLevel'>;
-
-export type TTrackQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: TApi_Locales_Enum;
-  id: Scalars['Int'];
-};
-
-
-export type TTrackQueryQuery = { api: { track: Maybe<(
-      Pick<TApi_Tracks, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<TTrackPageCourseFragment> }
-    )> }, translations: Maybe<TTrackPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
-
-export type TTracksPageTranslationsFragment = Pick<TTranslationsJson, 'aboutUs' | 'connect' | 'copyright' | 'courses' | 'footerSocialTitle' | 'homeFooterCTA' | 'homeStartTrack' | 'locale' | 'localeName' | 'localePath' | 'siteName' | 'siteSlogan' | 'soon' | 'tracks' | 'tracksPageTitle' | 'tracksPageDescription' | 'urlFacebook' | 'urlTelegram' | 'urlTwitter' | 'urlYoutube'>;
-
-export type TTracksPageOtherTranslationsFragment = Pick<TTranslationsJson, 'localeName' | 'localePath'>;
-
-export type TTracksPageTrackFragment = (
-  Pick<TApi_Tracks, 'id' | 'slug' | 'soon'>
-  & { translations: Array<Pick<TApi_Track_Translations, 'title' | 'description'>> }
-);
-
-export type TTracksQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: Maybe<TApi_Locales_Enum>;
-};
-
-
-export type TTracksQueryQuery = { translations: Maybe<TTracksPageTranslationsFragment>, otherLocaleTranslations: Maybe<TTracksPageOtherTranslationsFragment>, api: { tracks: Array<TTracksPageTrackFragment> } };

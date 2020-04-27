@@ -19,6 +19,18 @@ export const theme = {
     heading: 'inherit',
     monospace: 'Menlo, monospace',
   },
+  size: {
+    container: 768,
+  },
+  payout: {
+    header: {
+      color: 'white',
+      bg: 'black',
+    },
+    footer: {
+      bg: 'gray',
+    },
+  },
   fontSizes: [10, 12, 14, 16, 20, 24, 34, 48, 60, 96],
   fontWeights: {
     light: 300,

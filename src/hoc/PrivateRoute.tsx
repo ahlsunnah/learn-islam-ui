@@ -1,11 +1,11 @@
-import React, { FC }  from 'react'
+import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 
 const isLoggedIn = () => ''
 
 type propTypes = {
   component: React.ElementType
-  location: string,
+  location: string
 }
 
 const PrivateRoute: FC<propTypes> = ({ component: Component, location, ...rest }) => {
@@ -14,7 +14,7 @@ const PrivateRoute: FC<propTypes> = ({ component: Component, location, ...rest }
     return null
   }
 
-  return <Component {...rest}
+  return <Component {...rest} />
 }
 
 export default PrivateRoute

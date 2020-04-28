@@ -12582,6 +12582,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.26, postcss@^7.0.27:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+powered-by-vercel@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/powered-by-vercel/-/powered-by-vercel-1.0.0.tgz#999d7631b755a75166f9ad258993c2207f69702a"
+  integrity sha512-fMJ6NY46qBcjYxKcBEOUPycDiMrn/r4VDGUQerBIJY3WdR4en4LqxhXPmzdOTj3xxbLxG8vY9J3Dduwwhqbhzw==
+
 prebuild-install@^5.3.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-5.3.3.tgz#ef4052baac60d465f5ba6bf003c9c1de79b9da8e"

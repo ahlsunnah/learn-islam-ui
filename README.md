@@ -100,4 +100,4 @@ TODO: Explain gatsbyjs's architecture or link to explication
 
 ### Deployment
 
-[![Alt text](src/assets/images/powered-by-vercel.svg?raw=true 'Powered by Vercel')](https://vercel.com?utm_source=ahlsunnah)
+[![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=powered-by-vercel)

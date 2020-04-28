@@ -87,7 +87,9 @@ const HomeFooter = ({ dark, firstTrackSlug, withTrackSlug = true }: Props) => {
         <RawHTML>{t('copyright')}</RawHTML>
         <br />
         <br />
-        <img src={PoweredByVercel} alt="logo powered by Vercel" />
+        <a href="https://vercel.com?utm_source=ahlsunnah">
+          <img src={PoweredByVercel} alt="Powered by Vercel" />
+        </a>
       </div>
     </section>
   )

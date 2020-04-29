@@ -19,6 +19,19 @@ export const theme = {
     heading: 'inherit',
     monospace: 'Menlo, monospace',
   },
+  sizes: {
+    footer: 200,
+    container: 768,
+  },
+  payout: {
+    header: {
+      color: 'white',
+      bg: 'black',
+    },
+    footer: {
+      bg: 'gray',
+    },
+  },
   fontSizes: [10, 12, 14, 16, 20, 24, 34, 48, 60, 96],
   fontWeights: {
     light: 300,
@@ -34,9 +47,8 @@ export const theme = {
     text: '#000',
     background: '#fff',
     primary: '#0099CC',
-    // primary: '#07c',
+    primary_base: '#6496f6',
     secondary: '#353535',
-    // secondary: '#30c',
     muted: '#f6f6f6',
   },
   forms: {

@@ -106,5 +106,9 @@
   "loginPassword": "Mot de passe",
   "loginButton": "Connexion",
   "blueHeroLoginTitle": "Bienvenu",
-  "blueHeroLoginDescription": "Bism Illah Al Rahman Rahim"
+  "blueHeroLoginDescription": "Bism Illah Al Rahman Rahim",
+  "haveAccount": "Vous n'avez pas de compte?",
+  "registerAccount": "S'inscrire maintenant",
+  "allreadyHaveAccount": "Vous avez déjà un compte?",
+  "identification": "Identifiez-vous"
 }

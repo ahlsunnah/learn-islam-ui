@@ -4,9 +4,7 @@ import axios from 'axios'
 import 'firebase/auth'
 import { useState, useCallback, useEffect, createContext } from 'react'
 
-type FirebaseUser = {
-  authUser: firebase.User | null
-}
+type FirebaseUser = firebase.User | null
 
 type ContextType = {
   useAuth: () => UseAuth
@@ -44,9 +42,7 @@ firebase.initializeApp({
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
 export function useAuth(): UseAuth {
-  const [authUser, setAuthUser] = useState<FirebaseUser>({
-    authUser: JSON.parse(localStorage.getItem('authUser') || ''),
-  })
+  const [authUser, setAuthUser] = useState<FirebaseUser>(JSON.parse(localStorage.getItem('authUser') as string))
 
   const [userCreationState, setUserCreationState] = useState<UserCreationState>({ status: 'loading' })
   const [authState, setAuthState] = useState<AuthState>({ status: 'loading' })
@@ -56,14 +52,12 @@ export function useAuth(): UseAuth {
       async (user) => {
         if (user) {
           localStorage.setItem('authUser', JSON.stringify(user))
-          setAuthUser({ authUser: user })
+          setAuthUser(user)
         }
       },
       () => {
         localStorage.removeItem('authUser')
-        setAuthUser({
-          authUser: null,
-        })
+        setAuthUser(null)
       }
     )
   }, [])

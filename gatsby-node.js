@@ -19,3 +19,13 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
 // }
 
 exports.createPages = require('./src/build/createPages.ts').default
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = '/app/*'
+    // Update the page.
+    createPage(page)
+  }
+}

@@ -108,5 +108,9 @@
   "loginButton": "تسجيل الدخول",
   "blueHeroLoginTitle": "مرحبا بعودتك",
   "blueHeroLoginDescription": "بسم الله الرحمن الرحيم",
-  "loginWithGoogle": "جوجل"
+  "loginWithGoogle": "جوجل",
+  "haveAccount": "ليس لديك حساب؟",
+  "registerAccount": "سجل الآن",
+  "allreadyHaveAccount": "لديك حساب ؟",
+  "identification": "سجل الدخول"
 }

@@ -1,13 +1,35 @@
 import firebase from 'firebase/app'
-
 import axios from 'axios'
 
 import 'firebase/auth'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, createContext } from 'react'
 
-type FirebaseUser = {
-  authUser: firebase.User | null
+type FirebaseUser = firebase.User | null
+
+type ContextType = {
+  useAuth: () => UseAuth
 }
+
+type AuthState = {
+  status: 'loading' | 'in' | 'out'
+}
+
+type UserCreationState = {
+  status: 'userCreated' | 'loading'
+}
+
+type UseAuth = {
+  userCreationState: UserCreationState
+  authState: AuthState
+  addNewUser: (email: string, pwd: string) => Promise<void>
+  signInWithEmailAndPwdAndCookie: (email: string, pwd: string) => Promise<void>
+  signInWithEmailAndPwd: (email: string, pwd: string) => Promise<void>
+  signInWithGoogle: () => Promise<void>
+  signOut: () => Promise<void>
+  authUser: FirebaseUser
+}
+
+export const AuthContext = createContext<ContextType>({ useAuth })
 
 firebase.initializeApp({
   apiKey: process.env.WEB_FIREBASE_API_KEY,
@@ -19,23 +41,23 @@ firebase.initializeApp({
 
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
-export default function useAuth() {
-  const [authUser, setAuthUser] = useState<FirebaseUser>({ authUser: null })
-  const [authState, setAuthState] = useState({ status: 'loading' })
+export function useAuth(): UseAuth {
+  const [authUser, setAuthUser] = useState<FirebaseUser>(JSON.parse(localStorage.getItem('authUser') as string))
+
+  const [userCreationState, setUserCreationState] = useState<UserCreationState>({ status: 'loading' })
+  const [authState, setAuthState] = useState<AuthState>({ status: 'loading' })
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(
       async (user) => {
         if (user) {
           localStorage.setItem('authUser', JSON.stringify(user))
-          setAuthUser({ authUser: user })
+          setAuthUser(user)
         }
       },
       () => {
         localStorage.removeItem('authUser')
-        setAuthUser({
-          authUser: null,
-        })
+        setAuthUser(null)
       }
     )
   }, [])
@@ -92,7 +114,13 @@ export default function useAuth() {
 
   const addNewUser = useCallback(async (email, pwd) => {
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pwd)
+      setUserCreationState({ status: 'loading' })
+
+      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pwd)
+
+      await axios.post(`${process.env.AUTH_API}/auth/setCustomClaims`, { uid: user?.uid })
+
+      setUserCreationState({ status: 'userCreated' })
     } catch (err) {
       console.log(err)
     }
@@ -109,6 +137,7 @@ export default function useAuth() {
   }
 
   return {
+    userCreationState,
     authState,
     addNewUser,
     signInWithEmailAndPwdAndCookie,

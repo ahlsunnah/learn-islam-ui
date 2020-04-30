@@ -110,5 +110,7 @@
   "haveAccount": "Vous n'avez pas de compte?",
   "registerAccount": "S'inscrire maintenant",
   "allreadyHaveAccount": "Vous avez déjà un compte?",
-  "identification": "Identifiez-vous"
+  "identification": "Identifiez-vous",
+  "loginLastName": "Nom de famille",
+  "loginFirstName": "Prénom"
 }

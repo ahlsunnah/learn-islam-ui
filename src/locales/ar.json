@@ -112,5 +112,7 @@
   "haveAccount": "ليس لديك حساب؟",
   "registerAccount": "سجل الآن",
   "allreadyHaveAccount": "لديك حساب ؟",
-  "identification": "سجل الدخول"
+  "identification": "سجل الدخول",
+  "loginLastName": "القاب",
+  "loginFirstName": "الاسم"
 }

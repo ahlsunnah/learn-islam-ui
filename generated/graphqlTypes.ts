@@ -7038,7 +7038,6 @@ export type TSitePageFieldsEnum =
   'pluginCreator___packageJson___description' |
   'pluginCreator___packageJson___version' |
   'pluginCreator___packageJson___main' |
-  'pluginCreator___packageJson___author' |
   'pluginCreator___packageJson___license' |
   'pluginCreator___packageJson___dependencies' |
   'pluginCreator___packageJson___dependencies___name' |
@@ -7263,7 +7262,6 @@ export type TSitePluginFieldsEnum =
   'packageJson___description' |
   'packageJson___version' |
   'packageJson___main' |
-  'packageJson___author' |
   'packageJson___license' |
   'packageJson___dependencies' |
   'packageJson___dependencies___name' |
@@ -7306,7 +7304,6 @@ export type TSitePluginPackageJson = {
   description: Maybe<Scalars['String']>;
   version: Maybe<Scalars['String']>;
   main: Maybe<Scalars['String']>;
-  author: Maybe<Scalars['String']>;
   license: Maybe<Scalars['String']>;
   dependencies: Maybe<Array<Maybe<TSitePluginPackageJsonDependencies>>>;
   devDependencies: Maybe<Array<Maybe<TSitePluginPackageJsonDevDependencies>>>;
@@ -7347,7 +7344,6 @@ export type TSitePluginPackageJsonFilterInput = {
   description: Maybe<TStringQueryOperatorInput>;
   version: Maybe<TStringQueryOperatorInput>;
   main: Maybe<TStringQueryOperatorInput>;
-  author: Maybe<TStringQueryOperatorInput>;
   license: Maybe<TStringQueryOperatorInput>;
   dependencies: Maybe<TSitePluginPackageJsonDependenciesFilterListInput>;
   devDependencies: Maybe<TSitePluginPackageJsonDevDependenciesFilterListInput>;

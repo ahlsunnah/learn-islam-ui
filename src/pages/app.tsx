@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import React from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Router } from '@reach/router'
 import AppNavBar from '../components/molecules/AppNavBar/AppNavBar'
 import CssBaseLine from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
-import { Fragment } from 'react'
+import { AuthContext } from 'services/auth'
+import Login from '../components/modules/Login/Login'
 import Profile from 'components/modules/Profile/Profile'
 
 type LayoutContainerProps = {
@@ -23,6 +24,10 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => (
 )
 
 const App = () => {
+  const { useAuth } = useContext(AuthContext)
+
+  const { addNewUser, signInWithEmailAndPwd, authUser } = useAuth()
+
   return (
     <Fragment>
       <CssBaseLine />
@@ -59,6 +64,12 @@ const App = () => {
           >
             <Router basepath="/app">
               <Profile path="/profile" />
+              <Login
+                path="/login"
+                signInWithEmailAndPwd={signInWithEmailAndPwd}
+                authUser={authUser}
+                addNewUser={addNewUser}
+              />
             </Router>
           </Container>
         </main>

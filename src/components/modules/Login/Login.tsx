@@ -1,14 +1,12 @@
 /** @jsx jsx */
-import BlueHero from 'components/molecules/Hero/BlueHero'
-import HomeFooter from 'components/molecules/Footer/HomeFooter'
 import { useFormik, FormikErrors } from 'formik'
 import { Button, jsx, Label, Input, Box, Checkbox } from 'theme-ui'
 import { navigate } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
-import { AuthContext } from 'services/auth'
-import { FC, useState, Fragment, useContext } from 'react'
+import { FirebaseUser } from 'services/auth'
+import { FC, useState, Fragment } from 'react'
 
 type FormValues = {
   lastName: string
@@ -18,15 +16,17 @@ type FormValues = {
 }
 
 type PropTypes = {
+  addNewUser: (email: string, pwd: string) => Promise<void>
+  signInWithEmailAndPwd: (email: string, pwd: string) => Promise<void>
+  authUser: FirebaseUser
   path?: string
 }
 
-const Login: FC<PropTypes> = () => {
+const Login: FC<PropTypes> = (props) => {
+  const { addNewUser, signInWithEmailAndPwd, authUser } = props
+
   const [isNew, setIsNew] = useState(false)
   const { i18n, t } = useTranslation()
-  const { useAuth } = useContext(AuthContext)
-
-  const { addNewUser, signInWithEmailAndPwd, authUser } = useAuth()
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -68,7 +68,6 @@ const Login: FC<PropTypes> = () => {
         <html lang={i18n.language} />
       </Helmet>
       <div>
-        <BlueHero description={t('blueHeroLoginDescription')} title={t('blueHeroLoginTitle')} />
         <div
           sx={{
             maxWidth: 700,
@@ -158,7 +157,6 @@ const Login: FC<PropTypes> = () => {
             </Button>
           </form>
         </div>
-        <HomeFooter firstTrackSlug="add" withTrackSlug={false} />
       </div>
     </div>
   )

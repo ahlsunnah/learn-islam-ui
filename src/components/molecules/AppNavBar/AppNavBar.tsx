@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import { ReactComponent as LogoAr } from '../../../assets/images/logo-horizontal-ar-white.svg'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
@@ -82,7 +83,7 @@ export default function PrimarySearchAppBar() {
       <AppBar sx={{ bg: 'primary_base' }} position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Profile
+            <LogoAr width="300" height="60" />
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

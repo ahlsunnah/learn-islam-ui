@@ -4,7 +4,7 @@ import axios from 'axios'
 import 'firebase/auth'
 import { useState, useCallback, useEffect, createContext } from 'react'
 
-type FirebaseUser = firebase.User | null
+export type FirebaseUser = firebase.User | null
 
 type ContextType = {
   useAuth: () => UseAuth
@@ -18,7 +18,7 @@ type UserCreationState = {
   status: 'userCreated' | 'loading'
 }
 
-type UseAuth = {
+export type UseAuth = {
   userCreationState: UserCreationState
   authState: AuthState
   addNewUser: (email: string, pwd: string) => Promise<void>
@@ -40,6 +40,12 @@ firebase.initializeApp({
 // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
 
 const googleProvider = new firebase.auth.GoogleAuthProvider()
+
+const bearer = (idToken: string) => ({
+  headers: {
+    Authorization: `Bearer ${idToken}`,
+  },
+})
 
 export function useAuth(): UseAuth {
   const [authUser, setAuthUser] = useState<FirebaseUser>(JSON.parse(localStorage.getItem('authUser') as string))
@@ -118,7 +124,9 @@ export function useAuth(): UseAuth {
 
       const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pwd)
 
-      await axios.post(`${process.env.AUTH_API}/auth/setCustomClaims`, { uid: user?.uid })
+      const idToken = await user?.getIdToken()
+
+      await axios.post(`${process.env.AUTH_API}/auth/setCustomClaims`, { uid: user?.uid }, bearer(idToken as string))
 
       setUserCreationState({ status: 'userCreated' })
     } catch (err) {

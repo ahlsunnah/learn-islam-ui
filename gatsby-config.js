@@ -60,6 +60,7 @@ module.exports = {
     'gatsby-plugin-typescript',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
+    'gatsby-plugin-svgr',
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {

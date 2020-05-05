@@ -4,10 +4,10 @@ import axios from 'axios'
 import 'firebase/auth'
 import { useState, useCallback, useEffect, createContext } from 'react'
 
-export type FirebaseUser = firebase.User | null
+export type FirebaseUser = firebase.User | null | undefined
 
 type ContextType = {
-  useAuth: () => UseAuth
+  user: UseAuth | null
 }
 
 type AuthState = {
@@ -29,12 +29,7 @@ export type UseAuth = {
   authUser: FirebaseUser
 }
 
-export const AuthContext = createContext<ContextType>({ useAuth })
-
-firebase.initializeApp({
-  apiKey: process.env.WEB_FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-})
+export const AuthContext = createContext<ContextType>({ user: null })
 
 // TODO: set this if you want to manage session cookies
 // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
@@ -48,7 +43,16 @@ const bearer = (idToken: string) => ({
 })
 
 export function useAuth(): UseAuth {
-  const [authUser, setAuthUser] = useState<FirebaseUser>(JSON.parse(localStorage.getItem('authUser') as string))
+  const [authUser, setAuthUser] = useState<FirebaseUser>(undefined)
+
+  useEffect(() => {
+    firebase.initializeApp({
+      apiKey: process.env.GATSBY_WEB_FIREBASE_API_KEY,
+      authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+    })
+
+    setAuthUser(JSON.parse(localStorage.getItem('authUser') as string))
+  }, [])
 
   const [userCreationState, setUserCreationState] = useState<UserCreationState>({ status: 'loading' })
   const [authState, setAuthState] = useState<AuthState>({ status: 'loading' })
@@ -75,7 +79,7 @@ export function useAuth(): UseAuth {
 
       setAuthState({ status: 'loading' })
       // call the backend to add custom claims
-      await axios.post(`${process.env.AUTH_API}/auth/sessionLogin`, { idToken })
+      await axios.post(`${process.env.GATSBY_AUTH_API}/auth/sessionLogin`, { idToken })
 
       setAuthState({ status: 'in' })
     } catch (error) {
@@ -92,7 +96,7 @@ export function useAuth(): UseAuth {
 
         setAuthState({ status: 'loading' })
 
-        await axios.post(`${process.env.AUTH_API}/auth/sessionLogin`, { idToken })
+        await axios.post(`${process.env.GATSBY_AUTH_API}/auth/sessionLogin`, { idToken })
 
         setAuthState({ status: 'in' })
       } catch (err) {
@@ -126,7 +130,11 @@ export function useAuth(): UseAuth {
 
       const idToken = await user?.getIdToken()
 
-      await axios.post(`${process.env.AUTH_API}/auth/setCustomClaims`, { uid: user?.uid }, bearer(idToken as string))
+      await axios.post(
+        `${process.env.GATSBY_AUTH_API}/auth/setCustomClaims`,
+        { uid: user?.uid },
+        bearer(idToken as string)
+      )
 
       setUserCreationState({ status: 'userCreated' })
     } catch (err) {

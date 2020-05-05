@@ -24,9 +24,12 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => (
 )
 
 const App = () => {
-  const { useAuth } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
-  const { addNewUser, signInWithEmailAndPwd, authUser } = useAuth()
+  if (!user) {
+    // TODO: add loading spinner
+    return null
+  }
 
   return (
     <Fragment>
@@ -66,9 +69,9 @@ const App = () => {
               <Profile path="/profile" />
               <Login
                 path="/login"
-                signInWithEmailAndPwd={signInWithEmailAndPwd}
-                authUser={authUser}
-                addNewUser={addNewUser}
+                signInWithEmailAndPwd={user.signInWithEmailAndPwd}
+                authUser={user.authUser}
+                addNewUser={user.addNewUser}
               />
             </Router>
           </Container>

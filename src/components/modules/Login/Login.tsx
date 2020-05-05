@@ -9,6 +9,7 @@ import { FirebaseUser } from 'services/auth'
 import { FC, useState, Fragment } from 'react'
 
 type FormValues = {
+  userName: string
   lastName: string
   firstName: string
   email: string
@@ -30,6 +31,7 @@ const Login: FC<PropTypes> = (props) => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
+      userName: '',
       lastName: '',
       firstName: '',
       email: '',
@@ -97,11 +99,21 @@ const Login: FC<PropTypes> = (props) => {
             </p>
           </div>
           <form onSubmit={formik.handleSubmit}>
-            <Label htmlFor="email" mb={2}>
-              {t('loginUserName')}
-            </Label>
             {isNew && (
               <Fragment>
+                <Label htmlFor="username" mb={2}>
+                  {t('loginUserName')}
+                </Label>
+                <Input
+                  name="username"
+                  type="text"
+                  value={formik.values.userName}
+                  onChange={formik.handleChange}
+                  mb={3}
+                />
+                <Label htmlFor="firstName" mb={2}>
+                  {t('loginFirstName')}
+                </Label>
                 <Input
                   name="firstName"
                   type="text"
@@ -109,8 +121,8 @@ const Login: FC<PropTypes> = (props) => {
                   onChange={formik.handleChange}
                   mb={3}
                 />
-                <Label htmlFor="firstName" mb={2}>
-                  {t('loginFirstName')}
+                <Label htmlFor="lastName" mb={2}>
+                  {t('loginLastName')}
                 </Label>
                 <Input
                   name="lastName"
@@ -119,11 +131,11 @@ const Login: FC<PropTypes> = (props) => {
                   onChange={formik.handleChange}
                   mb={3}
                 />
-                <Label htmlFor="lastName" mb={2}>
-                  {t('loginLastName')}
-                </Label>
               </Fragment>
             )}
+            <Label htmlFor="email" mb={2}>
+              Email
+            </Label>
             <Input name="email" type="email" value={formik.values.email} onChange={formik.handleChange} mb={3} />
             <Label htmlFor="password" mb={2}>
               {t('loginPassword')}

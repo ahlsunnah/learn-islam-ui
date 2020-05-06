@@ -4,11 +4,11 @@ require('dotenv').config({
 
 console.log(process.env.NODE_ENV)
 
-const { GATSBY_API, GATSBY_API_SECRET } = process.env
+const { GATSBY_API, API_SECRET } = process.env
 if (!GATSBY_API) {
   throw new Error('We need an API environment variable !')
 }
-if (!GATSBY_API_SECRET) {
+if (!API_SECRET) {
   throw new Error('We need an API_SECRET environment variable !')
 }
 module.exports = {
@@ -53,7 +53,7 @@ module.exports = {
         fieldName: 'api',
         url: GATSBY_API,
         headers: {
-          'x-hasura-admin-secret': GATSBY_API_SECRET,
+          'x-hasura-admin-secret': API_SECRET,
         },
       },
     },

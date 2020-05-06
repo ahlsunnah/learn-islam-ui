@@ -1,16 +1,15 @@
 /** @jsx jsx */
-import BlueHero from 'components/molecules/Hero/BlueHero'
-import HomeFooter from 'components/molecules/Footer/HomeFooter'
 import { useFormik, FormikErrors } from 'formik'
 import { Button, jsx, Label, Input, Box, Checkbox } from 'theme-ui'
 import { navigate } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
-import { AuthContext } from 'services/auth'
-import { FC, useState, Fragment, useContext } from 'react'
+import { FirebaseUser } from 'services/auth'
+import { FC, useState, Fragment } from 'react'
 
 type FormValues = {
+  userName: string
   lastName: string
   firstName: string
   email: string
@@ -18,18 +17,21 @@ type FormValues = {
 }
 
 type PropTypes = {
+  addNewUser: (email: string, pwd: string) => Promise<void>
+  signInWithEmailAndPwd: (email: string, pwd: string) => Promise<void>
+  authUser: FirebaseUser
   path?: string
 }
 
-const Login: FC<PropTypes> = () => {
+const Login: FC<PropTypes> = (props) => {
+  const { addNewUser, signInWithEmailAndPwd, authUser } = props
+
   const [isNew, setIsNew] = useState(false)
   const { i18n, t } = useTranslation()
-  const { useAuth } = useContext(AuthContext)
-
-  const { addNewUser, signInWithEmailAndPwd, authUser } = useAuth()
 
   const formik = useFormik<FormValues>({
     initialValues: {
+      userName: '',
       lastName: '',
       firstName: '',
       email: '',
@@ -68,7 +70,6 @@ const Login: FC<PropTypes> = () => {
         <html lang={i18n.language} />
       </Helmet>
       <div>
-        <BlueHero description={t('blueHeroLoginDescription')} title={t('blueHeroLoginTitle')} />
         <div
           sx={{
             maxWidth: 700,
@@ -98,11 +99,21 @@ const Login: FC<PropTypes> = () => {
             </p>
           </div>
           <form onSubmit={formik.handleSubmit}>
-            <Label htmlFor="email" mb={2}>
-              {t('loginUserName')}
-            </Label>
             {isNew && (
               <Fragment>
+                <Label htmlFor="username" mb={2}>
+                  {t('loginUserName')}
+                </Label>
+                <Input
+                  name="username"
+                  type="text"
+                  value={formik.values.userName}
+                  onChange={formik.handleChange}
+                  mb={3}
+                />
+                <Label htmlFor="firstName" mb={2}>
+                  {t('loginFirstName')}
+                </Label>
                 <Input
                   name="firstName"
                   type="text"
@@ -110,8 +121,8 @@ const Login: FC<PropTypes> = () => {
                   onChange={formik.handleChange}
                   mb={3}
                 />
-                <Label htmlFor="firstName" mb={2}>
-                  {t('loginFirstName')}
+                <Label htmlFor="lastName" mb={2}>
+                  {t('loginLastName')}
                 </Label>
                 <Input
                   name="lastName"
@@ -120,11 +131,11 @@ const Login: FC<PropTypes> = () => {
                   onChange={formik.handleChange}
                   mb={3}
                 />
-                <Label htmlFor="lastName" mb={2}>
-                  {t('loginLastName')}
-                </Label>
               </Fragment>
             )}
+            <Label htmlFor="email" mb={2}>
+              Email
+            </Label>
             <Input name="email" type="email" value={formik.values.email} onChange={formik.handleChange} mb={3} />
             <Label htmlFor="password" mb={2}>
               {t('loginPassword')}
@@ -158,7 +169,6 @@ const Login: FC<PropTypes> = () => {
             </Button>
           </form>
         </div>
-        <HomeFooter firstTrackSlug="add" withTrackSlug={false} />
       </div>
     </div>
   )

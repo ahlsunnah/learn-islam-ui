@@ -4,11 +4,11 @@ require('dotenv').config({
 
 console.log(process.env.NODE_ENV)
 
-const { API, API_SECRET } = process.env
-if (!API) {
+const { GATSBY_API, GATSBY_API_SECRET } = process.env
+if (!GATSBY_API) {
   throw new Error('We need an API environment variable !')
 }
-if (!API_SECRET) {
+if (!GATSBY_API_SECRET) {
   throw new Error('We need an API_SECRET environment variable !')
 }
 module.exports = {
@@ -32,6 +32,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
+        disableAutoprefixing: true,
         stylesProvider: {
           injectFirst: true,
         },
@@ -50,9 +51,9 @@ module.exports = {
       options: {
         typeName: 'api',
         fieldName: 'api',
-        url: API,
+        url: GATSBY_API,
         headers: {
-          'x-hasura-admin-secret': API_SECRET,
+          'x-hasura-admin-secret': GATSBY_API_SECRET,
         },
       },
     },
@@ -60,6 +61,7 @@ module.exports = {
     'gatsby-plugin-typescript',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
+    'gatsby-plugin-svgr',
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {

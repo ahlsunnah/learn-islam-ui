@@ -24,7 +24,7 @@ const NavSection = ({ className }: Props) => {
   const destination = useMemo(
     () =>
       location.pathname.indexOf('login') !== -1
-        ? 'login'
+        ? 'app/login'
         : removeExtraSlashes(
             `${otherTranslationsLocale === 'ar' ? '' : otherTranslationsLocale}/${cleanPathName(
               location.pathname,
@@ -46,7 +46,7 @@ const NavSection = ({ className }: Props) => {
             <Link
               activeClassName="bb b--blue"
               className="ph2 no-underline"
-              to={`${link === 'login/' ? '/' : t('localePath')}${link}`}
+              to={`${link === 'app/login/' ? '/' : t('localePath')}${link}`}
             >
               <span>{t(`${title}`) as string}</span>
             </Link>

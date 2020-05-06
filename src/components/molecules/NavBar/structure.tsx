@@ -10,7 +10,7 @@ interface IItem {
 const items: IItem[] = [
   { title: 'tracks', link: 'masar/', Icon: Tracks },
   { title: 'aboutUs', link: 'nahnu/', Icon: AboutUs },
-  { title: 'login', link: 'login/', Icon: AboutUs },
+  { title: 'login', link: 'app/login/', Icon: AboutUs },
   // {title: 'courses', link: 'dourous', Icon: Courses},
 ]
 

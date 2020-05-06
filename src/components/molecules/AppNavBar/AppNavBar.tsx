@@ -4,14 +4,19 @@ import React from 'react'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'gatsby'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import { ReactComponent as LogoAr } from '../../../assets/images/logo-horizontal-ar-white.svg'
+import { ReactComponent as LogoFr } from '../../../assets/images/logo-horizontal-fr-white.svg'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MoreIcon from '@material-ui/icons/MoreVert'
 
-export default function PrimarySearchAppBar() {
+export default function AppNavBar() {
+  const { i18n } = useTranslation()
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -82,7 +87,9 @@ export default function PrimarySearchAppBar() {
       <AppBar sx={{ bg: 'primary_base' }} position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Profile
+            <Link to={i18n.language === 'fr' ? '/fr' : '/'} replace>
+              {i18n.language === 'ar' ? <LogoAr width="300" height="60" /> : <LogoFr width="300" height="60" />}
+            </Link>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

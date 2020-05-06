@@ -14,7 +14,7 @@ export default function ApolloConfig({ children }: PropTypes) {
 
   const { client } = useClient(authenticatedUser)
 
-  if (authenticatedUser) {
+  if (authenticatedUser || client === null) {
     return children
   }
 

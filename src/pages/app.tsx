@@ -49,7 +49,7 @@ const App = () => {
           }}
         >
           <LayoutContainer>
-            <AppNavBar />
+            <AppNavBar authUser={user.authUser} />
           </LayoutContainer>
         </header>
         <main

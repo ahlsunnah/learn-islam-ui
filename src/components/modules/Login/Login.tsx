@@ -2,11 +2,12 @@
 import { useFormik, FormikErrors } from 'formik'
 import { Button, jsx, Label, Input, Box, Checkbox } from 'theme-ui'
 import { navigate } from 'gatsby'
+import Alert from '@material-ui/lab/Alert'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { FirebaseUser } from 'services/auth'
-import { FC, useState, Fragment } from 'react'
+import { FC, useState } from 'react'
 
 type FormValues = {
   userName: string
@@ -23,7 +24,10 @@ type PropTypes = {
   path?: string
 }
 
+type LoginError = string | undefined
+
 const Login: FC<PropTypes> = (props) => {
+  const [loginError, setLoginError] = useState<LoginError>(undefined)
   const { addNewUser, signInWithEmailAndPwd, authUser } = props
 
   const [isNew, setIsNew] = useState(false)
@@ -54,7 +58,7 @@ const Login: FC<PropTypes> = (props) => {
           await signInWithEmailAndPwd(values.email, values.password)
         }
       } catch (err) {
-        console.log(err)
+        setLoginError(err.message)
       }
     },
   })
@@ -99,40 +103,6 @@ const Login: FC<PropTypes> = (props) => {
             </p>
           </div>
           <form onSubmit={formik.handleSubmit}>
-            {isNew && (
-              <Fragment>
-                <Label htmlFor="username" mb={2}>
-                  {t('loginUserName')}
-                </Label>
-                <Input
-                  name="username"
-                  type="text"
-                  value={formik.values.userName}
-                  onChange={formik.handleChange}
-                  mb={3}
-                />
-                <Label htmlFor="firstName" mb={2}>
-                  {t('loginFirstName')}
-                </Label>
-                <Input
-                  name="firstName"
-                  type="text"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  mb={3}
-                />
-                <Label htmlFor="lastName" mb={2}>
-                  {t('loginLastName')}
-                </Label>
-                <Input
-                  name="lastName"
-                  type="text"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  mb={3}
-                />
-              </Fragment>
-            )}
             <Label htmlFor="email" mb={2}>
               Email
             </Label>
@@ -167,6 +137,17 @@ const Login: FC<PropTypes> = (props) => {
             >
               {t('loginButton')}
             </Button>
+            {loginError && (
+              <Alert
+                variant="filled"
+                severity="error"
+                sx={{
+                  mt: 4,
+                }}
+              >
+                {loginError}
+              </Alert>
+            )}
           </form>
         </div>
       </div>

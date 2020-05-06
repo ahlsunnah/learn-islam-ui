@@ -36,7 +36,7 @@ export const AuthContext = createContext<ContextType>({ user: null })
 
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
-const bearer = (idToken: string) => ({
+const createHeaders = (idToken: string) => ({
   headers: {
     Authorization: `Bearer ${idToken}`,
   },
@@ -133,7 +133,7 @@ export function useAuth(): UseAuth {
       await axios.post(
         `${process.env.GATSBY_AUTH_API}/auth/setCustomClaims`,
         { uid: user?.uid },
-        bearer(idToken as string)
+        createHeaders(idToken as string)
       )
 
       setUserCreationState({ status: 'userCreated' })

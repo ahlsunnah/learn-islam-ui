@@ -32,6 +32,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
+        disableAutoprefixing: true,
         stylesProvider: {
           injectFirst: true,
         },

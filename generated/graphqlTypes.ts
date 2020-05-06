@@ -6251,8 +6251,6 @@ export type TQueryAllSitePageArgs = {
 export type TQuerySiteArgs = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -6446,8 +6444,6 @@ export type TQueryAllSitePluginArgs = {
 export type TSite = TNode & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<TSiteSiteMetadata>;
-  port: Maybe<Scalars['Int']>;
-  host: Maybe<Scalars['String']>;
   polyfill: Maybe<Scalars['Boolean']>;
   pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -6649,8 +6645,6 @@ export type TSiteFieldsEnum =
   'buildTime' |
   'siteMetadata___title' |
   'siteMetadata___siteUrl' |
-  'port' |
-  'host' |
   'polyfill' |
   'pathPrefix' |
   'id' |
@@ -6743,8 +6737,6 @@ export type TSiteFieldsEnum =
 export type TSiteFilterInput = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -6996,6 +6988,7 @@ export type TSitePageFieldsEnum =
   'pluginCreator___pluginOptions___codegenConfig___avoidOptionals' |
   'pluginCreator___pluginOptions___codegenConfig___maybeValue' |
   'pluginCreator___pluginOptions___codegenConfig___typesPrefix' |
+  'pluginCreator___pluginOptions___disableAutoprefixing' |
   'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___typeName' |
@@ -7220,6 +7213,7 @@ export type TSitePluginFieldsEnum =
   'pluginOptions___codegenConfig___avoidOptionals' |
   'pluginOptions___codegenConfig___maybeValue' |
   'pluginOptions___codegenConfig___typesPrefix' |
+  'pluginOptions___disableAutoprefixing' |
   'pluginOptions___stylesProvider___injectFirst' |
   'pluginOptions___path' |
   'pluginOptions___typeName' |
@@ -7368,6 +7362,7 @@ export type TSitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type TSitePluginPluginOptions = {
   fileName: Maybe<Scalars['String']>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfig>;
+  disableAutoprefixing: Maybe<Scalars['Boolean']>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProvider>;
   path: Maybe<Scalars['String']>;
   typeName: Maybe<Scalars['String']>;
@@ -7411,6 +7406,7 @@ export type TSitePluginPluginOptionsCodegenConfigFilterInput = {
 export type TSitePluginPluginOptionsFilterInput = {
   fileName: Maybe<TStringQueryOperatorInput>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfigFilterInput>;
+  disableAutoprefixing: Maybe<TBooleanQueryOperatorInput>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProviderFilterInput>;
   path: Maybe<TStringQueryOperatorInput>;
   typeName: Maybe<TStringQueryOperatorInput>;

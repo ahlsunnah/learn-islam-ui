@@ -108,38 +108,29 @@ export function useAuth(): UseAuth {
 
   const signInWithEmailAndPwd = useCallback(
     async (email, pwd) => {
-      try {
-        setAuthState({ status: 'loading' })
+      setAuthState({ status: 'loading' })
 
-        await firebase.auth().signInWithEmailAndPassword(email, pwd)
+      await firebase.auth().signInWithEmailAndPassword(email, pwd)
 
-        setAuthState({ status: 'in' })
-      } catch (err) {
-        setAuthState({ status: 'out' })
-        console.log(err)
-      }
+      setAuthState({ status: 'in' })
     },
     [setAuthState]
   )
 
   const addNewUser = useCallback(async (email, pwd) => {
-    try {
-      setUserCreationState({ status: 'loading' })
+    setUserCreationState({ status: 'loading' })
 
-      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pwd)
+    const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pwd)
 
-      const idToken = await user?.getIdToken()
+    const idToken = await user?.getIdToken()
 
-      await axios.post(
-        `${process.env.GATSBY_AUTH_API}/auth/setCustomClaims`,
-        { uid: user?.uid },
-        createHeaders(idToken as string)
-      )
+    await axios.post(
+      `${process.env.GATSBY_AUTH_API}/auth/setCustomClaims`,
+      { uid: user?.uid },
+      createHeaders(idToken as string)
+    )
 
-      setUserCreationState({ status: 'userCreated' })
-    } catch (err) {
-      console.log(err)
-    }
+    setUserCreationState({ status: 'userCreated' })
   }, [])
 
   const signOut = async () => {

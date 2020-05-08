@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import fetch from 'isomorphic-fetch'
 import { useMemo } from 'react'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -11,6 +11,7 @@ export default function useApolloClientConfig(token: string) {
   const httpLink = useMemo(
     () =>
       createHttpLink({
+        fetch,
         uri: process.env.GATSBY_API,
       }),
     []

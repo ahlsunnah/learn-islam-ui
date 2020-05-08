@@ -14,6 +14,7 @@ export type Scalars = {
   api_timestamptz: any;
   api__int4: any;
   api_jsonb: any;
+  api_citext: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
@@ -634,7 +635,7 @@ export type TApi_Chapter_Translations_Constraint =
   /** unique or primary key constraint */
   'chapter_translations_pkey';
 
-/** input type for incrementing integer columne in table "chapter_translations" */
+/** input type for incrementing integer column in table "chapter_translations" */
 export type TApi_Chapter_Translations_Inc_Input = {
   chapter_id: Maybe<Scalars['Int']>;
   id: Maybe<Scalars['Int']>;
@@ -737,6 +738,11 @@ export type TApi_Chapter_Translations_Order_By = {
   updated_at: Maybe<TApi_Order_By>;
   video: Maybe<TApi_Order_By>;
   vocabulary: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "chapter_translations" */
+export type TApi_Chapter_Translations_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "chapter_translations" */
@@ -1003,7 +1009,7 @@ export type TApi_Chapters_Constraint =
   /** unique or primary key constraint */
   'chapters_pkey';
 
-/** input type for incrementing integer columne in table "chapters" */
+/** input type for incrementing integer column in table "chapters" */
 export type TApi_Chapters_Inc_Input = {
   course_id: Maybe<Scalars['Int']>;
   duration: Maybe<Scalars['Int']>;
@@ -1106,6 +1112,11 @@ export type TApi_Chapters_Order_By = {
   slug: Maybe<TApi_Order_By>;
   translations_aggregate: Maybe<TApi_Chapter_Translations_Aggregate_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "chapters" */
+export type TApi_Chapters_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "chapters" */
@@ -1268,6 +1279,26 @@ export type TApi_Chapters_Variance_Order_By = {
   duration: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
   order: Maybe<TApi_Order_By>;
+};
+
+
+/** expression to compare columns of type citext. All fields are combined with logical 'AND'. */
+export type TApi_Citext_Comparison_Exp = {
+  _eq: Maybe<Scalars['api_citext']>;
+  _gt: Maybe<Scalars['api_citext']>;
+  _gte: Maybe<Scalars['api_citext']>;
+  _ilike: Maybe<Scalars['String']>;
+  _in: Maybe<Array<Scalars['api_citext']>>;
+  _is_null: Maybe<Scalars['Boolean']>;
+  _like: Maybe<Scalars['String']>;
+  _lt: Maybe<Scalars['api_citext']>;
+  _lte: Maybe<Scalars['api_citext']>;
+  _neq: Maybe<Scalars['api_citext']>;
+  _nilike: Maybe<Scalars['String']>;
+  _nin: Maybe<Array<Scalars['api_citext']>>;
+  _nlike: Maybe<Scalars['String']>;
+  _nsimilar: Maybe<Scalars['String']>;
+  _similar: Maybe<Scalars['String']>;
 };
 
 /** columns and relationships of "course_quiz_difficulties" */
@@ -1540,7 +1571,7 @@ export type TApi_Course_Translations_Constraint =
   /** unique or primary key constraint */
   'course_translations_pkey';
 
-/** input type for incrementing integer columne in table "course_translations" */
+/** input type for incrementing integer column in table "course_translations" */
 export type TApi_Course_Translations_Inc_Input = {
   course_id: Maybe<Scalars['Int']>;
   id: Maybe<Scalars['Int']>;
@@ -1631,6 +1662,11 @@ export type TApi_Course_Translations_Order_By = {
   locale_code: Maybe<TApi_Order_By>;
   title: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "course_translations" */
+export type TApi_Course_Translations_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "course_translations" */
@@ -1945,7 +1981,7 @@ export type TApi_Courses_Constraint =
   /** unique or primary key constraint */
   'courses_pkey';
 
-/** input type for incrementing integer columne in table "courses" */
+/** input type for incrementing integer column in table "courses" */
 export type TApi_Courses_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   level: Maybe<Scalars['Int']>;
@@ -2056,6 +2092,11 @@ export type TApi_Courses_Order_By = {
   track_id: Maybe<TApi_Order_By>;
   translations_aggregate: Maybe<TApi_Course_Translations_Aggregate_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "courses" */
+export type TApi_Courses_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "courses" */
@@ -2396,6 +2437,11 @@ export type TApi_Locales_Order_By = {
   name: Maybe<TApi_Order_By>;
 };
 
+/** primary key columns input for table: "locales" */
+export type TApi_Locales_Pk_Columns_Input = {
+  code: Scalars['String'];
+};
+
 /** select columns of table "locales" */
 export type TApi_Locales_Select_Column = 
   /** column name */
@@ -2557,7 +2603,7 @@ export type TApi_Quiz_Translations_Delete_Key_Input = {
   data: Maybe<Scalars['String']>;
 };
 
-/** input type for incrementing integer columne in table "quiz_translations" */
+/** input type for incrementing integer column in table "quiz_translations" */
 export type TApi_Quiz_Translations_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   quiz_id: Maybe<Scalars['Int']>;
@@ -2638,6 +2684,11 @@ export type TApi_Quiz_Translations_Order_By = {
   quiz: Maybe<TApi_Quizzes_Order_By>;
   quiz_id: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "quiz_translations" */
+export type TApi_Quiz_Translations_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
@@ -2900,6 +2951,11 @@ export type TApi_Quiz_Types_Order_By = {
   slug: Maybe<TApi_Order_By>;
 };
 
+/** primary key columns input for table: "quiz_types" */
+export type TApi_Quiz_Types_Pk_Columns_Input = {
+  slug: Scalars['String'];
+};
+
 /** select columns of table "quiz_types" */
 export type TApi_Quiz_Types_Select_Column = 
   /** column name */
@@ -3042,7 +3098,7 @@ export type TApi_Quizzes_Constraint =
   /** unique or primary key constraint */
   'quizzes_pkey';
 
-/** input type for incrementing integer columne in table "quizzes" */
+/** input type for incrementing integer column in table "quizzes" */
 export type TApi_Quizzes_Inc_Input = {
   course_id: Maybe<Scalars['Int']>;
   difficulty: Maybe<Scalars['Int']>;
@@ -3130,6 +3186,11 @@ export type TApi_Quizzes_Order_By = {
   type: Maybe<TApi_Quiz_Types_Order_By>;
   type_slug: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "quizzes" */
+export type TApi_Quizzes_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "quizzes" */
@@ -3400,7 +3461,7 @@ export type TApi_Topic_Translations_Constraint =
   /** unique or primary key constraint */
   'topic_translations_pkey';
 
-/** input type for incrementing integer columne in table "topic_translations" */
+/** input type for incrementing integer column in table "topic_translations" */
 export type TApi_Topic_Translations_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   topic_id: Maybe<Scalars['Int']>;
@@ -3485,6 +3546,11 @@ export type TApi_Topic_Translations_Order_By = {
   topic: Maybe<TApi_Topics_Order_By>;
   topic_id: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "topic_translations" */
+export type TApi_Topic_Translations_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "topic_translations" */
@@ -3754,7 +3820,7 @@ export type TApi_Topics_Constraint =
   /** unique or primary key constraint */
   'topics_pkey';
 
-/** input type for incrementing integer columne in table "topics" */
+/** input type for incrementing integer column in table "topics" */
 export type TApi_Topics_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   level: Maybe<Scalars['Int']>;
@@ -3850,6 +3916,11 @@ export type TApi_Topics_Order_By = {
   slug: Maybe<TApi_Order_By>;
   translations_aggregate: Maybe<TApi_Topic_Translations_Aggregate_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "topics" */
+export type TApi_Topics_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "topics" */
@@ -4094,7 +4165,7 @@ export type TApi_Track_Translations_Constraint =
   /** unique or primary key constraint */
   'track_translations_track_id_locale_code_key';
 
-/** input type for incrementing integer columne in table "track_translations" */
+/** input type for incrementing integer column in table "track_translations" */
 export type TApi_Track_Translations_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   track_id: Maybe<Scalars['Int']>;
@@ -4185,6 +4256,11 @@ export type TApi_Track_Translations_Order_By = {
   track: Maybe<TApi_Tracks_Order_By>;
   track_id: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "track_translations" */
+export type TApi_Track_Translations_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "track_translations" */
@@ -4455,7 +4531,7 @@ export type TApi_Tracks_Constraint =
   /** unique or primary key constraint */
   'tracks_pkey';
 
-/** input type for incrementing integer columne in table "tracks" */
+/** input type for incrementing integer column in table "tracks" */
 export type TApi_Tracks_Inc_Input = {
   id: Maybe<Scalars['Int']>;
   order: Maybe<Scalars['Int']>;
@@ -4540,6 +4616,11 @@ export type TApi_Tracks_Order_By = {
   soon: Maybe<TApi_Order_By>;
   translations_aggregate: Maybe<TApi_Track_Translations_Aggregate_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "tracks" */
+export type TApi_Tracks_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "tracks" */
@@ -4791,6 +4872,11 @@ export type TApi_User_Genders_Order_By = {
   letter: Maybe<TApi_Order_By>;
 };
 
+/** primary key columns input for table: "user_genders" */
+export type TApi_User_Genders_Pk_Columns_Input = {
+  letter: Scalars['String'];
+};
+
 /** select columns of table "user_genders" */
 export type TApi_User_Genders_Select_Column = 
   /** column name */
@@ -4815,12 +4901,15 @@ export type TApi_User_Genders_Update_Column =
 export type TApi_Users = {
   country: Maybe<Scalars['String']>;
   created_at: Scalars['api_timestamptz'];
-  email: Scalars['String'];
+  email: Scalars['api_citext'];
+  fbase_id: Scalars['String'];
   first_name: Maybe<Scalars['String']>;
   gender: Maybe<TApi_User_Genders_Enum>;
   id: Scalars['Int'];
   last_name: Maybe<Scalars['String']>;
   updated_at: Scalars['api_timestamptz'];
+  /** An object relationship */
+  user_gender: Maybe<TApi_User_Genders>;
 };
 
 /** aggregated selection of "users" */
@@ -4889,12 +4978,14 @@ export type TApi_Users_Bool_Exp = {
   _or: Maybe<Array<Maybe<TApi_Users_Bool_Exp>>>;
   country: Maybe<TApi_String_Comparison_Exp>;
   created_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
-  email: Maybe<TApi_String_Comparison_Exp>;
+  email: Maybe<TApi_Citext_Comparison_Exp>;
+  fbase_id: Maybe<TApi_String_Comparison_Exp>;
   first_name: Maybe<TApi_String_Comparison_Exp>;
   gender: Maybe<TApi_User_Genders_Enum_Comparison_Exp>;
   id: Maybe<TApi_Int_Comparison_Exp>;
   last_name: Maybe<TApi_String_Comparison_Exp>;
   updated_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
+  user_gender: Maybe<TApi_User_Genders_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -4902,9 +4993,11 @@ export type TApi_Users_Constraint =
   /** unique or primary key constraint */
   'users_email_key' |
   /** unique or primary key constraint */
+  'users_fbase_id_key' |
+  /** unique or primary key constraint */
   'users_pkey';
 
-/** input type for incrementing integer columne in table "users" */
+/** input type for incrementing integer column in table "users" */
 export type TApi_Users_Inc_Input = {
   id: Maybe<Scalars['Int']>;
 };
@@ -4913,19 +5006,22 @@ export type TApi_Users_Inc_Input = {
 export type TApi_Users_Insert_Input = {
   country: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['api_timestamptz']>;
-  email: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['api_citext']>;
+  fbase_id: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   gender: Maybe<TApi_User_Genders_Enum>;
   id: Maybe<Scalars['Int']>;
   last_name: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['api_timestamptz']>;
+  user_gender: Maybe<TApi_User_Genders_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
 export type TApi_Users_Max_Fields = {
   country: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['api_timestamptz']>;
-  email: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['api_citext']>;
+  fbase_id: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   id: Maybe<Scalars['Int']>;
   last_name: Maybe<Scalars['String']>;
@@ -4937,6 +5033,7 @@ export type TApi_Users_Max_Order_By = {
   country: Maybe<TApi_Order_By>;
   created_at: Maybe<TApi_Order_By>;
   email: Maybe<TApi_Order_By>;
+  fbase_id: Maybe<TApi_Order_By>;
   first_name: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
   last_name: Maybe<TApi_Order_By>;
@@ -4947,7 +5044,8 @@ export type TApi_Users_Max_Order_By = {
 export type TApi_Users_Min_Fields = {
   country: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['api_timestamptz']>;
-  email: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['api_citext']>;
+  fbase_id: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   id: Maybe<Scalars['Int']>;
   last_name: Maybe<Scalars['String']>;
@@ -4959,6 +5057,7 @@ export type TApi_Users_Min_Order_By = {
   country: Maybe<TApi_Order_By>;
   created_at: Maybe<TApi_Order_By>;
   email: Maybe<TApi_Order_By>;
+  fbase_id: Maybe<TApi_Order_By>;
   first_name: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
   last_name: Maybe<TApi_Order_By>;
@@ -4991,11 +5090,18 @@ export type TApi_Users_Order_By = {
   country: Maybe<TApi_Order_By>;
   created_at: Maybe<TApi_Order_By>;
   email: Maybe<TApi_Order_By>;
+  fbase_id: Maybe<TApi_Order_By>;
   first_name: Maybe<TApi_Order_By>;
   gender: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
   last_name: Maybe<TApi_Order_By>;
   updated_at: Maybe<TApi_Order_By>;
+  user_gender: Maybe<TApi_User_Genders_Order_By>;
+};
+
+/** primary key columns input for table: "users" */
+export type TApi_Users_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
 /** select columns of table "users" */
@@ -5006,6 +5112,8 @@ export type TApi_Users_Select_Column =
   'created_at' |
   /** column name */
   'email' |
+  /** column name */
+  'fbase_id' |
   /** column name */
   'first_name' |
   /** column name */
@@ -5021,7 +5129,8 @@ export type TApi_Users_Select_Column =
 export type TApi_Users_Set_Input = {
   country: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['api_timestamptz']>;
-  email: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['api_citext']>;
+  fbase_id: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   gender: Maybe<TApi_User_Genders_Enum>;
   id: Maybe<Scalars['Int']>;
@@ -5077,6 +5186,8 @@ export type TApi_Users_Update_Column =
   'created_at' |
   /** column name */
   'email' |
+  /** column name */
+  'fbase_id' |
   /** column name */
   'first_name' |
   /** column name */
@@ -6251,8 +6362,6 @@ export type TQueryAllSitePageArgs = {
 export type TQuerySiteArgs = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -6446,8 +6555,6 @@ export type TQueryAllSitePluginArgs = {
 export type TSite = TNode & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<TSiteSiteMetadata>;
-  port: Maybe<Scalars['Int']>;
-  host: Maybe<Scalars['String']>;
   polyfill: Maybe<Scalars['Boolean']>;
   pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -6649,8 +6756,6 @@ export type TSiteFieldsEnum =
   'buildTime' |
   'siteMetadata___title' |
   'siteMetadata___siteUrl' |
-  'port' |
-  'host' |
   'polyfill' |
   'pathPrefix' |
   'id' |
@@ -6743,8 +6848,6 @@ export type TSiteFieldsEnum =
 export type TSiteFilterInput = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;

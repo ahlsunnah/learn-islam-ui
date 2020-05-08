@@ -14,12 +14,7 @@ type AuthState = {
   status: 'loading' | 'in' | 'out'
 }
 
-type UserCreationState = {
-  status: 'userCreated' | 'loading'
-}
-
 export type UseAuth = {
-  userCreationState: UserCreationState
   authState: AuthState
   addNewUser: (email: string, pwd: string) => Promise<void>
   signInWithEmailAndPwdAndCookie: (email: string, pwd: string) => Promise<void>
@@ -36,12 +31,6 @@ export const AuthContext = createContext<ContextType>({ user: null })
 
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
-const createHeaders = (idToken: string) => ({
-  headers: {
-    Authorization: `Bearer ${idToken}`,
-  },
-})
-
 export function useAuth(): UseAuth {
   const [authUser, setAuthUser] = useState<FirebaseUser>(undefined)
 
@@ -54,7 +43,6 @@ export function useAuth(): UseAuth {
     setAuthUser(JSON.parse(localStorage.getItem('authUser') as string))
   }, [])
 
-  const [userCreationState, setUserCreationState] = useState<UserCreationState>({ status: 'loading' })
   const [authState, setAuthState] = useState<AuthState>({ status: 'loading' })
 
   useEffect(() => {
@@ -118,19 +106,7 @@ export function useAuth(): UseAuth {
   )
 
   const addNewUser = useCallback(async (email, pwd) => {
-    setUserCreationState({ status: 'loading' })
-
-    const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pwd)
-
-    const idToken = await user?.getIdToken()
-
-    await axios.post(
-      `${process.env.GATSBY_AUTH_API}/auth/setCustomClaims`,
-      { uid: user?.uid },
-      createHeaders(idToken as string)
-    )
-
-    setUserCreationState({ status: 'userCreated' })
+    await axios.post(`${process.env.GATSBY_AUTH_API}/auth/addNewUser`, { email, password: pwd })
   }, [])
 
   const signOut = async () => {
@@ -144,7 +120,6 @@ export function useAuth(): UseAuth {
   }
 
   return {
-    userCreationState,
     authState,
     addNewUser,
     signInWithEmailAndPwdAndCookie,

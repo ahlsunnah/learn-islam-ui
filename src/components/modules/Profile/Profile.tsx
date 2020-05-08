@@ -32,7 +32,7 @@ const NEW_USER_QUERY = gql`
     $country: String!
     $last_name: String!
     $gender: user_genders_enum!
-    $email: String!
+    $email: citext!
   ) {
     insert_users_one(
       object: { first_name: $first_name, country: $country, last_name: $last_name, email: $email, gender: $gender }

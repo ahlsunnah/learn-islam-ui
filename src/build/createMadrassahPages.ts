@@ -11,7 +11,7 @@ const createMadrassahPages: GatsbyCreatePages = async ({
   actions: { createPage, createRedirect },
 }): Promise<void> => {
   const locales: Locale[] = ['ar', 'fr']
-  const { localePaths, otherLocalesPaths } = createLocalesPaths(locales)
+  const { localePaths } = createLocalesPaths(locales)
 
   // const MainLayout = resolve(`./src/templates/MainLayout.jsx`)
   const homeTemplate = resolve(`./src/templates/Home.tsx`)

@@ -12,11 +12,7 @@ export default function ApolloConfig({ children }: PropTypes) {
   const { user } = useContext(AuthContext)
   const authenticatedUser = _get(user, 'authUser.xa', false)
 
-  const { client } = useClient(authenticatedUser)
-
-  if (authenticatedUser || client === null) {
-    return children
-  }
+  const client = useClient(authenticatedUser)
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

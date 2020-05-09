@@ -8242,8 +8242,6 @@ export type TTrackPageCourseFragment = (
   ) }
 );
 
-export type TTrackPageTranslationsFragment = Pick<TTranslationsJson, 'connect' | 'course' | 'level1' | 'level2' | 'level3' | 'locale' | 'localePath' | 'start' | 'startCourse' | 'toOtherLanguageCTA' | 'track' | 'trackLevel'>;
-
 export type TTrackQueryQueryVariables = {
   locale: Scalars['String'];
   localeEnum: TApi_Locales_Enum;
@@ -8254,7 +8252,7 @@ export type TTrackQueryQueryVariables = {
 export type TTrackQueryQuery = { api: { track: Maybe<(
       Pick<TApi_Tracks, 'id' | 'slug'>
       & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<TTrackPageCourseFragment> }
-    )> }, translations: Maybe<TTrackPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
+    )> }, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
 
 export type TGTracksPageTrackFragment = (
   Pick<TApi_Tracks, 'id' | 'slug' | 'soon'>

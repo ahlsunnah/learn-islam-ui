@@ -5,14 +5,13 @@ import Progress from 'components/modules/Quizs/Progress'
 import { Link } from 'gatsby'
 import target from 'assets/images/target.svg'
 import React from 'react'
-import { TTrackPageTranslationsFragment, TTrackPageCourseFragment } from '../../../graphqlTypes'
+import { TTrackPageCourseFragment } from '../../../graphqlTypes'
+import { TFunction } from 'i18next'
 
 type Props = {
   currentPath: string
-  t: TTrackPageTranslationsFragment
+  t: TFunction
 } & TTrackPageCourseFragment
-
-const levelStrings: ['level1', 'level2'] = ['level1', 'level2']
 
 const CourseCard = ({
   chapters,
@@ -59,7 +58,7 @@ const CourseCard = ({
     >
       <div className="self-end pv3 flex items-center">
         <IconWithText className="ph2" icon={target}>
-          {`${t.course} ${t[levelStrings[level - 1]]}`}
+          {`${t('course')} ${t(`level${level}`)}`}
         </IconWithText>
         <div className="ph4 pv2 br-pill white f7" style={{ backgroundColor: topic.color }}>
           {topic.translations[0].title}
@@ -78,7 +77,7 @@ const CourseCard = ({
         <div className="flex justify-between items-center">
           <Link className="no-underline" to={nextCoursePath}>
             <Button className="mt3" outlined>
-              {t.startCourse}
+              {t('startCourse')}
             </Button>
           </Link>
           {/* {percent !== 0 && (

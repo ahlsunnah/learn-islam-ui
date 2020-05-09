@@ -1,8 +1,8 @@
-import cx from 'classnames'
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import RawHTML from 'components/RawHTML'
 import { Link } from 'gatsby'
-import React from 'react'
-import { TTracksPageTrackFragment } from '../../../graphqlTypes'
+import { TracksPageTrackFragment } from '../../../hasuraTypes'
 
 interface ILinkOrChildrenProps {
   children: JSX.Element
@@ -21,25 +21,47 @@ const LinkOrChildren = ({ children, className = '', to }: ILinkOrChildrenProps) 
 interface IProps {
   localePath: string
   soonString: string
-  tracks: TTracksPageTrackFragment[]
+  tracks: TracksPageTrackFragment[]
 }
 const Tracks = ({ localePath, soonString, tracks }: IProps) => (
   <div>
     {tracks.map(({ slug, soon, translations }, i) => {
       const { title, description } = translations[0]
       return (
-        <LinkOrChildren key={slug} to={!soon && `${localePath}${slug}/`} className="no-underline">
+        <LinkOrChildren
+          key={slug}
+          to={!soon && `${localePath}${slug}/`}
+          sx={{
+            textDecoration: 'none',
+          }}
+        >
           <div
-            className={cx('mv4 mv5-ns pv3 flex justify-center black flex-column', {
-              'flex-row-reverse-ns': i % 2,
-              'flex-row-ns': !(i % 2),
-            })}
+            sx={{
+              my: ['2rem', , '4rem'],
+              py: '1rem',
+              display: 'flex',
+              justifyContent: 'center',
+              color: 'black',
+              flexDirection: ['column', , i % 2 ? 'row-reverse' : 'row'],
+            }}
           >
-            <div className="mh3 w5 h4 bg-light-gray" />
-            <div className="mh3 measure-narrow">
+            <div
+              sx={{
+                mx: '1rem',
+                width: '16rem',
+                height: '8rem',
+                bg: '#eee',
+              }}
+            />
+            <div
+              sx={{
+                mx: '1rem',
+                maxWidth: '20rem',
+              }}
+            >
               {!!soon && <span>{soonString}</span>}
               <h2>{title}</h2>
-              <RawHTML>{description}</RawHTML>
+              {description && <RawHTML>{description}</RawHTML>}
             </div>
           </div>
         </LinkOrChildren>

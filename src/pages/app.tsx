@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container'
 import { AuthContext } from 'services/auth'
 import Login from '../components/modules/Login/Login'
 import Profile from 'components/modules/Profile/Profile'
+import Tracks from 'components/modules/Tracks'
 
 type LayoutContainerProps = {
   children: React.ReactChild
@@ -66,6 +67,7 @@ const App = () => {
             maxWidth="sm"
           >
             <Router basepath="/app">
+              <Tracks path="/" />
               <Profile path="/profile" />
               <Login
                 path="/login"

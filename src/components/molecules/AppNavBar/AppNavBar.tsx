@@ -1,18 +1,16 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { ReactComponent as LogoAr } from '../../../assets/images/logo-horizontal-ar-white.svg'
 import { ReactComponent as LogoFr } from '../../../assets/images/logo-horizontal-fr-white.svg'
 import { FirebaseUser } from 'services/auth'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MoreIcon from '@material-ui/icons/MoreVert'
 
@@ -23,69 +21,10 @@ type Proptypes = {
 export default function AppNavBar({ authUser }: Proptypes) {
   const { i18n } = useTranslation()
   const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
-
-  const isMenuOpen = Boolean(anchorEl)
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null)
-  }
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-    handleMobileMenuClose()
-  }
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget)
-  }
 
   const menuId = 'primary-search-account-menu'
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  )
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  )
 
   return (
     <div className={classes.grow}>
@@ -105,7 +44,7 @@ export default function AppNavBar({ authUser }: Proptypes) {
                   aria-label="account of current user"
                   aria-controls={menuId}
                   aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
+                  onClick={() => navigate('/app/profile')}
                   color="inherit"
                 >
                   <AccountCircle />
@@ -116,7 +55,7 @@ export default function AppNavBar({ authUser }: Proptypes) {
                   aria-label="show more"
                   aria-controls={mobileMenuId}
                   aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
+                  onClick={() => navigate('/app/profile')}
                   color="inherit"
                 >
                   <MoreIcon />
@@ -126,8 +65,6 @@ export default function AppNavBar({ authUser }: Proptypes) {
           )}
         </Toolbar>
       </AppBar>
-      {authUser && renderMobileMenu}
-      {authUser && renderMenu}
     </div>
   )
 }

@@ -68,7 +68,7 @@ const App = () => {
           >
             <Router basepath="/app">
               <Tracks path="/" />
-              <Profile path="/profile" />
+              <Profile path="/profile" me={user.authUser} />
               <Login
                 path="/login"
                 signInWithEmailAndPwd={user.signInWithEmailAndPwd}

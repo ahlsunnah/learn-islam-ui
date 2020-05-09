@@ -1,7 +1,17 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMemo } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import _get from 'lodash/get'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import Card from '@material-ui/core/Card'
+import LocationOnRoundedIcon from '@material-ui/icons/LocationOnRounded'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import EmailRoundedIcon from '@material-ui/icons/EmailRounded'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -9,10 +19,12 @@ import FormControl from '@material-ui/core/FormControl'
 import { Fragment } from 'react'
 import FormLabel from '@material-ui/core/FormLabel'
 import Button from '@material-ui/core/Button'
+import { FirebaseUser } from 'services/auth'
 import TextField from '@material-ui/core/TextField'
 import { useFormik } from 'formik'
 
 type PropType = {
+  me: FirebaseUser
   path?: string
 }
 
@@ -25,6 +37,18 @@ type FormValues = {
 }
 
 type MutationErrorType = string | null
+
+const USER_QUERY = gql`
+  query Me($id: String!) {
+    users(where: { fbase_id: { _eq: $id } }) {
+      id
+      first_name
+      email
+      last_name
+      country
+    }
+  }
+`
 
 const NEW_USER_QUERY = gql`
   mutation AddNewUser(
@@ -42,7 +66,13 @@ const NEW_USER_QUERY = gql`
   }
 `
 
-const Profile: React.FC<PropType> = () => {
+const Profile: React.FC<PropType> = ({ me }) => {
+  const classes = useStyles()
+  const currentUserId = useMemo(() => _get(me, 'uid'), [me])
+  const { loading: queryLoading, error: queryError, data: queryData } = useQuery(USER_QUERY, {
+    variables: { id: currentUserId },
+  })
+  console.log(queryData)
   const [insert_users_one, { loading: mutationLoading, error: mutationError }] = useMutation(NEW_USER_QUERY)
 
   const formik = useFormik<FormValues>({
@@ -80,6 +110,46 @@ const Profile: React.FC<PropType> = () => {
 
   return (
     <Fragment>
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            Ala Eddine
+          </Typography>
+          <Grid container direction="row" justify="flex-start">
+            <Grid item>
+              <EmailRoundedIcon />
+            </Grid>
+            <Grid
+              item
+              sx={{
+                ml: 1,
+              }}
+            >
+              <Typography className={classes.pos} color="textSecondary">
+                Email
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container direction="row" justify="flex-start">
+            <Grid item>
+              <LocationOnRoundedIcon />
+            </Grid>
+            <Grid
+              item
+              sx={{
+                ml: 1,
+              }}
+            >
+              <Typography className={classes.pos} color="textSecondary">
+                My Country
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Edit profile</Button>
+        </CardActions>
+      </Card>
       <form onSubmit={formik.handleSubmit}>
         <FormControl component="fieldset" margin="dense">
           <FormLabel component="legend">Gender</FormLabel>
@@ -158,5 +228,22 @@ const Profile: React.FC<PropType> = () => {
     </Fragment>
   )
 }
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+})
 
 export default Profile

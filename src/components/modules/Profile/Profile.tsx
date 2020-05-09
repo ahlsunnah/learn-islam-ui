@@ -24,6 +24,7 @@ import { FirebaseUser } from 'services/auth'
 import TextField from '@material-ui/core/TextField'
 import { TApi_Users } from '../../../graphqlTypes'
 import { useFormik } from 'formik'
+import { MeQuery, MeQueryVariables } from '../../../hasuraTypes'
 
 type PropType = {
   me: FirebaseUser
@@ -71,10 +72,13 @@ const NEW_USER_QUERY = gql`
 const Profile: React.FC<PropType> = ({ me }) => {
   const [isEditProfile, setEditProfile] = useState(false)
   const classes = useStyles()
-  const currentUserId = useMemo(() => _get(me, 'uid'), [me])
-  const { loading: queryLoading, error: queryError, data: queryData } = useQuery(USER_QUERY, {
-    variables: { id: currentUserId },
-  })
+  const currentUserId = useMemo(() => _get(me, 'uid', ''), [me])
+  const { loading: queryLoading, error: queryError, data: queryData } = useQuery<MeQuery, MeQueryVariables>(
+    USER_QUERY,
+    {
+      variables: { id: currentUserId },
+    }
+  )
 
   const meData: TApi_Users = _get(queryData, 'users.[0]')
 

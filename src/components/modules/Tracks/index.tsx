@@ -1,6 +1,4 @@
 import { useTranslation } from 'react-i18next'
-import BlueHero from 'components/molecules/Hero/BlueHero'
-import HomeFooter from 'components/molecules/Footer/HomeFooter'
 import gql from 'graphql-tag'
 import React from 'react'
 import Tracks from './Tracks'
@@ -25,10 +23,9 @@ const TRACKS_QUERY = gql`
   }
 `
 type Props = {
-  isLegacy?: boolean
   path?: string
 }
-const TracksContainer: React.FC<Props> = ({ isLegacy }) => {
+const TracksContainer: React.FC<Props> = () => {
   const { t, i18n } = useTranslation()
   const language = i18n.language as Locale
   const { data, loading, error } = useQuery<TracksQuery, TracksQueryVariables>(TRACKS_QUERY, {
@@ -44,12 +41,6 @@ const TracksContainer: React.FC<Props> = ({ isLegacy }) => {
     return <div>An error has occurred, please refresh the page or try again later</div>
   }
   const { tracks } = data
-  return (
-    <div>
-      {isLegacy && <BlueHero description={t('tracksPageDescription')} title={t('tracksPageTitle')} />}
-      <Tracks tracks={tracks} localePath={t('localePath')} soonString={t('soon')} />
-      {isLegacy && <HomeFooter firstTrackSlug={`${t('localePath')}${tracks[0] && tracks[0].slug}`} />}
-    </div>
-  )
+  return <Tracks tracks={tracks} localePath={t('localePath')} soonString={t('soon')} />
 }
 export default TracksContainer

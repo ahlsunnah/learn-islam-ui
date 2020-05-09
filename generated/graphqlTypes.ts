@@ -8255,3 +8255,15 @@ export type TTrackQueryQuery = { api: { track: Maybe<(
       Pick<TApi_Tracks, 'id' | 'slug'>
       & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<TTrackPageCourseFragment> }
     )> }, translations: Maybe<TTrackPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
+
+export type TGTracksPageTrackFragment = (
+  Pick<TApi_Tracks, 'id' | 'slug' | 'soon'>
+  & { translations: Array<Pick<TApi_Track_Translations, 'title' | 'description'>> }
+);
+
+export type TTracksQueryQueryVariables = {
+  localeEnum: Maybe<TApi_Locales_Enum>;
+};
+
+
+export type TTracksQueryQuery = { api: { tracks: Array<TGTracksPageTrackFragment> } };

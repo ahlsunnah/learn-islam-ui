@@ -2,7 +2,6 @@
 import { jsx } from 'theme-ui'
 import RawHTML from 'components/RawHTML'
 import { Link } from 'gatsby'
-import { TracksPageTrackFragment } from '../../../hasuraTypes'
 
 interface ILinkOrChildrenProps {
   children: JSX.Element
@@ -21,7 +20,14 @@ const LinkOrChildren = ({ children, className = '', to }: ILinkOrChildrenProps) 
 interface IProps {
   localePath: string
   soonString: string
-  tracks: TracksPageTrackFragment[]
+  tracks: Array<{
+    slug: string
+    soon: boolean
+    translations: Array<{
+      title: string
+      description?: string | null
+    }>
+  }>
 }
 const Tracks = ({ localePath, soonString, tracks }: IProps) => (
   <div>

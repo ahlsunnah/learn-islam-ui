@@ -5927,12 +5927,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
-  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale';
+  'childTranslationsJson___locale' |
+  'childTranslationsJson___nextHelp';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -6339,15 +6339,15 @@ export type TQuerySitePageArgs = {
   internalComponentName: Maybe<TStringQueryOperatorInput>;
   componentChunkName: Maybe<TStringQueryOperatorInput>;
   matchPath: Maybe<TStringQueryOperatorInput>;
+  id: Maybe<TStringQueryOperatorInput>;
+  parent: Maybe<TNodeFilterInput>;
+  children: Maybe<TNodeFilterListInput>;
+  internal: Maybe<TInternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<TBooleanQueryOperatorInput>;
   context: Maybe<TSitePageContextFilterInput>;
   pluginCreator: Maybe<TSitePluginFilterInput>;
   pluginCreatorId: Maybe<TStringQueryOperatorInput>;
   componentPath: Maybe<TStringQueryOperatorInput>;
-  id: Maybe<TStringQueryOperatorInput>;
-  parent: Maybe<TNodeFilterInput>;
-  children: Maybe<TNodeFilterListInput>;
-  internal: Maybe<TInternalFilterInput>;
 };
 
 
@@ -6362,8 +6362,8 @@ export type TQueryAllSitePageArgs = {
 export type TQuerySiteArgs = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
+  polyfill: Maybe<TBooleanQueryOperatorInput>;
+  pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
   parent: Maybe<TNodeFilterInput>;
   children: Maybe<TNodeFilterListInput>;
@@ -6494,12 +6494,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -6555,8 +6555,8 @@ export type TQueryAllSitePluginArgs = {
 export type TSite = TNode & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<TSiteSiteMetadata>;
-  port: Maybe<Scalars['Int']>;
-  host: Maybe<Scalars['String']>;
+  polyfill: Maybe<Scalars['Boolean']>;
+  pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<TNode>;
   children: Array<TNode>;
@@ -6756,8 +6756,8 @@ export type TSiteFieldsEnum =
   'buildTime' |
   'siteMetadata___title' |
   'siteMetadata___siteUrl' |
-  'port' |
-  'host' |
+  'polyfill' |
+  'pathPrefix' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -6848,8 +6848,8 @@ export type TSiteFieldsEnum =
 export type TSiteFilterInput = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
-  port: Maybe<TIntQueryOperatorInput>;
-  host: Maybe<TStringQueryOperatorInput>;
+  polyfill: Maybe<TBooleanQueryOperatorInput>;
+  pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
   parent: Maybe<TNodeFilterInput>;
   children: Maybe<TNodeFilterListInput>;
@@ -6871,15 +6871,15 @@ export type TSitePage = TNode & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent: Maybe<TNode>;
+  children: Array<TNode>;
+  internal: TInternal;
   isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
   context: Maybe<TSitePageContext>;
   pluginCreator: Maybe<TSitePlugin>;
   pluginCreatorId: Maybe<Scalars['String']>;
   componentPath: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent: Maybe<TNode>;
-  children: Array<TNode>;
-  internal: TInternal;
 };
 
 export type TSitePageConnection = {
@@ -6957,118 +6957,6 @@ export type TSitePageFieldsEnum =
   'internalComponentName' |
   'componentChunkName' |
   'matchPath' |
-  'isCreatedByStatefulCreatePages' |
-  'context___localeEnum' |
-  'context___id' |
-  'context___locale' |
-  'context___localePaths___ar' |
-  'context___localePaths___fr' |
-  'context___slug' |
-  'context___next___type' |
-  'context___next___title' |
-  'context___next___path' |
-  'context___difficulty' |
-  'pluginCreator___id' |
-  'pluginCreator___parent___id' |
-  'pluginCreator___parent___parent___id' |
-  'pluginCreator___parent___parent___children' |
-  'pluginCreator___parent___children' |
-  'pluginCreator___parent___children___id' |
-  'pluginCreator___parent___children___children' |
-  'pluginCreator___parent___internal___content' |
-  'pluginCreator___parent___internal___contentDigest' |
-  'pluginCreator___parent___internal___description' |
-  'pluginCreator___parent___internal___fieldOwners' |
-  'pluginCreator___parent___internal___ignoreType' |
-  'pluginCreator___parent___internal___mediaType' |
-  'pluginCreator___parent___internal___owner' |
-  'pluginCreator___parent___internal___type' |
-  'pluginCreator___children' |
-  'pluginCreator___children___id' |
-  'pluginCreator___children___parent___id' |
-  'pluginCreator___children___parent___children' |
-  'pluginCreator___children___children' |
-  'pluginCreator___children___children___id' |
-  'pluginCreator___children___children___children' |
-  'pluginCreator___children___internal___content' |
-  'pluginCreator___children___internal___contentDigest' |
-  'pluginCreator___children___internal___description' |
-  'pluginCreator___children___internal___fieldOwners' |
-  'pluginCreator___children___internal___ignoreType' |
-  'pluginCreator___children___internal___mediaType' |
-  'pluginCreator___children___internal___owner' |
-  'pluginCreator___children___internal___type' |
-  'pluginCreator___internal___content' |
-  'pluginCreator___internal___contentDigest' |
-  'pluginCreator___internal___description' |
-  'pluginCreator___internal___fieldOwners' |
-  'pluginCreator___internal___ignoreType' |
-  'pluginCreator___internal___mediaType' |
-  'pluginCreator___internal___owner' |
-  'pluginCreator___internal___type' |
-  'pluginCreator___resolve' |
-  'pluginCreator___name' |
-  'pluginCreator___version' |
-  'pluginCreator___pluginOptions___fileName' |
-  'pluginCreator___pluginOptions___codegenConfig___avoidOptionals' |
-  'pluginCreator___pluginOptions___codegenConfig___maybeValue' |
-  'pluginCreator___pluginOptions___codegenConfig___typesPrefix' |
-  'pluginCreator___pluginOptions___disableAutoprefixing' |
-  'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
-  'pluginCreator___pluginOptions___path' |
-  'pluginCreator___pluginOptions___typeName' |
-  'pluginCreator___pluginOptions___fieldName' |
-  'pluginCreator___pluginOptions___url' |
-  'pluginCreator___pluginOptions___headers___x_hasura_admin_secret' |
-  'pluginCreator___pluginOptions___showSpinner' |
-  'pluginCreator___pluginOptions___siteUrl' |
-  'pluginCreator___pluginOptions___includePaths' |
-  'pluginCreator___pluginOptions___logo' |
-  'pluginCreator___pluginOptions___injectHTML' |
-  'pluginCreator___pluginOptions___icons___android' |
-  'pluginCreator___pluginOptions___icons___appleIcon' |
-  'pluginCreator___pluginOptions___icons___appleStartup' |
-  'pluginCreator___pluginOptions___icons___coast' |
-  'pluginCreator___pluginOptions___icons___favicons' |
-  'pluginCreator___pluginOptions___icons___firefox' |
-  'pluginCreator___pluginOptions___icons___twitter' |
-  'pluginCreator___pluginOptions___icons___yandex' |
-  'pluginCreator___pluginOptions___icons___windows' |
-  'pluginCreator___pluginOptions___endpoint' |
-  'pluginCreator___pluginOptions___name' |
-  'pluginCreator___pluginOptions___short_name' |
-  'pluginCreator___pluginOptions___start_url' |
-  'pluginCreator___pluginOptions___background_color' |
-  'pluginCreator___pluginOptions___theme_color' |
-  'pluginCreator___pluginOptions___display' |
-  'pluginCreator___pluginOptions___icon' |
-  'pluginCreator___pluginOptions___disable' |
-  'pluginCreator___pluginOptions___src' |
-  'pluginCreator___pluginOptions___integrity' |
-  'pluginCreator___pluginOptions___crossorigin' |
-  'pluginCreator___pluginOptions___onLoad' |
-  'pluginCreator___pluginOptions___pathCheck' |
-  'pluginCreator___nodeAPIs' |
-  'pluginCreator___browserAPIs' |
-  'pluginCreator___ssrAPIs' |
-  'pluginCreator___pluginFilepath' |
-  'pluginCreator___packageJson___name' |
-  'pluginCreator___packageJson___description' |
-  'pluginCreator___packageJson___version' |
-  'pluginCreator___packageJson___main' |
-  'pluginCreator___packageJson___license' |
-  'pluginCreator___packageJson___dependencies' |
-  'pluginCreator___packageJson___dependencies___name' |
-  'pluginCreator___packageJson___dependencies___version' |
-  'pluginCreator___packageJson___devDependencies' |
-  'pluginCreator___packageJson___devDependencies___name' |
-  'pluginCreator___packageJson___devDependencies___version' |
-  'pluginCreator___packageJson___peerDependencies' |
-  'pluginCreator___packageJson___peerDependencies___name' |
-  'pluginCreator___packageJson___peerDependencies___version' |
-  'pluginCreator___packageJson___keywords' |
-  'pluginCreatorId' |
-  'componentPath' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -7154,7 +7042,122 @@ export type TSitePageFieldsEnum =
   'internal___ignoreType' |
   'internal___mediaType' |
   'internal___owner' |
-  'internal___type';
+  'internal___type' |
+  'isCreatedByStatefulCreatePages' |
+  'context___localeEnum' |
+  'context___id' |
+  'context___locale' |
+  'context___localePaths___ar' |
+  'context___localePaths___fr' |
+  'context___slug' |
+  'context___next___type' |
+  'context___next___title' |
+  'context___next___path' |
+  'context___difficulty' |
+  'pluginCreator___id' |
+  'pluginCreator___parent___id' |
+  'pluginCreator___parent___parent___id' |
+  'pluginCreator___parent___parent___children' |
+  'pluginCreator___parent___children' |
+  'pluginCreator___parent___children___id' |
+  'pluginCreator___parent___children___children' |
+  'pluginCreator___parent___internal___content' |
+  'pluginCreator___parent___internal___contentDigest' |
+  'pluginCreator___parent___internal___description' |
+  'pluginCreator___parent___internal___fieldOwners' |
+  'pluginCreator___parent___internal___ignoreType' |
+  'pluginCreator___parent___internal___mediaType' |
+  'pluginCreator___parent___internal___owner' |
+  'pluginCreator___parent___internal___type' |
+  'pluginCreator___children' |
+  'pluginCreator___children___id' |
+  'pluginCreator___children___parent___id' |
+  'pluginCreator___children___parent___children' |
+  'pluginCreator___children___children' |
+  'pluginCreator___children___children___id' |
+  'pluginCreator___children___children___children' |
+  'pluginCreator___children___internal___content' |
+  'pluginCreator___children___internal___contentDigest' |
+  'pluginCreator___children___internal___description' |
+  'pluginCreator___children___internal___fieldOwners' |
+  'pluginCreator___children___internal___ignoreType' |
+  'pluginCreator___children___internal___mediaType' |
+  'pluginCreator___children___internal___owner' |
+  'pluginCreator___children___internal___type' |
+  'pluginCreator___internal___content' |
+  'pluginCreator___internal___contentDigest' |
+  'pluginCreator___internal___description' |
+  'pluginCreator___internal___fieldOwners' |
+  'pluginCreator___internal___ignoreType' |
+  'pluginCreator___internal___mediaType' |
+  'pluginCreator___internal___owner' |
+  'pluginCreator___internal___type' |
+  'pluginCreator___resolve' |
+  'pluginCreator___name' |
+  'pluginCreator___version' |
+  'pluginCreator___pluginOptions___fileName' |
+  'pluginCreator___pluginOptions___codegenConfig___avoidOptionals' |
+  'pluginCreator___pluginOptions___codegenConfig___maybeValue' |
+  'pluginCreator___pluginOptions___codegenConfig___typesPrefix' |
+  'pluginCreator___pluginOptions___additionalSchemas' |
+  'pluginCreator___pluginOptions___additionalSchemas___key' |
+  'pluginCreator___pluginOptions___additionalSchemas___fileName' |
+  'pluginCreator___pluginOptions___disableAutoprefixing' |
+  'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
+  'pluginCreator___pluginOptions___path' |
+  'pluginCreator___pluginOptions___typeName' |
+  'pluginCreator___pluginOptions___fieldName' |
+  'pluginCreator___pluginOptions___url' |
+  'pluginCreator___pluginOptions___headers___x_hasura_admin_secret' |
+  'pluginCreator___pluginOptions___showSpinner' |
+  'pluginCreator___pluginOptions___siteUrl' |
+  'pluginCreator___pluginOptions___includePaths' |
+  'pluginCreator___pluginOptions___logo' |
+  'pluginCreator___pluginOptions___injectHTML' |
+  'pluginCreator___pluginOptions___icons___android' |
+  'pluginCreator___pluginOptions___icons___appleIcon' |
+  'pluginCreator___pluginOptions___icons___appleStartup' |
+  'pluginCreator___pluginOptions___icons___coast' |
+  'pluginCreator___pluginOptions___icons___favicons' |
+  'pluginCreator___pluginOptions___icons___firefox' |
+  'pluginCreator___pluginOptions___icons___twitter' |
+  'pluginCreator___pluginOptions___icons___yandex' |
+  'pluginCreator___pluginOptions___icons___windows' |
+  'pluginCreator___pluginOptions___endpoint' |
+  'pluginCreator___pluginOptions___name' |
+  'pluginCreator___pluginOptions___short_name' |
+  'pluginCreator___pluginOptions___start_url' |
+  'pluginCreator___pluginOptions___background_color' |
+  'pluginCreator___pluginOptions___theme_color' |
+  'pluginCreator___pluginOptions___display' |
+  'pluginCreator___pluginOptions___icon' |
+  'pluginCreator___pluginOptions___disable' |
+  'pluginCreator___pluginOptions___src' |
+  'pluginCreator___pluginOptions___integrity' |
+  'pluginCreator___pluginOptions___crossorigin' |
+  'pluginCreator___pluginOptions___onLoad' |
+  'pluginCreator___pluginOptions___pathCheck' |
+  'pluginCreator___nodeAPIs' |
+  'pluginCreator___browserAPIs' |
+  'pluginCreator___ssrAPIs' |
+  'pluginCreator___pluginFilepath' |
+  'pluginCreator___packageJson___name' |
+  'pluginCreator___packageJson___description' |
+  'pluginCreator___packageJson___version' |
+  'pluginCreator___packageJson___main' |
+  'pluginCreator___packageJson___license' |
+  'pluginCreator___packageJson___dependencies' |
+  'pluginCreator___packageJson___dependencies___name' |
+  'pluginCreator___packageJson___dependencies___version' |
+  'pluginCreator___packageJson___devDependencies' |
+  'pluginCreator___packageJson___devDependencies___name' |
+  'pluginCreator___packageJson___devDependencies___version' |
+  'pluginCreator___packageJson___peerDependencies' |
+  'pluginCreator___packageJson___peerDependencies___name' |
+  'pluginCreator___packageJson___peerDependencies___version' |
+  'pluginCreator___packageJson___keywords' |
+  'pluginCreatorId' |
+  'componentPath';
 
 export type TSitePageFilterInput = {
   path: Maybe<TStringQueryOperatorInput>;
@@ -7162,15 +7165,15 @@ export type TSitePageFilterInput = {
   internalComponentName: Maybe<TStringQueryOperatorInput>;
   componentChunkName: Maybe<TStringQueryOperatorInput>;
   matchPath: Maybe<TStringQueryOperatorInput>;
+  id: Maybe<TStringQueryOperatorInput>;
+  parent: Maybe<TNodeFilterInput>;
+  children: Maybe<TNodeFilterListInput>;
+  internal: Maybe<TInternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<TBooleanQueryOperatorInput>;
   context: Maybe<TSitePageContextFilterInput>;
   pluginCreator: Maybe<TSitePluginFilterInput>;
   pluginCreatorId: Maybe<TStringQueryOperatorInput>;
   componentPath: Maybe<TStringQueryOperatorInput>;
-  id: Maybe<TStringQueryOperatorInput>;
-  parent: Maybe<TNodeFilterInput>;
-  children: Maybe<TNodeFilterListInput>;
-  internal: Maybe<TInternalFilterInput>;
 };
 
 export type TSitePageGroupConnection = {
@@ -7324,6 +7327,11 @@ export type TSitePluginFieldsEnum =
   'pluginOptions___codegenConfig___avoidOptionals' |
   'pluginOptions___codegenConfig___maybeValue' |
   'pluginOptions___codegenConfig___typesPrefix' |
+  'pluginOptions___additionalSchemas' |
+  'pluginOptions___additionalSchemas___key' |
+  'pluginOptions___additionalSchemas___fileName' |
+  'pluginOptions___additionalSchemas___pluckConfig___globalGqlIdentifierName' |
+  'pluginOptions___additionalSchemas___pluckConfig___modules' |
   'pluginOptions___disableAutoprefixing' |
   'pluginOptions___stylesProvider___injectFirst' |
   'pluginOptions___path' |
@@ -7473,6 +7481,7 @@ export type TSitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type TSitePluginPluginOptions = {
   fileName: Maybe<Scalars['String']>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfig>;
+  additionalSchemas: Maybe<Array<Maybe<TSitePluginPluginOptionsAdditionalSchemas>>>;
   disableAutoprefixing: Maybe<Scalars['Boolean']>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProvider>;
   path: Maybe<Scalars['String']>;
@@ -7502,6 +7511,72 @@ export type TSitePluginPluginOptions = {
   pathCheck: Maybe<Scalars['Boolean']>;
 };
 
+export type TSitePluginPluginOptionsAdditionalSchemas = {
+  key: Maybe<Scalars['String']>;
+  fileName: Maybe<Scalars['String']>;
+  schema: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchema>;
+  pluckConfig: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfig>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasFilterInput = {
+  key: Maybe<TStringQueryOperatorInput>;
+  fileName: Maybe<TStringQueryOperatorInput>;
+  schema: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaFilterInput>;
+  pluckConfig: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasFilterListInput = {
+  elemMatch: Maybe<TSitePluginPluginOptionsAdditionalSchemasFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfig = {
+  globalGqlIdentifierName: Maybe<Scalars['String']>;
+  modules: Maybe<Array<Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModules>>>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigFilterInput = {
+  globalGqlIdentifierName: Maybe<TStringQueryOperatorInput>;
+  modules: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterListInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModules = {
+  name: Maybe<Scalars['String']>;
+  identifier: Maybe<Scalars['String']>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterInput = {
+  name: Maybe<TStringQueryOperatorInput>;
+  identifier: Maybe<TStringQueryOperatorInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterListInput = {
+  elemMatch: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchema = {
+  https___learn_islam_api_ahlsunnah_dev_v1_graphql: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_Graphql>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaFilterInput = {
+  https___learn_islam_api_ahlsunnah_dev_v1_graphql: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_Graphql = {
+  headers: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeaders>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlFilterInput = {
+  headers: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeadersFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeaders = {
+  x_hasura_admin_secret: Maybe<Scalars['String']>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeadersFilterInput = {
+  x_hasura_admin_secret: Maybe<TStringQueryOperatorInput>;
+};
+
 export type TSitePluginPluginOptionsCodegenConfig = {
   avoidOptionals: Maybe<Scalars['Boolean']>;
   maybeValue: Maybe<Scalars['String']>;
@@ -7517,6 +7592,7 @@ export type TSitePluginPluginOptionsCodegenConfigFilterInput = {
 export type TSitePluginPluginOptionsFilterInput = {
   fileName: Maybe<TStringQueryOperatorInput>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfigFilterInput>;
+  additionalSchemas: Maybe<TSitePluginPluginOptionsAdditionalSchemasFilterListInput>;
   disableAutoprefixing: Maybe<TBooleanQueryOperatorInput>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProviderFilterInput>;
   path: Maybe<TStringQueryOperatorInput>;
@@ -7716,12 +7792,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -7930,12 +8006,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
-  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale';
+  'locale' |
+  'nextHelp';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -8034,12 +8110,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {

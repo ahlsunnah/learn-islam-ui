@@ -31,7 +31,6 @@ const TracksContainer: React.FC<Props> = () => {
   const { data, loading, error } = useQuery<TracksQuery, TracksQueryVariables>(TRACKS_QUERY, {
     variables: { locale: language },
   })
-  console.log(data, loading, error, language)
   if (loading) {
     return <div>Loading</div>
   }

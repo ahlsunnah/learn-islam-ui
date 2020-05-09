@@ -20,11 +20,12 @@ export default function useApolloClientConfig(token: string) {
   const authLink = useMemo(
     () =>
       setContext((_, { headers }) => {
+        const newHeaders = { ...headers }
+        if (token) {
+          newHeaders.authorization = `Bearer ${token}`
+        }
         return {
-          headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : '',
-          },
+          headers: newHeaders,
         }
       }),
     [token]

@@ -27,6 +27,29 @@ module.exports = {
           // immutableTypes: true,
           typesPrefix: 'T',
         },
+        additionalSchemas: [
+          {
+            key: 'hasura',
+            fileName: `generated/hasuraTypes.ts`,
+            schema: {
+              [GATSBY_API]: {
+                headers: {
+                  'x-hasura-admin-secret': API_SECRET,
+                },
+              },
+            },
+            pluckConfig: {
+              // config to ensure only queries using the `gql` tag are used for this schema
+              globalGqlIdentifierName: 'gql',
+              modules: [
+                {
+                  name: 'graphql-tag',
+                  identifier: 'gql',
+                },
+              ],
+            },
+          },
+        ],
       },
     },
     {

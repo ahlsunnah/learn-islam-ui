@@ -7107,6 +7107,9 @@ export type TSitePageFieldsEnum =
   'pluginCreator___pluginOptions___codegenConfig___avoidOptionals' |
   'pluginCreator___pluginOptions___codegenConfig___maybeValue' |
   'pluginCreator___pluginOptions___codegenConfig___typesPrefix' |
+  'pluginCreator___pluginOptions___additionalSchemas' |
+  'pluginCreator___pluginOptions___additionalSchemas___key' |
+  'pluginCreator___pluginOptions___additionalSchemas___fileName' |
   'pluginCreator___pluginOptions___disableAutoprefixing' |
   'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
   'pluginCreator___pluginOptions___path' |
@@ -7332,6 +7335,11 @@ export type TSitePluginFieldsEnum =
   'pluginOptions___codegenConfig___avoidOptionals' |
   'pluginOptions___codegenConfig___maybeValue' |
   'pluginOptions___codegenConfig___typesPrefix' |
+  'pluginOptions___additionalSchemas' |
+  'pluginOptions___additionalSchemas___key' |
+  'pluginOptions___additionalSchemas___fileName' |
+  'pluginOptions___additionalSchemas___pluckConfig___globalGqlIdentifierName' |
+  'pluginOptions___additionalSchemas___pluckConfig___modules' |
   'pluginOptions___disableAutoprefixing' |
   'pluginOptions___stylesProvider___injectFirst' |
   'pluginOptions___path' |
@@ -7481,6 +7489,7 @@ export type TSitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type TSitePluginPluginOptions = {
   fileName: Maybe<Scalars['String']>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfig>;
+  additionalSchemas: Maybe<Array<Maybe<TSitePluginPluginOptionsAdditionalSchemas>>>;
   disableAutoprefixing: Maybe<Scalars['Boolean']>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProvider>;
   path: Maybe<Scalars['String']>;
@@ -7510,6 +7519,72 @@ export type TSitePluginPluginOptions = {
   pathCheck: Maybe<Scalars['Boolean']>;
 };
 
+export type TSitePluginPluginOptionsAdditionalSchemas = {
+  key: Maybe<Scalars['String']>;
+  fileName: Maybe<Scalars['String']>;
+  schema: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchema>;
+  pluckConfig: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfig>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasFilterInput = {
+  key: Maybe<TStringQueryOperatorInput>;
+  fileName: Maybe<TStringQueryOperatorInput>;
+  schema: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaFilterInput>;
+  pluckConfig: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasFilterListInput = {
+  elemMatch: Maybe<TSitePluginPluginOptionsAdditionalSchemasFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfig = {
+  globalGqlIdentifierName: Maybe<Scalars['String']>;
+  modules: Maybe<Array<Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModules>>>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigFilterInput = {
+  globalGqlIdentifierName: Maybe<TStringQueryOperatorInput>;
+  modules: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterListInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModules = {
+  name: Maybe<Scalars['String']>;
+  identifier: Maybe<Scalars['String']>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterInput = {
+  name: Maybe<TStringQueryOperatorInput>;
+  identifier: Maybe<TStringQueryOperatorInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterListInput = {
+  elemMatch: Maybe<TSitePluginPluginOptionsAdditionalSchemasPluckConfigModulesFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchema = {
+  https___learn_islam_api_ahlsunnah_dev_v1_graphql: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_Graphql>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaFilterInput = {
+  https___learn_islam_api_ahlsunnah_dev_v1_graphql: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_Graphql = {
+  headers: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeaders>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlFilterInput = {
+  headers: Maybe<TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeadersFilterInput>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeaders = {
+  x_hasura_admin_secret: Maybe<Scalars['String']>;
+};
+
+export type TSitePluginPluginOptionsAdditionalSchemasSchemaHttps___Learn_Islam_Api_Ahlsunnah_Dev_V1_GraphqlHeadersFilterInput = {
+  x_hasura_admin_secret: Maybe<TStringQueryOperatorInput>;
+};
+
 export type TSitePluginPluginOptionsCodegenConfig = {
   avoidOptionals: Maybe<Scalars['Boolean']>;
   maybeValue: Maybe<Scalars['String']>;
@@ -7525,6 +7600,7 @@ export type TSitePluginPluginOptionsCodegenConfigFilterInput = {
 export type TSitePluginPluginOptionsFilterInput = {
   fileName: Maybe<TStringQueryOperatorInput>;
   codegenConfig: Maybe<TSitePluginPluginOptionsCodegenConfigFilterInput>;
+  additionalSchemas: Maybe<TSitePluginPluginOptionsAdditionalSchemasFilterListInput>;
   disableAutoprefixing: Maybe<TBooleanQueryOperatorInput>;
   stylesProvider: Maybe<TSitePluginPluginOptionsStylesProviderFilterInput>;
   path: Maybe<TStringQueryOperatorInput>;

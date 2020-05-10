@@ -50,22 +50,7 @@ export const pageQuery = graphql`
     }
   }
 
-  fragment TrackPageTranslations on TranslationsJson {
-    connect
-    course
-    level1
-    level2
-    level3
-    locale
-    localePath
-    start
-    startCourse
-    toOtherLanguageCTA
-    track
-    trackLevel
-  }
-
-  query trackQuery($locale: String!, $localeEnum: api_locales_enum!, $id: Int!) {
+  query trackQuery($localeEnum: api_locales_enum!, $id: Int!) {
     api {
       track: tracks_by_pk(id: $id) {
         id
@@ -77,13 +62,6 @@ export const pageQuery = graphql`
           ...TrackPageCourse
         }
       }
-    }
-    translations: translationsJson(locale: { eq: $locale }) {
-      ...TrackPageTranslations
-    }
-    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
-      localeName
-      localePath
     }
   }
 `

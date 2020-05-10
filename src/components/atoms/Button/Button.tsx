@@ -1,13 +1,11 @@
 /** @jsx jsx */
+import { ButtonProps } from '@material-ui/core'
+import MaterialButton from '@material-ui/core/Button'
 import { jsx } from 'theme-ui'
-import cx from 'classnames'
-import MaterialButton, { IButtonProps } from './MaterialButton'
-import '@material/react-button/dist/button.css'
-import 'styles/button.scss'
+import { SystemCssProperties, CSSPseudoSelectorProps, CSSSelectorObject } from '@styled-system/css'
 
-interface IProps {
+type Props<C extends React.ElementType> = ButtonProps<C, { component?: C }> & {
   autoSize?: boolean
-  children: JSX.Element | string
   className?: string
   elevated?: boolean
   greenOutlined?: boolean
@@ -18,32 +16,40 @@ interface IProps {
   outlined?: boolean
 }
 
-type ButtonTypes = HTMLAnchorElement | HTMLButtonElement
-
-const Button = ({
+const Button = <C extends React.ElementType>({
   autoSize,
-  children,
-  className = '',
+  className,
+  pill = true,
+  outlined,
   elevated,
   inverse,
-  greenOutlined,
+  raised,
   rounded = true,
-  outlined,
   ...props
-}: IProps & IButtonProps<ButtonTypes>) => (
-  <MaterialButton
-    className={cx(className, {
-      'br-pill': rounded,
-      'button-inverse': inverse,
-      'button-elevated': elevated,
-      'button-outlined-green': greenOutlined,
-      'pv2 h-auto lh-title': autoSize,
-    })}
-    outlined={outlined}
-    {...props}
-  >
-    {children}
-  </MaterialButton>
-)
+}: Props<C>) => {
+  const styles: (SystemCssProperties & CSSPseudoSelectorProps) | CSSSelectorObject = {
+    textTransform: 'unset',
+  }
+  let variant: 'text' | 'outlined' | 'contained' = 'contained'
+  let color: 'inherit' | 'primary' | 'secondary' | 'default' = 'primary'
+  if (outlined) {
+    variant = 'outlined'
+    styles.borderWidth = 2
+    styles[':hover'] = {
+      borderWidth: 2,
+    }
+  }
+  if (pill) {
+    styles.borderRadius = 9999
+  }
+  if (elevated) {
+    styles.boxShadow = '0 8px 8px rgba(0,0,0,.24),0 0 8px rgba(0,0,0,.12)'
+    styles[':hover'] = {
+      ...(styles[':hover'] || {}),
+      boxShadow: '0 4px 4px rgba(0,0,0,.24),0 0 4px rgba(0,0,0,.12)',
+    }
+  }
+  return <MaterialButton color={color} variant={variant} {...props} className={className} sx={styles}></MaterialButton>
+}
 
 export default Button

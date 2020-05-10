@@ -112,7 +112,11 @@ export function useAuth(): UseAuth {
   const signOut = async () => {
     try {
       setAuthState({ status: 'loading' })
+
+      localStorage.removeItem('authUser')
+      setAuthUser(undefined)
       await firebase.auth().signOut()
+
       setAuthState({ status: 'out' })
     } catch (error) {
       console.log(error)

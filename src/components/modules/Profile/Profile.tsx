@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui'
 import gql from 'graphql-tag'
 import { useMemo, useState } from 'react'
+import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import _get from 'lodash/get'
 import _upperFirst from 'lodash/upperFirst'
@@ -28,6 +29,7 @@ import { MeQuery, MeQueryVariables } from '../../../hasuraTypes'
 
 type PropType = {
   me: FirebaseUser
+  signOut: () => Promise<void>
   path?: string
 }
 
@@ -69,7 +71,7 @@ const NEW_USER_QUERY = gql`
   }
 `
 
-const Profile: React.FC<PropType> = ({ me }) => {
+const Profile: React.FC<PropType> = ({ me, signOut }) => {
   const [isEditProfile, setEditProfile] = useState(false)
   const classes = useStyles()
   const currentUserId = useMemo(() => _get(me, 'uid', ''), [me])
@@ -87,6 +89,15 @@ const Profile: React.FC<PropType> = ({ me }) => {
   const country = _upperFirst(_get(meData, 'country'))
 
   const [insert_users_one, { loading: mutationLoading, error: mutationError }] = useMutation(NEW_USER_QUERY)
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -163,6 +174,9 @@ const Profile: React.FC<PropType> = ({ me }) => {
           <CardActions>
             <Button size="small" onClick={() => setEditProfile((prev) => !prev)}>
               Edit profile
+            </Button>
+            <Button size="small" onClick={handleSignOut}>
+              Sign Out
             </Button>
           </CardActions>
         </Card>

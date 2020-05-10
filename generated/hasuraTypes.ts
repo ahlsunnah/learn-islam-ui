@@ -6452,6 +6452,13 @@ export type Users_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type MeQueryVariables = {
+  id: Scalars['String'];
+};
+
+
+export type MeQuery = { users: Array<Pick<Users, 'id' | 'first_name' | 'email' | 'last_name' | 'country'>> };
+
 export type AddNewUserMutationVariables = {
   first_name: Scalars['String'];
   country: Scalars['String'];

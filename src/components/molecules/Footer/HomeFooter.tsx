@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React from 'react'
 import { Link } from 'gatsby'
 import cx from 'classnames'
@@ -44,11 +46,12 @@ const HomeFooter = ({ dark, firstTrackSlug, withTrackSlug = true }: Props) => {
         <div className="mt4 mt5-ns tc">
           <Link to={`${firstTrackSlug}/`} className="no-underline">
             <Button
-              className={cx('ph4 b', {
-                'mdc-theme--secondary': dark,
-              })}
               elevated
-              inverse
+              color="default"
+              sx={{
+                bg: '#fff',
+                px: '2rem',
+              }}
             >
               {t('homeStartTrack')}
             </Button>

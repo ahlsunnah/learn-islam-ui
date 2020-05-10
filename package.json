@@ -19,8 +19,6 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@material-ui/styles": "^4.9.10",
-    "@material/react-button": "^0.15.0",
-    "@material/react-card": "^0.15.0",
     "@material/react-checkbox": "^0.15.0",
     "@material/react-drawer": "^0.15.0",
     "@material/react-list": "^0.15.0",

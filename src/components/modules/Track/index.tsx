@@ -7,7 +7,6 @@ import { ITrackPageProps } from '../../../types/track'
 
 const TrackContainer = ({
   data: {
-    otherLocaleTranslations,
     api: { track },
   },
   pageContext,
@@ -36,8 +35,6 @@ const TrackContainer = ({
           duration={trackDuration}
           level={trackLevel}
           nextCoursePath={nextCoursePath}
-          otherLocaleName={otherLocaleTranslations.localeName}
-          otherLocaleUrl={`${otherLocaleTranslations.localePath}${slug}`}
           trackTitle={track.translations[0].title}
         />
         <CoursesWrapper courses={track.courses} currentPath={currentPath} />

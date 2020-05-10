@@ -76,7 +76,7 @@ const CourseCard = ({
         )}
         <div className="flex justify-between items-center">
           <Link className="no-underline" to={nextCoursePath}>
-            <Button className="mt3" outlined>
+            <Button className="mt3" outlined pill>
               {t('startCourse')}
             </Button>
           </Link>

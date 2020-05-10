@@ -1,6 +1,8 @@
 import React from 'react'
 import { Styled, ThemeProvider } from 'theme-ui'
+import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles'
 import theme from 'styles/theme'
+import materialTheme from 'styles/materialTheme'
 import 'styles/custom.scss'
 import 'styles/fonts.scss'
 import 'styles/theme.scss'
@@ -13,10 +15,12 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children }) => (
   <ThemeProvider theme={theme}>
-    <Styled.root>
-      {children}
-      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css" />
-    </Styled.root>
+    <MaterialThemeProvider theme={materialTheme}>
+      <Styled.root>
+        {children}
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css" />
+      </Styled.root>
+    </MaterialThemeProvider>
   </ThemeProvider>
 )
 

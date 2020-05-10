@@ -1,6 +1,5 @@
 import Button from 'components/atoms/Button/Button'
-// import IconWithText from 'components/IconWithText'
-import RawHTML from 'components/RawHTML'
+import SwitchLanguageButton from 'components/atoms/SwitchLanguageButton/SwitchLanguageButton'
 import { Link } from 'gatsby'
 // import clock from 'images/clock.svg'
 // import target from 'images/target.svg'
@@ -12,36 +11,26 @@ interface IProps {
   duration: number
   level: number
   nextCoursePath: string
-  otherLocaleName: string
-  otherLocaleUrl: string
   trackTitle: string
 }
-const TrackHeader = ({ duration, level, nextCoursePath, otherLocaleName, otherLocaleUrl, trackTitle }: IProps) => {
-  const { t, i18n } = useTranslation()
+const TrackHeader = ({ duration, level, nextCoursePath, trackTitle }: IProps) => {
+  const { t } = useTranslation()
   return (
     <div className="ph3 pb4 pt3 flex flex-column flex-row-ns justify-around bg-white raised-header">
       <div className="self-end dn-ns">
-        <Link className="ph2 no-underline" to={otherLocaleUrl}>
-          <Button rounded outlined>
-            {otherLocaleName}
-          </Button>
-        </Link>
+        <SwitchLanguageButton />
       </div>
       <div className="mt3 mt5-ns ph5-ns flex2">
         <h1 className="mv0">{trackTitle}</h1>
-        {i18n.language === 'fr' && (
+        {/* {i18n.language === 'fr' && (
           <Link className="black no-underline" to={otherLocaleUrl}>
             <RawHTML className="mt2 mt0-ns">{t('toOtherLanguageCTA')}</RawHTML>
           </Link>
-        )}
+        )} */}
       </div>
       <div className="pt2 flex1 flex flex-column-reverse flex-column-ns">
         <div className="self-end dn db-ns">
-          <Link className="ph2 no-underline" to={otherLocaleUrl}>
-            <Button rounded outlined>
-              {otherLocaleName}
-            </Button>
-          </Link>
+          <SwitchLanguageButton />
         </div>
         <div className="mt3 mb2 mt4-ns mb4-ns mh3-l">
           <Link to={nextCoursePath}>

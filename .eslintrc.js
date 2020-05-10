@@ -28,6 +28,8 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-use-before-define': 0,
+    'prefer-const': 'warn',
+    '@typescript-eslint/ban-ts-ignore': 'warn',
   },
   settings: {
     'import/resolver': {

@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import cx from 'classnames'
 import Button from 'components/atoms/Button/Button'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
@@ -51,7 +53,15 @@ const HomeNewsletter = () => {
         {/* <label className="mdc-floating-label" htmlFor="newsletter-field">
           {homeEmailPlaceHolder}
         </label> */}
-        <Button className="mt4 mt0-ns mh2 ph3 ph4-ns" onClick={handleSubmit} elevated inverse>
+        <Button
+          className="mt4 mt0-ns mh2 ph3 ph4-ns"
+          onClick={handleSubmit}
+          elevated
+          color="default"
+          sx={{
+            bg: '#fff',
+          }}
+        >
           {t('enroll')}
         </Button>
         {result.message && (

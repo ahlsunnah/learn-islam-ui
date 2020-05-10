@@ -50,7 +50,7 @@ export const pageQuery = graphql`
     }
   }
 
-  query trackQuery($locale: String!, $localeEnum: api_locales_enum!, $id: Int!) {
+  query trackQuery($localeEnum: api_locales_enum!, $id: Int!) {
     api {
       track: tracks_by_pk(id: $id) {
         id
@@ -62,10 +62,6 @@ export const pageQuery = graphql`
           ...TrackPageCourse
         }
       }
-    }
-    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
-      localeName
-      localePath
     }
   }
 `

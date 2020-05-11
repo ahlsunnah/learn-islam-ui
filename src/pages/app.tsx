@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui'
 import React, { Fragment, useContext } from 'react'
 import { Router } from '@reach/router'
+import _get from 'lodash/get'
 import AppNavBar from '../components/molecules/AppNavBar/AppNavBar'
 import CssBaseLine from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
@@ -27,10 +28,9 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => (
 const App = () => {
   const { user } = useContext(AuthContext)
 
-  if (!user) {
-    // TODO: add loading spinner
-    return null
-  }
+  if (!user) return null
+
+  const isAuthLoading = _get(user, 'authState.status') === 'loading'
 
   return (
     <Fragment>
@@ -74,6 +74,7 @@ const App = () => {
                 signInWithEmailAndPwd={user.signInWithEmailAndPwd}
                 authUser={user.authUser}
                 addNewUser={user.addNewUser}
+                isAuthLoading={isAuthLoading}
               />
             </Router>
           </Container>

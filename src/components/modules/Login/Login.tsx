@@ -10,6 +10,7 @@ import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { FirebaseUser } from 'services/auth'
 import { FC, useState } from 'react'
+import Spinner from 'components/atoms/Spinner/Spinner'
 
 type FormValues = {
   userName: string
@@ -24,14 +25,15 @@ type PropTypes = {
   signInWithEmailAndPwd: (email: string, pwd: string) => Promise<void>
   authUser: FirebaseUser
   path?: string
+  isAuthLoading: boolean
 }
 
 type LoginError = string | undefined
 
 const Login: FC<PropTypes> = (props) => {
+  const { addNewUser, signInWithEmailAndPwd, authUser, isAuthLoading } = props
   const [isAccountCreated, setAccountCreated] = useState(false)
   const [loginError, setLoginError] = useState<LoginError>(undefined)
-  const { addNewUser, signInWithEmailAndPwd, authUser } = props
 
   const [isNew, setIsNew] = useState(false)
   const { i18n, t } = useTranslation()
@@ -71,6 +73,8 @@ const Login: FC<PropTypes> = (props) => {
       }
     },
   })
+
+  if (isAuthLoading) return <Spinner />
 
   if (authUser) {
     navigate('/app/profile')

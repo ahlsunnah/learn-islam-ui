@@ -43,7 +43,7 @@ export function useAuth(): UseAuth {
     setAuthUser(JSON.parse(localStorage.getItem('authUser') as string))
   }, [])
 
-  const [authState, setAuthState] = useState<AuthState>({ status: 'loading' })
+  const [authState, setAuthState] = useState<AuthState>({ status: 'out' })
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(
@@ -114,9 +114,10 @@ export function useAuth(): UseAuth {
       setAuthState({ status: 'loading' })
 
       localStorage.removeItem('authUser')
-      setAuthUser(undefined)
+
       await firebase.auth().signOut()
 
+      setAuthUser(undefined)
       setAuthState({ status: 'out' })
     } catch (error) {
       console.log(error)

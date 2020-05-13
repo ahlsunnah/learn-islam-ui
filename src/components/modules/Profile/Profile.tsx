@@ -26,6 +26,7 @@ import TextField from '@material-ui/core/TextField'
 import { TApi_Users } from '../../../graphqlTypes'
 import { useFormik } from 'formik'
 import { MeQuery, MeQueryVariables } from '../../../hasuraTypes'
+import Spinner from 'components/atoms/Spinner/Spinner'
 
 type PropType = {
   me: FirebaseUser
@@ -85,8 +86,8 @@ const Profile: React.FC<PropType> = ({ me, signOut }) => {
   const meData: TApi_Users = _get(queryData, 'users.[0]')
 
   const userFullName = `${_upperFirst(_get(meData, 'last_name'))}  ${_upperFirst(_get(meData, 'first_name'))}`
-  const email = _get(meData, 'email')
-  const country = _upperFirst(_get(meData, 'country'))
+  const email = _get(meData, 'email', '')
+  const country = _upperFirst(_get(meData, 'country', ''))
 
   const [insert_users_one, { loading: mutationLoading, error: mutationError }] = useMutation(NEW_USER_QUERY)
 
@@ -101,11 +102,11 @@ const Profile: React.FC<PropType> = ({ me, signOut }) => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      gender: 'female',
-      firstName: '',
-      lastName: '',
-      email: '',
-      country: '',
+      gender: _get(meData, 'gender', ''),
+      firstName: _get(meData, 'last_name', ''),
+      lastName: _get(meData, 'first_name', ''),
+      email,
+      country,
     },
 
     onSubmit: (values) => {
@@ -127,10 +128,7 @@ const Profile: React.FC<PropType> = ({ me, signOut }) => {
     return <p>Error</p>
   }
 
-  if (mutationLoading || queryLoading) {
-    // TODO implement a spinner superposing the submit button
-    return <p>loading</p>
-  }
+  if (mutationLoading || queryLoading) return <Spinner />
 
   return (
     <Fragment>
@@ -181,7 +179,7 @@ const Profile: React.FC<PropType> = ({ me, signOut }) => {
           </CardActions>
         </Card>
       )}
-      {isEditProfile && (
+      {(isEditProfile || !meData) && (
         <form
           onSubmit={formik.handleSubmit}
           sx={{

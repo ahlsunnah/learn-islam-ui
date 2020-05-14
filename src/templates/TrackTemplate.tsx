@@ -2,19 +2,30 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import TrackContainer from 'components/modules/Track'
+import TrackComponent from 'components/modules/Track/TrackComponent'
 import './styles.css'
 import { ITrackPageProps } from '../types/track'
 import { useTranslation } from 'react-i18next'
+import TrackSidebar from 'components/modules/Track/TrackSidebar'
 
 const TrackTemplate = (props: ITrackPageProps) => {
   const { i18n } = useTranslation()
+  const { track } = props.data.api
+  const { locale, localePaths, slug } = props.pageContext
+  const localePath = localePaths[locale]
+  const currentPath = `${localePath}${slug}`
+  const nextCoursePath =
+    track.courses[0] &&
+    `${currentPath}/${track.courses[0].slug}/${track.courses[0].chapters[0] && track.courses[0].chapters[0].slug}/`
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
       <Helmet>
         <html lang={i18n.language} />
       </Helmet>
-      <TrackContainer {...props} />
+      <div className="min-vh-100 flex">
+        <TrackSidebar locale={locale} localePath={localePath} />
+        <TrackComponent track={track} nextCoursePath={nextCoursePath} />
+      </div>
     </div>
   )
 }
@@ -49,18 +60,21 @@ export const pageQuery = graphql`
       }
     }
   }
+  fragment TrackPageTrack on api_tracks {
+    id
+    slug
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
+      title
+    }
+    courses {
+      ...TrackPageCourse
+    }
+  }
 
-  query trackQuery($localeEnum: api_locales_enum!, $id: Int!) {
+  query trackPage($localeEnum: api_locales_enum!, $id: Int!) {
     api {
       track: tracks_by_pk(id: $id) {
-        id
-        slug
-        translations(where: { locale_code: { _eq: $localeEnum } }) {
-          title
-        }
-        courses {
-          ...TrackPageCourse
-        }
+        ...TrackPageTrack
       }
     }
   }

@@ -7,7 +7,7 @@ import BlueHero from 'components/molecules/Hero/BlueHero'
 import HomeFooter from 'components/molecules/Footer/HomeFooter'
 import './styles.css'
 import { ITracksPageProps } from 'types/tracks'
-import Tracks from 'components/modules/Tracks/Tracks'
+import Tracks from 'components/modules/Tracks/TracksComponent'
 
 const TracksPage = (props: ITracksPageProps) => {
   const { t, i18n } = useTranslation()

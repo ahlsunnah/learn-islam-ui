@@ -15,9 +15,9 @@ const createMadrassahPages: GatsbyCreatePages = async ({
 
   // const MainLayout = resolve(`./src/templates/MainLayout.jsx`)
   const homeTemplate = resolve(`./src/templates/Home.tsx`)
-  const tracksTemplate = resolve(`./src/templates/Tracks.tsx`)
+  const tracksTemplate = resolve(`./src/templates/TracksTemplate.tsx`)
   const aboutUsTemplate = resolve(`./src/templates/AboutUs.tsx`)
-  const trackTemplate = resolve(`./src/templates/Track.tsx`)
+  const trackTemplate = resolve(`./src/templates/TrackTemplate.tsx`)
   const chapterTemplate = resolve(`./src/templates/Chapter.tsx`)
   const quizsTemplate = resolve(`./src/templates/Quizs.tsx`)
 

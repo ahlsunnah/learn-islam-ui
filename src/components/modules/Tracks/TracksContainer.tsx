@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import gql from 'graphql-tag'
 import React from 'react'
-import Tracks from './Tracks'
+import Tracks from './TracksComponent'
 import { useQuery } from '@apollo/react-hooks'
 import { TracksQuery, TracksQueryVariables } from '../../../hasuraTypes'
 import { Locale } from 'types'
@@ -9,7 +9,6 @@ import { Locale } from 'types'
 const TRACKS_QUERY = gql`
   fragment TracksPageTrack on tracks {
     id
-    slug
     soon
     translations(where: { locale_code: { _eq: $locale } }) {
       title

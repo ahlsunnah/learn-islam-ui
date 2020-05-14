@@ -6470,8 +6470,32 @@ export type AddNewUserMutationVariables = {
 
 export type AddNewUserMutation = { insert_users_one?: Maybe<Pick<Users, 'id'>> };
 
+export type TrackInnerPageCourseFragment = (
+  Pick<Courses, 'id' | 'level'>
+  & { translations: Array<Pick<Course_Translations, 'title' | 'description'>>, chapters: Array<(
+    Pick<Chapters, 'duration' | 'id'>
+    & { translations: Array<Pick<Chapter_Translations, 'locale_code'>> }
+  )>, quiz_difficulties?: Maybe<Pick<Course_Quiz_Difficulties, 'quiz_difficulties'>>, topic: (
+    Pick<Topics, 'id' | 'color'>
+    & { translations: Array<Pick<Topic_Translations, 'title'>> }
+  ) }
+);
+
+export type TrackInnerPageTrackFragment = (
+  Pick<Tracks, 'id'>
+  & { translations: Array<Pick<Track_Translations, 'title'>>, courses: Array<TrackInnerPageCourseFragment> }
+);
+
+export type TrackInnerPageQueryVariables = {
+  locale: Locales_Enum;
+  id: Scalars['Int'];
+};
+
+
+export type TrackInnerPageQuery = { track?: Maybe<TrackInnerPageTrackFragment> };
+
 export type TracksPageTrackFragment = (
-  Pick<Tracks, 'id' | 'slug' | 'soon'>
+  Pick<Tracks, 'id' | 'soon'>
   & { translations: Array<Pick<Track_Translations, 'title' | 'description'>> }
 );
 

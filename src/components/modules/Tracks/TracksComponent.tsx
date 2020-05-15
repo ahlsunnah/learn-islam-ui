@@ -2,6 +2,8 @@
 import { jsx } from 'theme-ui'
 import RawHTML from 'components/RawHTML'
 import { Link } from 'gatsby'
+import { TracksPageTrackFragment } from '../../../hasuraTypes'
+import { TGTracksPageTrackFragment } from '../../../graphqlTypes'
 
 interface ILinkOrChildrenProps {
   children: JSX.Element
@@ -20,23 +22,18 @@ const LinkOrChildren = ({ children, className = '', to }: ILinkOrChildrenProps) 
 interface IProps {
   localePath: string
   soonString: string
-  tracks: Array<{
-    slug: string
-    soon: boolean
-    translations: Array<{
-      title: string
-      description?: string | null
-    }>
-  }>
+  tracks: Array<TracksPageTrackFragment | TGTracksPageTrackFragment>
 }
 const Tracks = ({ localePath, soonString, tracks }: IProps) => (
   <div>
-    {tracks.map(({ slug, soon, translations }, i) => {
+    {tracks.map((track, i) => {
+      const { translations, soon, id } = track
       const { title, description } = translations[0]
+      const to = 'slug' in track ? `${localePath}${track.slug}/` : `/app/${id}`
       return (
         <LinkOrChildren
-          key={slug}
-          to={!soon && `${localePath}${slug}/`}
+          key={id}
+          to={!soon && to}
           sx={{
             textDecoration: 'none',
           }}

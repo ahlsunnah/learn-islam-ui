@@ -29,7 +29,4 @@ export interface IGraphql {
   >
 }
 
-export type GatsbyCreatePages = (fns: {
-  graphql: IGraphql
-  actions: IBoundActionCreators
-}) => void | Promise<void>
+export type GatsbyCreatePages = (fns: { graphql: IGraphql; actions: IBoundActionCreators }) => void | Promise<void>

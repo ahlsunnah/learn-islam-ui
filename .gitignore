@@ -35,3 +35,9 @@ public
 prototypes
 
 .chrome
+tmp
+
+.env*
+!.env*.example
+
+.vscode

@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/react',
-    'plugin:react/recommended',
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier', 'prettier/react', 'plugin:react/recommended'],
 
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,11 +20,16 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     '@typescript-eslint/array-type': 0,
     '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/interface-name-prefix': [1, 'always'],
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 1,
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/no-use-before-define': 0,
+    'prefer-const': 'warn',
+    '@typescript-eslint/ban-ts-ignore': 'warn',
   },
   settings: {
     'import/resolver': {

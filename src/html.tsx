@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 // const BUILD_TIME = new Date().getTime()
 interface Props {
@@ -7,12 +7,7 @@ interface Props {
   postBodyComponents: JSX.Element
   preBodyComponents: JSX.Element
 }
-const HTML = ({
-  body,
-  headComponents,
-  postBodyComponents,
-  preBodyComponents,
-}: Props) => {
+const HTML = ({ body, headComponents, postBodyComponents, preBodyComponents }: Props) => {
   return (
     <html lang="ar">
       <head>
@@ -36,7 +31,7 @@ const HTML = ({
       </head>
       <body>
         {preBodyComponents}
-        <div id="___gatsby" dangerouslySetInnerHTML={{__html: body}} />
+        <div id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
         {postBodyComponents}
       </body>
     </html>

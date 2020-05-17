@@ -1,9 +1,15 @@
-/* eslint no-console: 0 */
-const path = require(`path`)
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
-const {API2} = process.env
-if (!API2) {
-  console.error('We need an API2 environment variable !')
+console.log(process.env.NODE_ENV)
+
+const { GATSBY_API, API_SECRET } = process.env
+if (!GATSBY_API) {
+  throw new Error('We need an API environment variable !')
+}
+if (!API_SECRET) {
+  throw new Error('We need an API_SECRET environment variable !')
 }
 module.exports = {
   siteMetadata: {
@@ -11,6 +17,51 @@ module.exports = {
     siteUrl: `https://m-minhaj.com`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: `generated/graphqlTypes.ts`,
+        codegenConfig: {
+          avoidOptionals: true,
+          maybeValue: 'T',
+          // immutableTypes: true,
+          typesPrefix: 'T',
+        },
+        additionalSchemas: [
+          {
+            key: 'hasura',
+            fileName: `generated/hasuraTypes.ts`,
+            schema: {
+              [GATSBY_API]: {
+                headers: {
+                  'x-hasura-admin-secret': API_SECRET,
+                },
+              },
+            },
+            pluckConfig: {
+              // config to ensure only queries using the `gql` tag are used for this schema
+              globalGqlIdentifierName: 'gql',
+              modules: [
+                {
+                  name: 'graphql-tag',
+                  identifier: 'gql',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        disableAutoprefixing: true,
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    'gatsby-plugin-theme-ui',
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -23,14 +74,17 @@ module.exports = {
       options: {
         typeName: 'api',
         fieldName: 'api',
-        url: API2,
+        url: GATSBY_API,
+        headers: {
+          'x-hasura-admin-secret': API_SECRET,
+        },
       },
     },
 
     'gatsby-plugin-typescript',
-    'gatsby-plugin-emotion',
     // 'gatsby-plugin-webpack-bundle-analyzer',
     // 'gatsby-plugin-accessibilityjs',
+    'gatsby-plugin-svgr',
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
@@ -48,14 +102,14 @@ module.exports = {
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-sass',
-      options: {includePaths: [path.resolve(__dirname, './node_modules')]},
+      options: { includePaths: ['node_modules'] },
     },
-    'gatsby-plugin-postcss',
+    // 'gatsby-plugin-postcss',
 
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
-        logo: './src/images/logo-square-1500.png',
+        logo: './src/assets/images/logo-square-1500.png',
         injectHTML: true,
         icons: {
           android: true,
@@ -86,18 +140,25 @@ module.exports = {
         background_color: '#6496f6',
         theme_color: '#000696',
         display: 'minimal-ui',
-        icon: 'src/images/logo-square-1500.png',
+        icon: 'src/assets/images/logo-square-1500.png',
       },
     },
     {
       resolve: 'gatsby-plugin-load-script',
       options: {
-        disable: !process.env.SENTRY_DSN,
-        src: 'https://browser.sentry-cdn.com/5.4.0/bundle.min.js',
+        disable: !process.env.SENTRY_DSN, // When do you want to disable it ?
+        src: 'https://browser.sentry-cdn.com/5.15.4/bundle.min.js',
+        integrity: 'sha384-Nrg+xiw+qRl3grVrxJtWazjeZmUwoSt0FAVsbthlJ5OMpx0G08bqIq3b/v0hPjhB',
+        crossorigin: 'anonymous',
         onLoad: `() => Sentry.init({dsn:"${process.env.SENTRY_DSN}"})`,
       },
     },
-    'gatsby-plugin-offline',
-    `gatsby-plugin-netlify`,
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        navigateFallbackWhitelist: [/^(?!\/__).*/],
+      },
+    },
+    `gatsby-plugin-zeit-now`,
   ],
 }

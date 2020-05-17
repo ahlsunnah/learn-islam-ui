@@ -1,13 +1,13 @@
 import * as React from 'react'
-import {graphql} from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import cx from 'classnames'
-import QuizsContainer from 'modules/Quizs'
+import QuizsContainer from 'components/modules/Quizs'
 import './styles.css'
-import {IQuizsPageProps} from '../types/quizs'
+import { IQuizsPageProps } from '../types/quizs'
 
 const Quizs = (props: IQuizsPageProps): JSX.Element => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
+  <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
     <Helmet>
       <html lang={props.pageContext.locale} />
     </Helmet>
@@ -18,117 +18,94 @@ const Quizs = (props: IQuizsPageProps): JSX.Element => (
 export default Quizs
 
 export const pageQuery = graphql`
-  query quizQuery($locale: String!, $id: ID!) {
+  fragment QuizzesPageQuiz on api_quizzes {
+    id
+    type_slug
+    translations(where: { locale_code: { _eq: $localeEnum } }) {
+      id
+      data
+    }
+  }
+
+  fragment QuizzesPageTranslations on TranslationsJson {
+    assessmentPerfect
+    assessmentVeryGood
+    assessmentGood
+    assessmentFail
+    average
+    backToCourse
+    chooseACategoryTitle
+    chooseAnswer
+    congratulations
+    congratulationsCTA
+    continue
+    difficulty1
+    difficulty2
+    fillInTheBlankTitle
+    goToTop
+    goToTracks
+    grade
+    level
+    locale
+    localePath
+    nextCourse
+    nextTrack
+    progress
+    quiz
+    quizTitle
+    quizTrue
+    quizFalse
+    restartQuizs
+    seeYourScore
+    start
+    takeExam
+    yourLastScore
+    yourScore
+  }
+
+  query QuizQuery($locale: String!, $localeEnum: api_locales_enum, $id: Int!, $difficulty: Int!) {
     api {
-      course(id: $id) {
+      course: courses_by_pk(id: $id) {
         id
         slug
-        translations(locale: $locale) {
-          edges {
-            node {
-              id
-              title
-            }
-          }
+        translations(where: { locale_code: { _eq: $localeEnum } }) {
+          id
+          title
         }
-        quizs: quizSet {
-          edges {
-            node {
-              id
-              difficulty
-              type
-              translations(locale: $locale) {
-                edges {
-                  node {
-                    id
-                    data
-                  }
-                }
-              }
-            }
-          }
+        quizzes(where: { difficulty: { _eq: $difficulty } }) {
+          ...QuizzesPageQuiz
         }
         track {
           id
           slug
-          translations(locale: $locale) {
-            edges {
-              node {
-                title
-              }
-            }
+          translations(where: { locale_code: { _eq: $localeEnum } }) {
+            title
           }
-          courses: courseSet {
-            edges {
-              node {
-                id
-                slug
-                quizDifficulties
-                translations(locale: $locale) {
-                  edges {
-                    node {
-                      locale
-                      title
-                    }
-                  }
-                }
-                chapters: chapterSet {
-                  edges {
-                    node {
-                      id
-                      slug
-                      translations(locale: $locale) {
-                        edges {
-                          node {
-                            title
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+          courses {
+            id
+            slug
+            quiz_difficulties {
+              quiz_difficulties
+            }
+            translations(where: { locale_code: { _eq: $localeEnum } }) {
+              locale_code
+              title
+            }
+            chapters {
+              id
+              slug
+              translations(where: { locale_code: { _eq: $localeEnum } }) {
+                title
               }
             }
           }
         }
       }
     }
-    translations: translationsJson(locale: {eq: $locale}) {
-      assessmentPerfect
-      assessmentVeryGood
-      assessmentGood
-      assessmentFail
-      average
-      backToCourse
-      chooseACategoryTitle
-      chooseAnswer
-      congratulations
-      congratulationsCTA
-      continue
-      difficulty1
-      difficulty2
-      fillInTheBlankTitle
-      goToTop
-      goToTracks
-      grade
-      level
-      locale
-      localePath
-      nextCourse
-      nextTrack
-      progress
-      quiz
-      quizTitle
-      quizTrue
-      quizFalse
-      restartQuizs
-      seeYourScore
-      start
-      takeExam
-      yourLastScore
-      yourScore
+    translations: translationsJson(locale: { eq: $locale }) {
+      ...QuizzesPageTranslations
     }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
+    otherLocaleTranslations: translationsJson(locale: { ne: $locale }) {
       localeName
       localePath
     }

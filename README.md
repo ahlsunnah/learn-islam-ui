@@ -1,7 +1,3 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3e59182a-67c6-4d2d-b37b-86037e78b431/deploy-status)](https://app.netlify.com/sites/m-minhaj/deploys)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f22f178c-3aee-4831-8df6-631ab79cc15a/deploy-status)](https://app.netlify.com/sites/ceci-est-notre-croyance/deploys)
-
 # بسم الله الرحمن الرحيم
 
 إن الحمد لله نحمده ونستعينه ونتوب إليه، ونعوذ بالله من شرور أنفسنا ومن سيئات أعمالنا، من يهده الله فلا مضل له ومن يضلل فلا هادي الله، ونشهد ألا إله إلا الله وحده لا شريك له وأن محمدا عبده ورسوله
@@ -92,25 +88,6 @@ The app and the content are separated. Developers on this project usually work o
 - HTML & CSS
 - graphql
 
-#### Plateforms
-
-- [GatsbyJS](https://www.gatsbyjs.org/): Blazing-fast static site generator for React
-- [Django](https://djangoproject.com): Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
-
-#### Libraries
-
-- [React](https://reactjs.org): A JavaScript library for building user interfaces
-- [Redux](http://redux.js.org/): Redux is a predictable state container for JavaScript apps.
-
-#### Design
-
-- [Tachyons](http://tachyons.io/): Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.
-
-#### Code style, linting and error checking
-
-- [Prettier](https://github.com/prettier/prettier/): An opinionated code formatter.
-- [ESlint](https://eslint.org/) with [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript): The pluggable linting utility for JavaScript and JSX
-
 ### Architecture explication
 
 We have the data in the backend, currently it is a small nodejs app, in the future it should be a django project.
@@ -120,3 +97,7 @@ We have the data in the backend, currently it is a small nodejs app, in the futu
 TODO: Explain gatsbyjs's architecture or link to explication
 
 وبالله التوفيك وله الحمد والمنة وصلى الله على نبيه المختار محمد وعلى أهله وسلم
+
+### Deployment
+
+[![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=powered-by-vercel)

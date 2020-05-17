@@ -1,83 +1,15 @@
-import {IEdges, IPageContext} from './index'
-import {INext} from './chapter'
+import { IPageContext, Locale } from './index'
+import { INext } from './chapter'
+import { TQuizQueryQuery, TQuizzesPageTranslationsFragment, TQuizzesPageQuizFragment } from '../graphqlTypes'
 
 export interface IParams {
-  courseId: string
+  courseId: number
   difficulty: number
-  locale: string
+  locale: Locale
 }
 
-export type Difficulties = 1 | 2
-
-export interface IQuizsQuiz {
-  id: string
-  difficulty: number
-  type: string
-  translations: IEdges<{
-    id: string
-    data: string
-  }>
-}
-export interface IQuizsCourse<SidebarTrack> {
-  id: string
-  slug: string
-  translations: IEdges<{
-    id: string
-    title: string
-  }>
-  quizs: IEdges<IQuizsQuiz>
-  track: SidebarTrack
-}
-
-export interface IQuizsTranslations {
-  assessmentPerfect: string
-  assessmentVeryGood: string
-  assessmentGood: string
-  assessmentFail: string
-  average: string
-  backToCourse: string
-  chooseACategoryTitle: string
-  chooseAnswer: string
-  congratulations: string
-  congratulationsCTA: string
-  continue: string
-  difficulty1: string
-  difficulty2: string
-  fillInTheBlankTitle: string
-  goToTop: string
-  goToTracks: string
-  grade: string
-  level: string
-  locale: string
-  localePath: string
-  nextCourse: string
-  nextTrack: string
-  progress: string
-  quiz: string
-  quizTitle: string
-  quizTrue: string
-  quizFalse: string
-  restartQuizs: string
-  seeYourScore: string
-  start: string
-  takeExam: string
-  yourLastScore: string
-  yourScore: string
-}
-
-export interface IQuizsOtherLocaleTranslations {
-  localeName: string
-  localePath: string
-}
-
-export interface IQuizsPageProps<SidebarTrack> {
-  data: {
-    api: {
-      course: IQuizsCourse<SidebarTrack>
-    }
-    translations: IQuizsTranslations
-    otherLocaleTranslations: IQuizsOtherLocaleTranslations
-  }
+export interface IQuizsPageProps {
+  data: TQuizQueryQuery
   location: {
     pathname: string
   }
@@ -86,3 +18,10 @@ export interface IQuizsPageProps<SidebarTrack> {
     next: INext
   }
 }
+
+export type QuizProps = {
+  finished: boolean
+  number: number
+  locale: Locale
+  t: TQuizzesPageTranslationsFragment
+} & TQuizzesPageQuizFragment

@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 
-interface Props {
+interface IProps {
   children: string
   className?: string
 }
-const RawHTML = ({children, className = ''}: Props) => (
+const RawHTML = ({ children, className = '' }: IProps) => (
   <div
     className={className}
     dangerouslySetInnerHTML={{

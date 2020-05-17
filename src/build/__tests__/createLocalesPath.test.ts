@@ -1,20 +1,16 @@
 import createLocalesPaths from '../createLocalesPaths'
-import {Locale} from '../../types/index'
+import { Locale } from '../../types/index'
 
 test('createLocalesPaths needs a param', (): void => {
-  expect(
-    (): void => {
-      createLocalesPaths((undefined as unknown) as Locale[])
-    },
-  ).toThrow()
+  expect((): void => {
+    createLocalesPaths((undefined as unknown) as Locale[])
+  }).toThrow()
 })
 
 test('createLocalesPaths with no item', (): void => {
-  expect(
-    (): void => {
-      createLocalesPaths([])
-    },
-  ).toThrow()
+  expect((): void => {
+    createLocalesPaths([])
+  }).toThrow()
 })
 
 test('createLocalesPaths with an item passes', (): void => {

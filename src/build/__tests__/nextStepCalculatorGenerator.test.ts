@@ -1,7 +1,7 @@
 import nextStepCalculatorGenerator from '../nextStepCalculatorGenerator'
-import {data} from './fixtures/tracks-fixtures.json'
+import { data } from './fixtures/tracks-fixtures.json'
 
-const {tracks} = data
+const { tracks } = data
 
 test('last step is a chapter and it is not the last of the course', (): void => {
   const nextStepCalculatorWithTracks = nextStepCalculatorGenerator(tracks)
@@ -13,7 +13,7 @@ test('last step is a chapter and it is not the last of the course', (): void => 
       chapterIndex: 0,
       locale: 'ar',
       localePath: '/',
-    }),
+    })
   ).toMatchObject({
     type: 'chapter',
     title: 'توحيد الألوهية',
@@ -31,7 +31,7 @@ test('last step is the last of a chapter and there are quizzes', (): void => {
       chapterIndex: 0,
       locale: 'ar',
       localePath: '/',
-    }),
+    })
   ).toMatchObject({
     type: 'quiz',
     path: '/iktichaf/sira-annabiy/ikhtibar-1/',
@@ -48,7 +48,7 @@ test('last step is a quiz and there are other quizzes', (): void => {
       quizDifficultyIndex: 0,
       locale: 'ar',
       localePath: '/',
-    }),
+    })
   ).toMatchObject({
     type: 'quiz',
     path: '/iktichaf/sira-annabiy/ikhtibar-2/',
@@ -66,7 +66,7 @@ test('last quiz and there are no other quizzes in the course', (): void => {
       quizDifficultyIndex: 1,
       locale: 'ar',
       localePath: '/',
-    }),
+    })
   ).toMatchObject({
     type: 'chapter',
     title: 'القرآن الكريم',
@@ -84,7 +84,7 @@ test('last chapter of a course and there is no quiz in the course', (): void => 
       chapterIndex: 2,
       locale: 'ar',
       localePath: '/',
-    }),
+    })
   ).toMatchObject({
     type: 'chapter',
     title: 'أهم أحداث سيرة النبي ﷺ',
@@ -100,7 +100,7 @@ test('last quiz of the last course of a track and next course have only quizzes'
       quizDifficultyIndex: 0,
       locale: 'fr',
       localePath: '/fr/',
-    }),
+    })
   ).toMatchObject({
     type: 'quiz',
     path: '/fr/mutawassit/track3-course1/ikhtibar-2/',
@@ -114,7 +114,7 @@ test('last quiz of a track and next track starts with a chapter', (): void => {
       quizDifficultyIndex: 1,
       locale: 'fr',
       localePath: '/fr/',
-    }),
+    })
   ).toMatchObject({
     type: 'chapter',
     path: '/fr/mubtadi/track2-course/track2-course-chapter1/',
@@ -128,7 +128,7 @@ test('last quiz of a track and next track starts with a quiz (no chapter)', (): 
       quizDifficultyIndex: 1,
       locale: 'fr',
       localePath: '/fr/',
-    }),
+    })
   ).toMatchObject({
     type: 'quiz',
     path: '/fr/mutawassit/track3-course1/ikhtibar-2/',

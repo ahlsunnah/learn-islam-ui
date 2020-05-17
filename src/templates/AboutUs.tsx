@@ -1,58 +1,36 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import {graphql} from 'gatsby'
+import { useTranslation } from 'react-i18next'
+import { graphql } from 'gatsby'
 import cx from 'classnames'
-import AboutUsContainer from 'modules/AboutUs'
+import AboutUsContainer from 'components/modules/AboutUs'
+import { IAboutUsProps } from 'types/aboutUs'
 import './styles.css'
-import {IAboutUsProps} from 'types/aboutUs'
 
-const AboutUs = (props: IAboutUsProps) => (
-  <div className={cx({rtl: props.pageContext.locale === 'ar'})}>
-    <Helmet>
-      <html lang={props.pageContext.locale} />
-    </Helmet>
-    <AboutUsContainer {...props} />
-  </div>
-)
+const AboutUs = (props: IAboutUsProps) => {
+  const { i18n } = useTranslation()
+  return (
+    <div className={cx({ rtl: i18n.language === 'ar' })}>
+      <Helmet>
+        <html lang={i18n.language} />
+      </Helmet>
+      <AboutUsContainer {...props} />
+    </div>
+  )
+}
 
 export default AboutUs
 
 export const pageQuery = graphql`
-  query aboutUsQuery($locale: String!) {
+  fragment AboutUsTrack on api_tracks {
+    id
+    slug
+  }
+  query aboutUsQuery {
     api {
-      tracks: allTracks(first: 1) {
-        edges {
-          node {
-            id
-            slug
-          }
-        }
+      tracks(limit: 1) {
+        ...AboutUsTrack
       }
-    }
-    translations: translationsJson(locale: {eq: $locale}) {
-      aboutUs
-      aboutUsPageTitle
-      aboutUsPageContent
-      connect
-      courses
-      copyright
-      footerSocialTitle
-      homeFooterCTA
-      homeStartTrack
-      locale
-      localeName
-      localePath
-      siteName
-      siteSlogan
-      tracks
-      urlFacebook
-      urlTelegram
-      urlTwitter
-      urlYoutube
-    }
-    otherLocaleTranslations: translationsJson(locale: {ne: $locale}) {
-      localeName
-      localePath
     }
   }
 `

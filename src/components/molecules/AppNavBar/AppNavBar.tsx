@@ -112,7 +112,21 @@ export default function AppNavBar({ authUser }: Proptypes) {
           <div className={classes.grow} />
           {authUser && (
             <Fragment>
-              <div className={classes.sectionDesktop}>Tracks</div>
+              <div className={classes.sectionDesktop}>
+                <Button startIcon={<MenuBookIcon />} onClick={() => navigate('/app')}>
+                  Tracks
+                </Button>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={() => navigate('/app/profile')}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
               <div className={classes.sectionMobile}>
                 <IconButton
                   aria-label="show more"

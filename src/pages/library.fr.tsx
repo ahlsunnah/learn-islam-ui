@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import cx from 'classnames'
 import LibraryContainer from 'components/modules/Library/Library'
 
-const AboutUs = () => {
+const Library = () => {
   const { i18n } = useTranslation()
   return (
     <div className={cx({ rtl: i18n.language === 'ar' })}>
@@ -16,4 +16,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs
+export default Library

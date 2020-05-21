@@ -11,6 +11,7 @@ import Login from '../components/modules/Login/Login'
 import Profile from 'components/modules/Profile/Profile'
 import TracksContainer from 'components/modules/Tracks/TracksContainer'
 import TrackContainer from 'components/modules/Track/TrackContainer'
+import ChapterContainer from 'components/modules/AppChapter/AppChapter.fr'
 
 type LayoutContainerProps = {
   children: React.ReactChild
@@ -68,6 +69,7 @@ const App = () => {
           // maxWidth="sm"
           >
             <Router basepath="/app">
+              <ChapterContainer path="/hello" />
               <TracksContainer path="/" />
               <TrackContainer path=":trackId" />
               <Profile path="/profile" me={user.authUser} signOut={user.signOut} />

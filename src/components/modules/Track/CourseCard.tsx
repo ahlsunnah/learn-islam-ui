@@ -14,6 +14,7 @@ function isTrackInnerPageCourse(
 ): course is TTrackPageCourseFragment {
   return 'slug' in course
 }
+
 type Props = {
   course: TTrackPageCourseFragment | TrackInnerPageCourseFragment
   currentPath: string
@@ -26,6 +27,8 @@ const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
   const nextCoursePath = isTrackInnerPageCourse(course)
     ? `${currentPath}/${course.slug}/${course.chapters[0]?.slug}/`
     : `${currentPath}/${course.id}/${course.chapters[0]?.id}/`
+
+  console.log(nextCoursePath)
   // const finishedChapters = chapters.reduce((sum, {id: chapterId}): number => {
   //   if (chaptersState[chapterId]) {
   //     sum += 1 // eslint-disable-line no-param-reassign
@@ -49,7 +52,9 @@ const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
   // const percent =
   //   (100 * (finishedChapters + finishedQuizs)) /
   //   (quiz_difficulties.length + chapters.length)
+
   const { level, topic, translations } = course
+
   return (
     <Card
       className="mt4 ph4 w-60-ns flex flex-column"
@@ -87,4 +92,5 @@ const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
     </Card>
   )
 }
+
 export default CourseCard

@@ -52,21 +52,26 @@ type Props = {
   path?: string
   trackId?: string
 }
+
 const TracksContainer: React.FC<Props> = ({ trackId }) => {
   const parsedId = trackId && parseInt(trackId, 10)
+
   if (!parsedId) {
     throw new Error('No valid track Id')
   }
-  console.log(trackId)
-  const { t, i18n } = useTranslation()
-  const language = i18n.language as Locale
+
+  const { i18n } = useTranslation()
+
   const location = useLocation()
+
   const { data, loading, error } = useQuery<TrackInnerPageQuery, TrackInnerPageQueryVariables>(TRACKS_QUERY, {
-    variables: { locale: language, id: parsedId },
+    variables: { locale: i18n.language as Locale, id: parsedId },
   })
+
   if (loading) {
     return <div>Loading</div>
   }
+
   if (error || !data) {
     // TODO: Error message translations
     console.error(error)
@@ -76,10 +81,13 @@ const TracksContainer: React.FC<Props> = ({ trackId }) => {
   if (!data.track) {
     return <div>We have no track here!</div>
   }
+
   const track: TrackInnerPageTrackFragment = data.track
+
   const nextCoursePath =
     track.courses[0] &&
     `${location.pathname}/${track.courses[0].id}/${track.courses[0].chapters[0] && track.courses[0].chapters[0].id}/`
   return <TrackComponent track={track} nextCoursePath={nextCoursePath} />
 }
+
 export default TracksContainer

@@ -69,7 +69,7 @@ const App = () => {
           // maxWidth="sm"
           >
             <Router basepath="/app">
-              <ChapterContainer path="/hello" />
+              <ChapterContainer path="/chapter" />
               <TracksContainer path="/" />
               <TrackContainer path=":trackId" />
               <Profile path="/profile" me={user.authUser} signOut={user.signOut} />

@@ -9,9 +9,9 @@ import { ChapterStatesProvider } from 'hooks/useChapterState'
 
 const Chapter = (props: IChapterProps) => (
   <ChapterStatesProvider>
-    <div className={cx({ rtl: props.pageContext.locale === 'ar' })}>
+    <div className={cx({ rtl: props.pageContext?.locale === 'ar' })}>
       <Helmet>
-        <html lang={props.pageContext.locale} />
+        <html lang={props.pageContext?.locale} />
       </Helmet>
       <ChapterContainer {...props} />
     </div>

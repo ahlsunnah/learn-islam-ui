@@ -8,8 +8,8 @@ export interface INext {
 }
 
 export interface IChapterProps {
-  data: TChapterQueryQuery
-  pageContext: IPageContext & {
+  data?: TChapterQueryQuery
+  pageContext?: IPageContext & {
     next: INext
   }
 }

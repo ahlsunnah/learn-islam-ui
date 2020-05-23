@@ -27,7 +27,7 @@ const icons: IIcon[] = [
 type Props = {
   dark?: boolean
   withTrackSlug?: boolean
-  firstTrackSlug: string
+  firstTrackSlug?: string
 }
 
 const HomeFooter = ({ dark, firstTrackSlug, withTrackSlug = true }: Props) => {

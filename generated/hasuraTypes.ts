@@ -26,6 +26,268 @@ export type _Int4_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['_int4']>>;
 };
 
+/** columns and relationships of "books" */
+export type Books = {
+  description?: Maybe<Scalars['String']>;
+  download_link: Scalars['String'];
+  id: Scalars['Int'];
+  image_link?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "books" */
+export type Books_Aggregate = {
+  aggregate?: Maybe<Books_Aggregate_Fields>;
+  nodes: Array<Books>;
+};
+
+/** aggregate fields of "books" */
+export type Books_Aggregate_Fields = {
+  avg?: Maybe<Books_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Books_Max_Fields>;
+  min?: Maybe<Books_Min_Fields>;
+  stddev?: Maybe<Books_Stddev_Fields>;
+  stddev_pop?: Maybe<Books_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Books_Stddev_Samp_Fields>;
+  sum?: Maybe<Books_Sum_Fields>;
+  var_pop?: Maybe<Books_Var_Pop_Fields>;
+  var_samp?: Maybe<Books_Var_Samp_Fields>;
+  variance?: Maybe<Books_Variance_Fields>;
+};
+
+
+/** aggregate fields of "books" */
+export type Books_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Books_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "books" */
+export type Books_Aggregate_Order_By = {
+  avg?: Maybe<Books_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Books_Max_Order_By>;
+  min?: Maybe<Books_Min_Order_By>;
+  stddev?: Maybe<Books_Stddev_Order_By>;
+  stddev_pop?: Maybe<Books_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Books_Stddev_Samp_Order_By>;
+  sum?: Maybe<Books_Sum_Order_By>;
+  var_pop?: Maybe<Books_Var_Pop_Order_By>;
+  var_samp?: Maybe<Books_Var_Samp_Order_By>;
+  variance?: Maybe<Books_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "books" */
+export type Books_Arr_Rel_Insert_Input = {
+  data: Array<Books_Insert_Input>;
+  on_conflict?: Maybe<Books_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Books_Avg_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "books" */
+export type Books_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "books". All fields are combined with a logical 'AND'. */
+export type Books_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Books_Bool_Exp>>>;
+  _not?: Maybe<Books_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Books_Bool_Exp>>>;
+  description?: Maybe<String_Comparison_Exp>;
+  download_link?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  image_link?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "books" */
+export type Books_Constraint = 
+  /** unique or primary key constraint */
+  'books_pkey';
+
+/** input type for incrementing integer column in table "books" */
+export type Books_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "books" */
+export type Books_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
+  download_link?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  image_link?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Books_Max_Fields = {
+  description?: Maybe<Scalars['String']>;
+  download_link?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  image_link?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "books" */
+export type Books_Max_Order_By = {
+  description?: Maybe<Order_By>;
+  download_link?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  image_link?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Books_Min_Fields = {
+  description?: Maybe<Scalars['String']>;
+  download_link?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  image_link?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "books" */
+export type Books_Min_Order_By = {
+  description?: Maybe<Order_By>;
+  download_link?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  image_link?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "books" */
+export type Books_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Books>;
+};
+
+/** input type for inserting object relation for remote table "books" */
+export type Books_Obj_Rel_Insert_Input = {
+  data: Books_Insert_Input;
+  on_conflict?: Maybe<Books_On_Conflict>;
+};
+
+/** on conflict condition type for table "books" */
+export type Books_On_Conflict = {
+  constraint: Books_Constraint;
+  update_columns: Array<Books_Update_Column>;
+  where?: Maybe<Books_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "books" */
+export type Books_Order_By = {
+  description?: Maybe<Order_By>;
+  download_link?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  image_link?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "books" */
+export type Books_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "books" */
+export type Books_Select_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'download_link' |
+  /** column name */
+  'id' |
+  /** column name */
+  'image_link';
+
+/** input type for updating data in table "books" */
+export type Books_Set_Input = {
+  description?: Maybe<Scalars['String']>;
+  download_link?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  image_link?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Books_Stddev_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "books" */
+export type Books_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Books_Stddev_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "books" */
+export type Books_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Books_Stddev_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "books" */
+export type Books_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Books_Sum_Fields = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "books" */
+export type Books_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "books" */
+export type Books_Update_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'download_link' |
+  /** column name */
+  'id' |
+  /** column name */
+  'image_link';
+
+/** aggregate var_pop on columns */
+export type Books_Var_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "books" */
+export type Books_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Books_Var_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "books" */
+export type Books_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Books_Variance_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "books" */
+export type Books_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
 /** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
   _eq?: Maybe<Scalars['Boolean']>;
@@ -1971,6 +2233,10 @@ export type Locales_Update_Column =
 
 /** mutation root */
 export type Mutation_Root = {
+  /** delete data from the table: "books" */
+  delete_books?: Maybe<Books_Mutation_Response>;
+  /** delete single row from the table: "books" */
+  delete_books_by_pk?: Maybe<Books>;
   /** delete data from the table: "chapter_translations" */
   delete_chapter_translations?: Maybe<Chapter_Translations_Mutation_Response>;
   /** delete single row from the table: "chapter_translations" */
@@ -2027,6 +2293,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "books" */
+  insert_books?: Maybe<Books_Mutation_Response>;
+  /** insert a single row into the table: "books" */
+  insert_books_one?: Maybe<Books>;
   /** insert data into the table: "chapter_translations" */
   insert_chapter_translations?: Maybe<Chapter_Translations_Mutation_Response>;
   /** insert a single row into the table: "chapter_translations" */
@@ -2083,6 +2353,10 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "books" */
+  update_books?: Maybe<Books_Mutation_Response>;
+  /** update single row of the table: "books" */
+  update_books_by_pk?: Maybe<Books>;
   /** update data of the table: "chapter_translations" */
   update_chapter_translations?: Maybe<Chapter_Translations_Mutation_Response>;
   /** update single row of the table: "chapter_translations" */
@@ -2139,6 +2413,18 @@ export type Mutation_Root = {
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_BooksArgs = {
+  where: Books_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Books_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -2307,6 +2593,20 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_BooksArgs = {
+  objects: Array<Books_Insert_Input>;
+  on_conflict?: Maybe<Books_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Books_OneArgs = {
+  object: Books_Insert_Input;
+  on_conflict?: Maybe<Books_On_Conflict>;
 };
 
 
@@ -2503,6 +2803,22 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: Maybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_BooksArgs = {
+  _inc?: Maybe<Books_Inc_Input>;
+  _set?: Maybe<Books_Set_Input>;
+  where: Books_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Books_By_PkArgs = {
+  _inc?: Maybe<Books_Inc_Input>;
+  _set?: Maybe<Books_Set_Input>;
+  pk_columns: Books_Pk_Columns_Input;
 };
 
 
@@ -2750,6 +3066,12 @@ export type Order_By =
 
 /** query root */
 export type Query_Root = {
+  /** fetch data from the table: "books" */
+  books: Array<Books>;
+  /** fetch aggregated fields from the table: "books" */
+  books_aggregate: Books_Aggregate;
+  /** fetch data from the table: "books" using primary key columns */
+  books_by_pk?: Maybe<Books>;
   /** fetch data from the table: "chapter_translations" */
   chapter_translations: Array<Chapter_Translations>;
   /** fetch aggregated fields from the table: "chapter_translations" */
@@ -2838,6 +3160,32 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** query root */
+export type Query_RootBooksArgs = {
+  distinct_on?: Maybe<Array<Books_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Books_Order_By>>;
+  where?: Maybe<Books_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootBooks_AggregateArgs = {
+  distinct_on?: Maybe<Array<Books_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Books_Order_By>>;
+  where?: Maybe<Books_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootBooks_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -4099,6 +4447,12 @@ export type String_Comparison_Exp = {
 
 /** subscription root */
 export type Subscription_Root = {
+  /** fetch data from the table: "books" */
+  books: Array<Books>;
+  /** fetch aggregated fields from the table: "books" */
+  books_aggregate: Books_Aggregate;
+  /** fetch data from the table: "books" using primary key columns */
+  books_by_pk?: Maybe<Books>;
   /** fetch data from the table: "chapter_translations" */
   chapter_translations: Array<Chapter_Translations>;
   /** fetch aggregated fields from the table: "chapter_translations" */
@@ -4187,6 +4541,32 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** subscription root */
+export type Subscription_RootBooksArgs = {
+  distinct_on?: Maybe<Array<Books_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Books_Order_By>>;
+  where?: Maybe<Books_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootBooks_AggregateArgs = {
+  distinct_on?: Maybe<Array<Books_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Books_Order_By>>;
+  where?: Maybe<Books_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootBooks_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 

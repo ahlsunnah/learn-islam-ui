@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { red } from '@material-ui/core/colors'
 import ShareIcon from '@material-ui/icons/Share'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import { FC } from 'react'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +41,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const BookCard = () => {
+type BookCardType = {
+  imageUrl: string
+  description: string
+}
+
+const BookCard: FC<BookCardType> = ({ imageUrl, description }) => {
   const classes = useStyles()
 
   return (
@@ -51,12 +57,12 @@ const BookCard = () => {
             maxWidth: '100%',
             maxHeight: '100%',
           }}
-          src="https://i.imgur.com/xAqLtFo.jpg"
+          src={imageUrl}
         />
       </div>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          this is the book of sahih boukhari
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

@@ -31,6 +31,12 @@ export type Scalars = {
 
 /** query root */
 export type TApi = {
+  /** fetch data from the table: "books" */
+  books: Array<TApi_Books>;
+  /** fetch aggregated fields from the table: "books" */
+  books_aggregate: TApi_Books_Aggregate;
+  /** fetch data from the table: "books" using primary key columns */
+  books_by_pk: Maybe<TApi_Books>;
   /** fetch data from the table: "chapter_translations" */
   chapter_translations: Array<TApi_Chapter_Translations>;
   /** fetch aggregated fields from the table: "chapter_translations" */
@@ -119,6 +125,32 @@ export type TApi = {
   users_aggregate: TApi_Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk: Maybe<TApi_Users>;
+};
+
+
+/** query root */
+export type TApiBooksArgs = {
+  distinct_on: Maybe<Array<TApi_Books_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_Books_Order_By>>;
+  where: Maybe<TApi_Books_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiBooks_AggregateArgs = {
+  distinct_on: Maybe<Array<TApi_Books_Select_Column>>;
+  limit: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+  order_by: Maybe<Array<TApi_Books_Order_By>>;
+  where: Maybe<TApi_Books_Bool_Exp>;
+};
+
+
+/** query root */
+export type TApiBooks_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -517,6 +549,268 @@ export type TApi__Int4_Comparison_Exp = {
   _lte: Maybe<Scalars['api__int4']>;
   _neq: Maybe<Scalars['api__int4']>;
   _nin: Maybe<Array<Scalars['api__int4']>>;
+};
+
+/** columns and relationships of "books" */
+export type TApi_Books = {
+  description: Maybe<Scalars['String']>;
+  download_link: Scalars['String'];
+  id: Scalars['Int'];
+  image_link: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "books" */
+export type TApi_Books_Aggregate = {
+  aggregate: Maybe<TApi_Books_Aggregate_Fields>;
+  nodes: Array<TApi_Books>;
+};
+
+/** aggregate fields of "books" */
+export type TApi_Books_Aggregate_Fields = {
+  avg: Maybe<TApi_Books_Avg_Fields>;
+  count: Maybe<Scalars['Int']>;
+  max: Maybe<TApi_Books_Max_Fields>;
+  min: Maybe<TApi_Books_Min_Fields>;
+  stddev: Maybe<TApi_Books_Stddev_Fields>;
+  stddev_pop: Maybe<TApi_Books_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<TApi_Books_Stddev_Samp_Fields>;
+  sum: Maybe<TApi_Books_Sum_Fields>;
+  var_pop: Maybe<TApi_Books_Var_Pop_Fields>;
+  var_samp: Maybe<TApi_Books_Var_Samp_Fields>;
+  variance: Maybe<TApi_Books_Variance_Fields>;
+};
+
+
+/** aggregate fields of "books" */
+export type TApi_Books_Aggregate_FieldsCountArgs = {
+  columns: Maybe<Array<TApi_Books_Select_Column>>;
+  distinct: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "books" */
+export type TApi_Books_Aggregate_Order_By = {
+  avg: Maybe<TApi_Books_Avg_Order_By>;
+  count: Maybe<TApi_Order_By>;
+  max: Maybe<TApi_Books_Max_Order_By>;
+  min: Maybe<TApi_Books_Min_Order_By>;
+  stddev: Maybe<TApi_Books_Stddev_Order_By>;
+  stddev_pop: Maybe<TApi_Books_Stddev_Pop_Order_By>;
+  stddev_samp: Maybe<TApi_Books_Stddev_Samp_Order_By>;
+  sum: Maybe<TApi_Books_Sum_Order_By>;
+  var_pop: Maybe<TApi_Books_Var_Pop_Order_By>;
+  var_samp: Maybe<TApi_Books_Var_Samp_Order_By>;
+  variance: Maybe<TApi_Books_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "books" */
+export type TApi_Books_Arr_Rel_Insert_Input = {
+  data: Array<TApi_Books_Insert_Input>;
+  on_conflict: Maybe<TApi_Books_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type TApi_Books_Avg_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "books" */
+export type TApi_Books_Avg_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "books". All fields are combined with a logical 'AND'. */
+export type TApi_Books_Bool_Exp = {
+  _and: Maybe<Array<Maybe<TApi_Books_Bool_Exp>>>;
+  _not: Maybe<TApi_Books_Bool_Exp>;
+  _or: Maybe<Array<Maybe<TApi_Books_Bool_Exp>>>;
+  description: Maybe<TApi_String_Comparison_Exp>;
+  download_link: Maybe<TApi_String_Comparison_Exp>;
+  id: Maybe<TApi_Int_Comparison_Exp>;
+  image_link: Maybe<TApi_String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "books" */
+export type TApi_Books_Constraint = 
+  /** unique or primary key constraint */
+  'books_pkey';
+
+/** input type for incrementing integer column in table "books" */
+export type TApi_Books_Inc_Input = {
+  id: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "books" */
+export type TApi_Books_Insert_Input = {
+  description: Maybe<Scalars['String']>;
+  download_link: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  image_link: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type TApi_Books_Max_Fields = {
+  description: Maybe<Scalars['String']>;
+  download_link: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  image_link: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "books" */
+export type TApi_Books_Max_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  download_link: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  image_link: Maybe<TApi_Order_By>;
+};
+
+/** aggregate min on columns */
+export type TApi_Books_Min_Fields = {
+  description: Maybe<Scalars['String']>;
+  download_link: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  image_link: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "books" */
+export type TApi_Books_Min_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  download_link: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  image_link: Maybe<TApi_Order_By>;
+};
+
+/** response of any mutation on the table "books" */
+export type TApi_Books_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<TApi_Books>;
+};
+
+/** input type for inserting object relation for remote table "books" */
+export type TApi_Books_Obj_Rel_Insert_Input = {
+  data: TApi_Books_Insert_Input;
+  on_conflict: Maybe<TApi_Books_On_Conflict>;
+};
+
+/** on conflict condition type for table "books" */
+export type TApi_Books_On_Conflict = {
+  constraint: TApi_Books_Constraint;
+  update_columns: Array<TApi_Books_Update_Column>;
+  where: Maybe<TApi_Books_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "books" */
+export type TApi_Books_Order_By = {
+  description: Maybe<TApi_Order_By>;
+  download_link: Maybe<TApi_Order_By>;
+  id: Maybe<TApi_Order_By>;
+  image_link: Maybe<TApi_Order_By>;
+};
+
+/** primary key columns input for table: "books" */
+export type TApi_Books_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "books" */
+export type TApi_Books_Select_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'download_link' |
+  /** column name */
+  'id' |
+  /** column name */
+  'image_link';
+
+/** input type for updating data in table "books" */
+export type TApi_Books_Set_Input = {
+  description: Maybe<Scalars['String']>;
+  download_link: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  image_link: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type TApi_Books_Stddev_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "books" */
+export type TApi_Books_Stddev_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type TApi_Books_Stddev_Pop_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "books" */
+export type TApi_Books_Stddev_Pop_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type TApi_Books_Stddev_Samp_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "books" */
+export type TApi_Books_Stddev_Samp_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate sum on columns */
+export type TApi_Books_Sum_Fields = {
+  id: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "books" */
+export type TApi_Books_Sum_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** update columns of table "books" */
+export type TApi_Books_Update_Column = 
+  /** column name */
+  'description' |
+  /** column name */
+  'download_link' |
+  /** column name */
+  'id' |
+  /** column name */
+  'image_link';
+
+/** aggregate var_pop on columns */
+export type TApi_Books_Var_Pop_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "books" */
+export type TApi_Books_Var_Pop_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type TApi_Books_Var_Samp_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "books" */
+export type TApi_Books_Var_Samp_Order_By = {
+  id: Maybe<TApi_Order_By>;
+};
+
+/** aggregate variance on columns */
+export type TApi_Books_Variance_Fields = {
+  id: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "books" */
+export type TApi_Books_Variance_Order_By = {
+  id: Maybe<TApi_Order_By>;
 };
 
 /** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
@@ -6362,6 +6656,8 @@ export type TQueryAllSitePageArgs = {
 export type TQuerySiteArgs = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
+  port: Maybe<TIntQueryOperatorInput>;
+  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -6555,6 +6851,8 @@ export type TQueryAllSitePluginArgs = {
 export type TSite = TNode & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<TSiteSiteMetadata>;
+  port: Maybe<Scalars['Int']>;
+  host: Maybe<Scalars['String']>;
   polyfill: Maybe<Scalars['Boolean']>;
   pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -6756,6 +7054,8 @@ export type TSiteFieldsEnum =
   'buildTime' |
   'siteMetadata___title' |
   'siteMetadata___siteUrl' |
+  'port' |
+  'host' |
   'polyfill' |
   'pathPrefix' |
   'id' |
@@ -6848,6 +7148,8 @@ export type TSiteFieldsEnum =
 export type TSiteFilterInput = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
+  port: Maybe<TIntQueryOperatorInput>;
+  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -8156,6 +8458,11 @@ export type TMadrassahPageQueryQuery = { api: { tracks: Array<(
         )> }
       )> }
     )> } };
+
+export type TBookQueryQueryVariables = {};
+
+
+export type TBookQueryQuery = { api: { books: Array<Pick<TApi_Books, 'description' | 'id' | 'image_link'>> } };
 
 export type TAboutUsTrackFragment = Pick<TApi_Tracks, 'id' | 'slug'>;
 

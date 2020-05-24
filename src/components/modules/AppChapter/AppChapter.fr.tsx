@@ -5,6 +5,7 @@ import MainChapter from './MainChapter'
 import { useQuery } from '@apollo/react-hooks'
 import { chapterPageTrack } from 'graphql/fragments'
 import '../Chapter/styles.scss'
+import { ChapterQueryQuery, ChapterQueryQueryVariables } from '../../../hasuraTypes'
 
 export const CHAPTER_QUERY = gql`
   query chapterQuery($id: Int!) {
@@ -44,7 +45,7 @@ type AppChapterType = {
 }
 
 const AppChapter: FC<AppChapterType> = () => {
-  const { loading, error, data } = useQuery(CHAPTER_QUERY, {
+  const { loading, error, data } = useQuery<ChapterQueryQuery, ChapterQueryQueryVariables>(CHAPTER_QUERY, {
     variables: { id: 1 },
   })
 

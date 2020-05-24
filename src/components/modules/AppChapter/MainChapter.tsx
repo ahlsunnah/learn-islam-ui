@@ -1,19 +1,22 @@
 /* eslint react/no-unused-prop-types: 0 */
 import _get from 'lodash/get'
-import StepWrapper from 'components/molecules/StepWrapper'
+import StepWrapper from 'components/molecules/AppStepWrapper'
 import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import NavigationButtons from '../Chapter/NavigationButtons'
 import StepContent from '../Chapter/StepContent'
-import '../Chapter/styles.scss'
+import './styles.scss'
 import Tab from '../Chapter/Tab'
 import VideoIframe from '../Chapter/VideoIframe'
-import { IChapterProps } from '../../../types/chapter'
 import useChapterState, { ChapterStates } from 'hooks/useChapterState'
 import { useTranslation } from 'react-i18next'
+import { ChapterQueryQuery } from '../../../hasuraTypes'
 
-const MainChapter: React.FC<IChapterProps> = ({ data }) => {
-  console.log(data)
+type MainChapterType = {
+  data: ChapterQueryQuery | undefined
+}
+
+const MainChapter: React.FC<MainChapterType> = ({ data }) => {
   const chapter = _get(data, ['chapter'])
 
   const { t } = useTranslation()
@@ -61,7 +64,6 @@ const MainChapter: React.FC<IChapterProps> = ({ data }) => {
     <StepWrapper
       currentCourseSlug={chapter.course.slug}
       track={chapter.course.track}
-      t={t}
       otherLocaleName="fr"
       otherLocalePath="path"
       title={chapterStrings.title}

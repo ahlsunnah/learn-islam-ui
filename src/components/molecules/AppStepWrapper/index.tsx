@@ -3,11 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import {
-  TChapterPageTrackFragment,
-  TChapterPageTranslationsFragment,
-  TQuizzesPageTranslationsFragment,
-} from '../../../graphqlTypes'
+import { TChapterPageTrackFragment } from '../../../graphqlTypes'
 
 interface IProps {
   children: JSX.Element | JSX.Element[]
@@ -15,13 +11,13 @@ interface IProps {
   track: TChapterPageTrackFragment
   otherLocaleName: string
   otherLocalePath: string
-  t: TChapterPageTranslationsFragment | TQuizzesPageTranslationsFragment
   title: string
 }
 
 interface IState {
   isSideBarVisible: boolean
 }
+
 class StepWrapper extends React.Component<IProps, IState> {
   public state = {
     isSideBarVisible: false,
@@ -42,7 +38,7 @@ class StepWrapper extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const { children, currentCourseSlug, track, otherLocaleName, otherLocalePath, t, title } = this.props
+    const { children, currentCourseSlug, track, otherLocaleName, otherLocalePath, title } = this.props
     const { isSideBarVisible } = this.state
     return (
       <div>
@@ -50,7 +46,6 @@ class StepWrapper extends React.Component<IProps, IState> {
           currentCourseSlug={currentCourseSlug}
           track={track}
           isOpen={isSideBarVisible}
-          t={t}
           toggleSidebar={this.toggleSidebar}
         />
         <div

@@ -42,23 +42,9 @@ class StepWrapper extends React.Component<IProps, IState> {
     const { isSideBarVisible } = this.state
     return (
       <div>
-        <Sidebar
-          currentCourseSlug={currentCourseSlug}
-          track={track}
-          isOpen={isSideBarVisible}
-          toggleSidebar={this.toggleSidebar}
-        />
-        <div
-          className={cx('absolute w-100 flex flex-column items-stretch', {
-            wrapperWithoutSidebar: isSideBarVisible,
-          })}
-        >
-          <Header
-            otherLocaleName={otherLocaleName}
-            otherLocalePath={otherLocalePath}
-            title={title}
-            toggleSidebar={this.toggleSidebar}
-          />
+        <Sidebar currentCourseSlug={currentCourseSlug} track={track} isOpen={isSideBarVisible} />
+        <div>
+          <Header otherLocaleName={otherLocaleName} otherLocalePath={otherLocalePath} title={title} />
           {children}
         </div>
       </div>

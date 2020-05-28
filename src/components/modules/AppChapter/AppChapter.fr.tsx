@@ -7,6 +7,8 @@ import { chapterPageTrack } from 'graphql/fragments'
 import '../Chapter/styles.scss'
 import { ChapterQueryQuery, ChapterQueryQueryVariables } from '../../../hasuraTypes'
 
+const DEFAULT_CHAPTER = 1
+
 export const CHAPTER_QUERY = gql`
   query chapterQuery($id: Int!) {
     chapter: chapters_by_pk(id: $id) {
@@ -42,11 +44,12 @@ export const CHAPTER_QUERY = gql`
 
 type AppChapterType = {
   path?: string
+  chapterId?: number
 }
 
-const AppChapter: FC<AppChapterType> = () => {
+const AppChapter: FC<AppChapterType> = ({ chapterId }) => {
   const { loading, error, data } = useQuery<ChapterQueryQuery, ChapterQueryQueryVariables>(CHAPTER_QUERY, {
-    variables: { id: 1 },
+    variables: { id: chapterId || DEFAULT_CHAPTER },
   })
 
   if (loading) {

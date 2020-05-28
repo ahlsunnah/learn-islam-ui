@@ -113,8 +113,8 @@ export default function AppNavBar({ authUser }: Proptypes) {
           {authUser && (
             <Fragment>
               <div className={classes.sectionDesktop}>
-                <Button startIcon={<MenuBookIcon />} onClick={() => navigate('/app')}>
-                  Tracks
+                <Button startIcon={<MenuBookIcon />} onClick={() => navigate('/app/tracks')}>
+                  courses
                 </Button>
                 <IconButton
                   edge="end"

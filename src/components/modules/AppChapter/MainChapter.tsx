@@ -8,7 +8,6 @@ import StepContent from '../Chapter/StepContent'
 import './styles.scss'
 import Tab from '../Chapter/Tab'
 import VideoIframe from '../Chapter/VideoIframe'
-import useChapterState, { ChapterStates } from 'hooks/useChapterState'
 import { useTranslation } from 'react-i18next'
 import { ChapterQueryQuery } from '../../../hasuraTypes'
 
@@ -21,20 +20,7 @@ const MainChapter: React.FC<MainChapterType> = ({ data }) => {
 
   const { t } = useTranslation()
 
-  const otherLocaleTranslations = _get(data, 'otherLocaleTranslations')
-
   const chapterTranslation = _get(data, ['chapter', 'translations'], [])
-
-  // TODO: remove the 0
-  const [chapterState, setChapterState] = useChapterState(chapter?.id || 0)
-
-  const toggleCompleteChapter = () => {
-    if (chapterState == ChapterStates['not started']) {
-      setChapterState(ChapterStates.completed)
-    } else {
-      setChapterState(ChapterStates['not started'])
-    }
-  }
 
   const [activeTab, setActiveTab] = useState<string>('AR')
 
@@ -48,7 +34,6 @@ const MainChapter: React.FC<MainChapterType> = ({ data }) => {
 
   const arabicTranscription = arabicChapter && arabicChapter.transcription
 
-  console.log(chapterTranslation)
   const chapterStrings = chapterTranslation.find(({ locale_code }) => locale_code === 'fr')
 
   if (!chapterStrings) {

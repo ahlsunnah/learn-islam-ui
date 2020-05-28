@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from 'react'
+import _dropRight from 'lodash/dropRight'
 import cx from 'classnames'
 import { Link } from 'gatsby'
+import { useLocation } from '@reach/router'
 import leftSvg from 'assets/images/chevron-left.svg'
-import getWindowWidth from 'lib/getWindowWidth'
 import ChapterCursor from './ChapterCursor'
 import { TChapterPageTrackFragment } from '../../../graphqlTypes'
 import { useAllChaptersStates, ChapterStates } from 'hooks/useChapterState'
@@ -16,18 +17,15 @@ interface IProps {
   currentCourseSlug: string
   track: TChapterPageTrackFragment
   isOpen: boolean
-  toggleSidebar: () => void
 }
 
 const difficultyStrings: ['difficulty1', 'difficulty2'] = ['difficulty1', 'difficulty2']
 
-const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track, isOpen, toggleSidebar }) => {
+const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track, isOpen }) => {
   const { t, i18n } = useTranslation()
-  const closeDrawerOnMobile = (): void => {
-    if (getWindowWidth() < 800) {
-      toggleSidebar()
-    }
-  }
+  const location = useLocation()
+
+  console.log(location)
 
   const { courses } = track
   const [allChaptersStates] = useAllChaptersStates()
@@ -62,7 +60,6 @@ const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track, isOpen, toggleSid
           {courses.map(
             ({
               chapters,
-              id: courseId,
               quiz_difficulties: { quiz_difficulties },
               slug: courseSlug,
               translations: courseStrings,
@@ -83,8 +80,7 @@ const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track, isOpen, toggleSid
                           key={`${courseSlug}-${chapterSlug}`}
                           activeClassName="white b"
                           className="ph1 pv2 flex items-center moon-gray no-underline"
-                          onClick={closeDrawerOnMobile}
-                          to={`${t('localePath')}${track.slug}/${courseSlug}/${chapterSlug}/`}
+                          to={`/${_dropRight(location.pathname.split('/')).join('/')}/${id}`}
                         >
                           <ChapterCursor
                             className="h2 ph1"
@@ -103,7 +99,6 @@ const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track, isOpen, toggleSid
                           key={`${courseSlug}-quiz${difficulty}`}
                           activeClassName="white b"
                           className="ph1 pv2 flex items-center moon-gray no-underline"
-                          onClick={closeDrawerOnMobile}
                           to={`${t('localePath')}${track.slug}/${courseSlug}/ikhtibar-${difficulty}/`}
                         >
                           <ChapterCursor className="h2 ph1" isQuiz />

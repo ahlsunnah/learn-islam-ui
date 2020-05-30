@@ -27,17 +27,20 @@ type Props = {
 const TracksContainer: React.FC<Props> = () => {
   const { t, i18n } = useTranslation()
   const language = i18n.language as Locale
+
   const { data, loading, error } = useQuery<TracksQuery, TracksQueryVariables>(TRACKS_QUERY, {
     variables: { locale: language },
   })
+
   if (loading) {
     return <div>Loading</div>
   }
+
   if (error || !data) {
     // TODO: Error message translations
-    console.error(error)
     return <div>An error has occurred, please refresh the page or try again later</div>
   }
+
   const { tracks } = data
   return <Tracks tracks={tracks} localePath={t('localePath')} soonString={t('soon')} />
 }

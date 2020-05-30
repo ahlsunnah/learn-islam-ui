@@ -2,6 +2,8 @@
 import target from 'assets/images/target.svg'
 import Button from 'components/atoms/Button/Button'
 import Card from 'components/atoms/Card/Card'
+import { useMemo } from 'react'
+import { useLocation } from '@reach/router'
 import IconWithText from 'components/atoms/IconWithText/IconWithText'
 import { Link } from 'gatsby'
 import { TFunction } from 'i18next'
@@ -23,43 +25,21 @@ type Props = {
 
 const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
   // TODO calculate next chapter with progress
+  const location = useLocation()
 
   const nextCoursePath = isTrackInnerPageCourse(course)
     ? `${currentPath}/${course.slug}/${course.chapters[0]?.slug}/`
     : `${currentPath}/${course.id}/${course.chapters[0]?.id}/`
 
-  console.log(nextCoursePath)
-  // const finishedChapters = chapters.reduce((sum, {id: chapterId}): number => {
-  //   if (chaptersState[chapterId]) {
-  //     sum += 1 // eslint-disable-line no-param-reassign
-  //   }
-  //   return sum
-  // }, 0)
-  // const finishedQuizs: number = (quiz_difficulties as number[]).reduce<number>(
-  //   (acc, difficulty) => {
-  //     if (
-  //       quizsState &&
-  //       quizsState[t.locale] &&
-  //       quizsState[t.locale][difficulty] &&
-  //       quizsState[t.locale][difficulty].passed
-  //     ) {
-  //       return acc + 1
-  //     }
-  //     return acc
-  //   },
-  //   0,
-  // )
-  // const percent =
-  //   (100 * (finishedChapters + finishedQuizs)) /
-  //   (quiz_difficulties.length + chapters.length)
+  const appPath = useMemo(
+    () => (location.pathname.indexOf('app') !== -1 ? `${location.pathname}/chapter/${course.id}` : false),
+    [location, course]
+  )
 
   const { level, topic, translations } = course
 
   return (
-    <Card
-      className="mt4 ph4 w-60-ns flex flex-column"
-      // to={`${currentPath}/${slug}`}
-    >
+    <Card className="mt4 ph4 w-60-ns flex flex-column">
       <div className="self-end pv3 flex items-center">
         <IconWithText className="ph2" icon={target}>
           {`${t('course')} ${t(`level${level}`)}`}
@@ -79,14 +59,11 @@ const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
           />
         )}
         <div className="flex justify-between items-center">
-          <Link className="no-underline" to={nextCoursePath}>
+          <Link className="no-underline" to={appPath || nextCoursePath}>
             <Button className="mt3" outlined pill>
               {t('startCourse')}
             </Button>
           </Link>
-          {/* {percent !== 0 && (
-            <Progress className="mt3 w-60" progress={percent} />
-          )} */}
         </div>
       </div>
     </Card>

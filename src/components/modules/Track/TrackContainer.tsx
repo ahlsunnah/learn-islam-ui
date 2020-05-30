@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import gql from 'graphql-tag'
-import React from 'react'
+import React, { useMemo } from 'react'
+import _get from 'lodash/get'
 import TrackComponent from './TrackComponent'
 import { useQuery } from '@apollo/react-hooks'
 import { TrackInnerPageQuery, TrackInnerPageQueryVariables, TrackInnerPageTrackFragment } from '../../../hasuraTypes'
@@ -56,6 +57,7 @@ type Props = {
 const TracksContainer: React.FC<Props> = ({ trackId }) => {
   const parsedId = trackId && parseInt(trackId, 10)
 
+  // TODO: never throw errors
   if (!parsedId) {
     throw new Error('No valid track Id')
   }
@@ -67,6 +69,19 @@ const TracksContainer: React.FC<Props> = ({ trackId }) => {
   const { data, loading, error } = useQuery<TrackInnerPageQuery, TrackInnerPageQueryVariables>(TRACKS_QUERY, {
     variables: { locale: i18n.language as Locale, id: parsedId },
   })
+
+  const track: TrackInnerPageTrackFragment | null | undefined = _get(data, 'track')
+
+  const nextCoursePath =
+    track &&
+    track.courses[0] &&
+    `${location.pathname}/${track.courses[0].id}/${track.courses[0].chapters[0] && track.courses[0].chapters[0].id}/`
+
+  const appPath = useMemo(
+    () =>
+      location.pathname.indexOf('app') !== -1 ? `${location.pathname}/chapter/${track && track.courses[0].id}` : false,
+    [location, track]
+  )
 
   if (loading) {
     return <div>Loading</div>
@@ -82,12 +97,7 @@ const TracksContainer: React.FC<Props> = ({ trackId }) => {
     return <div>We have no track here!</div>
   }
 
-  const track: TrackInnerPageTrackFragment = data.track
-
-  const nextCoursePath =
-    track.courses[0] &&
-    `${location.pathname}/${track.courses[0].id}/${track.courses[0].chapters[0] && track.courses[0].chapters[0].id}/`
-  return <TrackComponent track={track} nextCoursePath={nextCoursePath} />
+  return <TrackComponent track={track} nextCoursePath={appPath || nextCoursePath} />
 }
 
 export default TracksContainer

@@ -53,7 +53,7 @@ const AppChapter: FC<AppChapterType> = ({ chapterId }) => {
   })
 
   if (loading) {
-    return <div className="lo">Loading</div>
+    return <div>Loading</div>
   }
 
   if (error) {

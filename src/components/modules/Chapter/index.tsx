@@ -51,7 +51,6 @@ const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
     <NavigationButtons
       isChapterComplete={chapterState === ChapterStates.completed}
       next={pageContext.next}
-      t={t}
       toggleCompleteChapter={toggleCompleteChapter}
     />
   )

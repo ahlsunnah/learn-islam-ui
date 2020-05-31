@@ -71,7 +71,7 @@ const App = () => {
             variant: 'layout.main',
           }}
         >
-          <Container>
+          <Container sx={{ mt: '64px' }} maxWidth="xl">
             <Router basepath="app">
               <GenericRouteWrapper path="tracks">
                 <Fragment>

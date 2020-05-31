@@ -1,8 +1,5 @@
 import getWindowWidth from 'lib/getWindowWidth'
 import React from 'react'
-import cx from 'classnames'
-import Header from './Header'
-import Sidebar from './Sidebar'
 import { TChapterPageTrackFragment } from '../../../graphqlTypes'
 
 interface IProps {
@@ -38,17 +35,7 @@ class StepWrapper extends React.Component<IProps, IState> {
   }
 
   public render(): JSX.Element {
-    const { children, currentCourseSlug, track, otherLocaleName, otherLocalePath, title } = this.props
-    const { isSideBarVisible } = this.state
-    return (
-      <div>
-        <Sidebar currentCourseSlug={currentCourseSlug} track={track} isOpen={isSideBarVisible} />
-        <div>
-          <Header otherLocaleName={otherLocaleName} otherLocalePath={otherLocalePath} title={title} />
-          {children}
-        </div>
-      </div>
-    )
+    return <div></div>
   }
 }
 export default StepWrapper

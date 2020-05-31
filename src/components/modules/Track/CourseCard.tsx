@@ -5,7 +5,7 @@ import Card from 'components/atoms/Card/Card'
 import { useMemo } from 'react'
 import { useLocation } from '@reach/router'
 import IconWithText from 'components/atoms/IconWithText/IconWithText'
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { TFunction } from 'i18next'
 import { jsx } from 'theme-ui'
 import { TTrackPageCourseFragment } from '../../../graphqlTypes'
@@ -59,11 +59,16 @@ const CourseCard = ({ currentPath, course, t }: Props): JSX.Element => {
           />
         )}
         <div className="flex justify-between items-center">
-          <Link className="no-underline" to={appPath || nextCoursePath}>
-            <Button className="mt3" outlined pill>
+          <div className="no-underline">
+            <Button
+              className="mt3"
+              outlined
+              pill
+              onClick={() => navigate(appPath || nextCoursePath, { state: { coursePage: location } })}
+            >
               {t('startCourse')}
             </Button>
-          </Link>
+          </div>
         </div>
       </div>
     </Card>

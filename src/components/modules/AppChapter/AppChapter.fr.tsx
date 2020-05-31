@@ -52,7 +52,7 @@ const AppChapter: FC<AppChapterType> = ({ chapterId }) => {
     variables: { id: chapterId || DEFAULT_CHAPTER },
   })
 
-  if (loading) {
+  if (!data || loading) {
     return <div>Loading</div>
   }
 

@@ -1,4 +1,5 @@
 /* eslint react/no-unused-prop-types: 0 */
+import _get from 'lodash/get'
 import StepWrapper from 'components/molecules/StepWrapper'
 import React, { useState } from 'react'
 import Helmet from 'react-helmet'
@@ -11,12 +12,15 @@ import { IChapterProps } from '../../../types/chapter'
 import useChapterState, { ChapterStates } from 'hooks/useChapterState'
 
 const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
-  const {
-    api: { chapter },
-    otherLocaleTranslations,
-    translations: t,
-  } = data
-  const [chapterState, setChapterState] = useChapterState(chapter.id)
+  const chapter = _get(data, ['api', 'chapter'])
+
+  const otherLocaleTranslations = _get(data, 'otherLocaleTranslations')
+  const t = _get(data, 'translations')
+
+  const chapterTranslation = _get(data, ['api', 'chapter', 'translations'], [])
+
+  // TODO: remove the 0
+  const [chapterState, setChapterState] = useChapterState(chapter?.id || 0)
   const toggleCompleteChapter = () => {
     if (chapterState == ChapterStates['not started']) {
       setChapterState(ChapterStates.completed)
@@ -32,25 +36,28 @@ const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
   }
 
   // TODO: memoize this:
-  const arabicChapter = data.api.chapter.translations.find(({ locale_code }) => locale_code === 'ar')
+  const arabicChapter = chapterTranslation.find(({ locale_code }) => locale_code === 'ar')
 
   const arabicTranscription = arabicChapter && arabicChapter.transcription
-  const chapterStrings = data.api.chapter.translations.find(({ locale_code }) => locale_code === pageContext.locale)
+  const chapterStrings = chapterTranslation.find(({ locale_code }) => locale_code === pageContext?.locale)
 
   if (!chapterStrings) {
     // TODO: Log to Sentry
     return <div>{"Error, we didn't find any strings for this chapter ..."}</div>
   }
-  const otherLocalePath = `${data.otherLocaleTranslations.localePath}${data.api.chapter.course.track.slug}/${data.api.chapter.course.slug}/${data.api.chapter.slug}`
+  const otherLocalePath = `${data?.otherLocaleTranslations.localePath}${data?.api.chapter.course.track.slug}/${data?.api.chapter.course.slug}/${data?.api.chapter.slug}`
 
-  const navigationButtons = (
+  const navigationButtons = t && pageContext && (
     <NavigationButtons
       isChapterComplete={chapterState === ChapterStates.completed}
       next={pageContext.next}
-      t={t}
       toggleCompleteChapter={toggleCompleteChapter}
     />
   )
+
+  if (!(chapter && otherLocaleTranslations && pageContext && t)) {
+    return null
+  }
 
   return (
     <StepWrapper

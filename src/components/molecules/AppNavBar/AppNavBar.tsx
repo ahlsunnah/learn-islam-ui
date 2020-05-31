@@ -102,7 +102,7 @@ export default function AppNavBar({ authUser }: Proptypes) {
 
   return (
     <div className={classes.grow}>
-      <AppBar sx={{ bg: 'primary_base' }} position="static">
+      <AppBar sx={{ bg: 'primary_base' }} position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to={i18n.language === 'fr' ? '/fr' : '/'} replace>
@@ -113,8 +113,8 @@ export default function AppNavBar({ authUser }: Proptypes) {
           {authUser && (
             <Fragment>
               <div className={classes.sectionDesktop}>
-                <Button startIcon={<MenuBookIcon />} onClick={() => navigate('/app')}>
-                  Tracks
+                <Button startIcon={<MenuBookIcon />} onClick={() => navigate('/app/tracks')}>
+                  courses
                 </Button>
                 <IconButton
                   edge="end"

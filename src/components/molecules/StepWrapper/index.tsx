@@ -7,7 +7,7 @@ import {
   TChapterPageTrackFragment,
   TChapterPageTranslationsFragment,
   TQuizzesPageTranslationsFragment,
-} from '../../graphqlTypes'
+} from '../../../graphqlTypes'
 
 interface IProps {
   children: JSX.Element | JSX.Element[]

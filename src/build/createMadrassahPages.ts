@@ -13,7 +13,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
   const locales: Locale[] = ['ar', 'fr']
   const { localePaths } = createLocalesPaths(locales)
 
-  // const MainLayout = resolve(`./src/templates/MainLayout.jsx`)
   const homeTemplate = resolve(`./src/templates/Home.tsx`)
   const tracksTemplate = resolve(`./src/templates/TracksTemplate.tsx`)
   const aboutUsTemplate = resolve(`./src/templates/AboutUs.tsx`)
@@ -90,10 +89,12 @@ const createMadrassahPages: GatsbyCreatePages = async ({
       }
     `
   )
+
   if (result.errors) {
     result.errors.forEach((error): void => console.error(error.message))
     throw new Error('Error while executing a query in createMadrassahPages')
   }
+
   const {
     api: { tracks },
   } = result.data

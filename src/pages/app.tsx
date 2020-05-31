@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, FC, ReactElement } from 'react'
 import { Router } from '@reach/router'
 import _get from 'lodash/get'
 import AppNavBar from '../components/molecules/AppNavBar/AppNavBar'
@@ -11,6 +11,7 @@ import Login from '../components/modules/Login/Login'
 import Profile from 'components/modules/Profile/Profile'
 import TracksContainer from 'components/modules/Tracks/TracksContainer'
 import TrackContainer from 'components/modules/Track/TrackContainer'
+import ChapterContainer from 'components/modules/AppChapter/AppChapter.fr'
 
 type LayoutContainerProps = {
   children: React.ReactChild
@@ -25,6 +26,15 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => (
     {children}
   </div>
 )
+
+type GenericRouteWrapperType = {
+  path: string
+  children: ReactElement
+}
+
+const GenericRouteWrapper: FC<GenericRouteWrapperType> = ({ children }) => {
+  return children
+}
 
 const App = () => {
   const { user } = useContext(AuthContext)
@@ -61,18 +71,22 @@ const App = () => {
             variant: 'layout.main',
           }}
         >
-          <Container
-          // sx={{
-          //   mt: 3,
-          // }}
-          // maxWidth="sm"
-          >
-            <Router basepath="/app">
-              <TracksContainer path="/" />
-              <TrackContainer path=":trackId" />
-              <Profile path="/profile" me={user.authUser} signOut={user.signOut} />
+          <Container sx={{ mt: '64px' }} maxWidth="xl">
+            <Router basepath="app">
+              <GenericRouteWrapper path="tracks">
+                <Fragment>
+                  <TracksContainer path="/" />
+                  <GenericRouteWrapper path=":trackId">
+                    <Fragment>
+                      <TrackContainer path="/" />
+                      <ChapterContainer path="chapter/:chapterId" />
+                    </Fragment>
+                  </GenericRouteWrapper>
+                </Fragment>
+              </GenericRouteWrapper>
+              <Profile path="profile" me={user.authUser} signOut={user.signOut} />
               <Login
-                path="/login"
+                path="login"
                 signInWithEmailAndPwd={user.signInWithEmailAndPwd}
                 authUser={user.authUser}
                 addNewUser={user.addNewUser}

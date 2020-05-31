@@ -6832,6 +6832,22 @@ export type Users_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type ChapterQueryQueryVariables = {
+  id: Scalars['Int'];
+};
+
+
+export type ChapterQueryQuery = { chapter?: Maybe<(
+    Pick<Chapters, 'id' | 'slug' | 'audio'>
+    & { translations: Array<Pick<Chapter_Translations, 'id' | 'title' | 'transcription' | 'vocabulary' | 'locale_code' | 'video'>>, course: (
+      Pick<Courses, 'id' | 'slug'>
+      & { track: ChapterPageTrackFragment, chapters: Array<(
+        Pick<Chapters, 'id' | 'slug'>
+        & { translations: Array<Pick<Chapter_Translations, 'title'>> }
+      )> }
+    ) }
+  )> };
+
 export type MeQueryVariables = {
   id: Scalars['String'];
 };
@@ -6885,3 +6901,14 @@ export type TracksQueryVariables = {
 
 
 export type TracksQuery = { tracks: Array<TracksPageTrackFragment> };
+
+export type ChapterPageTrackFragment = (
+  Pick<Tracks, 'id' | 'slug'>
+  & { translations: Array<Pick<Track_Translations, 'title'>>, courses: Array<(
+    Pick<Courses, 'id' | 'slug'>
+    & { quiz_difficulties?: Maybe<Pick<Course_Quiz_Difficulties, 'quiz_difficulties'>>, chapters: Array<(
+      Pick<Chapters, 'id' | 'slug'>
+      & { translations: Array<Pick<Chapter_Translations, 'title'>> }
+    )>, translations: Array<Pick<Course_Translations, 'locale_code' | 'title'>> }
+  )> }
+);

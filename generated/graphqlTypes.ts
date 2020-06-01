@@ -6656,6 +6656,8 @@ export type TQueryAllSitePageArgs = {
 export type TQuerySiteArgs = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
+  port: Maybe<TIntQueryOperatorInput>;
+  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -6849,6 +6851,8 @@ export type TQueryAllSitePluginArgs = {
 export type TSite = TNode & {
   buildTime: Maybe<Scalars['Date']>;
   siteMetadata: Maybe<TSiteSiteMetadata>;
+  port: Maybe<Scalars['Int']>;
+  host: Maybe<Scalars['String']>;
   polyfill: Maybe<Scalars['Boolean']>;
   pathPrefix: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -7050,6 +7054,8 @@ export type TSiteFieldsEnum =
   'buildTime' |
   'siteMetadata___title' |
   'siteMetadata___siteUrl' |
+  'port' |
+  'host' |
   'polyfill' |
   'pathPrefix' |
   'id' |
@@ -7142,6 +7148,8 @@ export type TSiteFieldsEnum =
 export type TSiteFilterInput = {
   buildTime: Maybe<TDateQueryOperatorInput>;
   siteMetadata: Maybe<TSiteSiteMetadataFilterInput>;
+  port: Maybe<TIntQueryOperatorInput>;
+  host: Maybe<TStringQueryOperatorInput>;
   polyfill: Maybe<TBooleanQueryOperatorInput>;
   pathPrefix: Maybe<TStringQueryOperatorInput>;
   id: Maybe<TStringQueryOperatorInput>;
@@ -7204,7 +7212,6 @@ export type TSitePageContext = {
   localePaths: Maybe<TSitePageContextLocalePaths>;
   slug: Maybe<Scalars['String']>;
   next: Maybe<TSitePageContextNext>;
-  difficulty: Maybe<Scalars['Int']>;
   langKey: Maybe<Scalars['String']>;
 };
 
@@ -7215,7 +7222,6 @@ export type TSitePageContextFilterInput = {
   localePaths: Maybe<TSitePageContextLocalePathsFilterInput>;
   slug: Maybe<TStringQueryOperatorInput>;
   next: Maybe<TSitePageContextNextFilterInput>;
-  difficulty: Maybe<TIntQueryOperatorInput>;
   langKey: Maybe<TStringQueryOperatorInput>;
 };
 
@@ -7349,7 +7355,6 @@ export type TSitePageFieldsEnum =
   'context___next___type' |
   'context___next___title' |
   'context___next___path' |
-  'context___difficulty' |
   'context___langKey' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |

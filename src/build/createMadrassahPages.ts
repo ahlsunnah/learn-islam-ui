@@ -122,12 +122,7 @@ const createMadrassahPages: GatsbyCreatePages = async ({
 
       courses.forEach((course, courseIndex): void => {
         const nextStepCalculatorWithCourse = nextStepCalculatorWithTrack(courseIndex)
-        const {
-          chapters,
-          id: courseId,
-          quiz_difficulties: { quiz_difficulties },
-          slug: courseSlug,
-        } = course
+        const { chapters, slug: courseSlug } = course
 
         // create chapter pages
         chapters.forEach((chapter, chapterIndex): void => {
@@ -165,37 +160,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
             }
           })
         })
-
-        // Create quizs:
-        if (quiz_difficulties && quiz_difficulties.length) {
-          locales.forEach((locale): void => {
-            ;(quiz_difficulties as number[]).forEach((difficulty, quizDifficultyIndex): void => {
-              console.log(
-                `Create QUIZS page for course ${courseSlug} and locale ${locale} and difficulty ${difficulty}`
-              )
-              const next = nextStepCalculatorWithCourse({
-                locale,
-                localePath: localePaths[locale],
-                quizDifficultyIndex,
-              })
-
-              createPage({
-                path: `${localePaths[locale]}${trackSlug}/${courseSlug}/ikhtibar-${difficulty}/`,
-                title: `difficulty${quiz_difficulties[difficulty]}`,
-                component: slash(quizsTemplate),
-                context: {
-                  difficulty,
-                  locale: locale,
-                  localeEnum: locale,
-                  localePaths,
-                  next,
-                  slug: courseSlug,
-                  id: courseId,
-                },
-              })
-            })
-          })
-        }
       })
     }
   })

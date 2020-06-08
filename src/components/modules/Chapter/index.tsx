@@ -71,14 +71,6 @@ const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
       <Helmet title={chapterStrings.title} />
       <VideoIframe source={chapterStrings.video} title={chapterStrings.title} />
       <nav className="chapter-tabs w-100 flex justify-around items-center">
-        <Tab
-          type="AR"
-          active={activeTab === 'AR'}
-          handleClick={toggleActiveTab}
-          svgPath="M8 4h32a4 4 0 0 1 4 4v36l-8-8H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4zm22.5 23.3l-3.2 2.1c-2.7 0-5.5 0-7.8-1.5-1.6-1-2.2-3-2-4.8 0-2 1-4 2.6-5.3.5-.7-1-.7-1.3-1.2a3.4 3.4 0 0 1-.8-4.2c.7-1.7 2.6-3 4.5-2.6A6 6 0 0 1 25 11c0 .4-1.2 0-1.6.2-1.5.2-3 .4-4.4 1.2-.9.6-.3 1.7.6 2 1 .7 2.1 1 3.3 1.1a22 22 0 0 1 5.3-2l-.5 2c-2.9 1.1-6 2.1-8.2 4.5-1.2 1.3-1.5 3.6-.2 5 1.3 1.5 3.4 1.7 5.3 2h5.8v.2z"
-        >
-          {t.tabTranscription}
-        </Tab>
         {chapterStrings.vocabulary && (
           <Tab
             type="VOC"
@@ -109,9 +101,7 @@ const Chapter: React.FC<IChapterProps> = ({ data, pageContext }) => {
             : `${t.locale === 'ar' ? 'ال' : ''}${t[pageContext.next.type]} ${t.next}`}
         </Tab>
       </nav>
-      <StepContent active={activeTab === 'AR'} arabic content={arabicTranscription}>
-        {navigationButtons}
-      </StepContent>
+
       <StepContent active={activeTab === 'VOC'} content={chapterStrings.vocabulary}>
         {navigationButtons}
       </StepContent>

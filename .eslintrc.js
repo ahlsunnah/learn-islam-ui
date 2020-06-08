@@ -30,6 +30,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 0,
     'prefer-const': 'warn',
     '@typescript-eslint/ban-ts-ignore': 'warn',
+    '@typescript-eslint/type-annotation-spacing': 0,
   },
   settings: {
     'import/resolver': {

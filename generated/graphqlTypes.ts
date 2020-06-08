@@ -8509,35 +8509,6 @@ export type THomeQueryQueryVariables = {};
 
 export type THomeQueryQuery = { api: { tracks: Array<THomeTrackFragment> } };
 
-export type TQuizzesPageQuizFragment = (
-  Pick<TApi_Quizzes, 'id' | 'type_slug'>
-  & { translations: Array<Pick<TApi_Quiz_Translations, 'id' | 'data'>> }
-);
-
-export type TQuizzesPageTranslationsFragment = Pick<TTranslationsJson, 'assessmentPerfect' | 'assessmentVeryGood' | 'assessmentGood' | 'assessmentFail' | 'average' | 'backToCourse' | 'chooseACategoryTitle' | 'chooseAnswer' | 'congratulations' | 'congratulationsCTA' | 'continue' | 'difficulty1' | 'difficulty2' | 'fillInTheBlankTitle' | 'goToTop' | 'goToTracks' | 'grade' | 'level' | 'locale' | 'localePath' | 'nextCourse' | 'nextTrack' | 'progress' | 'quiz' | 'quizTitle' | 'quizTrue' | 'quizFalse' | 'restartQuizs' | 'seeYourScore' | 'start' | 'takeExam' | 'yourLastScore' | 'yourScore'>;
-
-export type TQuizQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: Maybe<TApi_Locales_Enum>;
-  id: Scalars['Int'];
-  difficulty: Scalars['Int'];
-};
-
-
-export type TQuizQueryQuery = { api: { course: Maybe<(
-      Pick<TApi_Courses, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Course_Translations, 'id' | 'title'>>, quizzes: Array<TQuizzesPageQuizFragment>, track: (
-        Pick<TApi_Tracks, 'id' | 'slug'>
-        & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<(
-          Pick<TApi_Courses, 'id' | 'slug'>
-          & { quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, translations: Array<Pick<TApi_Course_Translations, 'locale_code' | 'title'>>, chapters: Array<(
-            Pick<TApi_Chapters, 'id' | 'slug'>
-            & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-          )> }
-        )> }
-      ) }
-    )> }, translations: Maybe<TQuizzesPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath'>> };
-
 export type TTrackPageCourseFragment = (
   Pick<TApi_Courses, 'id' | 'level' | 'slug'>
   & { translations: Array<Pick<TApi_Course_Translations, 'title' | 'description'>>, chapters: Array<(

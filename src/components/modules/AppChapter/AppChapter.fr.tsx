@@ -1,66 +1,58 @@
 /* eslint react/no-unused-prop-types: 0 */
-import React, { FC } from 'react'
-import gql from 'graphql-tag'
-import MainChapter from './MainChapter'
 import { useQuery } from '@apollo/react-hooks'
-import { chapterPageTrack } from 'graphql/fragments'
-import '../Chapter/styles.scss'
+import gql from 'graphql-tag'
+import React, { FC } from 'react'
 import { ChapterQueryQuery, ChapterQueryQueryVariables } from '../../../hasuraTypes'
+import '../Chapter/styles.scss'
+import MainChapter from './MainChapter'
 
 const DEFAULT_CHAPTER = 1
 
 export const CHAPTER_QUERY = gql`
-  query chapterQuery($id: Int!) {
-    chapter: chapters_by_pk(id: $id) {
+  fragment Chapter on chapters {
+    id
+    slug
+    audio
+    translations(where: { locale_code: { _eq: fr } }) {
       id
-      slug
-      audio
-      translations {
-        id
-        title
-        transcription
-        vocabulary
-        locale_code
-        video
-      }
-      course {
-        id
-        slug
-        track {
-          ...ChapterPageTrack
-        }
-        chapters {
-          id
-          slug
-          translations(where: { locale_code: { _eq: fr } }) {
-            title
-          }
-        }
-      }
+      title
+      transcription
+      vocabulary
+      locale_code
+      video
     }
   }
-  ${chapterPageTrack}
+  query ChapterQuery($id: Int!) {
+    chapter: chapters_by_pk(id: $id) {
+      ...Chapter
+    }
+  }
 `
 
 type AppChapterType = {
   path?: string
-  chapterId?: number
+  chapterId?: string
+  trackId?: string
 }
 
 const AppChapter: FC<AppChapterType> = ({ chapterId }) => {
+  const parsedChapterId = (chapterId && parseInt(chapterId, 10)) || DEFAULT_CHAPTER
+
   const { loading, error, data } = useQuery<ChapterQueryQuery, ChapterQueryQueryVariables>(CHAPTER_QUERY, {
-    variables: { id: chapterId || DEFAULT_CHAPTER },
+    variables: { id: parsedChapterId || DEFAULT_CHAPTER },
   })
 
-  if (!data || loading) {
+  if (loading) {
     return <div>Loading</div>
   }
 
   if (error) {
     return <div>{error.message}</div>
   }
-
-  return <MainChapter data={data} />
+  if (!data || !data.chapter) {
+    return <div>Il y a eu un probl&egrave;me</div>
+  }
+  return <MainChapter chapter={data.chapter} />
 }
 
 export default AppChapter

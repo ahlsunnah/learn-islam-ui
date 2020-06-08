@@ -8,25 +8,43 @@ import { Link } from 'gatsby'
 import { useLocation } from '@reach/router'
 import leftSvg from 'assets/images/chevron-left.svg'
 import ChapterCursor from './ChapterCursor'
-import { TChapterPageTrackFragment } from '../../../graphqlTypes'
 import { useAllChaptersStates, ChapterStates } from 'hooks/useChapterState'
 import { useTranslation } from 'react-i18next'
+import useTrackNavigationQuery from 'hooks/useTrackNavigationQuery'
+import useParsedParams from 'hooks/useParsedParams'
 
-interface IProps {
-  currentCourseSlug: string
-  track: TChapterPageTrackFragment
-}
+type Props = {}
 
-const difficultyStrings: ['difficulty1', 'difficulty2'] = ['difficulty1', 'difficulty2']
+const DEFAULT_TRACK_ID = 1
+const DEFAULT_CHAPTER_ID = 1
 
-const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track }) => {
+const Sidebar: React.FC<Props> = () => {
   const { t } = useTranslation()
   const location = useLocation()
+  const trackPath = _dropRight(location.pathname.split('/'), 2).join('/')
+
+  const { trackId, chapterId } = useParsedParams()
+  if (!trackId) console.error(`trackId is not defined`)
+  if (!chapterId) console.error(`chapterId is not defined`)
 
   const goBackToTracks: string = _get(location, 'state.coursePage.pathname')
 
-  const { courses } = track
   const [allChaptersStates] = useAllChaptersStates()
+  const { data, loading, error } = useTrackNavigationQuery(trackId || DEFAULT_TRACK_ID)
+
+  if (loading) {
+    return <div>Loading</div>
+  }
+  if (error || !data || !data.track) {
+    return <div>An error Ocurred</div>
+  }
+  const { track } = data
+  const { courses } = track
+  const currentCourse = courses.find((course) => {
+    return course.chapters.some((chapter) => chapter.id === (chapterId || DEFAULT_CHAPTER_ID))
+  })
+  const currentCourseId = currentCourse?.id
+
   return (
     <Fragment>
       <header>
@@ -40,33 +58,28 @@ const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track }) => {
 
       <div className="flex flex-column">
         {courses.map(
-          ({
-            chapters,
-            quiz_difficulties: { quiz_difficulties },
-            slug: courseSlug,
-            translations: courseStrings,
-          }): JSX.Element => {
+          ({ chapters, id: courseId, translations: courseStrings }): JSX.Element => {
             return (
-              <div key={courseSlug} className="pv2 bt b--black">
+              <div key={courseId} className="pv2 bt b--black">
                 <div
                   className={cx('ph4 pv2 flex items-center moon-gray b', {
-                    'white b': currentCourseSlug === courseSlug,
+                    'white b': currentCourseId === courseId,
                   })}
                 >
                   <span className="ph1">{courseStrings[0].title}</span>
                 </div>
                 {chapters &&
                   chapters.map(
-                    ({ id, slug: chapterSlug, translations: chapterStrings }, j): JSX.Element => (
+                    ({ id: chapterId, translations: chapterStrings }, j): JSX.Element => (
                       <Link
-                        key={`${courseSlug}-${chapterSlug}`}
+                        key={`${courseId}-${chapterId}`}
                         activeClassName="white b"
                         className="ph1 pv2 flex items-center moon-gray no-underline"
-                        to={`/${_dropRight(location.pathname.split('/')).join('/')}/${id}`}
+                        to={`${trackPath}/chapter/${chapterId}`}
                       >
                         <ChapterCursor
                           className="h2 ph1"
-                          isComplete={allChaptersStates[id] === ChapterStates.completed}
+                          isComplete={allChaptersStates[chapterId] === ChapterStates.completed}
                         />
                         <span className="ph1">
                           {j + 1}. {chapterStrings[0].title}
@@ -74,23 +87,15 @@ const Sidebar: React.FC<IProps> = ({ currentCourseSlug, track }) => {
                       </Link>
                     )
                   )}
-                {(quiz_difficulties as number[]).map(
-                  (difficulty, j): JSX.Element => {
-                    return (
-                      <Link
-                        key={`${courseSlug}-quiz${difficulty}`}
-                        activeClassName="white b"
-                        className="ph1 pv2 flex items-center moon-gray no-underline"
-                        to={`${t('localePath')}${track.slug}/${courseSlug}/ikhtibar-${difficulty}/`}
-                      >
-                        <ChapterCursor className="h2 ph1" isQuiz />
-                        <span className="ph1">
-                          {`${courses.length + j + 1}. ${t('quiz')} ${t([difficultyStrings[difficulty - 1]])}`}
-                        </span>
-                      </Link>
-                    )
-                  }
-                )}
+
+                <Link
+                  activeClassName="white b"
+                  className="ph1 pv2 flex items-center moon-gray no-underline"
+                  to={`${trackPath}/quiz/${courseId}`}
+                >
+                  <ChapterCursor className="h2 ph1" isQuiz />
+                  <span className="ph1">{t('quiz')}</span>
+                </Link>
               </div>
             )
           }

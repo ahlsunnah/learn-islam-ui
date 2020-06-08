@@ -6832,21 +6832,17 @@ export type Users_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type ChapterFragment = (
+  Pick<Chapters, 'id' | 'slug' | 'audio'>
+  & { translations: Array<Pick<Chapter_Translations, 'id' | 'title' | 'transcription' | 'vocabulary' | 'locale_code' | 'video'>> }
+);
+
 export type ChapterQueryQueryVariables = {
   id: Scalars['Int'];
 };
 
 
-export type ChapterQueryQuery = { chapter?: Maybe<(
-    Pick<Chapters, 'id' | 'slug' | 'audio'>
-    & { translations: Array<Pick<Chapter_Translations, 'id' | 'title' | 'transcription' | 'vocabulary' | 'locale_code' | 'video'>>, course: (
-      Pick<Courses, 'id' | 'slug'>
-      & { track: ChapterPageTrackFragment, chapters: Array<(
-        Pick<Chapters, 'id' | 'slug'>
-        & { translations: Array<Pick<Chapter_Translations, 'title'>> }
-      )> }
-    ) }
-  )> };
+export type ChapterQueryQuery = { chapter?: Maybe<ChapterFragment> };
 
 export type MeQueryVariables = {
   id: Scalars['String'];
@@ -6865,6 +6861,22 @@ export type AddNewUserMutationVariables = {
 
 
 export type AddNewUserMutation = { insert_users_one?: Maybe<Pick<Users, 'id'>> };
+
+export type QuizFragmentFragment = (
+  Pick<Quizzes, 'id' | 'type_slug'>
+  & { translations: Array<Pick<Quiz_Translations, 'id' | 'data'>> }
+);
+
+export type QuizContainerQueryVariables = {
+  locale?: Maybe<Locales_Enum>;
+  id: Scalars['Int'];
+};
+
+
+export type QuizContainerQuery = { course?: Maybe<(
+    Pick<Courses, 'id' | 'slug'>
+    & { translations: Array<Pick<Course_Translations, 'id' | 'title'>>, quizzes: Array<QuizFragmentFragment> }
+  )> };
 
 export type TrackInnerPageCourseFragment = (
   Pick<Courses, 'id' | 'level'>
@@ -6909,6 +6921,26 @@ export type ChapterPageTrackFragment = (
     & { quiz_difficulties?: Maybe<Pick<Course_Quiz_Difficulties, 'quiz_difficulties'>>, chapters: Array<(
       Pick<Chapters, 'id' | 'slug'>
       & { translations: Array<Pick<Chapter_Translations, 'title'>> }
-    )>, translations: Array<Pick<Course_Translations, 'locale_code' | 'title'>> }
+    )>, translations: Array<Pick<Course_Translations, 'id' | 'locale_code' | 'title'>> }
   )> }
 );
+
+export type TrackNavigationChapterFragment = (
+  Pick<Chapters, 'id'>
+  & { translations: Array<Pick<Chapter_Translations, 'title'>> }
+);
+
+export type TrackNavigationTrackFragment = (
+  Pick<Tracks, 'id' | 'slug'>
+  & { translations: Array<Pick<Track_Translations, 'title'>>, courses: Array<(
+    Pick<Courses, 'id'>
+    & { chapters: Array<TrackNavigationChapterFragment>, translations: Array<Pick<Course_Translations, 'id' | 'locale_code' | 'title'>> }
+  )> }
+);
+
+export type TrackNavigationQueryVariables = {
+  id: Scalars['Int'];
+};
+
+
+export type TrackNavigationQuery = { track?: Maybe<TrackNavigationTrackFragment> };

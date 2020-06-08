@@ -21,6 +21,7 @@ export const chapterPageTrack = gql`
         }
       }
       translations(where: { locale_code: { _eq: fr } }) {
+        id
         locale_code
         title
       }

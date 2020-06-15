@@ -3,13 +3,9 @@ import slash from 'slash'
 import { GatsbyCreatePages } from '../types/gatsbyNode'
 import createLocalesPaths from './createLocalesPaths'
 import { Locale } from '../types/index'
-import nextStepCalculatorGenerator from './nextStepCalculatorGenerator'
 import { TMadrassahPageQueryQuery } from '../graphqlTypes'
 
-const createMadrassahPages: GatsbyCreatePages = async ({
-  graphql,
-  actions: { createPage, createRedirect },
-}): Promise<void> => {
+const createMadrassahPages: GatsbyCreatePages = async ({ graphql, actions: { createPage } }): Promise<void> => {
   const locales: Locale[] = ['ar', 'fr']
   const { localePaths } = createLocalesPaths(locales)
 
@@ -17,8 +13,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
   const tracksTemplate = resolve(`./src/templates/TracksTemplate.tsx`)
   const aboutUsTemplate = resolve(`./src/templates/AboutUs.tsx`)
   const trackTemplate = resolve(`./src/templates/TrackTemplate.tsx`)
-  const chapterTemplate = resolve(`./src/templates/Chapter.tsx`)
-  const quizsTemplate = resolve(`./src/templates/Quizs.tsx`)
 
   // home pages
   console.log('Creating home pages')
@@ -98,11 +92,10 @@ const createMadrassahPages: GatsbyCreatePages = async ({
   const {
     api: { tracks },
   } = result.data
-  const nextStepCalculatorWithTracks = nextStepCalculatorGenerator(tracks)
 
-  tracks.forEach((track, trackIndex): void => {
+  tracks.forEach((track): void => {
     const { courses, id: trackId, slug: trackSlug, translations } = track
-    const nextStepCalculatorWithTrack = nextStepCalculatorWithTracks(trackIndex)
+
     if (courses && courses.length) {
       // create track pages
       translations.forEach(({ locale_code }): void => {
@@ -117,48 +110,6 @@ const createMadrassahPages: GatsbyCreatePages = async ({
             localePaths,
             slug: trackSlug,
           },
-        })
-      })
-
-      courses.forEach((course, courseIndex): void => {
-        const nextStepCalculatorWithCourse = nextStepCalculatorWithTrack(courseIndex)
-        const { chapters, slug: courseSlug } = course
-
-        // create chapter pages
-        chapters.forEach((chapter, chapterIndex): void => {
-          const { id: chapterId, slug: chapterSlug, translations: chapterTranslations } = chapter
-          chapterTranslations.forEach(({ locale_code }): void => {
-            console.log(`creating CHAPTER page for slug (${chapterSlug}) and locale (${locale_code}) `)
-            const next = nextStepCalculatorWithCourse({
-              chapterIndex,
-              locale: locale_code,
-              localePath: localePaths[locale_code],
-            })
-
-            const chapterPath = `${localePaths[locale_code]}${trackSlug}/${courseSlug}/${chapterSlug}/`
-            createPage({
-              path: chapterPath,
-              component: slash(chapterTemplate),
-              context: {
-                locale: locale_code,
-                localeEnum: locale_code,
-                localePaths,
-                next,
-                slug: chapterSlug,
-                id: chapterId,
-              },
-            })
-
-            if (chapterIndex === 0) {
-              // course link redirects to first chapter
-              createRedirect({
-                fromPath: `${localePaths[locale_code]}${trackSlug}/${courseSlug}/`,
-                isPermanent: true,
-                redirectInBrowser: true,
-                toPath: chapterPath,
-              })
-            }
-          })
         })
       })
     }

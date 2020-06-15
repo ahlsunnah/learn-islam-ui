@@ -74,7 +74,7 @@ const Sidebar: React.FC<Props> = () => {
                       <Link
                         key={`${courseId}-${chapterId}`}
                         activeClassName="white b"
-                        className="ph1 pv2 flex items-center moon-gray no-underline"
+                        className="ph1 pv2 flex items-center moon-gray no-underline pointer"
                         to={`${trackPath}/chapter/${chapterId}`}
                       >
                         <ChapterCursor
@@ -90,7 +90,7 @@ const Sidebar: React.FC<Props> = () => {
 
                 <Link
                   activeClassName="white b"
-                  className="ph1 pv2 flex items-center moon-gray no-underline"
+                  className="ph1 pv2 flex items-center moon-gray no-underline pointer"
                   to={`${trackPath}/quiz/${courseId}`}
                 >
                   <ChapterCursor className="h2 ph1" isQuiz />

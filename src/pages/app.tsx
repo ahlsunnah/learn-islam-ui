@@ -11,7 +11,7 @@ import Login from '../components/modules/Login/Login'
 import Profile from 'components/modules/Profile/Profile'
 import TracksContainer from 'components/modules/Tracks/TracksContainer'
 import TrackContainer from 'components/modules/Track/TrackContainer'
-import ChapterContainer from 'components/modules/AppChapter/AppChapter.fr'
+import ChapterContainer from 'components/modules/Chapter/AppChapter.fr'
 
 type LayoutContainerProps = {
   children: React.ReactChild

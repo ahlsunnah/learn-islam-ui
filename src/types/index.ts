@@ -12,9 +12,3 @@ export interface IPageContext {
   localePaths: ILocalePaths
   otherLanguagePath: string
 }
-
-export interface IEdges<T> {
-  edges: Array<{
-    node: T
-  }>
-}

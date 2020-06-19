@@ -1,7 +1,7 @@
 import { IPageContext } from './index'
-import { TTrackQueryQuery } from '../graphqlTypes'
+import { TTrackPageQuery } from '../graphqlTypes'
 
 export interface ITrackPageProps {
-  data: TTrackQueryQuery
+  data: TTrackPageQuery
   pageContext: IPageContext & { slug: string }
 }

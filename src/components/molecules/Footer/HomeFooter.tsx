@@ -9,13 +9,12 @@ import Twitter from 'react-icons/lib/fa/twitter'
 import Youtube from 'react-icons/lib/fa/youtube-play'
 import Button from '../../atoms/Button/Button'
 import RawHTML from '../../RawHTML'
-import { IFooterTranslations } from '../../../types/footer'
 import { useTranslation } from 'react-i18next'
 import PoweredByVercel from 'powered-by-vercel'
 
 interface IIcon {
   Icon: React.FC<{ className?: string }>
-  href: keyof IFooterTranslations
+  href: string
 }
 const icons: IIcon[] = [
   { Icon: Facebook, href: 'urlFacebook' },

@@ -3,7 +3,7 @@ import shuffle from 'lib/shuffle'
 import React, { useState } from 'react'
 import RadioButton from './RadioButton'
 import ResultIndicator from './ResultIndicator'
-import { QuizProps } from 'types/quizs'
+import { QuestionProps } from '.'
 
 interface IChooseACategoryData {
   values: Array<{
@@ -12,14 +12,7 @@ interface IChooseACategoryData {
   }>
 }
 
-const ChooseACategory: React.FC<QuizProps> = ({
-  finished,
-  number,
-  t: { chooseACategoryTitle },
-  id,
-  locale,
-  translations,
-}) => {
+const ChooseACategory: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz: { id, translations } }) => {
   const data: IChooseACategoryData = translations[0].data
   const categories = data.values.map(({ name }) => name)
   const itemsDictionary = data.values.reduce<{
@@ -45,7 +38,7 @@ const ChooseACategory: React.FC<QuizProps> = ({
     <div>
       <div className="pb2 flex bb items-center">
         <div className="flex-no-shrink mr2 b">{number} - &nbsp;</div>
-        <div className="f4 b">{chooseACategoryTitle}</div>
+        <div className="f4 b">{t('chooseACategoryTitle')}</div>
       </div>
       <div className="mt3 f4">
         {shuffledItems.map(

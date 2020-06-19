@@ -8,6 +8,8 @@ import { TrackInnerPageQuery, TrackInnerPageQueryVariables, TrackInnerPageTrackF
 import { Locale } from 'types'
 import { useLocation } from '@reach/router'
 
+const DEFAULT_TRACK = 1
+
 const TRACKS_QUERY = gql`
   fragment TrackInnerPageCourse on courses {
     id
@@ -73,9 +75,12 @@ const TracksContainer: React.FC<Props> = ({ trackId }) => {
   const track: TrackInnerPageTrackFragment | null | undefined = _get(data, 'track')
 
   const nextCoursePath =
-    track &&
-    track.courses[0] &&
-    `${location.pathname}/${track.courses[0].id}/${track.courses[0].chapters[0] && track.courses[0].chapters[0].id}/`
+    (track &&
+      track.courses[0] &&
+      `${location.pathname}/${track.courses[0].id}/${
+        track.courses[0].chapters[0] && track.courses[0].chapters[0].id
+      }/`) ||
+    ''
 
   const appPath = useMemo(
     () =>
@@ -93,7 +98,7 @@ const TracksContainer: React.FC<Props> = ({ trackId }) => {
     return <div>An error has occurred, please refresh the page or try again later</div>
   }
 
-  if (!data.track) {
+  if (!track) {
     return <div>We have no track here!</div>
   }
 

@@ -7211,7 +7211,6 @@ export type TSitePageContext = {
   locale: Maybe<Scalars['String']>;
   localePaths: Maybe<TSitePageContextLocalePaths>;
   slug: Maybe<Scalars['String']>;
-  next: Maybe<TSitePageContextNext>;
   langKey: Maybe<Scalars['String']>;
 };
 
@@ -7221,7 +7220,6 @@ export type TSitePageContextFilterInput = {
   locale: Maybe<TStringQueryOperatorInput>;
   localePaths: Maybe<TSitePageContextLocalePathsFilterInput>;
   slug: Maybe<TStringQueryOperatorInput>;
-  next: Maybe<TSitePageContextNextFilterInput>;
   langKey: Maybe<TStringQueryOperatorInput>;
 };
 
@@ -7233,18 +7231,6 @@ export type TSitePageContextLocalePaths = {
 export type TSitePageContextLocalePathsFilterInput = {
   ar: Maybe<TStringQueryOperatorInput>;
   fr: Maybe<TStringQueryOperatorInput>;
-};
-
-export type TSitePageContextNext = {
-  type: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  path: Maybe<Scalars['String']>;
-};
-
-export type TSitePageContextNextFilterInput = {
-  type: Maybe<TStringQueryOperatorInput>;
-  title: Maybe<TStringQueryOperatorInput>;
-  path: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TSitePageEdge = {
@@ -7352,9 +7338,6 @@ export type TSitePageFieldsEnum =
   'context___localePaths___ar' |
   'context___localePaths___fr' |
   'context___slug' |
-  'context___next___type' |
-  'context___next___title' |
-  'context___next___path' |
   'context___langKey' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
@@ -8467,37 +8450,6 @@ export type TAboutUsQueryQueryVariables = {};
 
 
 export type TAboutUsQueryQuery = { api: { tracks: Array<TAboutUsTrackFragment> } };
-
-export type TChapterPageTrackFragment = (
-  Pick<TApi_Tracks, 'id' | 'slug'>
-  & { translations: Array<Pick<TApi_Track_Translations, 'title'>>, courses: Array<(
-    Pick<TApi_Courses, 'id' | 'slug'>
-    & { quiz_difficulties: Maybe<Pick<TApi_Course_Quiz_Difficulties, 'quiz_difficulties'>>, chapters: Array<(
-      Pick<TApi_Chapters, 'id' | 'slug'>
-      & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-    )>, translations: Array<Pick<TApi_Course_Translations, 'locale_code' | 'title'>> }
-  )> }
-);
-
-export type TChapterPageTranslationsFragment = Pick<TTranslationsJson, 'chapter' | 'clickHere' | 'chapterAudio' | 'congratulations' | 'congratulationsCTA' | 'course' | 'difficulty1' | 'difficulty2' | 'downloadAudio' | 'focus' | 'goToTracks' | 'iCompletedTheChapter' | 'listenAudio' | 'locale' | 'localeName' | 'localePath' | 'next' | 'nextCourse' | 'nextHelp' | 'readIn' | 'quiz' | 'tabAudio' | 'tabCompleted' | 'tabTranscription' | 'tabTranslation' | 'tabVocabulary' | 'takeQuiz' | 'track'>;
-
-export type TChapterQueryQueryVariables = {
-  locale: Scalars['String'];
-  localeEnum: Maybe<TApi_Locales_Enum>;
-  id: Scalars['Int'];
-};
-
-
-export type TChapterQueryQuery = { api: { chapter: Maybe<(
-      Pick<TApi_Chapters, 'id' | 'slug' | 'audio'>
-      & { translations: Array<Pick<TApi_Chapter_Translations, 'id' | 'title' | 'transcription' | 'vocabulary' | 'locale_code' | 'video'>>, course: (
-        Pick<TApi_Courses, 'id' | 'slug'>
-        & { track: TChapterPageTrackFragment, chapters: Array<(
-          Pick<TApi_Chapters, 'id' | 'slug'>
-          & { translations: Array<Pick<TApi_Chapter_Translations, 'title'>> }
-        )> }
-      ) }
-    )> }, translations: Maybe<TChapterPageTranslationsFragment>, otherLocaleTranslations: Maybe<Pick<TTranslationsJson, 'localeName' | 'localePath' | 'readIn'>> };
 
 export type THomeTrackFragment = (
   Pick<TApi_Tracks, 'id' | 'order' | 'slug' | 'soon'>

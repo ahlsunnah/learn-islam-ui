@@ -25,6 +25,7 @@ const Button = <C extends React.ElementType>({
   inverse,
   raised,
   rounded = true,
+  greenOutlined, // TODO
   ...props
 }: Props<C>) => {
   const styles: (SystemCssProperties & CSSPseudoSelectorProps) | CSSSelectorObject = {

@@ -4,18 +4,21 @@ import ChooseACategory from './ChooseACategory'
 import FillInTheBlank from './FillInTheBlank'
 import LinkTheSentences from './LinkTheSentences'
 import TrueOrFalse from './TrueOrFalse'
-import { TQuizzesPageTranslationsFragment, TQuizzesPageQuizFragment } from '../../../../graphqlTypes'
-import { Locale } from 'types'
 
-type Props = {
+import { Locale } from 'types'
+import { TFunction } from 'i18next'
+import { QuizContainerQuizFragment } from '../../../../hasuraTypes'
+
+export type QuestionProps = {
   finished: boolean
   number: number
   locale: Locale
-  t: TQuizzesPageTranslationsFragment
-} & TQuizzesPageQuizFragment
+  quiz: QuizContainerQuizFragment
+  t: TFunction
+}
 
-const Quiz: React.FC<Props> = (props) => {
-  const { type_slug } = props
+const Question: React.FC<QuestionProps> = (props) => {
+  const { type_slug } = props.quiz
   switch (type_slug) {
     case 'choose': // {text, values: [ch1, ch2, ch3, ...]}
       return <Choose {...props} />
@@ -35,4 +38,4 @@ const Quiz: React.FC<Props> = (props) => {
       return null
   }
 }
-export default Quiz
+export default Question

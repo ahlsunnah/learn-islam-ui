@@ -1,12 +1,11 @@
 import cx from 'classnames'
 import shuffle from 'lib/shuffle'
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import Correct from 'react-icons/lib/md/check'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
 import MultilineSelect from './MultilineSelect'
-import { QuizProps } from 'types/quizs'
+import { QuestionProps } from '.'
 
 interface ILinkTheSentencesData {
   title: string
@@ -15,7 +14,7 @@ interface ILinkTheSentencesData {
     b: string
   }>
 }
-const LinkTheSentences = ({ finished, number, t: { chooseAnswer, locale }, translations }: QuizProps) => {
+const LinkTheSentences: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz: { translations } }) => {
   const { title, values }: ILinkTheSentencesData = translations[0].data
   const valuesDictionary = values.reduce<{ [left: string]: string }>((acc, { a, b }) => {
     acc[a] = b
@@ -64,7 +63,7 @@ const LinkTheSentences = ({ finished, number, t: { chooseAnswer, locale }, trans
               </div>
               <MultilineSelect
                 correctAnswer={finished ? correctValue : ''}
-                chooseAnswerString={chooseAnswer}
+                chooseAnswerString={t('chooseAnswer')}
                 finished={finished}
                 isRtl={locale === 'ar'}
                 isCorrect={isCorrect}

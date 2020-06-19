@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 import SelectInput from './SelectInput'
-import { QuizProps } from 'types/quizs'
+import { QuestionProps } from '.'
 
 interface IFillInTheBlankData {
   text: string
@@ -29,7 +29,7 @@ interface IFillInTheBlankState {
   selectStyle?: React.CSSProperties
 }
 
-class FillInTheBlank extends React.PureComponent<QuizProps, IFillInTheBlankState> {
+class FillInTheBlank extends React.PureComponent<QuestionProps, IFillInTheBlankState> {
   state: IFillInTheBlankState = {
     answers: [],
     selectStyle: undefined,
@@ -68,8 +68,9 @@ class FillInTheBlank extends React.PureComponent<QuizProps, IFillInTheBlankState
     const {
       finished,
       number,
-      translations,
-      t: { fillInTheBlankTitle, locale },
+      quiz: { translations },
+      locale,
+      t,
     } = this.props
     const { answers, selectStyle } = this.state
     const { text, values }: IFillInTheBlankData = translations[0].data
@@ -80,7 +81,7 @@ class FillInTheBlank extends React.PureComponent<QuizProps, IFillInTheBlankState
       <div>
         <div className="pb2 flex bb items-center">
           <div className="flex-no-shrink mr2 b">{number} -&nbsp;</div>
-          <div className="f4 b">{fillInTheBlankTitle}</div>
+          <div className="f4 b">{t('fillInTheBlankTitle')}</div>
         </div>
         <div className="mt3 mb0 f4">
           {textParts.map((part, i) =>

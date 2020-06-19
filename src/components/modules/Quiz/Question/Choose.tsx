@@ -3,14 +3,15 @@ import Button from 'components/atoms/Button/Button'
 import shuffle from 'lib/shuffle'
 import React, { useState } from 'react'
 import ResultIndicator from './ResultIndicator'
-import { QuizProps } from 'types/quizs'
+import type { QuestionProps } from '.'
 
 interface IChooseData {
   text: string
   values: string[]
 }
 
-const Choose: React.FC<QuizProps> = ({ finished, number, t, id, locale, translations }) => {
+const Choose: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz }) => {
+  const { id, translations } = quiz
   const data: IChooseData = translations[0].data
   const [values] = useState<string[]>(shuffle(data.values))
   const [answer, setAnswer] = useState<string | null>(null)

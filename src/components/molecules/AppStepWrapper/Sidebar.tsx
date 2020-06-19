@@ -23,9 +23,9 @@ const Sidebar: React.FC<Props> = () => {
   const location = useLocation()
   const trackPath = _dropRight(location.pathname.split('/'), 2).join('/')
 
-  const { trackId, chapterId } = useParsedParams()
+  const { trackId, chapterId, courseId } = useParsedParams()
   if (!trackId) console.error(`trackId is not defined`)
-  if (!chapterId) console.error(`chapterId is not defined`)
+  if (!chapterId && !courseId) console.error(`We need at least chapterId or courseId in the sidebar`)
 
   const goBackToTracks: string = _get(location, 'state.coursePage.pathname')
 
@@ -41,6 +41,10 @@ const Sidebar: React.FC<Props> = () => {
   const { track } = data
   const { courses } = track
   const currentCourse = courses.find((course) => {
+    if (courseId) {
+      // We are in a quiz
+      return course.id === courseId
+    }
     return course.chapters.some((chapter) => chapter.id === (chapterId || DEFAULT_CHAPTER_ID))
   })
   const currentCourseId = currentCourse?.id

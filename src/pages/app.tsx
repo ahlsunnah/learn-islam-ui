@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import React, { Fragment, useContext, FC, ReactElement } from 'react'
+import React, { Fragment, useContext, FC } from 'react'
 import { Router } from '@reach/router'
 import _get from 'lodash/get'
 import AppNavBar from '../components/molecules/AppNavBar/AppNavBar'
@@ -12,6 +12,7 @@ import Profile from 'components/modules/Profile/Profile'
 import TracksContainer from 'components/modules/Tracks/TracksContainer'
 import TrackContainer from 'components/modules/Track/TrackContainer'
 import ChapterContainer from 'components/modules/Chapter/AppChapter.fr'
+import QuizContainer from 'components/modules/Quiz/QuizContainer'
 
 type LayoutContainerProps = {
   children: React.ReactChild
@@ -29,11 +30,10 @@ const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => (
 
 type GenericRouteWrapperType = {
   path: string
-  children: ReactElement
 }
 
 const GenericRouteWrapper: FC<GenericRouteWrapperType> = ({ children }) => {
-  return children
+  return <Fragment>{children}</Fragment>
 }
 
 const App = () => {
@@ -74,15 +74,12 @@ const App = () => {
           <Container sx={{ mt: '64px' }} maxWidth="xl">
             <Router basepath="app">
               <GenericRouteWrapper path="tracks">
-                <Fragment>
-                  <TracksContainer path="/" />
-                  <GenericRouteWrapper path=":trackId">
-                    <Fragment>
-                      <TrackContainer path="/" />
-                      <ChapterContainer path="chapter/:chapterId" />
-                    </Fragment>
-                  </GenericRouteWrapper>
-                </Fragment>
+                <TracksContainer path="/" />
+                <GenericRouteWrapper path=":trackId">
+                  <TrackContainer path="/" />
+                  <ChapterContainer path="chapter/:chapterId" />
+                  <QuizContainer path="quiz/:courseId" />
+                </GenericRouteWrapper>
               </GenericRouteWrapper>
               <Profile path="profile" me={user.authUser} signOut={user.signOut} />
               <Login

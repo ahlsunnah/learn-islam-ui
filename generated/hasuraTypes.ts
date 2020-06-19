@@ -2257,6 +2257,14 @@ export type Mutation_Root = {
   delete_locales?: Maybe<Locales_Mutation_Response>;
   /** delete single row from the table: "locales" */
   delete_locales_by_pk?: Maybe<Locales>;
+  /** delete data from the table: "question_choices" */
+  delete_question_choices?: Maybe<Question_Choices_Mutation_Response>;
+  /** delete single row from the table: "question_choices" */
+  delete_question_choices_by_pk?: Maybe<Question_Choices>;
+  /** delete data from the table: "questions" */
+  delete_questions?: Maybe<Questions_Mutation_Response>;
+  /** delete single row from the table: "questions" */
+  delete_questions_by_pk?: Maybe<Questions>;
   /** delete data from the table: "quiz_translations" */
   delete_quiz_translations?: Maybe<Quiz_Translations_Mutation_Response>;
   /** delete single row from the table: "quiz_translations" */
@@ -2289,6 +2297,10 @@ export type Mutation_Root = {
   delete_user_genders?: Maybe<User_Genders_Mutation_Response>;
   /** delete single row from the table: "user_genders" */
   delete_user_genders_by_pk?: Maybe<User_Genders>;
+  /** delete data from the table: "user_question_choice" */
+  delete_user_question_choice?: Maybe<User_Question_Choice_Mutation_Response>;
+  /** delete single row from the table: "user_question_choice" */
+  delete_user_question_choice_by_pk?: Maybe<User_Question_Choice>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -2317,6 +2329,14 @@ export type Mutation_Root = {
   insert_locales?: Maybe<Locales_Mutation_Response>;
   /** insert a single row into the table: "locales" */
   insert_locales_one?: Maybe<Locales>;
+  /** insert data into the table: "question_choices" */
+  insert_question_choices?: Maybe<Question_Choices_Mutation_Response>;
+  /** insert a single row into the table: "question_choices" */
+  insert_question_choices_one?: Maybe<Question_Choices>;
+  /** insert data into the table: "questions" */
+  insert_questions?: Maybe<Questions_Mutation_Response>;
+  /** insert a single row into the table: "questions" */
+  insert_questions_one?: Maybe<Questions>;
   /** insert data into the table: "quiz_translations" */
   insert_quiz_translations?: Maybe<Quiz_Translations_Mutation_Response>;
   /** insert a single row into the table: "quiz_translations" */
@@ -2349,6 +2369,10 @@ export type Mutation_Root = {
   insert_user_genders?: Maybe<User_Genders_Mutation_Response>;
   /** insert a single row into the table: "user_genders" */
   insert_user_genders_one?: Maybe<User_Genders>;
+  /** insert data into the table: "user_question_choice" */
+  insert_user_question_choice?: Maybe<User_Question_Choice_Mutation_Response>;
+  /** insert a single row into the table: "user_question_choice" */
+  insert_user_question_choice_one?: Maybe<User_Question_Choice>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -2377,6 +2401,14 @@ export type Mutation_Root = {
   update_locales?: Maybe<Locales_Mutation_Response>;
   /** update single row of the table: "locales" */
   update_locales_by_pk?: Maybe<Locales>;
+  /** update data of the table: "question_choices" */
+  update_question_choices?: Maybe<Question_Choices_Mutation_Response>;
+  /** update single row of the table: "question_choices" */
+  update_question_choices_by_pk?: Maybe<Question_Choices>;
+  /** update data of the table: "questions" */
+  update_questions?: Maybe<Questions_Mutation_Response>;
+  /** update single row of the table: "questions" */
+  update_questions_by_pk?: Maybe<Questions>;
   /** update data of the table: "quiz_translations" */
   update_quiz_translations?: Maybe<Quiz_Translations_Mutation_Response>;
   /** update single row of the table: "quiz_translations" */
@@ -2409,6 +2441,10 @@ export type Mutation_Root = {
   update_user_genders?: Maybe<User_Genders_Mutation_Response>;
   /** update single row of the table: "user_genders" */
   update_user_genders_by_pk?: Maybe<User_Genders>;
+  /** update data of the table: "user_question_choice" */
+  update_user_question_choice?: Maybe<User_Question_Choice_Mutation_Response>;
+  /** update single row of the table: "user_question_choice" */
+  update_user_question_choice_by_pk?: Maybe<User_Question_Choice>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -2485,6 +2521,30 @@ export type Mutation_RootDelete_LocalesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Locales_By_PkArgs = {
   code: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Question_ChoicesArgs = {
+  where: Question_Choices_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Question_Choices_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_QuestionsArgs = {
+  where: Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Questions_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -2585,6 +2645,18 @@ export type Mutation_RootDelete_User_Genders_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_User_Question_ChoiceArgs = {
+  where: User_Question_Choice_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_User_Question_Choice_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
@@ -2677,6 +2749,34 @@ export type Mutation_RootInsert_LocalesArgs = {
 export type Mutation_RootInsert_Locales_OneArgs = {
   object: Locales_Insert_Input;
   on_conflict?: Maybe<Locales_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Question_ChoicesArgs = {
+  objects: Array<Question_Choices_Insert_Input>;
+  on_conflict?: Maybe<Question_Choices_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Question_Choices_OneArgs = {
+  object: Question_Choices_Insert_Input;
+  on_conflict?: Maybe<Question_Choices_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_QuestionsArgs = {
+  objects: Array<Questions_Insert_Input>;
+  on_conflict?: Maybe<Questions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Questions_OneArgs = {
+  object: Questions_Insert_Input;
+  on_conflict?: Maybe<Questions_On_Conflict>;
 };
 
 
@@ -2793,6 +2893,20 @@ export type Mutation_RootInsert_User_Genders_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_User_Question_ChoiceArgs = {
+  objects: Array<User_Question_Choice_Insert_Input>;
+  on_conflict?: Maybe<User_Question_Choice_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_User_Question_Choice_OneArgs = {
+  object: User_Question_Choice_Insert_Input;
+  on_conflict?: Maybe<User_Question_Choice_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
   on_conflict?: Maybe<Users_On_Conflict>;
@@ -2897,6 +3011,38 @@ export type Mutation_RootUpdate_LocalesArgs = {
 export type Mutation_RootUpdate_Locales_By_PkArgs = {
   _set?: Maybe<Locales_Set_Input>;
   pk_columns: Locales_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Question_ChoicesArgs = {
+  _inc?: Maybe<Question_Choices_Inc_Input>;
+  _set?: Maybe<Question_Choices_Set_Input>;
+  where: Question_Choices_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Question_Choices_By_PkArgs = {
+  _inc?: Maybe<Question_Choices_Inc_Input>;
+  _set?: Maybe<Question_Choices_Set_Input>;
+  pk_columns: Question_Choices_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_QuestionsArgs = {
+  _inc?: Maybe<Questions_Inc_Input>;
+  _set?: Maybe<Questions_Set_Input>;
+  where: Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Questions_By_PkArgs = {
+  _inc?: Maybe<Questions_Inc_Input>;
+  _set?: Maybe<Questions_Set_Input>;
+  pk_columns: Questions_Pk_Columns_Input;
 };
 
 
@@ -3035,6 +3181,22 @@ export type Mutation_RootUpdate_User_Genders_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_User_Question_ChoiceArgs = {
+  _inc?: Maybe<User_Question_Choice_Inc_Input>;
+  _set?: Maybe<User_Question_Choice_Set_Input>;
+  where: User_Question_Choice_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_Question_Choice_By_PkArgs = {
+  _inc?: Maybe<User_Question_Choice_Inc_Input>;
+  _set?: Maybe<User_Question_Choice_Set_Input>;
+  pk_columns: User_Question_Choice_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
   _inc?: Maybe<Users_Inc_Input>;
   _set?: Maybe<Users_Set_Input>;
@@ -3106,6 +3268,18 @@ export type Query_Root = {
   locales_aggregate: Locales_Aggregate;
   /** fetch data from the table: "locales" using primary key columns */
   locales_by_pk?: Maybe<Locales>;
+  /** fetch data from the table: "question_choices" */
+  question_choices: Array<Question_Choices>;
+  /** fetch aggregated fields from the table: "question_choices" */
+  question_choices_aggregate: Question_Choices_Aggregate;
+  /** fetch data from the table: "question_choices" using primary key columns */
+  question_choices_by_pk?: Maybe<Question_Choices>;
+  /** fetch data from the table: "questions" */
+  questions: Array<Questions>;
+  /** fetch aggregated fields from the table: "questions" */
+  questions_aggregate: Questions_Aggregate;
+  /** fetch data from the table: "questions" using primary key columns */
+  questions_by_pk?: Maybe<Questions>;
   /** fetch data from the table: "quiz_translations" */
   quiz_translations: Array<Quiz_Translations>;
   /** fetch aggregated fields from the table: "quiz_translations" */
@@ -3154,6 +3328,12 @@ export type Query_Root = {
   user_genders_aggregate: User_Genders_Aggregate;
   /** fetch data from the table: "user_genders" using primary key columns */
   user_genders_by_pk?: Maybe<User_Genders>;
+  /** fetch data from the table: "user_question_choice" */
+  user_question_choice: Array<User_Question_Choice>;
+  /** fetch aggregated fields from the table: "user_question_choice" */
+  user_question_choice_aggregate: User_Question_Choice_Aggregate;
+  /** fetch data from the table: "user_question_choice" using primary key columns */
+  user_question_choice_by_pk?: Maybe<User_Question_Choice>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -3336,6 +3516,58 @@ export type Query_RootLocales_AggregateArgs = {
 /** query root */
 export type Query_RootLocales_By_PkArgs = {
   code: Scalars['String'];
+};
+
+
+/** query root */
+export type Query_RootQuestion_ChoicesArgs = {
+  distinct_on?: Maybe<Array<Question_Choices_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Question_Choices_Order_By>>;
+  where?: Maybe<Question_Choices_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootQuestion_Choices_AggregateArgs = {
+  distinct_on?: Maybe<Array<Question_Choices_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Question_Choices_Order_By>>;
+  where?: Maybe<Question_Choices_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootQuestion_Choices_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type Query_RootQuestionsArgs = {
+  distinct_on?: Maybe<Array<Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Questions_Order_By>>;
+  where?: Maybe<Questions_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootQuestions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Questions_Order_By>>;
+  where?: Maybe<Questions_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootQuestions_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -3548,6 +3780,32 @@ export type Query_RootUser_Genders_By_PkArgs = {
 
 
 /** query root */
+export type Query_RootUser_Question_ChoiceArgs = {
+  distinct_on?: Maybe<Array<User_Question_Choice_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Question_Choice_Order_By>>;
+  where?: Maybe<User_Question_Choice_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootUser_Question_Choice_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Question_Choice_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Question_Choice_Order_By>>;
+  where?: Maybe<User_Question_Choice_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootUser_Question_Choice_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3570,6 +3828,612 @@ export type Query_RootUsers_AggregateArgs = {
 /** query root */
 export type Query_RootUsers_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+/** columns and relationships of "question_choices" */
+export type Question_Choices = {
+  choice: Scalars['String'];
+  choice_order: Scalars['Int'];
+  id: Scalars['Int'];
+  is_right_choice: Scalars['Boolean'];
+  question_id: Scalars['Int'];
+};
+
+/** aggregated selection of "question_choices" */
+export type Question_Choices_Aggregate = {
+  aggregate?: Maybe<Question_Choices_Aggregate_Fields>;
+  nodes: Array<Question_Choices>;
+};
+
+/** aggregate fields of "question_choices" */
+export type Question_Choices_Aggregate_Fields = {
+  avg?: Maybe<Question_Choices_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Question_Choices_Max_Fields>;
+  min?: Maybe<Question_Choices_Min_Fields>;
+  stddev?: Maybe<Question_Choices_Stddev_Fields>;
+  stddev_pop?: Maybe<Question_Choices_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Question_Choices_Stddev_Samp_Fields>;
+  sum?: Maybe<Question_Choices_Sum_Fields>;
+  var_pop?: Maybe<Question_Choices_Var_Pop_Fields>;
+  var_samp?: Maybe<Question_Choices_Var_Samp_Fields>;
+  variance?: Maybe<Question_Choices_Variance_Fields>;
+};
+
+
+/** aggregate fields of "question_choices" */
+export type Question_Choices_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Question_Choices_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "question_choices" */
+export type Question_Choices_Aggregate_Order_By = {
+  avg?: Maybe<Question_Choices_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Question_Choices_Max_Order_By>;
+  min?: Maybe<Question_Choices_Min_Order_By>;
+  stddev?: Maybe<Question_Choices_Stddev_Order_By>;
+  stddev_pop?: Maybe<Question_Choices_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Question_Choices_Stddev_Samp_Order_By>;
+  sum?: Maybe<Question_Choices_Sum_Order_By>;
+  var_pop?: Maybe<Question_Choices_Var_Pop_Order_By>;
+  var_samp?: Maybe<Question_Choices_Var_Samp_Order_By>;
+  variance?: Maybe<Question_Choices_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "question_choices" */
+export type Question_Choices_Arr_Rel_Insert_Input = {
+  data: Array<Question_Choices_Insert_Input>;
+  on_conflict?: Maybe<Question_Choices_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Question_Choices_Avg_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "question_choices" */
+export type Question_Choices_Avg_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "question_choices". All fields are combined with a logical 'AND'. */
+export type Question_Choices_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Question_Choices_Bool_Exp>>>;
+  _not?: Maybe<Question_Choices_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Question_Choices_Bool_Exp>>>;
+  choice?: Maybe<String_Comparison_Exp>;
+  choice_order?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  is_right_choice?: Maybe<Boolean_Comparison_Exp>;
+  question_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "question_choices" */
+export type Question_Choices_Constraint = 
+  /** unique or primary key constraint */
+  'question_choices_pkey' |
+  /** unique or primary key constraint */
+  'question_choices_question_id_choice_key';
+
+/** input type for incrementing integer column in table "question_choices" */
+export type Question_Choices_Inc_Input = {
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "question_choices" */
+export type Question_Choices_Insert_Input = {
+  choice?: Maybe<Scalars['String']>;
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  is_right_choice?: Maybe<Scalars['Boolean']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Question_Choices_Max_Fields = {
+  choice?: Maybe<Scalars['String']>;
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "question_choices" */
+export type Question_Choices_Max_Order_By = {
+  choice?: Maybe<Order_By>;
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Question_Choices_Min_Fields = {
+  choice?: Maybe<Scalars['String']>;
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "question_choices" */
+export type Question_Choices_Min_Order_By = {
+  choice?: Maybe<Order_By>;
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "question_choices" */
+export type Question_Choices_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Question_Choices>;
+};
+
+/** input type for inserting object relation for remote table "question_choices" */
+export type Question_Choices_Obj_Rel_Insert_Input = {
+  data: Question_Choices_Insert_Input;
+  on_conflict?: Maybe<Question_Choices_On_Conflict>;
+};
+
+/** on conflict condition type for table "question_choices" */
+export type Question_Choices_On_Conflict = {
+  constraint: Question_Choices_Constraint;
+  update_columns: Array<Question_Choices_Update_Column>;
+  where?: Maybe<Question_Choices_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "question_choices" */
+export type Question_Choices_Order_By = {
+  choice?: Maybe<Order_By>;
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  is_right_choice?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "question_choices" */
+export type Question_Choices_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "question_choices" */
+export type Question_Choices_Select_Column = 
+  /** column name */
+  'choice' |
+  /** column name */
+  'choice_order' |
+  /** column name */
+  'id' |
+  /** column name */
+  'is_right_choice' |
+  /** column name */
+  'question_id';
+
+/** input type for updating data in table "question_choices" */
+export type Question_Choices_Set_Input = {
+  choice?: Maybe<Scalars['String']>;
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  is_right_choice?: Maybe<Scalars['Boolean']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Question_Choices_Stddev_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "question_choices" */
+export type Question_Choices_Stddev_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Question_Choices_Stddev_Pop_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "question_choices" */
+export type Question_Choices_Stddev_Pop_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Question_Choices_Stddev_Samp_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "question_choices" */
+export type Question_Choices_Stddev_Samp_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Question_Choices_Sum_Fields = {
+  choice_order?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  question_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "question_choices" */
+export type Question_Choices_Sum_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "question_choices" */
+export type Question_Choices_Update_Column = 
+  /** column name */
+  'choice' |
+  /** column name */
+  'choice_order' |
+  /** column name */
+  'id' |
+  /** column name */
+  'is_right_choice' |
+  /** column name */
+  'question_id';
+
+/** aggregate var_pop on columns */
+export type Question_Choices_Var_Pop_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "question_choices" */
+export type Question_Choices_Var_Pop_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Question_Choices_Var_Samp_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "question_choices" */
+export type Question_Choices_Var_Samp_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Question_Choices_Variance_Fields = {
+  choice_order?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  question_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "question_choices" */
+export type Question_Choices_Variance_Order_By = {
+  choice_order?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  question_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "questions" */
+export type Questions = {
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  is_active: Scalars['Boolean'];
+  level: Scalars['String'];
+  question: Scalars['String'];
+  type: Scalars['String'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "questions" */
+export type Questions_Aggregate = {
+  aggregate?: Maybe<Questions_Aggregate_Fields>;
+  nodes: Array<Questions>;
+};
+
+/** aggregate fields of "questions" */
+export type Questions_Aggregate_Fields = {
+  avg?: Maybe<Questions_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Questions_Max_Fields>;
+  min?: Maybe<Questions_Min_Fields>;
+  stddev?: Maybe<Questions_Stddev_Fields>;
+  stddev_pop?: Maybe<Questions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Questions_Stddev_Samp_Fields>;
+  sum?: Maybe<Questions_Sum_Fields>;
+  var_pop?: Maybe<Questions_Var_Pop_Fields>;
+  var_samp?: Maybe<Questions_Var_Samp_Fields>;
+  variance?: Maybe<Questions_Variance_Fields>;
+};
+
+
+/** aggregate fields of "questions" */
+export type Questions_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Questions_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "questions" */
+export type Questions_Aggregate_Order_By = {
+  avg?: Maybe<Questions_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Questions_Max_Order_By>;
+  min?: Maybe<Questions_Min_Order_By>;
+  stddev?: Maybe<Questions_Stddev_Order_By>;
+  stddev_pop?: Maybe<Questions_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Questions_Stddev_Samp_Order_By>;
+  sum?: Maybe<Questions_Sum_Order_By>;
+  var_pop?: Maybe<Questions_Var_Pop_Order_By>;
+  var_samp?: Maybe<Questions_Var_Samp_Order_By>;
+  variance?: Maybe<Questions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "questions" */
+export type Questions_Arr_Rel_Insert_Input = {
+  data: Array<Questions_Insert_Input>;
+  on_conflict?: Maybe<Questions_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Questions_Avg_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "questions" */
+export type Questions_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "questions". All fields are combined with a logical 'AND'. */
+export type Questions_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Questions_Bool_Exp>>>;
+  _not?: Maybe<Questions_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Questions_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  is_active?: Maybe<Boolean_Comparison_Exp>;
+  level?: Maybe<String_Comparison_Exp>;
+  question?: Maybe<String_Comparison_Exp>;
+  type?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "questions" */
+export type Questions_Constraint = 
+  /** unique or primary key constraint */
+  'questions_pkey' |
+  /** unique or primary key constraint */
+  'questions_question_key';
+
+/** input type for incrementing integer column in table "questions" */
+export type Questions_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "questions" */
+export type Questions_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
+  level?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Questions_Max_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "questions" */
+export type Questions_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Questions_Min_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "questions" */
+export type Questions_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "questions" */
+export type Questions_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Questions>;
+};
+
+/** input type for inserting object relation for remote table "questions" */
+export type Questions_Obj_Rel_Insert_Input = {
+  data: Questions_Insert_Input;
+  on_conflict?: Maybe<Questions_On_Conflict>;
+};
+
+/** on conflict condition type for table "questions" */
+export type Questions_On_Conflict = {
+  constraint: Questions_Constraint;
+  update_columns: Array<Questions_Update_Column>;
+  where?: Maybe<Questions_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "questions" */
+export type Questions_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  is_active?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "questions" */
+export type Questions_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "questions" */
+export type Questions_Select_Column = 
+  /** column name */
+  'created_at' |
+  /** column name */
+  'id' |
+  /** column name */
+  'is_active' |
+  /** column name */
+  'level' |
+  /** column name */
+  'question' |
+  /** column name */
+  'type' |
+  /** column name */
+  'updated_at';
+
+/** input type for updating data in table "questions" */
+export type Questions_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
+  level?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Questions_Stddev_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "questions" */
+export type Questions_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Questions_Stddev_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "questions" */
+export type Questions_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Questions_Stddev_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "questions" */
+export type Questions_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Questions_Sum_Fields = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "questions" */
+export type Questions_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "questions" */
+export type Questions_Update_Column = 
+  /** column name */
+  'created_at' |
+  /** column name */
+  'id' |
+  /** column name */
+  'is_active' |
+  /** column name */
+  'level' |
+  /** column name */
+  'question' |
+  /** column name */
+  'type' |
+  /** column name */
+  'updated_at';
+
+/** aggregate var_pop on columns */
+export type Questions_Var_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "questions" */
+export type Questions_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Questions_Var_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "questions" */
+export type Questions_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Questions_Variance_Fields = {
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "questions" */
+export type Questions_Variance_Order_By = {
+  id?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "quiz_translations" */
@@ -4487,6 +5351,18 @@ export type Subscription_Root = {
   locales_aggregate: Locales_Aggregate;
   /** fetch data from the table: "locales" using primary key columns */
   locales_by_pk?: Maybe<Locales>;
+  /** fetch data from the table: "question_choices" */
+  question_choices: Array<Question_Choices>;
+  /** fetch aggregated fields from the table: "question_choices" */
+  question_choices_aggregate: Question_Choices_Aggregate;
+  /** fetch data from the table: "question_choices" using primary key columns */
+  question_choices_by_pk?: Maybe<Question_Choices>;
+  /** fetch data from the table: "questions" */
+  questions: Array<Questions>;
+  /** fetch aggregated fields from the table: "questions" */
+  questions_aggregate: Questions_Aggregate;
+  /** fetch data from the table: "questions" using primary key columns */
+  questions_by_pk?: Maybe<Questions>;
   /** fetch data from the table: "quiz_translations" */
   quiz_translations: Array<Quiz_Translations>;
   /** fetch aggregated fields from the table: "quiz_translations" */
@@ -4535,6 +5411,12 @@ export type Subscription_Root = {
   user_genders_aggregate: User_Genders_Aggregate;
   /** fetch data from the table: "user_genders" using primary key columns */
   user_genders_by_pk?: Maybe<User_Genders>;
+  /** fetch data from the table: "user_question_choice" */
+  user_question_choice: Array<User_Question_Choice>;
+  /** fetch aggregated fields from the table: "user_question_choice" */
+  user_question_choice_aggregate: User_Question_Choice_Aggregate;
+  /** fetch data from the table: "user_question_choice" using primary key columns */
+  user_question_choice_by_pk?: Maybe<User_Question_Choice>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -4717,6 +5599,58 @@ export type Subscription_RootLocales_AggregateArgs = {
 /** subscription root */
 export type Subscription_RootLocales_By_PkArgs = {
   code: Scalars['String'];
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestion_ChoicesArgs = {
+  distinct_on?: Maybe<Array<Question_Choices_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Question_Choices_Order_By>>;
+  where?: Maybe<Question_Choices_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestion_Choices_AggregateArgs = {
+  distinct_on?: Maybe<Array<Question_Choices_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Question_Choices_Order_By>>;
+  where?: Maybe<Question_Choices_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestion_Choices_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestionsArgs = {
+  distinct_on?: Maybe<Array<Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Questions_Order_By>>;
+  where?: Maybe<Questions_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Questions_Order_By>>;
+  where?: Maybe<Questions_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootQuestions_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -4925,6 +5859,32 @@ export type Subscription_RootUser_Genders_AggregateArgs = {
 /** subscription root */
 export type Subscription_RootUser_Genders_By_PkArgs = {
   letter: Scalars['String'];
+};
+
+
+/** subscription root */
+export type Subscription_RootUser_Question_ChoiceArgs = {
+  distinct_on?: Maybe<Array<User_Question_Choice_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Question_Choice_Order_By>>;
+  where?: Maybe<User_Question_Choice_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootUser_Question_Choice_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Question_Choice_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Question_Choice_Order_By>>;
+  where?: Maybe<User_Question_Choice_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootUser_Question_Choice_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -6500,6 +7460,289 @@ export type User_Genders_Update_Column =
   /** column name */
   'letter';
 
+/** columns and relationships of "user_question_choice" */
+export type User_Question_Choice = {
+  id: Scalars['Int'];
+  question_choice_id: Scalars['Int'];
+  user_id: Scalars['Int'];
+};
+
+/** aggregated selection of "user_question_choice" */
+export type User_Question_Choice_Aggregate = {
+  aggregate?: Maybe<User_Question_Choice_Aggregate_Fields>;
+  nodes: Array<User_Question_Choice>;
+};
+
+/** aggregate fields of "user_question_choice" */
+export type User_Question_Choice_Aggregate_Fields = {
+  avg?: Maybe<User_Question_Choice_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<User_Question_Choice_Max_Fields>;
+  min?: Maybe<User_Question_Choice_Min_Fields>;
+  stddev?: Maybe<User_Question_Choice_Stddev_Fields>;
+  stddev_pop?: Maybe<User_Question_Choice_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<User_Question_Choice_Stddev_Samp_Fields>;
+  sum?: Maybe<User_Question_Choice_Sum_Fields>;
+  var_pop?: Maybe<User_Question_Choice_Var_Pop_Fields>;
+  var_samp?: Maybe<User_Question_Choice_Var_Samp_Fields>;
+  variance?: Maybe<User_Question_Choice_Variance_Fields>;
+};
+
+
+/** aggregate fields of "user_question_choice" */
+export type User_Question_Choice_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Question_Choice_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "user_question_choice" */
+export type User_Question_Choice_Aggregate_Order_By = {
+  avg?: Maybe<User_Question_Choice_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<User_Question_Choice_Max_Order_By>;
+  min?: Maybe<User_Question_Choice_Min_Order_By>;
+  stddev?: Maybe<User_Question_Choice_Stddev_Order_By>;
+  stddev_pop?: Maybe<User_Question_Choice_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<User_Question_Choice_Stddev_Samp_Order_By>;
+  sum?: Maybe<User_Question_Choice_Sum_Order_By>;
+  var_pop?: Maybe<User_Question_Choice_Var_Pop_Order_By>;
+  var_samp?: Maybe<User_Question_Choice_Var_Samp_Order_By>;
+  variance?: Maybe<User_Question_Choice_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_question_choice" */
+export type User_Question_Choice_Arr_Rel_Insert_Input = {
+  data: Array<User_Question_Choice_Insert_Input>;
+  on_conflict?: Maybe<User_Question_Choice_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type User_Question_Choice_Avg_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "user_question_choice" */
+export type User_Question_Choice_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "user_question_choice". All fields are combined with a logical 'AND'. */
+export type User_Question_Choice_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<User_Question_Choice_Bool_Exp>>>;
+  _not?: Maybe<User_Question_Choice_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<User_Question_Choice_Bool_Exp>>>;
+  id?: Maybe<Int_Comparison_Exp>;
+  question_choice_id?: Maybe<Int_Comparison_Exp>;
+  user_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "user_question_choice" */
+export type User_Question_Choice_Constraint = 
+  /** unique or primary key constraint */
+  'user_question_choice_pkey';
+
+/** input type for incrementing integer column in table "user_question_choice" */
+export type User_Question_Choice_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "user_question_choice" */
+export type User_Question_Choice_Insert_Input = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type User_Question_Choice_Max_Fields = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "user_question_choice" */
+export type User_Question_Choice_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type User_Question_Choice_Min_Fields = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "user_question_choice" */
+export type User_Question_Choice_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "user_question_choice" */
+export type User_Question_Choice_Mutation_Response = {
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<User_Question_Choice>;
+};
+
+/** input type for inserting object relation for remote table "user_question_choice" */
+export type User_Question_Choice_Obj_Rel_Insert_Input = {
+  data: User_Question_Choice_Insert_Input;
+  on_conflict?: Maybe<User_Question_Choice_On_Conflict>;
+};
+
+/** on conflict condition type for table "user_question_choice" */
+export type User_Question_Choice_On_Conflict = {
+  constraint: User_Question_Choice_Constraint;
+  update_columns: Array<User_Question_Choice_Update_Column>;
+  where?: Maybe<User_Question_Choice_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "user_question_choice" */
+export type User_Question_Choice_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "user_question_choice" */
+export type User_Question_Choice_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "user_question_choice" */
+export type User_Question_Choice_Select_Column = 
+  /** column name */
+  'id' |
+  /** column name */
+  'question_choice_id' |
+  /** column name */
+  'user_id';
+
+/** input type for updating data in table "user_question_choice" */
+export type User_Question_Choice_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type User_Question_Choice_Stddev_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "user_question_choice" */
+export type User_Question_Choice_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type User_Question_Choice_Stddev_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "user_question_choice" */
+export type User_Question_Choice_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type User_Question_Choice_Stddev_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "user_question_choice" */
+export type User_Question_Choice_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type User_Question_Choice_Sum_Fields = {
+  id?: Maybe<Scalars['Int']>;
+  question_choice_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "user_question_choice" */
+export type User_Question_Choice_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "user_question_choice" */
+export type User_Question_Choice_Update_Column = 
+  /** column name */
+  'id' |
+  /** column name */
+  'question_choice_id' |
+  /** column name */
+  'user_id';
+
+/** aggregate var_pop on columns */
+export type User_Question_Choice_Var_Pop_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "user_question_choice" */
+export type User_Question_Choice_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type User_Question_Choice_Var_Samp_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "user_question_choice" */
+export type User_Question_Choice_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type User_Question_Choice_Variance_Fields = {
+  id?: Maybe<Scalars['Float']>;
+  question_choice_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "user_question_choice" */
+export type User_Question_Choice_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  question_choice_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
 /** columns and relationships of "users" */
 export type Users = {
   country?: Maybe<Scalars['String']>;
@@ -6862,9 +8105,14 @@ export type AddNewUserMutationVariables = {
 
 export type AddNewUserMutation = { insert_users_one?: Maybe<Pick<Users, 'id'>> };
 
-export type QuizFragmentFragment = (
+export type QuizContainerQuizFragment = (
   Pick<Quizzes, 'id' | 'type_slug'>
   & { translations: Array<Pick<Quiz_Translations, 'id' | 'data'>> }
+);
+
+export type QuizContainerCourseFragment = (
+  Pick<Courses, 'id' | 'slug'>
+  & { translations: Array<Pick<Course_Translations, 'id' | 'title'>>, quizzes: Array<QuizContainerQuizFragment> }
 );
 
 export type QuizContainerQueryVariables = {
@@ -6873,10 +8121,7 @@ export type QuizContainerQueryVariables = {
 };
 
 
-export type QuizContainerQuery = { course?: Maybe<(
-    Pick<Courses, 'id' | 'slug'>
-    & { translations: Array<Pick<Course_Translations, 'id' | 'title'>>, quizzes: Array<QuizFragmentFragment> }
-  )> };
+export type QuizContainerQuery = { course?: Maybe<QuizContainerCourseFragment> };
 
 export type TrackInnerPageCourseFragment = (
   Pick<Courses, 'id' | 'level'>

@@ -1,14 +1,11 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import { compose, setPropTypes, withPropsOnChange } from 'recompose'
 import Progress from './Progress'
 
-interface Props {
+type Props = {
   percent: number
   progressText: string
 }
 class ProgressWrapper extends React.Component<Props> {
-  // TODO
   render() {
     const { percent, progressText } = this.props
     return (

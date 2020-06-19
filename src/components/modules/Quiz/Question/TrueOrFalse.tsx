@@ -2,14 +2,14 @@ import cx from 'classnames'
 import Button from 'components/atoms/Button/Button'
 import React, { useState } from 'react'
 import ResultIndicator from './ResultIndicator'
-import { QuizProps } from 'types/quizs'
+import { QuestionProps } from '.'
 
 interface ITrueOrFalseData {
   text: string
   isTrue: boolean
 }
 
-const TrueOrFalse: React.FC<QuizProps> = ({ finished, number, t: { quizFalse, quizTrue }, translations }) => {
+const TrueOrFalse: React.FC<QuestionProps> = ({ finished, number, t, quiz: { translations } }) => {
   const { text, isTrue }: ITrueOrFalseData = translations[0].data
   const [answer, setAnswer] = useState<boolean>()
   const handleAnswer = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
@@ -34,7 +34,7 @@ const TrueOrFalse: React.FC<QuizProps> = ({ finished, number, t: { quizFalse, qu
               raised={answer === true}
               outlined={answer !== true}
             >
-              {quizTrue}
+              {t('quizTrue')}
             </Button>
           </div>
           <div className="mt2">
@@ -50,7 +50,7 @@ const TrueOrFalse: React.FC<QuizProps> = ({ finished, number, t: { quizFalse, qu
               raised={answer === false}
               outlined={answer !== false}
             >
-              {quizFalse}
+              {t('quizFalse')}
             </Button>
           </div>
         </div>

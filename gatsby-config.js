@@ -2,6 +2,10 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+// Load ts files in gatsby.node and gatsby-browser
+require('source-map-support').install()
+require('ts-node').register()
+
 console.log(process.env.NODE_ENV)
 
 const { GATSBY_API, API_SECRET } = process.env

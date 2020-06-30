@@ -35,7 +35,7 @@ const createMadrassahPages: GatsbyCreatePages = async ({ graphql, actions: { cre
     })
   })
 
-  // // about us pages
+  // about us pages
   console.log('Creating about us pages')
   locales.forEach((locale): void => {
     createPage({

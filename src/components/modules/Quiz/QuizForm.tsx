@@ -46,7 +46,12 @@ const QuizForm: React.FC<QuizComponentProps> = ({ courseStrings, quizzes }) => {
           )
         })}
       </div>
-      <QuizFooter finished={gameState === GameState.finished} totalQuestions={quizzes.length} t={t} />
+      <QuizFooter
+        submit={() => 'TODO'}
+        finished={gameState === GameState.finished}
+        totalQuestions={quizzes.length}
+        t={t}
+      />
     </div>
   )
 }

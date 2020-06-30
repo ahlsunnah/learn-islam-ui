@@ -30,7 +30,6 @@ const MainChapter: React.FC<MainChapterType> = ({ chapter }) => {
     setActiveTab(el.name)
   }, [])
 
-  // TODO: memoize this:
   const chapterTranslations = chapter?.translations
   const chapterStrings = chapterTranslations.find(({ locale_code }) => locale_code === 'fr')
 

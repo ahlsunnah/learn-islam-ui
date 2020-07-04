@@ -2,12 +2,13 @@
 import { jsx } from 'theme-ui'
 import MaterialCard from '@material-ui/core/Card'
 
-interface IProps {
+type Props = {
   children: JSX.Element | JSX.Element[]
   className?: string
   rounded?: boolean
 }
-const Card = ({ children, className, rounded }: IProps): JSX.Element => (
+
+const Card = ({ children, className, rounded }: Props): JSX.Element => (
   <MaterialCard
     className={className}
     sx={{

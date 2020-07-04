@@ -3,7 +3,7 @@ import Card from 'components/atoms/Card/Card'
 import Question from './Question'
 import QuizFooter from './QuizFooter'
 import QuizHeader from './QuizHeader'
-import { QuizContainerQuizFragment } from '../../../hasuraTypes'
+import { QuestionContainerQuestionFragment } from '../../../hasuraTypes'
 import { useTranslation } from 'react-i18next'
 import { Locale } from 'types'
 
@@ -18,10 +18,10 @@ export type QuizComponentProps = {
     id: number
     title: string
   }
-  quizzes: QuizContainerQuizFragment[]
+  questions: QuestionContainerQuestionFragment[]
 }
 
-const QuizForm: React.FC<QuizComponentProps> = ({ courseStrings, quizzes }) => {
+const QuizForm: React.FC<QuizComponentProps> = ({ courseStrings, questions }) => {
   const [gameState, setGameState] = useState<GameState>(GameState['not started'])
   const { t, i18n } = useTranslation()
   const locale = i18n.language as Locale
@@ -35,13 +35,19 @@ const QuizForm: React.FC<QuizComponentProps> = ({ courseStrings, quizzes }) => {
         restartQuizs={() => undefined} // TODO
         started={true} // TODO
         t={t}
-        totalQuestions={quizzes.length}
+        totalQuestions={questions.length}
       />
       <div id="quizs-start">
-        {quizzes.map((quiz, i) => {
+        {questions.map((question, i) => {
           return (
-            <Card key={quiz.id} className="mb5 pv4 ph4 w-60-l w-75-m w-100 center" rounded>
-              <Question number={i + 1} finished={gameState === GameState.finished} t={t} locale={locale} quiz={quiz} />
+            <Card key={question.id} className="mb5 pv4 ph4 w-60-l w-75-m w-100 center" rounded>
+              <Question
+                number={i + 1}
+                finished={gameState === GameState.finished}
+                t={t}
+                locale={locale}
+                question={question}
+              />
             </Card>
           )
         })}
@@ -49,7 +55,7 @@ const QuizForm: React.FC<QuizComponentProps> = ({ courseStrings, quizzes }) => {
       <QuizFooter
         submit={() => 'TODO'}
         finished={gameState === GameState.finished}
-        totalQuestions={quizzes.length}
+        totalQuestions={questions.length}
         t={t}
       />
     </div>

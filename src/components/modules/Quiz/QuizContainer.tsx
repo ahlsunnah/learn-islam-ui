@@ -4,31 +4,45 @@ import QuizComponent from 'components/modules/Quiz/QuizComponent'
 import { useQuery } from '@apollo/react-hooks'
 import { useTranslation } from 'react-i18next'
 import { Locale } from 'types'
-import { QuizContainerQuery, QuizContainerQueryVariables } from '../../../hasuraTypes'
+import { CourseContainerQuery, CourseContainerQueryVariables } from '../../../hasuraTypes'
 
+// Put Fragments in a separate file for reusability
 export const QUIZ_QUERY = gql`
-  fragment QuizContainerQuiz on quizzes {
+  fragment QuestionType on question_types {
+    slug
+    name
+  }
+  fragment QuestionChoices on question_choices {
     id
-    type_slug
-    translations(where: { locale_code: { _eq: $locale } }) {
-      id
-      data
+    choice
+    choice_order
+    is_right_choice
+  }
+  fragment QuestionContainerQuestion on questions {
+    id
+    question
+    is_active
+    question_type {
+      ...QuestionType
+    }
+    question_choices {
+      ...QuestionChoices
     }
   }
-  fragment QuizContainerCourse on courses {
+  fragment QuestionContainerCourse on courses {
     id
     slug
     translations(where: { locale_code: { _eq: $locale } }) {
       id
       title
     }
-    quizzes {
-      ...QuizContainerQuiz
+    questions {
+      ...QuestionContainerQuestion
     }
   }
-  query QuizContainer($locale: locales_enum, $id: Int!) {
+  query CourseContainer($locale: locales_enum, $id: Int!) {
     course: courses_by_pk(id: $id) {
-      ...QuizContainerCourse
+      ...QuestionContainerCourse
     }
   }
 `
@@ -47,9 +61,10 @@ const Quizs: React.FC<Props> = ({ courseId }) => {
     throw new Error('No valid course Id')
   }
 
-  const { data, loading, error } = useQuery<QuizContainerQuery, QuizContainerQueryVariables>(QUIZ_QUERY, {
+  const { data, loading, error } = useQuery<CourseContainerQuery, CourseContainerQueryVariables>(QUIZ_QUERY, {
     variables: { locale: i18n.language as Locale, id: parsedId },
   })
+
   if (loading) {
     return <div>Loading</div>
   }

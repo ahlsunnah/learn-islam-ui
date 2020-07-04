@@ -1,4 +1,5 @@
 import React from 'react'
+import _get from 'lodash/get'
 import Choose from './Choose'
 import ChooseACategory from './ChooseACategory'
 import FillInTheBlank from './FillInTheBlank'
@@ -7,19 +8,20 @@ import TrueOrFalse from './TrueOrFalse'
 
 import { Locale } from 'types'
 import { TFunction } from 'i18next'
-import { QuizContainerQuizFragment } from '../../../../hasuraTypes'
+import { QuestionContainerQuestionFragment } from '../../../../hasuraTypes'
 
 export type QuestionProps = {
   finished: boolean
   number: number
   locale: Locale
-  quiz: QuizContainerQuizFragment
+  question: QuestionContainerQuestionFragment
   t: TFunction
 }
 
-const Question: React.FC<QuestionProps> = (props) => {
-  const { type_slug } = props.quiz
-  switch (type_slug) {
+const Question = (props: QuestionProps) => {
+  const typeSlug: string = _get(props, ['question', 'question_type', 'slug'])
+  console.log(typeSlug)
+  switch (typeSlug) {
     case 'choose': // {text, values: [ch1, ch2, ch3, ...]}
       return <Choose {...props} />
     case 'choose_a_category': // {values: [{name: '', items: ''}, {name: '', items: ''}]}
@@ -38,4 +40,5 @@ const Question: React.FC<QuestionProps> = (props) => {
       return null
   }
 }
+
 export default Question

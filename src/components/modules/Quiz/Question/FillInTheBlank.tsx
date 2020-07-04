@@ -1,4 +1,3 @@
-import cx from 'classnames'
 import React from 'react'
 import SelectInput from './SelectInput'
 import { QuestionProps } from '.'
@@ -14,6 +13,7 @@ type DisplayAnswerProps = {
   index: number
   value: string
 }
+
 const DisplayAnswer = ({ answer, answerIndex, index, value }: DisplayAnswerProps) => {
   if (answerIndex === undefined) return <div className="green">{value}</div>
   if (answerIndex === index) return <div className="dark-blue">{value}</div>

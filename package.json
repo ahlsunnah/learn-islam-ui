@@ -7,6 +7,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "rimraf public .cache node_modules/.cache",
+    "g:clean": "gatsby clean",
     "serve": "http-server ./public -p 8000 -P http://localhost:8000",
     "start": "gatsby develop",
     "test": "jest",

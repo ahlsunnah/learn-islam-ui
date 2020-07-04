@@ -46,7 +46,7 @@ type MutationErrorType = string | null
 
 const USER_QUERY = gql`
   query Me($id: String!) {
-    users(where: { fbase_id: { _eq: $id } }) {
+    users(where: { fbase: { _eq: $id } }) {
       id
       first_name
       email

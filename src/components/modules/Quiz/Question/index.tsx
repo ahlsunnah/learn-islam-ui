@@ -6,21 +6,38 @@ import FillInTheBlank from './FillInTheBlank'
 import LinkTheSentences from './LinkTheSentences'
 import TrueOrFalse from './TrueOrFalse'
 
-import { Locale } from 'types'
-import { TFunction } from 'i18next'
 import { QuestionContainerQuestionFragment } from '../../../../hasuraTypes'
 
 export type QuestionProps = {
   finished: boolean
   number: number
-  locale: Locale
   question: QuestionContainerQuestionFragment
-  t: TFunction
+}
+
+const AlternativeQuestion = (props: QuestionProps) => {
+  const typeSlug: string = _get(props, ['question', 'question_type', 'slug'])
+
+  // if (typeSlug === 'fill_in_the_blank') {
+  //   return <FillInTheBlank {...props} />
+  // }
+
+  // if (typeSlug === 'choose') {
+  //   return <Choose {...props} />
+  // }
+
+  // if (typeSlug === 'true_or_false') {
+  //   return <TrueOrFalse {...props} />
+  // }
+
+  if (typeSlug === 'choose_a_category') {
+    return <ChooseACategory {...props} />
+  }
+
+  return null
 }
 
 const Question = (props: QuestionProps) => {
   const typeSlug: string = _get(props, ['question', 'question_type', 'slug'])
-  console.log(typeSlug)
   switch (typeSlug) {
     case 'choose': // {text, values: [ch1, ch2, ch3, ...]}
       return <Choose {...props} />
@@ -41,4 +58,4 @@ const Question = (props: QuestionProps) => {
   }
 }
 
-export default Question
+export default AlternativeQuestion

@@ -50,6 +50,8 @@ export const theme = {
     primary_base: '#6496f6',
     secondary: '#353535',
     muted: '#f6f6f6',
+    success_base: '#72c293',
+    success_light: '#50e3ac',
   },
   forms: {
     label: {

@@ -16,6 +16,7 @@ interface IProps {
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   value: string
 }
+
 const RadioButton = ({ checked, children, error, greenChecked, id, name, onChange, value }: IProps): JSX.Element => (
   <div>
     <Radio label={children} key={id} className={cx({ isGreen: greenChecked, isRed: error })}>
@@ -34,4 +35,5 @@ const RadioButton = ({ checked, children, error, greenChecked, id, name, onChang
     </Radio>
   </div>
 )
+
 export default React.memo(RadioButton)

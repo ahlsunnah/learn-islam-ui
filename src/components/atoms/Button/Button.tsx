@@ -16,23 +16,14 @@ type Props<C extends React.ElementType> = ButtonProps<C, { component?: C }> & {
   outlined?: boolean
 }
 
-const Button = <C extends React.ElementType>({
-  autoSize,
-  className,
-  pill = true,
-  outlined,
-  elevated,
-  inverse,
-  raised,
-  rounded = true,
-  greenOutlined, // TODO
-  ...props
-}: Props<C>) => {
+const Button = <C extends React.ElementType>({ className, pill = true, outlined, elevated, ...props }: Props<C>) => {
   const styles: (SystemCssProperties & CSSPseudoSelectorProps) | CSSSelectorObject = {
     textTransform: 'unset',
   }
+
   let variant: 'text' | 'outlined' | 'contained' = 'contained'
-  let color: 'inherit' | 'primary' | 'secondary' | 'default' = 'primary'
+  const color: 'inherit' | 'primary' | 'secondary' | 'default' = 'primary'
+
   if (outlined) {
     variant = 'outlined'
     styles.borderWidth = 2
@@ -40,9 +31,11 @@ const Button = <C extends React.ElementType>({
       borderWidth: 2,
     }
   }
+
   if (pill) {
     styles.borderRadius = 9999
   }
+
   if (elevated) {
     styles.boxShadow = '0 8px 8px rgba(0,0,0,.24),0 0 8px rgba(0,0,0,.12)'
     styles[':hover'] = {
@@ -50,6 +43,7 @@ const Button = <C extends React.ElementType>({
       boxShadow: '0 4px 4px rgba(0,0,0,.24),0 0 4px rgba(0,0,0,.12)',
     }
   }
+
   return <MaterialButton color={color} variant={variant} {...props} className={className} sx={styles}></MaterialButton>
 }
 

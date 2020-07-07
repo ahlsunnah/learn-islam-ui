@@ -1,21 +1,36 @@
-import cx from 'classnames'
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import Button from 'components/atoms/Button/Button'
-import React, { useState } from 'react'
-import ResultIndicator from './ResultIndicator'
+import { useCallback, useState } from 'react'
 import { QuestionProps } from '.'
+import { useTranslation } from 'react-i18next'
+import { useField } from 'formik'
 
-interface ITrueOrFalseData {
-  text: string
-  isTrue: boolean
-}
+const TrueOrFalse: React.FC<QuestionProps> = ({ number, question }) => {
+  const text = question.question
+  const { t } = useTranslation()
 
-const TrueOrFalse: React.FC<QuestionProps> = ({ finished, number, t, quiz: { translations } }) => {
-  const { text, isTrue }: ITrueOrFalseData = translations[0].data
-  const [answer, setAnswer] = useState<boolean>()
-  const handleAnswer = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
-    const { name } = e.currentTarget
-    setAnswer(name === 'true')
-  }
+  const [buttonState, setButtonState] = useState<{ [key: string]: { bg: string } }>({
+    true: { bg: 'primary_base' },
+    false: { bg: 'primary_base' },
+  })
+
+  const [, , helper] = useField(`question#${question.id}`)
+
+  const handleAnswer = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
+      const { name } = e.currentTarget
+      helper.setValue(name)
+
+      setButtonState((st) => ({
+        ...st,
+        [name]: { bg: st[name].bg === 'success_base' ? 'primary_base' : 'success_base' },
+        [`${!(name === 'true')}`]: { bg: 'primary_base' },
+      }))
+    },
+    [helper]
+  )
+
   return (
     <div>
       <div className="flex">
@@ -25,55 +40,16 @@ const TrueOrFalse: React.FC<QuestionProps> = ({ finished, number, t, quiz: { tra
       <div className="mt4 flex justify-between">
         <div>
           <div className="mt2">
-            <ResultIndicator finished={finished} isCorrect={isTrue} selected={answer === true} />
-            <Button
-              greenOutlined={finished && isTrue && answer !== true}
-              name="true"
-              onClick={handleAnswer}
-              rounded
-              raised={answer === true}
-              outlined={answer !== true}
-            >
+            <Button name="true" onClick={handleAnswer} rounded sx={buttonState.true}>
               {t('quizTrue')}
             </Button>
           </div>
           <div className="mt2">
-            <ResultIndicator finished={finished} isCorrect={!isTrue} selected={answer === false} />
-            <Button
-              className={cx({
-                ph3: answer === false,
-              })}
-              greenOutlined={finished && !isTrue && answer !== false}
-              name="false"
-              onClick={handleAnswer}
-              rounded
-              raised={answer === false}
-              outlined={answer !== false}
-            >
+            <Button name="false" onClick={handleAnswer} rounded sx={buttonState.false}>
               {t('quizFalse')}
             </Button>
           </div>
         </div>
-        {/* {finished &&
-          (score ? (
-            <div
-              className={cx('self-end green f3', {
-                tl: locale === 'ar',
-                tr: locale !== 'ar',
-              })}
-            >
-              1/1
-            </div>
-          ) : (
-            <div
-              className={cx('self-end green f3', {
-                tl: locale === 'ar',
-                tr: locale !== 'ar',
-              })}
-            >
-              0/1
-            </div>
-          ))} */}
       </div>
     </div>
   )

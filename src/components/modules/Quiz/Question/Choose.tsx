@@ -1,27 +1,14 @@
-import cx from 'classnames'
-import Button from 'components/atoms/Button/Button'
-import shuffle from 'lib/shuffle'
-import React, { useState } from 'react'
-import ResultIndicator from './ResultIndicator'
+import { CheckboxWithLabel } from 'components/atoms/CheckBox/CheckBox'
+import { Field } from 'formik'
+import _shuffle from 'lodash/shuffle'
+import React from 'react'
 import type { QuestionProps } from '.'
 
-interface IChooseData {
-  text: string
-  values: string[]
-}
+const Choose: React.FC<QuestionProps> = ({ number, question }) => {
+  const questionChoices = question.question_choices
 
-const Choose: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz }) => {
-  const { id, translations } = quiz
-  const data: IChooseData = translations[0].data
-  const [values] = useState<string[]>(shuffle(data.values))
-  const [answer, setAnswer] = useState<string | null>(null)
-  const handleAnswer = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const text = e.currentTarget.innerText
-    setAnswer(text)
-  }
-  const { text } = data
-  const correctAnswer = data.values[0]
-  const isAnswerCorrect = answer === correctAnswer
+  const text = question.question
+
   return (
     <div>
       <div className="flex">
@@ -29,48 +16,19 @@ const Choose: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz }) 
         <div className="f4 b">{text}</div>
       </div>
       <div className="mt4">
-        {values.map((value, index) => {
-          const isSelected = answer === value
-          const isCorrectAnswer = value === correctAnswer
+        {_shuffle(questionChoices).map((value, index) => {
           return (
             <div className="mt2 flex items-center" key={index}>
-              <ResultIndicator finished={finished} isCorrect={isAnswerCorrect} selected={isSelected} />
-              <Button
-                className={cx('pv2 h-auto lh-title tl', {
-                  ph3: isSelected,
-                })}
-                raised={isSelected}
-                greenOutlined={finished && isCorrectAnswer && !isSelected}
-                outlined={!isSelected}
-                onClick={handleAnswer}
-                name={value}
-              >
-                {value}
-              </Button>
+              <Field
+                name={`question#${value.question_id}.choice#${value.id}`}
+                type="checkbox"
+                component={CheckboxWithLabel}
+                label={{ label: value.choice }}
+              />
             </div>
           )
         })}
       </div>
-      {/* {finished &&
-        (score ? (
-          <div
-            className={cx('mt3 green f3', {
-              tl: locale === 'ar',
-              tr: locale !== 'ar',
-            })}
-          >
-            1/1
-          </div>
-        ) : (
-          <div
-            className={cx('mt3 green f3', {
-              tl: locale === 'ar',
-              tr: locale !== 'ar',
-            })}
-          >
-            0/1
-          </div>
-        ))} */}
     </div>
   )
 }

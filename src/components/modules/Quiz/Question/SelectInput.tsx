@@ -1,46 +1,37 @@
 import cx from 'classnames'
 import React from 'react'
+import { Question_Choices } from '../../../../hasuraTypes'
+import { useField } from 'formik'
 
 interface IProps {
   className?: string
   style?: React.CSSProperties
   name: string
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  options: string[]
-  setRef: (ref: HTMLDivElement, index: number) => void
+  options: Pick<Question_Choices, 'id' | 'choice' | 'choice_order' | 'is_right_choice' | 'question_id'>[]
   index: number
   value?: string
 }
-class SelectInput extends React.PureComponent<IProps> {
-  setRef = (ref: HTMLDivElement | null) => {
-    const { index, setRef } = this.props
-    if (ref) {
-      setRef(ref, index)
-    }
-  }
 
-  render() {
-    const { className, name, onChange, options, style, value } = this.props
-    return (
-      <div className={cx('bb', className)} ref={this.setRef}>
-        <select
-          className={cx('bg-transparent bn pointer', className)}
-          name={name}
-          onChange={onChange}
-          style={style}
-          value={value}
-        >
-          <option value="" />
-          {value !== undefined && <option value={value}>{value}</option>}
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
-    )
-  }
+// what is this?
+// {value !== undefined && <option value={value}>{value}</option>}
+
+function SelectInput(props: IProps) {
+  const { className, options, style, value, ...rest } = props
+  const [field] = useField(rest)
+
+  return (
+    <div className={cx('bb', className)}>
+      <select className={cx('bg-transparent bn pointer', className)} style={style} {...field} {...rest}>
+        <option value="" />
+        {value !== undefined && <option value={value}>{value}</option>}
+        {options.map((option) => (
+          <option key={option.id} value={option.id as number}>
+            {option.choice}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
 }
 
 export default SelectInput

@@ -6350,8 +6350,11 @@ export type TApi_User_Genders_Update_Column =
 
 /** columns and relationships of "user_question_choice" */
 export type TApi_User_Question_Choice = {
+  created_at: Maybe<Scalars['api_timestamptz']>;
   id: Scalars['Int'];
+  order: Scalars['Int'];
   question_choice_id: Scalars['Int'];
+  updated_at: Maybe<Scalars['api_timestamptz']>;
   user_id: Scalars['Int'];
 };
 
@@ -6407,6 +6410,7 @@ export type TApi_User_Question_Choice_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type TApi_User_Question_Choice_Avg_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6414,6 +6418,7 @@ export type TApi_User_Question_Choice_Avg_Fields = {
 /** order by avg() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Avg_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6423,8 +6428,11 @@ export type TApi_User_Question_Choice_Bool_Exp = {
   _and: Maybe<Array<Maybe<TApi_User_Question_Choice_Bool_Exp>>>;
   _not: Maybe<TApi_User_Question_Choice_Bool_Exp>;
   _or: Maybe<Array<Maybe<TApi_User_Question_Choice_Bool_Exp>>>;
+  created_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
   id: Maybe<TApi_Int_Comparison_Exp>;
+  order: Maybe<TApi_Int_Comparison_Exp>;
   question_choice_id: Maybe<TApi_Int_Comparison_Exp>;
+  updated_at: Maybe<TApi_Timestamptz_Comparison_Exp>;
   user_id: Maybe<TApi_Int_Comparison_Exp>;
 };
 
@@ -6436,42 +6444,58 @@ export type TApi_User_Question_Choice_Constraint =
 /** input type for incrementing integer column in table "user_question_choice" */
 export type TApi_User_Question_Choice_Inc_Input = {
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
   user_id: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "user_question_choice" */
 export type TApi_User_Question_Choice_Insert_Input = {
+  created_at: Maybe<Scalars['api_timestamptz']>;
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
   user_id: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
 export type TApi_User_Question_Choice_Max_Fields = {
+  created_at: Maybe<Scalars['api_timestamptz']>;
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
   user_id: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Max_Order_By = {
+  created_at: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
 
 /** aggregate min on columns */
 export type TApi_User_Question_Choice_Min_Fields = {
+  created_at: Maybe<Scalars['api_timestamptz']>;
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
   user_id: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Min_Order_By = {
+  created_at: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
 
@@ -6498,8 +6522,11 @@ export type TApi_User_Question_Choice_On_Conflict = {
 
 /** ordering options when selecting data from "user_question_choice" */
 export type TApi_User_Question_Choice_Order_By = {
+  created_at: Maybe<TApi_Order_By>;
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
+  updated_at: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
 
@@ -6511,22 +6538,32 @@ export type TApi_User_Question_Choice_Pk_Columns_Input = {
 /** select columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Select_Column = 
   /** column name */
+  'created_at' |
+  /** column name */
   'id' |
   /** column name */
+  'order' |
+  /** column name */
   'question_choice_id' |
+  /** column name */
+  'updated_at' |
   /** column name */
   'user_id';
 
 /** input type for updating data in table "user_question_choice" */
 export type TApi_User_Question_Choice_Set_Input = {
+  created_at: Maybe<Scalars['api_timestamptz']>;
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['api_timestamptz']>;
   user_id: Maybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
 export type TApi_User_Question_Choice_Stddev_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6534,6 +6571,7 @@ export type TApi_User_Question_Choice_Stddev_Fields = {
 /** order by stddev() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Stddev_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6541,6 +6579,7 @@ export type TApi_User_Question_Choice_Stddev_Order_By = {
 /** aggregate stddev_pop on columns */
 export type TApi_User_Question_Choice_Stddev_Pop_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6548,6 +6587,7 @@ export type TApi_User_Question_Choice_Stddev_Pop_Fields = {
 /** order by stddev_pop() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Stddev_Pop_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6555,6 +6595,7 @@ export type TApi_User_Question_Choice_Stddev_Pop_Order_By = {
 /** aggregate stddev_samp on columns */
 export type TApi_User_Question_Choice_Stddev_Samp_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6562,6 +6603,7 @@ export type TApi_User_Question_Choice_Stddev_Samp_Fields = {
 /** order by stddev_samp() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Stddev_Samp_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6569,6 +6611,7 @@ export type TApi_User_Question_Choice_Stddev_Samp_Order_By = {
 /** aggregate sum on columns */
 export type TApi_User_Question_Choice_Sum_Fields = {
   id: Maybe<Scalars['Int']>;
+  order: Maybe<Scalars['Int']>;
   question_choice_id: Maybe<Scalars['Int']>;
   user_id: Maybe<Scalars['Int']>;
 };
@@ -6576,6 +6619,7 @@ export type TApi_User_Question_Choice_Sum_Fields = {
 /** order by sum() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Sum_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6583,15 +6627,22 @@ export type TApi_User_Question_Choice_Sum_Order_By = {
 /** update columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Update_Column = 
   /** column name */
+  'created_at' |
+  /** column name */
   'id' |
   /** column name */
+  'order' |
+  /** column name */
   'question_choice_id' |
+  /** column name */
+  'updated_at' |
   /** column name */
   'user_id';
 
 /** aggregate var_pop on columns */
 export type TApi_User_Question_Choice_Var_Pop_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6599,6 +6650,7 @@ export type TApi_User_Question_Choice_Var_Pop_Fields = {
 /** order by var_pop() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Var_Pop_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6606,6 +6658,7 @@ export type TApi_User_Question_Choice_Var_Pop_Order_By = {
 /** aggregate var_samp on columns */
 export type TApi_User_Question_Choice_Var_Samp_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6613,6 +6666,7 @@ export type TApi_User_Question_Choice_Var_Samp_Fields = {
 /** order by var_samp() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Var_Samp_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -6620,6 +6674,7 @@ export type TApi_User_Question_Choice_Var_Samp_Order_By = {
 /** aggregate variance on columns */
 export type TApi_User_Question_Choice_Variance_Fields = {
   id: Maybe<Scalars['Float']>;
+  order: Maybe<Scalars['Float']>;
   question_choice_id: Maybe<Scalars['Float']>;
   user_id: Maybe<Scalars['Float']>;
 };
@@ -6627,6 +6682,7 @@ export type TApi_User_Question_Choice_Variance_Fields = {
 /** order by variance() on columns of table "user_question_choice" */
 export type TApi_User_Question_Choice_Variance_Order_By = {
   id: Maybe<TApi_Order_By>;
+  order: Maybe<TApi_Order_By>;
   question_choice_id: Maybe<TApi_Order_By>;
   user_id: Maybe<TApi_Order_By>;
 };
@@ -7688,12 +7744,12 @@ export type TFileFieldsEnum =
   'childTranslationsJson___here' |
   'childTranslationsJson___clickHere' |
   'childTranslationsJson___trackLevel' |
+  'childTranslationsJson___nextHelp' |
   'childTranslationsJson___chapterAudio' |
   'childTranslationsJson___siteContentPresentation' |
   'childTranslationsJson___homeContentTitle' |
   'childTranslationsJson___chooseAnswer' |
-  'childTranslationsJson___locale' |
-  'childTranslationsJson___nextHelp';
+  'childTranslationsJson___locale';
 
 export type TFileFilterInput = {
   sourceInstanceName: Maybe<TStringQueryOperatorInput>;
@@ -8257,12 +8313,12 @@ export type TQueryTranslationsJsonArgs = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 
@@ -9552,12 +9608,12 @@ export type TTranslationsJson = TNode & {
   here: Maybe<Scalars['String']>;
   clickHere: Maybe<Scalars['String']>;
   trackLevel: Maybe<Scalars['String']>;
+  nextHelp: Maybe<Scalars['String']>;
   chapterAudio: Maybe<Scalars['String']>;
   siteContentPresentation: Maybe<Scalars['String']>;
   homeContentTitle: Maybe<Scalars['String']>;
   chooseAnswer: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
-  nextHelp: Maybe<Scalars['String']>;
 };
 
 export type TTranslationsJsonConnection = {
@@ -9766,12 +9822,12 @@ export type TTranslationsJsonFieldsEnum =
   'here' |
   'clickHere' |
   'trackLevel' |
+  'nextHelp' |
   'chapterAudio' |
   'siteContentPresentation' |
   'homeContentTitle' |
   'chooseAnswer' |
-  'locale' |
-  'nextHelp';
+  'locale';
 
 export type TTranslationsJsonFilterInput = {
   id: Maybe<TStringQueryOperatorInput>;
@@ -9870,12 +9926,12 @@ export type TTranslationsJsonFilterInput = {
   here: Maybe<TStringQueryOperatorInput>;
   clickHere: Maybe<TStringQueryOperatorInput>;
   trackLevel: Maybe<TStringQueryOperatorInput>;
+  nextHelp: Maybe<TStringQueryOperatorInput>;
   chapterAudio: Maybe<TStringQueryOperatorInput>;
   siteContentPresentation: Maybe<TStringQueryOperatorInput>;
   homeContentTitle: Maybe<TStringQueryOperatorInput>;
   chooseAnswer: Maybe<TStringQueryOperatorInput>;
   locale: Maybe<TStringQueryOperatorInput>;
-  nextHelp: Maybe<TStringQueryOperatorInput>;
 };
 
 export type TTranslationsJsonGroupConnection = {

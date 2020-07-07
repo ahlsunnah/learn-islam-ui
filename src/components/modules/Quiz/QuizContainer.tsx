@@ -17,6 +17,7 @@ export const QUIZ_QUERY = gql`
     choice
     choice_order
     is_right_choice
+    question_id
   }
   fragment QuestionContainerQuestion on questions {
     id
@@ -74,6 +75,7 @@ const Quizs: React.FC<Props> = ({ courseId }) => {
   if (!data || !data.course) {
     return <div>No data to display</div>
   }
+
   return <QuizComponent course={data.course} />
 }
 

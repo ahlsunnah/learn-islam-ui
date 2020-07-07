@@ -42,8 +42,6 @@ type FormValues = {
   country: string
 }
 
-type MutationErrorType = string | null
-
 const USER_QUERY = gql`
   query Me($id: String!) {
     users(where: { fbase: { _eq: $id } }) {
@@ -76,6 +74,7 @@ const Profile: React.FC<PropType> = ({ me, signOut }) => {
   const [isEditProfile, setEditProfile] = useState(false)
   const classes = useStyles()
   const currentUserId = useMemo(() => _get(me, 'uid', ''), [me])
+
   const { loading: queryLoading, error: queryError, data: queryData } = useQuery<MeQuery, MeQueryVariables>(
     USER_QUERY,
     {

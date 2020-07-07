@@ -8003,8 +8003,11 @@ export type User_Genders_Update_Column =
 
 /** columns and relationships of "user_question_choice" */
 export type User_Question_Choice = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id: Scalars['Int'];
+  order: Scalars['Int'];
   question_choice_id: Scalars['Int'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id: Scalars['Int'];
 };
 
@@ -8060,6 +8063,7 @@ export type User_Question_Choice_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type User_Question_Choice_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8067,6 +8071,7 @@ export type User_Question_Choice_Avg_Fields = {
 /** order by avg() on columns of table "user_question_choice" */
 export type User_Question_Choice_Avg_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8076,8 +8081,11 @@ export type User_Question_Choice_Bool_Exp = {
   _and?: Maybe<Array<Maybe<User_Question_Choice_Bool_Exp>>>;
   _not?: Maybe<User_Question_Choice_Bool_Exp>;
   _or?: Maybe<Array<Maybe<User_Question_Choice_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  order?: Maybe<Int_Comparison_Exp>;
   question_choice_id?: Maybe<Int_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_id?: Maybe<Int_Comparison_Exp>;
 };
 
@@ -8089,42 +8097,58 @@ export type User_Question_Choice_Constraint =
 /** input type for incrementing integer column in table "user_question_choice" */
 export type User_Question_Choice_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
   user_id?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "user_question_choice" */
 export type User_Question_Choice_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
 export type User_Question_Choice_Max_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "user_question_choice" */
 export type User_Question_Choice_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type User_Question_Choice_Min_Fields = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "user_question_choice" */
 export type User_Question_Choice_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
@@ -8151,8 +8175,11 @@ export type User_Question_Choice_On_Conflict = {
 
 /** ordering options when selecting data from "user_question_choice" */
 export type User_Question_Choice_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
@@ -8164,22 +8191,32 @@ export type User_Question_Choice_Pk_Columns_Input = {
 /** select columns of table "user_question_choice" */
 export type User_Question_Choice_Select_Column = 
   /** column name */
+  'created_at' |
+  /** column name */
   'id' |
   /** column name */
+  'order' |
+  /** column name */
   'question_choice_id' |
+  /** column name */
+  'updated_at' |
   /** column name */
   'user_id';
 
 /** input type for updating data in table "user_question_choice" */
 export type User_Question_Choice_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
 export type User_Question_Choice_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8187,6 +8224,7 @@ export type User_Question_Choice_Stddev_Fields = {
 /** order by stddev() on columns of table "user_question_choice" */
 export type User_Question_Choice_Stddev_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8194,6 +8232,7 @@ export type User_Question_Choice_Stddev_Order_By = {
 /** aggregate stddev_pop on columns */
 export type User_Question_Choice_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8201,6 +8240,7 @@ export type User_Question_Choice_Stddev_Pop_Fields = {
 /** order by stddev_pop() on columns of table "user_question_choice" */
 export type User_Question_Choice_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8208,6 +8248,7 @@ export type User_Question_Choice_Stddev_Pop_Order_By = {
 /** aggregate stddev_samp on columns */
 export type User_Question_Choice_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8215,6 +8256,7 @@ export type User_Question_Choice_Stddev_Samp_Fields = {
 /** order by stddev_samp() on columns of table "user_question_choice" */
 export type User_Question_Choice_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8222,6 +8264,7 @@ export type User_Question_Choice_Stddev_Samp_Order_By = {
 /** aggregate sum on columns */
 export type User_Question_Choice_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['Int']>;
   question_choice_id?: Maybe<Scalars['Int']>;
   user_id?: Maybe<Scalars['Int']>;
 };
@@ -8229,6 +8272,7 @@ export type User_Question_Choice_Sum_Fields = {
 /** order by sum() on columns of table "user_question_choice" */
 export type User_Question_Choice_Sum_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8236,15 +8280,22 @@ export type User_Question_Choice_Sum_Order_By = {
 /** update columns of table "user_question_choice" */
 export type User_Question_Choice_Update_Column = 
   /** column name */
+  'created_at' |
+  /** column name */
   'id' |
   /** column name */
+  'order' |
+  /** column name */
   'question_choice_id' |
+  /** column name */
+  'updated_at' |
   /** column name */
   'user_id';
 
 /** aggregate var_pop on columns */
 export type User_Question_Choice_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8252,6 +8303,7 @@ export type User_Question_Choice_Var_Pop_Fields = {
 /** order by var_pop() on columns of table "user_question_choice" */
 export type User_Question_Choice_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8259,6 +8311,7 @@ export type User_Question_Choice_Var_Pop_Order_By = {
 /** aggregate var_samp on columns */
 export type User_Question_Choice_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8266,6 +8319,7 @@ export type User_Question_Choice_Var_Samp_Fields = {
 /** order by var_samp() on columns of table "user_question_choice" */
 export type User_Question_Choice_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8273,6 +8327,7 @@ export type User_Question_Choice_Var_Samp_Order_By = {
 /** aggregate variance on columns */
 export type User_Question_Choice_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
+  order?: Maybe<Scalars['Float']>;
   question_choice_id?: Maybe<Scalars['Float']>;
   user_id?: Maybe<Scalars['Float']>;
 };
@@ -8280,6 +8335,7 @@ export type User_Question_Choice_Variance_Fields = {
 /** order by variance() on columns of table "user_question_choice" */
 export type User_Question_Choice_Variance_Order_By = {
   id?: Maybe<Order_By>;
+  order?: Maybe<Order_By>;
   question_choice_id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -8675,7 +8731,7 @@ export type AddNewUserMutation = { insert_users_one?: Maybe<Pick<Users, 'id'>> }
 
 export type QuestionTypeFragment = Pick<Question_Types, 'slug' | 'name'>;
 
-export type QuestionChoicesFragment = Pick<Question_Choices, 'id' | 'choice' | 'choice_order' | 'is_right_choice'>;
+export type QuestionChoicesFragment = Pick<Question_Choices, 'id' | 'choice' | 'choice_order' | 'is_right_choice' | 'question_id'>;
 
 export type QuestionContainerQuestionFragment = (
   Pick<Questions, 'id' | 'question' | 'is_active'>
@@ -8741,6 +8797,13 @@ export type ChapterPageTrackFragment = (
     )>, translations: Array<Pick<Course_Translations, 'id' | 'locale_code' | 'title'>> }
   )> }
 );
+
+export type MeQueryVariables = {
+  id: Scalars['String'];
+};
+
+
+export type MeQuery = { users: Array<Pick<Users, 'id' | 'first_name' | 'email' | 'last_name' | 'country'>> };
 
 export type TrackNavigationChapterFragment = (
   Pick<Chapters, 'id'>

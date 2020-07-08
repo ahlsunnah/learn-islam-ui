@@ -29,8 +29,12 @@ const AlternativeQuestion = (props: QuestionProps) => {
   //   return <TrueOrFalse {...props} />
   // }
 
-  if (typeSlug === 'choose_a_category') {
-    return <ChooseACategory {...props} />
+  // if (typeSlug === 'choose_a_category') {
+  //   return <ChooseACategory {...props} />
+  // }
+
+  if (typeSlug === 'link_the_sentences') {
+    return <LinkTheSentences {...props} />
   }
 
   return null

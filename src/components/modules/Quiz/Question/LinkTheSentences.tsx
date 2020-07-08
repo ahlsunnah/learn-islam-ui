@@ -1,6 +1,5 @@
 import cx from 'classnames'
-import shuffle from 'lib/shuffle'
-import React, { useState } from 'react'
+import React from 'react'
 import ArrowForward from 'react-icons/lib/md/arrow-forward'
 import Correct from 'react-icons/lib/md/check'
 import Error from 'react-icons/lib/md/do-not-disturb-alt'
@@ -14,25 +13,12 @@ interface ILinkTheSentencesData {
     b: string
   }>
 }
-const LinkTheSentences: React.FC<QuestionProps> = ({ finished, number, t, locale, quiz: { translations } }) => {
-  const { title, values }: ILinkTheSentencesData = translations[0].data
-  const valuesDictionary = values.reduce<{ [left: string]: string }>((acc, { a, b }) => {
-    acc[a] = b
-    return acc
-  }, {})
-  const [leftValues] = useState<string[]>(shuffle(Object.keys(valuesDictionary)))
-  const rightValues = Object.values(valuesDictionary).sort()
-  const [selectedValuesDictionary, setSelectedValuesDictionary] = useState<{
-    [left: string]: string | undefined
-  }>({})
-  const handleAnswer = (name: string, value: string | undefined) => {
-    setSelectedValuesDictionary({
-      ...selectedValuesDictionary,
-      [name]: value,
-    })
-  }
-  const chosenValues = Object.values(selectedValuesDictionary)
-  const remainingValues = rightValues.filter((rightValue) => !chosenValues.includes(rightValue))
+
+const LinkTheSentences: React.FC<QuestionProps> = ({ number, question }) => {
+  const { question: QuestionData } = question
+
+  const handleAnswer = (name: string, value: string | undefined) => {}
+
   return (
     <div>
       <div className="pb2 mb3 flex bb items-center">
@@ -76,18 +62,6 @@ const LinkTheSentences: React.FC<QuestionProps> = ({ finished, number, t, locale
           )
         })}
       </div>
-      {/* {finished && (
-        <div
-          className={cx('mt3 f3', {
-            tl: locale === 'ar',
-            tr: locale !== 'ar',
-            green: score > answers.length / 2,
-            red: score <= answers.length / 2,
-          })}
-        >
-          {score}/{answers.length}
-        </div>
-      )} */}
     </div>
   )
 }

@@ -24,16 +24,14 @@ const ChooseACategory: React.FC<QuestionProps> = ({ number, question }) => {
             <div>{questionTitle}</div>
             <div className="mt1">
               <Field component={RadioGroup} name={`question#${question.id}`}>
-                {question_choices.map(
-                  (category): JSX.Element => (
-                    <FormControlLabel
-                      value={category.id}
-                      key={category.id}
-                      control={<Radio />}
-                      label={category.choice as string}
-                    />
-                  )
-                )}
+                {question_choices.map((category) => (
+                  <FormControlLabel
+                    value={`${category.id}`}
+                    key={category.id}
+                    control={<Radio />}
+                    label={category.choice as string}
+                  />
+                ))}
               </Field>
             </div>
           </div>

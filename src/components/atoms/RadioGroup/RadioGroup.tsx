@@ -1,4 +1,5 @@
 import * as React from 'react'
+import _get from 'lodash/get'
 import MuiRadioGroup, { RadioGroupProps as MuiRadioGroupProps } from '@material-ui/core/RadioGroup'
 import { FieldProps } from 'formik'
 
@@ -10,10 +11,11 @@ export function fieldToRadioGroup({
   form,
   ...props
 }: IRadioGroupProps): MuiRadioGroupProps {
-  console.log(field)
+  console.log(field.value)
   return {
     ...props,
     ...field,
+    value: _get(field, 'value', ''),
   }
 }
 

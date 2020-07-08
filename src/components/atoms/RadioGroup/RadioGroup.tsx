@@ -11,7 +11,6 @@ export function fieldToRadioGroup({
   form,
   ...props
 }: IRadioGroupProps): MuiRadioGroupProps {
-  console.log(field.value)
   return {
     ...props,
     ...field,

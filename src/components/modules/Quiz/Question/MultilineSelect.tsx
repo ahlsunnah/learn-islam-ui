@@ -12,15 +12,19 @@ type SelectOnChange = (
   actionMeta: ActionMeta
 ) => void
 
+type selectOption = {
+  label: string
+  value: string
+}
+
 interface IProps {
-  chooseAnswerString: string
-  correctAnswer: string
-  finished: boolean
-  isCorrect: boolean
-  isRtl: boolean
+  chooseAnswerString?: string
+  correctAnswer?: string
+  finished?: boolean
+  isCorrect?: boolean
   onChange: (name: string, value?: string) => void
   value?: string
-  options: string[]
+  options: selectOption[]
   name: string
 }
 
@@ -29,7 +33,6 @@ const MultilineSelect = ({
   isCorrect,
   value,
   correctAnswer,
-  isRtl,
   onChange,
   options,
   chooseAnswerString,
@@ -46,6 +49,7 @@ const MultilineSelect = ({
       onChange(name, value)
     }
   }
+
   return (
     <div className="relative w-100">
       {finished && (
@@ -70,7 +74,6 @@ const MultilineSelect = ({
       {!finished && (
         <Select
           isClearable
-          isRtl={isRtl}
           onChange={handleChange}
           isSearchable={false}
           styles={{
@@ -79,12 +82,13 @@ const MultilineSelect = ({
                 color: styles.color,
                 marginLeft: styles.marginLeft,
                 marginRight: styles.marginRight,
-                // maxWidth: styles.maxWidth,
               }
             },
+            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
           }}
           value={value ? { label: value, value } : undefined}
-          options={options.map((value) => ({ label: value, value }))}
+          options={options}
+          menuPortalTarget={document.body}
           placeholder={chooseAnswerString}
         />
       )}

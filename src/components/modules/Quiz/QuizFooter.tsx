@@ -13,6 +13,7 @@ interface IProps {
   t: TFunction
   totalQuestions: number
 }
+
 const QuizFooter = ({ finished, t, totalQuestions }: IProps) => {
   const { submitForm } = useFormikContext()
 

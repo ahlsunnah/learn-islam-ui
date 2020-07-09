@@ -14,32 +14,6 @@ export type QuestionProps = {
   question: QuestionContainerQuestionFragment
 }
 
-const AlternativeQuestion = (props: QuestionProps) => {
-  const typeSlug: string = _get(props, ['question', 'question_type', 'slug'])
-
-  // if (typeSlug === 'fill_in_the_blank') {
-  //   return <FillInTheBlank {...props} />
-  // }
-
-  // if (typeSlug === 'choose') {
-  //   return <Choose {...props} />
-  // }
-
-  // if (typeSlug === 'true_or_false') {
-  //   return <TrueOrFalse {...props} />
-  // }
-
-  // if (typeSlug === 'choose_a_category') {
-  //   return <ChooseACategory {...props} />
-  // }
-
-  if (typeSlug === 'link_the_sentences') {
-    return <LinkTheSentences {...props} />
-  }
-
-  return null
-}
-
 const Question = (props: QuestionProps) => {
   const typeSlug: string = _get(props, ['question', 'question_type', 'slug'])
   switch (typeSlug) {
@@ -62,4 +36,4 @@ const Question = (props: QuestionProps) => {
   }
 }
 
-export default AlternativeQuestion
+export default Question

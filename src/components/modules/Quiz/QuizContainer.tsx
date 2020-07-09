@@ -23,6 +23,7 @@ export const QUIZ_QUERY = gql`
     id
     question
     is_active
+    title
     question_type {
       ...QuestionType
     }

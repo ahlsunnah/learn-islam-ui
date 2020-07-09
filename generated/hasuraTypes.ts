@@ -4594,6 +4594,7 @@ export type Questions = {
   /** An object relationship */
   question_type?: Maybe<Question_Types>;
   question_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4693,6 +4694,7 @@ export type Questions_Bool_Exp = {
   question_choices?: Maybe<Question_Choices_Bool_Exp>;
   question_type?: Maybe<Question_Types_Bool_Exp>;
   question_type_id?: Maybe<Int_Comparison_Exp>;
+  title?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -4720,6 +4722,7 @@ export type Questions_Insert_Input = {
   question_choices?: Maybe<Question_Choices_Arr_Rel_Insert_Input>;
   question_type?: Maybe<Question_Types_Obj_Rel_Insert_Input>;
   question_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4730,6 +4733,7 @@ export type Questions_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   question?: Maybe<Scalars['String']>;
   question_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4740,6 +4744,7 @@ export type Questions_Max_Order_By = {
   id?: Maybe<Order_By>;
   question?: Maybe<Order_By>;
   question_type_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -4750,6 +4755,7 @@ export type Questions_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   question?: Maybe<Scalars['String']>;
   question_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4760,6 +4766,7 @@ export type Questions_Min_Order_By = {
   id?: Maybe<Order_By>;
   question?: Maybe<Order_By>;
   question_type_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -4794,6 +4801,7 @@ export type Questions_Order_By = {
   question_choices_aggregate?: Maybe<Question_Choices_Aggregate_Order_By>;
   question_type?: Maybe<Question_Types_Order_By>;
   question_type_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -4817,6 +4825,8 @@ export type Questions_Select_Column =
   /** column name */
   'question_type_id' |
   /** column name */
+  'title' |
+  /** column name */
   'updated_at';
 
 /** input type for updating data in table "questions" */
@@ -4827,6 +4837,7 @@ export type Questions_Set_Input = {
   is_active?: Maybe<Scalars['Boolean']>;
   question?: Maybe<Scalars['String']>;
   question_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4900,6 +4911,8 @@ export type Questions_Update_Column =
   'question' |
   /** column name */
   'question_type_id' |
+  /** column name */
+  'title' |
   /** column name */
   'updated_at';
 
@@ -8734,7 +8747,7 @@ export type QuestionTypeFragment = Pick<Question_Types, 'slug' | 'name'>;
 export type QuestionChoicesFragment = Pick<Question_Choices, 'id' | 'choice' | 'choice_order' | 'is_right_choice' | 'question_id'>;
 
 export type QuestionContainerQuestionFragment = (
-  Pick<Questions, 'id' | 'question' | 'is_active'>
+  Pick<Questions, 'id' | 'question' | 'is_active' | 'title'>
   & { question_type?: Maybe<QuestionTypeFragment>, question_choices: Array<QuestionChoicesFragment> }
 );
 

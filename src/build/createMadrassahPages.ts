@@ -3,7 +3,6 @@ import slash from 'slash'
 import { GatsbyCreatePages } from '../types/gatsbyNode'
 import createLocalesPaths from './createLocalesPaths'
 import { Locale } from '../types/index'
-import { TMadrassahPageQueryQuery } from '../graphqlTypes'
 
 const createMadrassahPages: GatsbyCreatePages = async ({ graphql, actions: { createPage } }): Promise<void> => {
   const locales: Locale[] = ['ar', 'fr']
@@ -45,7 +44,7 @@ const createMadrassahPages: GatsbyCreatePages = async ({ graphql, actions: { cre
   })
 
   console.log('fetching data')
-  const result = await graphql<TMadrassahPageQueryQuery>(
+  const result = await graphql(
     `
       query MadrassahPageQuery {
         api {
@@ -90,17 +89,21 @@ const createMadrassahPages: GatsbyCreatePages = async ({ graphql, actions: { cre
   }
 
   const {
+    //@ts-ignore
     api: { tracks },
   } = result.data
 
+  //@ts-ignore
   tracks.forEach((track): void => {
     const { courses, id: trackId, slug: trackSlug, translations } = track
 
     if (courses && courses.length) {
       // create track pages
+      //@ts-ignore
       translations.forEach(({ locale_code }): void => {
         console.log(`creating TRACK page for slug (${trackSlug}) and locale (${locale_code}) `)
         createPage({
+          //@ts-ignore
           path: `${localePaths[locale_code]}${trackSlug}/`,
           component: slash(trackTemplate),
           context: {

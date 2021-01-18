@@ -8934,7 +8934,6 @@ export type TSitePageFieldsEnum =
   'pluginCreator___pluginOptions___headers___x_hasura_admin_secret' |
   'pluginCreator___pluginOptions___showSpinner' |
   'pluginCreator___pluginOptions___siteUrl' |
-  'pluginCreator___pluginOptions___includePaths' |
   'pluginCreator___pluginOptions___logo' |
   'pluginCreator___pluginOptions___injectHTML' |
   'pluginCreator___pluginOptions___icons___android' |
@@ -9166,7 +9165,6 @@ export type TSitePluginFieldsEnum =
   'pluginOptions___headers___x_hasura_admin_secret' |
   'pluginOptions___showSpinner' |
   'pluginOptions___siteUrl' |
-  'pluginOptions___includePaths' |
   'pluginOptions___logo' |
   'pluginOptions___injectHTML' |
   'pluginOptions___icons___android' |
@@ -9318,7 +9316,6 @@ export type TSitePluginPluginOptions = {
   headers: Maybe<TSitePluginPluginOptionsHeaders>;
   showSpinner: Maybe<Scalars['Boolean']>;
   siteUrl: Maybe<Scalars['String']>;
-  includePaths: Maybe<Array<Maybe<Scalars['String']>>>;
   logo: Maybe<Scalars['String']>;
   injectHTML: Maybe<Scalars['Boolean']>;
   icons: Maybe<TSitePluginPluginOptionsIcons>;
@@ -9431,7 +9428,6 @@ export type TSitePluginPluginOptionsFilterInput = {
   headers: Maybe<TSitePluginPluginOptionsHeadersFilterInput>;
   showSpinner: Maybe<TBooleanQueryOperatorInput>;
   siteUrl: Maybe<TStringQueryOperatorInput>;
-  includePaths: Maybe<TStringQueryOperatorInput>;
   logo: Maybe<TStringQueryOperatorInput>;
   injectHTML: Maybe<TBooleanQueryOperatorInput>;
   icons: Maybe<TSitePluginPluginOptionsIconsFilterInput>;

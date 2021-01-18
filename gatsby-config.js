@@ -113,7 +113,7 @@ module.exports = {
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-sass',
-      options: { includePaths: ['node_modules'] },
+      // options: { includePaths: ['node_modules'] },
     },
     // 'gatsby-plugin-postcss',
 
